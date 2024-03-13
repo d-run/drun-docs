@@ -1,3 +1,18 @@
 # Page tree
 nav:
   - Home: home.md
+  - 智能应用:
+    - 介绍:
+      - 什么是智能应用？: dak/intro/index.md
+    - 插件管理:
+      - 创建插件: dak/user-guide/plugins/cerate.md
+  - 模型中心:
+    - 介绍:
+      - 什么是智能应用？: dmc/intro/index.md
+  - 模型开发:
+    - 介绍:
+      - 什么是智能应用？: baize/intro/index.md
+  - 模型微调:
+    - 介绍:
+      - 什么是智能应用？: dtx/intro/index.md
+      
