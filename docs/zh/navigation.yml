@@ -4,6 +4,8 @@ nav:
   - 智能应用:
     - 介绍:
       - 什么是智能应用？: dak/intro/index.md
+    - 应用中心:
+      - 创建应用: dak/user-guide/app-center/create-app.md
     - 插件管理:
       - 创建插件: dak/user-guide/plugins/create-plugin.md
   - 模型中心:
