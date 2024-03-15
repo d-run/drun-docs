@@ -1,6 +1,6 @@
 # Page tree
 nav:
-  - Home: index.md
+  - 首页: index.md
   - 智能应用:
     - 介绍:
       - 什么是智能应用？: dak/intro/index.md
