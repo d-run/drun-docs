@@ -31,7 +31,6 @@ theme:
   include_search_page: false
   search_index_only: true
   include_homepage_in_sidebar: false
-  
 
   # Static files
   static_templates:
@@ -106,7 +105,7 @@ plugins:
 # Customization
 extra:
   homepage: /
-  
+
   # comments
   comments:
     enabled: true
