@@ -31,7 +31,6 @@ theme:
   include_search_page: false
   search_index_only: true
   include_homepage_in_sidebar: false
-  
 
   # Static files
   static_templates:
@@ -106,7 +105,7 @@ plugins:
 # Customization
 extra:
   homepage: /
-  
+
   # comments
   comments:
     enabled: true
@@ -118,9 +117,9 @@ extra:
     - link: /
       name: 简体中文
       lang: zh
-    - link: /en/
-      name: English
-      lang: en
+    # - link: /en/
+    #   name: English
+    #   lang: en
   generator: false
 
   status:
@@ -129,7 +128,7 @@ extra:
 
 # Customization Javascript
 extra_javascript:
-  - stylesheets/zoom_image.js
+  - static/stylesheets/zoom_image.js
   # - https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js # disable fix mermaid not working
 
 # Customization css
