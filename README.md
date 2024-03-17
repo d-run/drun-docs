@@ -1,5 +1,13 @@
 # DaoCloud d.run Documentation
 
+English | [中文](./README_zh.md)
+
+d.run is a comprehensive AIGC platform that allows you to enhance your LLM models and
+leverage your organization's knowledge base. By integrating AI generation engines and plugins
+such as cloud native AI engine, DataTunerX, DaoCloud AIGC Knowledge, and infmonkeys,
+d.run provides a powerful tool for creating, training, and inferring AI products.
+This repository serves as a user-friendly portal for accessing all the necessary documents related to d.run.
+
 ## Open a PR
 
 This website uses Pull Request (PR) to modify, translate, and manage all pages.
@@ -60,8 +68,6 @@ This section lists some conventions about a file or folder name for your referen
 - Do not add any punctuation by the end of a heading
 - Care about links to avoid any null or dead link
 - Give a consistent experience to explore all pages herein
-
-For more details refer to [DaoCloud Style Guide of Writing](./style.md).
 
 ## Thanks to all contributors ❤
 
