@@ -2,6 +2,8 @@
 nav:
   - Home: home.md
   - 智能应用:
+    - 数据分析:
+      - 问答质量: dak\data-analysis\q&a-quality.md
     - 介绍:
       - 什么是智能应用？: dak/intro/index.md
     - 插件管理:
