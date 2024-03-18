@@ -1,6 +1,6 @@
 # Page tree
 nav:
-  - Home: home.md
+  - 首页: index.md
   - 智能应用:
     - 数据分析:
       - 问答质量: dak/data-analysis/qa-quality.md
@@ -12,7 +12,7 @@ nav:
     - 介绍:
       - 什么是智能应用？: dak/intro/index.md
     - 插件管理:
-      - 创建插件: dak/user-guide/plugins/cerate.md
+      - 创建插件: dak/user-guide/plugins/create-plugin.md
   - 模型中心:
     - 介绍:
       - 什么是智能应用？: dmc/intro/index.md
