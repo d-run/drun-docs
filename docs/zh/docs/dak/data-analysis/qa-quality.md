@@ -6,7 +6,7 @@
 
 2. 点击**详情**按钮进入。
 
-    ![q&a-quality](q&a-quality.png)
+    ![alt text](image/qa-quality.png)
 
 3. 可以查看以下内容：
 
@@ -14,11 +14,11 @@
     - 应用回答：应用针对用户问题产生的答案。
     - 该条问题使用的提示词。
 
-    ![q&a-quality-detail](q&a-quality-detail.png)
+    ![alt text](image/qa-quality-detail.png)
 
 4. 当有新的问答生成，可点击右上角**刷新**按钮查看最新问答详情。
 
-    ![refresh-q&a-quality](refresh-q&a-quality.png)
+    ![alt text](image/refresh-qa-quality.png)
 
 ## 导出问答质量
 
@@ -26,6 +26,6 @@
 
 1. 在**问答质量**页点击右上角**导出**按键。
 
-    ![export-q&a-quality](export-q&a-quality.png)
+    ![alt text](image/export-qa-quality.png)
 
 2. 自动将问答内容详情汇总成xlsx文件并下载。
