@@ -23,7 +23,6 @@ nav:
           - 分片命中率: dak/data-analysis/shard-hit-ratio.md
           - 登录次数: dak/data-analysis/number-of-login.md
           - 问答次数: dak/data-analysis/number-of-qa.md
-      - 插件设置: dak/user-guide/plugins/create-plugin.md
       - 我的反馈: dak/my-feedback/my-feedback.md
       - 系统配置: dak/user-guide/system-config.md
   - 模型中心:
