@@ -22,7 +22,7 @@
 
     - 注意：与语料库关联的语料库无法选择和更改，只能选择添加我的语料库，中文的应用只可以选择中文语料库，应用为英文只能选择英文语料库
 
-    ![manage](./images/%20manage.png)
+    ![manage](./images/manage.png)
 
 ## 对话页面功能
 
@@ -42,4 +42,4 @@
 
 6. 停止对话功能：用户可以在模型回答过程中选择停止对话，让助手停止输出内容。
 
-![page-function](conversation/images/page-function.png)
+![page-function](./images/page-function.png)
