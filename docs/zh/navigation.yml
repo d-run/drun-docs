@@ -2,6 +2,7 @@
 nav:
   - 首页: index.md
   - 智能应用:
+    - 我的反馈: dak/my-feedback/my-feedback.md
     - 数据分析:
       - 问答质量: dak/data-analysis/qa-quality.md
       - 分片质量: dak/data-analysis/shard-quality.md
