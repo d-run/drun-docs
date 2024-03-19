@@ -28,8 +28,7 @@ nav:
 =======
     - 介绍:
       - 什么是智能应用？: dak/intro/index.md
-    - 对话:
-      - 对话页面功能: dak/user-guide/conversation/conversation.md
+    - 对话: dak/user-guide/conversation/conversation.md
     - 语料库:
       - 创建语料库: dak/user-guide/corpus/create-corpus.md
       - 上传数据: dak/user-guide/corpus/upload-date.md
@@ -38,6 +37,7 @@ nav:
       - 格式化导入: dak/user-guide/corpus/format-update.md
     - 插件管理:
       - 创建插件: dak/user-guide/plugins/create-plugin.md
+<<<<<<< HEAD
     - 系统配置:
 <<<<<<< HEAD
       - 系统配置: dak/user-guide/System-Configuration/System-Configuration.md
@@ -45,6 +45,9 @@ nav:
 =======
       - 系统配置: dak/user-guide/System-Config/System-Config.md
 >>>>>>> ce0d21a (update)
+=======
+    - 系统配置: dak/user-guide/System-Config/System-Config.md
+>>>>>>> ba182a9 (update)
   - 模型中心:
       - 介绍:
           - 什么是模型中心: dmc/intro/index.md
