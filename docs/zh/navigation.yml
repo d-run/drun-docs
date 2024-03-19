@@ -16,7 +16,6 @@ nav:
           - 问答次数: dak/data-analysis/number-of-qa.md
       - 插件管理:
           - 创建插件: dak/user-guide/plugins/create-plugin.md
-          - 创建插件: dak/user-guide/plugins/create-plugin.md
   - 模型中心:
       - 介绍:
           - 什么是模型中心: dmc/intro/index.md
