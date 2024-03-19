@@ -39,8 +39,12 @@ nav:
     - 插件管理:
       - 创建插件: dak/user-guide/plugins/create-plugin.md
     - 系统配置:
+<<<<<<< HEAD
       - 系统配置: dak/user-guide/System-Configuration/System-Configuration.md
 >>>>>>> ace1d3c (update-1)
+=======
+      - 系统配置: dak/user-guide/System-Config/System-Config.md
+>>>>>>> ce0d21a (update)
   - 模型中心:
       - 介绍:
           - 什么是模型中心: dmc/intro/index.md
