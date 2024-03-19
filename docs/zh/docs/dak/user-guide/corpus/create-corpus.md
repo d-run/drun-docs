@@ -13,14 +13,5 @@
 
 * 简介：简要描述语料库中的内容信息，简介可为中英文，数字，限制400个字符
 
-<<<<<<< HEAD
-    * 简介：简要描述语料库中的内容信息，简介可为中英文、数字，限制 400 个字符
-
-<<<<<<< HEAD
 ![创建语料库](./images/create-corpus.png)
-=======
-    ![创建语料库](image-1.png)
->>>>>>> d3661b3 (Update create-corpus.md)
-=======
-![create-corpus](image-1.png)
->>>>>>> ace1d3c (update-1)
+
