@@ -10,7 +10,7 @@ nav:
       - 数据分析:
           - 问答质量: dak/data-analysis/qa-quality.md
           - 分片质量: dak/data-analysis/shard-quality.md
-          - 修改意见: dak/data-analysis/improvement-suggestions.md
+          - 改进意见: dak/data-analysis/suggestions.md
           - 分片命中率: dak/data-analysis/shard-hit-ratio.md
           - 登录次数: dak/data-analysis/number-of-login.md
           - 问答次数: dak/data-analysis/number-of-qa.md
