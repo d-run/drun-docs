@@ -28,15 +28,12 @@ def do_upload_cli(file, public_key, private_key, region, bucket):
 
     if os.path.isdir(file):
         out = subprocess.run(
-            [cmd, 'cp', '-r', file, bucket, '--accesskey', public_key, '--secretkey',
-             private_key,
-             '--endpoint',
-             region])
+            [cmd, 'cp', '-r', file, bucket, '--accesskey', public_key, '--secretkey', private_key,
+             '--endpoint', region, '--parallel', '20'])
     elif os.path.isfile(file):
         out = subprocess.run(
             [cmd, 'cp', file, bucket, '--accesskey', public_key, '--secretkey', private_key,
-             '--endpoint',
-             region])
+             '--endpoint', region, '--parallel', '20'])
 
     if out.returncode != 0:
         raise Exception("ucloud upload error", out.returncode)
