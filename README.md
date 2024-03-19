@@ -1,6 +1,10 @@
-# DaoCloud d.run Documentation
+# d.run
 
 English | [中文](./README_zh.md)
+
+d.run = DaoCloud Runs Intelligence
+
+d.run unleashes your compute power
 
 d.run is a comprehensive AIGC platform that allows you to enhance your LLM models and
 leverage your organization's knowledge base. By integrating AI generation engines and plugins
