@@ -1,13 +1,21 @@
 # Page tree
 nav:
-  - Home: home.md
+  - 首页: index.md
   - 智能应用:
       - 介绍:
           - 什么是智能应用: dak/intro/index.md
       - 应用中心:
           - 创建应用: dak/user-guide/app-center/create-app.md
           - 召回策略: dak/user-guide/app-center/retrieval-strategy.md
+      - 数据分析:
+          - 问答质量: dak/data-analysis/qa-quality.md
+          - 分片质量: dak/data-analysis/shard-quality.md
+          - 修改意见: dak/data-analysis/improvement-suggestions.md
+          - 分片命中率: dak/data-analysis/shard-hit-ratio.md
+          - 登录次数: dak/data-analysis/number-of-login.md
+          - 问答次数: dak/data-analysis/number-of-qa.md
       - 插件管理:
+          - 创建插件: dak/user-guide/plugins/create-plugin.md
           - 创建插件: dak/user-guide/plugins/create-plugin.md
   - 模型中心:
       - 介绍:
