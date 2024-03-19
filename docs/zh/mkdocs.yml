@@ -3,7 +3,7 @@
 INHERIT: navigation.yml
 
 # Project information
-site_name: d.run Docs
+site_name: d.run 让算力更自由
 site_url: https://docs.d.run/
 site_author: d.run
 site_description: >-
