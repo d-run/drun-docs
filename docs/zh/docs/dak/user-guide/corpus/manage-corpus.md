@@ -16,6 +16,6 @@
 
 - 在文件分片中点击某一分片的操作按钮，即可编辑语料分片内容/删除某一分片
 
-
+ ![alt text](./images/manage-corpus.png)
 
 

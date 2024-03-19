@@ -4,13 +4,13 @@
 
 ## docx文档预处理方式
 
-1. 直接支持带图文的docx文档按照约定的字符长度分割，例如：
+ 1. 直接支持带图文的docx文档按照约定的字符长度分割，例如：
 
- ![picture1](image.png)
+ ![picture1](./images/picture1.png)
 
-2. 也支持手工用`<split></split>`标签，提前规划好文档分割段落。
+ 2. 也支持手工用`<split></split>`标签，提前规划好文档分割段落。
 
- ![picture2](image.png)
+ ![picture2](./images/picture2.png)
 
 
     对于 Docx 文档中的图片信息，整理的时候请直接粘贴到文档（不要使用形状或者文本框包裹图片）以免程序无法检测从而遗漏图片的处理。
@@ -20,7 +20,7 @@
 
  xlsx 文件需要符合固定的模板格式，模板形式详见下图。
 
- ![picture3](image-1.png)
+ ![picture3](./images/picture3.png)
 
  Q：问题，A：答案。
 
