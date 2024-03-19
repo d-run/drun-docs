@@ -4,6 +4,13 @@ nav:
   - 智能应用:
       - 介绍:
           - 什么是智能应用: dak/intro/index.md
+      - 对话: dak/user-guide/conversation/conversation.md
+      - 语料库:
+          - 创建语料库: dak/user-guide/corpus/create-corpus.md
+          - 上传数据: dak/user-guide/corpus/upload-date.md
+          - 管理语料库: dak/user-guide/corpus/manage-corpus.md
+          - 图文导入: dak/user-guide/corpus/image-upload.md
+          - 格式化导入: dak/user-guide/corpus/format-update.md
       - 应用中心:
           - 创建应用: dak/user-guide/app-center/create-app.md
           - 召回策略: dak/user-guide/app-center/retrieval-strategy.md
@@ -14,9 +21,9 @@ nav:
           - 分片命中率: dak/data-analysis/shard-hit-ratio.md
           - 登录次数: dak/data-analysis/number-of-login.md
           - 问答次数: dak/data-analysis/number-of-qa.md
-      - 插件管理:
-          - 创建插件: dak/user-guide/plugins/create-plugin.md
+      - 插件设置: dak/user-guide/plugins/create-plugin.md
       - 我的反馈: dak/my-feedback/my-feedback.md
+      - 系统配置: dak/user-guide/System-Config/System-Config.md
   - 模型中心:
       - 介绍:
           - 什么是模型中心: dmc/intro/index.md
