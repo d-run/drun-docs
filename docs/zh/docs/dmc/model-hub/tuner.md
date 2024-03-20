@@ -23,7 +23,7 @@ hide:
 
 3. 屏幕提示创建成功，接下来可以通过部署的模型提供服务。
 
-下一步：[模型服务](../model-service/index.md)
+下一步：[模型服务](../model-service/local.md#_4)
 
 ## 删除
 
