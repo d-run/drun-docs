@@ -27,6 +27,12 @@ nav:
       - 系统配置: dak/user-guide/system-config.md
   - 模型中心:
       - 什么是模型中心: dmc/index.md
+      - 模型仓库:
+          - 内置模型: dmc/model-hub/built-in.md
+          - 微调模型: dmc/model-hub/tuner.md
+      - 模型服务: 
+          - 本地模型服务: dmc/model-service/local.md
+          - 在线模型服务: dmc/model-service/online.md
   - 模型开发:
       - 什么是模型开发: baize/index.md
   - 模型微调:
