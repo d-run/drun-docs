@@ -9,7 +9,7 @@ hide:
 
 1. 在 **应用中心** 页面中，点击 **创建** 按钮。
 
-    ![应用中心](images/app-center.png)
+    ![应用中心](../../images/app-center.png)
 
 2. 填写应用基础信息
 
