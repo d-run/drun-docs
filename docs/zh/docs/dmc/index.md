@@ -5,9 +5,9 @@ hide:
 
 # 什么是模型中心
 
-d.run 模型中心内置了[模型仓库](./model-hub/index.md)，可以一站式管理各类大模型，按需部署。
+d.run 模型中心内置了[模型仓库](./model-hub/built-in.md)，可以一站式管理各类大模型，按需部署。
 
-另外通过[模型服务](./model-service/index.md)，您可以从本地、在线提供大语言模型服务、向量化模型服务。
+另外通过[模型服务](./model-service/local.md)，您可以从本地、在线提供大语言模型服务、向量化模型服务。
 
 ![model hub](./images/dmc-home.png)
 
