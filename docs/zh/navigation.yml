@@ -37,5 +37,6 @@ nav:
       - 什么是模型开发: baize/index.md
   - 模型微调:
       - 什么是模型微调: dtx/index.md
+      - 参数组: dtx/population-of-parameters.md
   - 算力容器: https://docs.daocloud.io/kpanda/intro/
   - 全局管局: https://docs.daocloud.io/ghippo/intro/
