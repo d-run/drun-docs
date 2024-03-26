@@ -1,6 +1,10 @@
-# DaoCloud d.run 文档站
+# d.run
 
 [English](./README.md) | 中文
+
+d.run = DaoCloud Runs Intelligence
+
+d.run 让算力更自由
 
 d.run 是一个全方位的人工智能生成和增强平台，可以帮助您优化您的大语言模型，并利用您的知识库。
 通过整合 AI 生成引擎和各种插件，比如云原生 AI 引擎 baize、DataTunerX、DaoCloud AIGC 知识库和 infmonkeys 等插件，

@@ -1,0 +1,15 @@
+baize:
+  - "docs/zh/docs/baize/**/*"
+
+dak:
+  - "docs/zh/docs/dak/**/*"
+
+dmc:
+  - "docs/zh/docs/dmc/**/*"
+
+dtx:
+  - "docs/zh/docs/dtx/**/*"
+
+dev:
+  - "scripts/**/*"
+  - ".github/**/*"
