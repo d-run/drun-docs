@@ -1,2 +1,16 @@
-.venv/
+.venv
+builds
+temp_dir
+.DS_Store
+_book/
 .idea/
+.vscode/
+public/
+scripts/config.py
+__pycache__
+.VSCodeCounter
+docs/zh/site/
+docs/en/site/
+*.docx
+ufile.log
+.env
