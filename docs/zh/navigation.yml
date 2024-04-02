@@ -4,7 +4,110 @@ nav:
   - d.run 文档:
       - 容器算力:
           - 购买算力: buy/index.md
-          - 算力集群: kpanda/index.md
+          - 算力集群:
+              - 介绍:
+                  - 什么是容器管理: kpanda/intro/index.md
+                  - 功能总览: kpanda/intro/features.md
+                  - 竞争优势: kpanda/intro/benefits.md
+                  - 适用场景: kpanda/intro/scenarios.md
+                  - 基本概念: kpanda/intro/concepts.md
+                  - 常见问题: kpanda/intro/faq.md
+              - 集群管理:
+                  - 访问集群: kpanda/user-guide/clusters/access-cluster.md
+                  - 卸载/解除接入集群: kpanda/user-guide/clusters/delete-cluster.md
+                  - 集群角色: kpanda/user-guide/clusters/cluster-role.md
+                  - 集群状态: kpanda/user-guide/clusters/cluster-status.md
+                  - 集群版本支持范围: kpanda/user-guide/clusters/cluster-version.md
+              - 权限管理:
+                  - 权限体系介绍: kpanda/user-guide/permissions/permission-brief.md
+                  - 集群和命名空间授权: kpanda/user-guide/permissions/cluster-ns-auth.md
+              - 节点管理:
+                  - 节点可用性检查: kpanda/user-guide/nodes/node-check.md
+                  - 节点认证: kpanda/user-guide/nodes/node-authentication.md
+                  - 节点扩容: kpanda/user-guide/nodes/add-node.md
+                  - 节点缩容: kpanda/user-guide/nodes/delete-node.md
+                  - 污点管理: kpanda/user-guide/nodes/taints.md
+                  - 节点调度: kpanda/user-guide/nodes/schedule.md
+                  - 节点详情: kpanda/user-guide/nodes/node-details.md
+                  - 标签与注解: kpanda/user-guide/nodes/labels-annotations.md
+              - 工作负载:
+                  - 创建 Deployment: kpanda/user-guide/workloads/create-deployment.md
+                  - 创建 StatefulSet: kpanda/user-guide/workloads/create-statefulset.md
+                  - 创建 DaemonSet: kpanda/user-guide/workloads/create-daemonset.md
+                  - 创建 CronJob: kpanda/user-guide/workloads/create-cronjob.md
+                  - 创建 Job: kpanda/user-guide/workloads/create-job.md
+                  - 工作负载参数配置:
+                      - 工作负载状态: kpanda/user-guide/workloads/pod-config/workload-status.md
+                      - Job 参数: kpanda/user-guide/workloads/pod-config/job-parameters.md
+                      - 生命周期: kpanda/user-guide/workloads/pod-config/lifecycle.md
+                      - 环境变量: kpanda/user-guide/workloads/pod-config/env-variables.md
+                      - 健康检查: kpanda/user-guide/workloads/pod-config/health-check.md
+                      - 集群调度: kpanda/user-guide/workloads/pod-config/scheduling-policy.md
+              - 弹性伸缩:
+                  - 安装 metrics-server 插件: kpanda/user-guide/scale/install-metrics-server.md
+                  - 安装 kubernetes-cronhpa-controller 插件: kpanda/user-guide/scale/install-cronhpa.md
+                  - 安装 VPA 插件: kpanda/user-guide/scale/install-vpa.md
+                  - 创建 HPA 策略: kpanda/user-guide/scale/create-hpa.md
+                  - 创建 VPA 策略: kpanda/user-guide/scale/create-vpa.md
+                  - HPA 和 CronHPA 兼容规则: kpanda/user-guide/scale/hpa-cronhpa-compatibility-rules.md
+              - Helm 应用:
+                  - Helm 模板: kpanda/user-guide/helm/README.md
+                  - 上传 Helm 模板: kpanda/user-guide/helm/upload-helm.md
+                  - 管理 Helm 应用: kpanda/user-guide/helm/helm-app.md
+                  - 管理 Helm 仓库: kpanda/user-guide/helm/helm-repo.md
+                  - 多架构 Helm 应用: kpanda/user-guide/helm/multi-archi-helm.md
+                  - 自定义Helm应用导入Addon: kpanda/user-guide/helm/Import-addon.md
+              - 容器网络:
+                  - 创建 Service: kpanda/user-guide/network/create-services.md
+                  - 创建 Ingress: kpanda/user-guide/network/create-ingress.md
+                  - 网络策略: kpanda/user-guide/network/network-policy.md
+              - 自定义资源: kpanda/user-guide/custom-resources/create.md
+              - 容器存储:
+                  - 数据卷声明: kpanda/user-guide/storage/pvc.md
+                  - 数据卷: kpanda/user-guide/storage/pv.md
+                  - 存储池: kpanda/user-guide/storage/sc.md
+                  - 共享存储池: kpanda/user-guide/storage/sc-share.md
+              - 配置与密钥:
+                  - 创建配置项: kpanda/user-guide/configmaps-secrets/create-configmap.md
+                  - 使用配置项: kpanda/user-guide/configmaps-secrets/use-configmap.md
+                  - 创建密钥: kpanda/user-guide/configmaps-secrets/create-secret.md
+                  - 使用密钥: kpanda/user-guide/configmaps-secrets/use-secret.md
+                  - Configmap/Secret 热加载: kpanda/user-guide/configmaps-secrets/configmap-hot-loading.md
+              - 命名空间:
+                  - 创建命名空间: kpanda/user-guide/namespaces/createns.md
+                  - 启用命名空间独享节点: kpanda/user-guide/namespaces/exclusive.md
+                  - Pod 安全策略: kpanda/user-guide/namespaces/podsecurity.md
+              - 集群运维:
+                  - 最近操作: kpanda/user-guide/clusterops/latest-operations.md
+                  - 集群升级: kpanda/user-guide/clusters/upgrade-cluster.md
+                  - 集群设置: kpanda/user-guide/clusterops/cluster-settings.md
+              - GPU 管理:
+                  - GPU 管理概述: kpanda/user-guide/gpu/index.md
+                  - GPU 支持矩阵: kpanda/user-guide/gpu/gpu_matrix.md
+                  - NVIDIA GPU 管理:
+                      - NVIDIA GPU 模式说明: kpanda/user-guide/gpu/nvidia/index.md
+                      - GPU Operator 离线安装:
+                          - GPU Operator 离线安装: kpanda/user-guide/gpu/nvidia/install_nvidia_driver_of_operator.md
+                          - 构建 CentOS 7.9 离线 yum 源: kpanda/user-guide/gpu/nvidia/upgrade_yum_source_centos7_9.md
+                          - 上传 Red Hat GPU Operator 离线镜像: kpanda/user-guide/gpu/nvidia/push_image_to_repo.md
+                          - 构建 Red Hat 8.4 离线 yum 源: kpanda/user-guide/gpu/nvidia/upgrade_yum_source_redhat8_4.md
+                          - 构建 Red Hat 7.9 离线 yum 源: kpanda/user-guide/gpu/nvidia/yum_source_redhat7_9.md
+                      - NVIDIA GPU 整卡模式: kpanda/user-guide/gpu/nvidia/full_gpu_userguide.md
+                      - NVIDIA vGPU 模式:
+                          - 安装 vGPU Addon: kpanda/user-guide/gpu/nvidia/vgpu/vgpu_addon.md
+                          - 应用使用 NVIDIA vGPU: kpanda/user-guide/gpu/nvidia/vgpu/vgpu_user.md
+                      - NVIDIA MIG 模式:
+                          - NVIDIA MIG 概述: kpanda/user-guide/gpu/nvidia/mig/index.md
+                          - 开启 MIG 功能: kpanda/user-guide/gpu/nvidia/mig/create_mig.md
+                          - 应用使用 NVIDIA MIG: kpanda/user-guide/gpu/nvidia/mig/mig_usage.md
+                          - MIG 相关命令: kpanda/user-guide/gpu/nvidia/mig/mig_command.md
+                  - 昇腾 GPU 管理:
+                      - 昇腾 NPU 组件安装: kpanda/user-guide/gpu/ascend_driver_install.md
+                      - 应用使用昇腾 GPU: kpanda/user-guide/gpu/Ascend_usage.md
+                  - 天数 GPU 管理: kpanda/user-guide/gpu/Iluvatar_usage.md
+                  - GPU 配额管理: kpanda/user-guide/gpu/vgpu_quota.md
+                  - GPU 监控指标: kpanda/user-guide/gpu/gpu-metrics.md
+                  - 安装和使用 Volcano: kpanda/user-guide/gpu/volcano_user_guide.md
           - 可观测性: insight/index.md
       - 模型应用:
           - 智能应用:
