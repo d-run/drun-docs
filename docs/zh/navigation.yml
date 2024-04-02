@@ -14,7 +14,6 @@ nav:
                   - 常见问题: kpanda/intro/faq.md
               - 集群管理:
                   - 访问集群: kpanda/user-guide/clusters/access-cluster.md
-                  - 升级集群: kpanda/user-guide/clusters/upgrade-cluster.md
                   - 卸载/解除接入集群: kpanda/user-guide/clusters/delete-cluster.md
                   - 集群角色: kpanda/user-guide/clusters/cluster-role.md
                   - 集群状态: kpanda/user-guide/clusters/cluster-status.md
