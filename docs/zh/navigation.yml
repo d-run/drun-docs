@@ -48,6 +48,58 @@ nav:
                   - 本地模型服务: dmc/model-service/local.md
                   - 在线模型服务: dmc/model-service/online.md
       - 管理:
-          - 全局管理: ghippo/index.md
+          - 全局管理:
+              - 介绍:
+                  - 什么是全局管理: ghippo/intro/index.md
+                  - 登录: ghippo/intro/login.md
+                  - 功能总览: ghippo/intro/features.md
+                  - 常见术语: ghippo/intro/glossary.md
+              - 用户与访问控制:
+                  - 什么是用户与访问控制: ghippo/user-guide/access-control/iam.md
+                  - 用户: ghippo/user-guide/access-control/user.md
+                  - 用户组: ghippo/user-guide/access-control/group.md
+                  - 角色:
+                      - ghippo/user-guide/access-control/role.md
+                      - 系统角色: ghippo/user-guide/access-control/global.md
+                      - 自定义角色: ghippo/user-guide/access-control/custom-role.md
+                  - 身份提供商:
+                      - ghippo/user-guide/access-control/idprovider.md
+                      - LDAP: ghippo/user-guide/access-control/ldap.md
+                      - OIDC: ghippo/user-guide/access-control/oidc.md
+                  - 接入管理:
+                      - ghippo/user-guide/access-control/docking.md
+                      - Webhook: ghippo/user-guide/access-control/webhook.md
+                      - OAuth 2.0 之企业微信: ghippo/user-guide/access-control/oauth2.0.md
+              - 工作空间与层级:
+                  - ghippo/user-guide/workspace/ws-folder.md
+                  - 创建和删除工作空间: ghippo/user-guide/workspace/workspace.md
+                  - 工作空间权限: ghippo/user-guide/workspace/ws-permission.md
+                  - 创建和删除文件夹: ghippo/user-guide/workspace/folders.md
+                  - 文件夹权限: ghippo/user-guide/workspace/folder-permission.md
+                  - 资源配额: ghippo/user-guide/workspace/quota.md
+                  - 资源组与共享资源的区别: ghippo/user-guide/workspace/res-gp-and-shared-res.md
+              - 审计日志:
+                  - K8s审计日志采集开关: ghippo/user-guide/audit/open-audit.md
+                  - K8s审计日志输出开关: ghippo/user-guide/audit/open-k8s-audit.md
+                  - 下载和导出审计日志: ghippo/user-guide/audit/audit-log.md
+                  - 获取审计日志源IP: ghippo/user-guide/audit/source-ip.md
+                  - 审计项汇总:
+                      - 容器管理审计项汇总: ghippo/user-guide/audit/gproduct-audit/kpanda.md
+                      - 可观测性审计项汇总: ghippo/user-guide/audit/gproduct-audit/insight.md
+                      - 全局管理审计项汇总: ghippo/user-guide/audit/gproduct-audit/ghippo.md
+              - 运营管理:
+                  - ghippo/user-guide/report-billing/index.md
+                  - 报表管理: ghippo/user-guide/report-billing/report.md
+                  - 计费计量: ghippo/user-guide/report-billing/billing.md
+              - 平台设置:
+                  - 安全策略: ghippo/user-guide/platform-setting/security.md
+                  - 邮箱服务器设置: ghippo/user-guide/platform-setting/mail-server.md
+                  - 外观定制: ghippo/user-guide/platform-setting/appearance.md
+                  - 关于平台: ghippo/user-guide/platform-setting/about.md
+                  - 密码重置: ghippo/user-guide/password.md
+              - 个人中心:
+                  - 安全设置: ghippo/user-guide/personal-center/security-setting.md
+                  - 访问密钥: ghippo/user-guide/personal-center/accesstoken.md
+                  - 语言设置: ghippo/user-guide/personal-center/language.md
   - AI 行业动态:
       - 金融行业迎来大模型时代: news/0326-compute-power.md
