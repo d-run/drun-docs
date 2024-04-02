@@ -56,7 +56,7 @@
 
 4. 点击右下角 **确定** 即可创建参数组供微调实验中使用。
 
-下一步：[微调实验](fine-tuning-experiment.md)
+下一步：[微调实验](fine-tuning-lab.md)
 
 ## 编辑参数组
 
