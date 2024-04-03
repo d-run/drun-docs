@@ -17,7 +17,9 @@
 
 🤗 Transformers 提供了便于快速下载和使用的API，让你可以把预训练模型用在给定文本、在你的数据集上微调然后通过 [model hub](https://huggingface.co/models) 与社区共享。同时，每个定义的 Python 模块均完全独立，方便修改和快速研究实验。
 
-🤗 Transformers 支持三个最热门的深度学习库： [Jax](https://jax.readthedocs.io/en/latest/), [PyTorch](https://pytorch.org/) 以及 [TensorFlow](https://www.tensorflow.org/) — 并与之无缝整合。你可以直接使用一个框架训练你的模型然后用另一个加载和推理。
+🤗 Transformers 支持三个最热门的深度学习库：
+[Jax](https://jax.readthedocs.io/en/latest/)、[PyTorch](https://pytorch.org/) 以及 [TensorFlow](https://www.tensorflow.org/) — 并与之无缝整合。
+你可以直接使用一个框架训练你的模型然后用另一个加载和推理。
 
 ## 在线演示
 
@@ -25,6 +27,7 @@
 Hugging Face 也提供了[私有模型托管、模型版本管理以及推理API](https://huggingface.co/pricing)。
 
 这里是一些例子：
+
 - [用 BERT 做掩码填词](https://huggingface.co/google-bert/bert-base-uncased?text=Paris+is+the+%5BMASK%5D+of+France)
 - [用 Electra 做命名实体识别](https://huggingface.co/dbmdz/electra-large-discriminator-finetuned-conll03-english?text=My+name+is+Sarah+and+I+live+in+London+city)
 - [用 GPT-2 做文本生成](https://huggingface.co/openai-community/gpt2?text=A+long+time+ago%2C+)
@@ -132,7 +135,7 @@ PyTorch 或 TensorFlow 训练循环中，或是如何使用 Hugging Face 的 `Tr
     - 模型内部结构保持透明一致
     - 模型文件可单独使用，方便魔改和快速实验
 
-## 什么情况下我不该用 transformers？
+## 什么情况下不该用 Transformers？
 
 - 本库并不是模块化的神经网络工具箱。模型文件中的代码特意呈若璞玉，未经额外抽象封装，以便研究人员快速迭代魔改而不致溺于抽象和文件跳转之中。
 - `Trainer` API 并非兼容任何模型，只为本库之模型优化。若是在寻找适用于通用机器学习的训练循环实现，请另觅他库。
@@ -184,4 +187,5 @@ conda install conda-forge::transformers
 [Hugging Face 组织](https://huggingface.co/organizations)上传，
 均与 huggingface.co [model hub](https://huggingface.co) 无缝整合。
 
-目前的检查点数量： ![](https://img.shields.io/endpoint?url=https://huggingface.co/api/shields/models&color=brightgreen)
+目前的模型数量：
+![](https://img.shields.io/endpoint?url=https://huggingface.co/api/shields/models&color=brightgreen)
