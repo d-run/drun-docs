@@ -10,3 +10,5 @@ d.run 智能应用是基于知识库构建的应用中心，包括 AI 对话、�
 您在这里可以创建应用和插件，为 AI 对话构建语料库，然后通过数据分析来优化用户体验。
 
 ![应用中心](./images/app-center.png)
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }

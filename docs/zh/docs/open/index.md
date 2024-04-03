@@ -25,3 +25,5 @@ hide:
 !!! info
 
     本频道正在建设中，敬请期待。
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }

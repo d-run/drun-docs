@@ -134,3 +134,5 @@ FinetuneExperiment 中其实就是包含了多个 FinetuneJob。也是用户侧�
 同时还会同步 FinetuneJob 的状态到 FinetuneExperiment 中的状态中。
 
 ![FinetuneExperiment](./images/core03.png)
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
