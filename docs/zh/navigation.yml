@@ -259,4 +259,5 @@ nav:
       - 金融行业迎来大模型时代: news/0326-compute-power.md
   - 开源拾珠:
       - 索引: open/index.md
+      - OpenAI: open/openai.md
       - Hugging Face: open/huggingface.md

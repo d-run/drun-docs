@@ -3,7 +3,7 @@
 !!! info
 
     [Hugging Face](https://huggingface.co/) 是机器学习领域中最火热的开源 AI 社区，
-    旗下 [Transformers 仓库](https://github.com/huggingface/transformers)的 Star 数 12.4 万（截止 2024 年 4 月）。
+    旗下 [Transformers 仓库](https://github.com/huggingface/transformers)的 Star 数达 12.4 万。
 
 <h3 align="center">
     <p>为 Jax、PyTorch 和 TensorFlow 打造的先进的自然语言处理</p>
