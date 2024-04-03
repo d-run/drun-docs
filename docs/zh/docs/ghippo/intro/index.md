@@ -36,3 +36,5 @@
 4. 进入 __审计日志__ ，查看并[导出审计日志](../user-guide/audit/audit-log.md)
 
 5. 进入 __平台设置__ ，设置安全策略、邮件服务器、外观定制、正版授权
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }

@@ -42,3 +42,5 @@ hide:
 | 9    | 告警消息   | Event             | 告警规则被触发时的记录信息，记录了告警规则、触发时间、当前系统状态；同时将触发相应的动作，例如发送邮件 |
 | 10   | 通知       | Notification      | 由系统通过邮件等渠道发送给用户的告警事件信息                 |
 | 11   | PromQL     | PromQL            | Prometheus 系统所支持的查询语句                              |
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }

@@ -21,3 +21,5 @@ d.run 算法开发是 DaoCloud 推出的基于云原生操作系统的 AI 算力
 **逻辑架构图**
 
 ![架构图](./images/archi.png)
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
