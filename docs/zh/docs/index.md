@@ -35,7 +35,7 @@ hide:
   <p style="font-size: 28px; font-weight: bold;">多地域<font color="green">算力中心</font>，按需选择</p>
 </div>
 
-![多地域算力中心](./images/home02.png)
+[![多地域算力中心](./images/home02.png)](https://console.d.run/)
 
 <div class="grid cards" markdown>
 
