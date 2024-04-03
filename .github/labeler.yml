@@ -1,6 +1,9 @@
 baize:
   - "docs/zh/docs/baize/**/*"
 
+buy:
+  - "docs/zh/docs/buy/**/*"
+
 dak:
   - "docs/zh/docs/dak/**/*"
 
@@ -9,6 +12,21 @@ dmc:
 
 dtx:
   - "docs/zh/docs/dtx/**/*"
+
+ghippo:
+  - "docs/zh/docs/ghippo/**/*"
+
+insight:
+  - "docs/zh/docs/insight/**/*"
+
+kpanda:
+  - "docs/zh/docs/kpanda/**/*"
+
+monkey:
+  - "docs/zh/docs/monkey/**/*"
+
+news:
+  - "docs/zh/docs/news/**/*"
 
 dev:
   - "scripts/**/*"
