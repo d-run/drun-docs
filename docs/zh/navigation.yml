@@ -254,6 +254,7 @@ nav:
                   - 安全设置: ghippo/user-guide/personal-center/security-setting.md
                   - 访问密钥: ghippo/user-guide/personal-center/accesstoken.md
                   - 语言设置: ghippo/user-guide/personal-center/language.md
-  - AI 行业动态:
+  - AI 行业新闻:
       - “AI 流程编排”化算力为“算利”: news/0403-cp-to-profit.md
       - 金融行业迎来大模型时代: news/0326-compute-power.md
+  - 开源拾珠: open/index.md
