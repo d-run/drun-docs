@@ -1,12 +1,21 @@
+---
+hide:
+  - toc
+---
+
 # “AI 流程编排”化算力为“算利”
 
-> 国家级专精特新“小巨人”企业发布算力生态平台
->
-> 来源：[解放日报](https://www.shobserver.com/staticsg/res/html/journal/detail.html?date=2024-04-02&id=370048&page=07)；记者：俞陶然
+!!! info
+
+    国家级专精特新“小巨人”企业发布算力生态平台
+
+    来源：[解放日报](https://www.shobserver.com/staticsg/res/html/journal/detail.html?date=2024-04-02&id=370048&page=07)；记者：俞陶然
 
 人工智能大模型的兴起，让 GPU（图形处理器）算力成为极其重要的资源。在这个领域，GPU 算力云服务扮演着重要角色，可以实现算力资源跨地区、跨行业的自由流动。
 最近，国家级专精特新“小巨人”企业——上海道客，联合行业伙伴发布了“d.run 算力一体化方案”。这个方案包括上海、合肥等地的算力中心服务，
 算法开发、模型微调等模型开发工具以及智能应用、流程编排等应用开发工具，为用户提供一个 AI 算力生态平台。
+
+[![解放日报头版](./images/profit01.png)](https://www.shobserver.com/staticsg/res/html/journal/detail.html?date=2024-04-02&id=370048&page=07)
 
 ## AI 基础设施
 
@@ -41,3 +50,5 @@
 吴恩达团队的实验研究发现：在零样本条件下，GPT-3.5 生成内容的正确率为 48.1%，GPT-4 的正确率达到 67.0%；
 如果采用“智能体工作流”模式，GPT-3.5 的正确率高达 95.1%，远超 GPT-4。这个对比实验给尹伯昊团队带来了很大信心，
 而在“实战”环境中，以流程为中心的大模型落地平台能否催生高质量的 AI 大模型应用？还有待用户检验。
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
