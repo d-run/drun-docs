@@ -257,6 +257,7 @@ nav:
   - AI 行业新闻:
       - DBRX 开源 LLM 介绍: news/0407-dbrx.md
       - “AI 流程编排”化算力为“算利”: news/0403-cp-to-profit.md
+      - 谁将替代 Transformer: news/0327-transformer.md
       - 金融行业迎来大模型时代: news/0326-compute-power.md
   - 开源拾贝:
       - 索引: open/index.md
