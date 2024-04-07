@@ -66,9 +66,10 @@ hide:
 
     ---
 
-    一个浪漫而神秘的名字，寻求将能源转化为智能的最优解，旗下 Kimi 助手是国内近期股市的炒作热点之一
+    一个浪漫而神秘的名字，寻求将能源转化为智能的最优解。
+    清华大学出品，无需翻墙，月活近 800 万，国内排名第一的智能 App
 
-    [:octicons-arrow-right-24: 了解更多](https://www.moonshot.cn/)
+    [:octicons-arrow-right-24: 了解更多](./moonshot.md)
 
 -   :open_hands:{ .lg .middle } __OpenRouter__
 
