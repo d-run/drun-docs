@@ -30,13 +30,13 @@ hide:
 
     [:octicons-arrow-right-24: 了解更多](./huggingface.md)
 
--   :simple-amazon:{ .lg .middle } __Claude 3 Sonnet__
+-   :simple-amazon:{ .lg .middle } __Claude 3__
 
     ---
 
-    Amazon 与 Anthropic 联手打造的生成式 AI 模型，时刻对标 ChatGPT 步伐
+    Amazon 与 Google 联手打造的生成式 AI 模型，时刻对标 ChatGPT 步伐
 
-    [:octicons-arrow-right-24: 了解更多](https://www.anthropic.com/news/claude-3-family)
+    [:octicons-arrow-right-24: 了解更多](./claude.md)
 
 -   :simple-x:{ .lg .middle } __马斯克 Grok__
 

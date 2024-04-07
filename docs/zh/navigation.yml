@@ -265,3 +265,4 @@ nav:
       - OpenAI: open/openai.md
       - Hugging Face: open/huggingface.md
       - 月之暗面: open/moonshot.md
+      - Claude 3: open/claude.md
