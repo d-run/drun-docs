@@ -8,7 +8,7 @@ hide:
 
 此频道将作为各个火热 AI 项目和公司的入口，让你把握时代脉搏，了解行业动态，且看 AI 风口下的一代天骄们。
 
-!!! tip "🤔"
+!!! tip ":thinking:"
 
     AI 技术快速迭代，谁能抢占先机，谁在笑傲江湖？
 
@@ -171,6 +171,38 @@ hide:
 
     [:octicons-arrow-right-24: 了解更多](https://en.wikipedia.org/wiki/RDMA_over_Converged_Ethernet)
 
+-   :material-cloud-arrow-up:{ .lg .middle } __CUDA__
+
+    ---
+
+    这是 Nvidia 推出的运算平台，采用通用并行计算架构，使 GPU 能够解决复杂的计算问题。
+
+    [:octicons-arrow-right-24: 了解更多](https://developer.nvidia.com/cuda-zone)
+
+-   :speedboat:{ .lg .middle } __模型加速 ColossalAI__
+
+    ---
+
+    让大模型运行的更快、更简单、更便宜
+
+    [:octicons-arrow-right-24: 了解更多](https://colossalai.org/)
+
+-   :simple-reason:{ .lg .middle } __模型推理 Triton__
+
+    ---
+
+    一种在模型推理方面用于编写高效自定义深度学习原语的语言和编译器
+
+    [:octicons-arrow-right-24: 了解更多](https://triton-lang.org/)
+
+-   :material-tune:{ .lg .middle } __模型微调 DataTunerX__
+
+    ---
+
+    这是一个采用分布式架构的云原生模型微调方案
+
+    [:octicons-arrow-right-24: 了解更多](https://github.com/DataTunerX/datatunerx)
+
 -   :spider:{ .lg .middle } __Spiderpool__
 
     ---
@@ -178,6 +210,22 @@ hide:
     Spiderpool 是一个基于 Kubernetes 构建的 Underlay 和 RDMA 网络解决方案
 
     [:octicons-arrow-right-24: 了解更多](https://spidernet-io.github.io/spiderpool/v0.9/)
+
+-   :material-usb-flash-drive:{ .lg .middle } __HwameiStor__
+
+    ---
+
+    一款高性能本地存储系统，适用于处理有状态工作负载和 AI 负载
+
+    [:octicons-arrow-right-24: 了解更多](https://hwameistor.io/cn/)
+
+-   :file_folder:{ .lg .middle } __JuiceFS__
+
+    ---
+
+    弹性、多云、兼容 POSIX、HDFS 和 S3 协议的高性能、云原生分布式文件系统
+
+    [:octicons-arrow-right-24: 了解更多](https://juicefs.com/zh-cn/)
 
 </div>
 
