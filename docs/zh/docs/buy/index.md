@@ -14,7 +14,4 @@ hide:
 
     A100 80G * 1 指的是 1 张 A100 显卡，显存共 80 GB。
 
-    购买得卡数越多，享受的折扣越大。例如：
-    购买 2 张卡，第二张享受 4 折优惠。
-
 [注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
