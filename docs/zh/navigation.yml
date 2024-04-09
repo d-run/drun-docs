@@ -8,8 +8,6 @@ nav:
               - 介绍:
                   - 什么是容器管理: kpanda/intro/index.md
                   - 功能总览: kpanda/intro/features.md
-                  - 竞争优势: kpanda/intro/benefits.md
-                  - 适用场景: kpanda/intro/scenarios.md
                   - 基本概念: kpanda/intro/concepts.md
                   - 常见问题: kpanda/intro/faq.md
               - 集群管理:
@@ -111,9 +109,8 @@ nav:
           - 可观测性:
               - 介绍:
                   - 可观测性: insight/intro/index.md
-                  - 产品优势: insight/intro/benefits.md
                   - 应用场景: insight/intro/scenarios.md
-                  - 功能列表: insight/intro/feature.md
+                  - 功能列表: insight/intro/features.md
                   - 权限说明: insight/intro/permission.md
               - 仪表盘:
                   - 概览: insight/user-guide/dashboard/overview.md
@@ -162,6 +159,7 @@ nav:
       - 模型应用:
           - 智能应用:
               - 什么是智能应用: dak/index.md
+              - 功能特性: dak/features.md
               - 应用中心:
                   - 创建应用: dak/user-guide/app-center/create-app.md
                   - 应用对话: dak/user-guide/app-center/conversation.md
@@ -184,16 +182,19 @@ nav:
                   - 问答次数: dak/data-analysis/number-of-qa.md
               - 我的反馈: dak/my-feedback/my-feedback.md
               - 系统配置: dak/user-guide/system-config.md
-          - 流程编排: monkey/index.md
+          - 流程编排:
+              - 什么是流程编排: monkey/index.md
+              - 功能特性: monkey/features.md
       - 模型工具:
-          - 算法开发:
-              - 什么是算法开发: baize/index.md
+          - 算法开发: baize/index.md
           - 模型微调:
               - 什么是模型微调: dtx/index.md
+              - 功能特性: dtx/features.md
               - 微调实验: dtx/fine-tuning-lab.md
               - 参数组: dtx/parameters.md
           - 模型中心:
               - 什么是模型中心: dmc/index.md
+              - 功能特性: dmc/features.md
               - 模型仓库:
                   - 内置模型: dmc/model-hub/built-in.md
                   - 微调模型: dmc/model-hub/tuner.md
