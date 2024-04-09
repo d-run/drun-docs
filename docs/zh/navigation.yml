@@ -263,7 +263,22 @@ nav:
       - 金融行业迎来大模型时代: news/0326-compute-power.md
   - 智海拾贝:
       - 索引: open/index.md
-      - OpenAI: open/openai.md
-      - Hugging Face: open/huggingface.md
-      - 月之暗面: open/moonshot.md
-      - Claude 3: open/claude.md
+      - 大模型:
+          - OpenAI: open/models/openai.md
+          - Hugging Face: open/models/huggingface.md
+          - 月之暗面: open/models/moonshot.md
+          - Claude 3: open/models/claude.md
+      - 硬件厂商:
+          - 华为: open/hardware/huawei.md
+      - 国内 AI 先锋企业:
+          - 思必驰: open/pioneers/aispeech.md
+          - 阿里巴巴: open/pioneers/alibaba.md
+          - 百度: open/pioneers/baidu.md
+          - 云从科技: open/pioneers/cloudwalk.md
+          - 汉王科技: open/pioneers/hw99.md
+          - 科大讯飞: open/pioneers/iflytek.md
+          - 旷视科技: open/pioneers/megvii.md
+          - 商汤科技: open/pioneers/sensetime.md
+          - 腾讯: open/pioneers/tencent.md
+          - 图森未来: open/pioneers/tusimple.md
+          - 云知声: open/pioneers/unisound.md

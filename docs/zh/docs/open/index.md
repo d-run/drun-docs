@@ -24,7 +24,7 @@ hide:
 
     ChatGPT 一经推出，就引发了人类社会的又一次技术革命；最近 Sora 蓄势待发，仅凭几个视频就引发全球业界热议
 
-    [:octicons-arrow-right-24: 了解更多](./openai.md)
+    [:octicons-arrow-right-24: 了解更多](models/openai.md)
 
 -   :smile:{ .lg .middle } __Hugging Face__
 
@@ -32,7 +32,7 @@ hide:
 
     起源于 Transformer，逐渐成为机器学习领域中最火热的开源社区，目前汇聚了 58 万个 LLM 大模型
 
-    [:octicons-arrow-right-24: 了解更多](./huggingface.md)
+    [:octicons-arrow-right-24: 了解更多](models/huggingface.md)
 
 -   :simple-amazon:{ .lg .middle } __Claude 3__
 
@@ -40,7 +40,7 @@ hide:
 
     Amazon 与 Google 联手打造的生成式 AI 模型，时刻对标 ChatGPT 步伐
 
-    [:octicons-arrow-right-24: 了解更多](./claude.md)
+    [:octicons-arrow-right-24: 了解更多](models/claude.md)
 
 -   :simple-x:{ .lg .middle } __马斯克 Grok__
 
@@ -64,7 +64,7 @@ hide:
 
     清华大学计算机系孵化出的一家公司，致力于打造新一代认知智能通用模型
 
-    [:octicons-arrow-right-24: 了解更多](https://www.zhipuai.cn/)
+    [:octicons-arrow-right-24: 了解更多](./models/zhipuai.md)
 
 -   :octicons-moon-16:{ .lg .middle } __Moonshot 月之暗面__
 
@@ -72,7 +72,7 @@ hide:
 
     一个浪漫而神秘的名字，清华大学出品，无需翻墙，月活近 800 万，国内排名第一的智能聊天 App
 
-    [:octicons-arrow-right-24: 了解更多](./moonshot.md)
+    [:octicons-arrow-right-24: 了解更多](models/moonshot.md)
 
 -   :open_hands:{ .lg .middle } __OpenRouter__
 
@@ -105,7 +105,7 @@ hide:
 
     阿里巴巴发布的聊天机器人，手机注册即可聊天
 
-    [:octicons-arrow-right-24: 了解更多](https://tongyi.aliyun.com/qianwen/)
+    [:octicons-arrow-right-24: 了解更多](./pioneers/alibaba.md)
 
 -   :fontawesome-solid-list:{ .lg .middle } __中国大模型列表__
 
@@ -137,7 +137,7 @@ hide:
 
     国内 AI 技术前沿，还得看华为，无论是芯片，还是其他
 
-    [:octicons-arrow-right-24: 了解更多](https://www.huawei.com/cn/)
+    [:octicons-arrow-right-24: 了解更多](./hardware/huawei.md)
 
 -   :material-chip:{ .lg .middle } __Iluvatar 天数智芯__
 
@@ -226,6 +226,94 @@ hide:
     弹性、多云、兼容 POSIX、HDFS 和 S3 协议的高性能、云原生分布式文件系统
 
     [:octicons-arrow-right-24: 了解更多](https://juicefs.com/zh-cn/)
+
+</div>
+
+<div style="text-align: center;">
+  <p style="font-size: 28px; font-weight: bold;">国内 AI 先锋企业</p>
+</div>
+
+<div class="grid cards" markdown>
+
+-   :speech_left:{ .lg .middle } __思必驰__
+
+    ---
+
+    一家专注于自然语言处理和语音交互技术的企业
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/aispeech.md)
+
+-   :simple-baidu:{ .lg .middle } __百度__
+
+    ---
+
+    百度文心一言是首个国内面向 C 端收费的大模型产品
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/baidu.md)
+
+-   :person_walking:{ .lg .middle } __云从科技__
+
+    ---
+
+    一家专注于人机交互技术和人工智能应用的企业
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/cloudwalk.md)
+
+-   :pen_ballpoint:{ .lg .middle } __汉王科技__
+
+    ---
+
+    先进的文字识别技术与智能交互龙头公司
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/hw99.md)
+
+-   :butterfly:{ .lg .middle } __科大讯飞__
+
+    ---
+
+    对标 ChatGPT 的星火大模型基于深度学习、以中文为核心
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/iflytek.md)
+
+-   :video_camera:{ .lg .middle } __旷视科技__
+
+    ---
+
+    专注于机器学习和计算机视觉技术，在人脸识别、图像识别、智能监控等领域有着卓越的表现
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/megvii.md)
+
+-   :simple-opnsense:{ .lg .middle } __商汤科技__
+
+    ---
+
+    涵盖感知智能、自然语言处理、决策智能、智能内容生成等关键技术领域
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/sensetime.md)
+
+-   :simple-tencentqq:{ .lg .middle } __腾讯__
+
+    ---
+
+    在自然语言处理、计算机视觉、语音识别等领域有不错表现，被广泛应用于游戏、社交、智慧金融等领域
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/tencent.md)
+
+-   :blue_car:{ .lg .middle } __图森未来__
+
+    ---
+
+    专注于自动驾驶技术的企业，致力于为客户提供高效、安全的自动驾驶解决方案
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/tusimple.md)
+
+-   :loud_sound:{ .lg .middle } __云知声__
+
+    ---
+
+    专注于智能物联网服务的创新企业，核心业务涵盖了语音识别、语义理解等系统的研发和制造
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/unisound.md)
 
 </div>
 

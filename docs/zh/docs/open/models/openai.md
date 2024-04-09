@@ -13,7 +13,7 @@ hide:
 鼓励员工积极参与公司决策和发展，并通过不定期的内部技术交流和讲座等活动，促进员工之间的知识共享和技术交流。
 OpenAI 的估值约数百亿美元，其中 CEO 萨姆·奥特曼透露年收入已飙升至数十亿美元。
 
-![openai logo](./images/openai01.jpg)
+![openai logo](../images/openai01.jpg)
 
 ## 简史
 

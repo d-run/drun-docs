@@ -21,7 +21,7 @@
 
 ## Claude 3 与 GPT-4 比较
 
-![与 GPT-4 比较](./images/claude01.png)
+![与 GPT-4 比较](../images/claude01.png)
 
 Claude 3 现在已经像 GPT-4 一样支持多模态能力。Opus 在 MMMU 的得分为 59.4%，超过了 GPT-4V，与 Gemini 1.0 Ultra 持平。
 如果想上传照片或图片给 AI 分析，数据显示 Claude 3 的能力比 GPT-4 更佳。
