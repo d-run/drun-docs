@@ -235,38 +235,6 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :speech_left:{ .lg .middle } __思必驰__
-
-    ---
-
-    一家专注于自然语言处理和语音交互技术的企业
-
-    [:octicons-arrow-right-24: 了解更多](./pioneers/aispeech.md)
-
--   :simple-baidu:{ .lg .middle } __百度__
-
-    ---
-
-    百度文心一言是首个国内面向 C 端收费的大模型产品
-
-    [:octicons-arrow-right-24: 了解更多](./pioneers/baidu.md)
-
--   :person_walking:{ .lg .middle } __云从科技__
-
-    ---
-
-    一家专注于人机交互技术和人工智能应用的企业
-
-    [:octicons-arrow-right-24: 了解更多](./pioneers/cloudwalk.md)
-
--   :pen_ballpoint:{ .lg .middle } __汉王科技__
-
-    ---
-
-    先进的文字识别技术与智能交互龙头公司
-
-    [:octicons-arrow-right-24: 了解更多](./pioneers/hw99.md)
-
 -   :butterfly:{ .lg .middle } __科大讯飞__
 
     ---
@@ -298,6 +266,54 @@ hide:
     在自然语言处理、计算机视觉、语音识别等领域有不错表现，被广泛应用于游戏、社交、智慧金融等领域
 
     [:octicons-arrow-right-24: 了解更多](./pioneers/tencent.md)
+
+-   :simple-bytedance:{ .lg .middle } __字节跳动__
+
+    ---
+
+    字节跳动正在 AI 大模型领域秘密研发多个产品，包括多模态数字人产品以及 AI 生图、AI 生视频产品等
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/bytedance.md)
+
+-   :speech_left:{ .lg .middle } __思必驰__
+
+    ---
+
+    一家专注于自然语言处理和语音交互技术的企业
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/aispeech.md)
+
+-   :simple-baidu:{ .lg .middle } __百度__
+
+    ---
+
+    百度文心一言是首个国内面向 C 端收费的大模型产品
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/baidu.md)
+
+-   :cloud_rain:{ .lg .middle } __百川智能__
+
+    ---
+
+    这家成立仅六个月的人工智能初创企业，获得 3 亿美元融资
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/baichuan.md)
+
+-   :person_walking:{ .lg .middle } __云从科技__
+
+    ---
+
+    一家专注于人机交互技术和人工智能应用的企业
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/cloudwalk.md)
+
+-   :pen_ballpoint:{ .lg .middle } __汉王科技__
+
+    ---
+
+    先进的文字识别技术与智能交互龙头公司
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/hw99.md)
 
 -   :blue_car:{ .lg .middle } __图森未来__
 
