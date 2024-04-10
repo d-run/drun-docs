@@ -257,6 +257,7 @@ nav:
                   - 语言设置: ghippo/user-guide/personal-center/language.md
   - AI 行业新闻:
       - 索引: news/index.md
+      - Kimi火了后国内其他大模型: news/0408-after-kimi.md
       - DBRX 开源 LLM 介绍: news/0407-dbrx.md
       - “AI 流程编排”化算力为“算利”: news/0403-cp-to-profit.md
       - 谁将替代 Transformer: news/0327-transformer.md
