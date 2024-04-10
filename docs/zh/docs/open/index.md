@@ -145,7 +145,7 @@ hide:
 
     国内头部通用 GPU 高端芯片及超级算力系统提供商
 
-    [:octicons-arrow-right-24: 了解更多](https://www.iluvatar.com/)
+    [:octicons-arrow-right-24: 了解更多](./hardware/illuvatar.md)
 
 </div>
 

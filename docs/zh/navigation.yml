@@ -271,6 +271,7 @@ nav:
           - Claude 3: open/models/claude.md
       - 硬件厂商:
           - 华为: open/hardware/huawei.md
+          - 天数智芯: open/hardware/illuvatar.md
       - 国内 AI 先锋企业:
           - 科大讯飞: open/pioneers/iflytek.md
           - 旷视科技: open/pioneers/megvii.md
