@@ -58,7 +58,7 @@ hide:
 
     [:octicons-arrow-right-24: 了解更多](https://gemini.google.com/)
 
--   :student:{ .lg .middle } __智谱 AI__
+-   :student:{ .lg .middle } __智谱 GLM-130B__
 
     ---
 
@@ -66,7 +66,7 @@ hide:
 
     [:octicons-arrow-right-24: 了解更多](./models/zhipuai.md)
 
--   :octicons-moon-16:{ .lg .middle } __Moonshot 月之暗面__
+-   :octicons-moon-16:{ .lg .middle } __月之暗面 Kimi__
 
     ---
 
@@ -90,7 +90,7 @@ hide:
 
     [:octicons-arrow-right-24: 了解更多](https://oc.app/)
 
--   :octicons-file-binary-16:{ .lg .middle } __01.AI 零一万物__
+-   :octicons-file-binary-16:{ .lg .middle } __零一万物 Yi-34B__
 
     ---
 
@@ -314,14 +314,6 @@ hide:
     先进的文字识别技术与智能交互龙头公司
 
     [:octicons-arrow-right-24: 了解更多](./pioneers/hw99.md)
-
--   :blue_car:{ .lg .middle } __图森未来__
-
-    ---
-
-    专注于自动驾驶技术的企业，致力于为客户提供高效、安全的自动驾驶解决方案
-
-    [:octicons-arrow-right-24: 了解更多](./pioneers/tusimple.md)
 
 -   :loud_sound:{ .lg .middle } __云知声__
 
