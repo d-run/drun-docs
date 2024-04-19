@@ -14,4 +14,8 @@ hide:
 
     A100 80G * 1 指的是 1 张 A100 显卡，显存共 80 GB。
 
+    勾选最后一个选项 **CPU 1G * 1** ，可以用一元体验完整功能。
+
+    ![一元体验](images/buy03.png)
+
 [注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
