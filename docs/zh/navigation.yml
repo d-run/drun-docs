@@ -3,7 +3,8 @@ nav:
   - 首页: https://d.run
   - d.run 文档:
       - 容器算力:
-          - 购买算力: buy/index.md
+          - d.run 简介: buy/index.md
+          - 购买算力: buy/buy.md
           - 算力集群:
               - 介绍:
                   - 什么是容器管理: kpanda/intro/index.md
