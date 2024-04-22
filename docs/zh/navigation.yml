@@ -2,8 +2,8 @@
 nav:
   - 首页: https://d.run
   - d.run 文档:
-      - 容器算力:
-          - d.run 简介: buy/index.md
+      - d.run 简介: buy/index.md
+      - 智能算力:
           - 购买算力: buy/buy.md
           - 算力集群:
               - 介绍:
@@ -158,8 +158,8 @@ nav:
                   - 指标抓取说明: insight/user-guide/collection-manag/metric-collect.md
                   - 链路数据的时钟偏移: insight/reference/traceclockskew.md
       - 模型应用:
-          - 智能应用:
-              - 什么是智能应用: dak/index.md
+          - 智能问答:
+              - 什么是智能问答: dak/index.md
               - 功能特性: dak/features.md
               - 应用中心:
                   - 创建应用: dak/user-guide/app-center/create-app.md
@@ -187,7 +187,9 @@ nav:
               - 什么是流程编排: monkey/index.md
               - 功能特性: monkey/features.md
       - 模型工具:
-          - 算法开发: baize/index.md
+          - 算法开发:
+              - 什么是算法开发: baize/index.md
+              - 算法开发功能特性: baize/features.md
           - 模型微调:
               - 什么是模型微调: dtx/index.md
               - 功能特性: dtx/features.md
