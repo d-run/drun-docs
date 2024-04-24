@@ -35,17 +35,17 @@ d.run 面向用户提供功能丰富、易用性好、性能高效的模型套�
 
 查阅各模块的功能清单：
 
-- **智能算力**
-    - [算力集群](../kpanda/intro/features.md)
-    - [可观测性](../insight/intro/features.md)
-- **模型应用**
-    - [智能问答](../dak/features.md)
-    - [流程编排](../monkey/features.md)
-- **模型工具**
-    - [模型微调](../dtx/features.md)
-    - [算法开发](../baize/features.md)
-    - [模型中心](../dmc/features.md)
-- [全局管理](../ghippo/intro/features.md)
+| **领域** | **产品模块** |
+| --- | --- |
+| 智能算力 | [购买算力](./buy.md) |
+|  | [算力集群](../kpanda/intro/features.md) |
+|  | [可观测性](../insight/intro/features.md) |
+| 模型应用 | [智能问答](../dak/features.md) |
+|  | [流程编排](../monkey/features.md) |
+| 模型工具 | [模型微调](../dtx/features.md) |
+|  | [算法开发](../baize/features.md) |
+|  | [模型中心](../dmc/features.md) |
+| 管理 | [全局管理](../ghippo/intro/features.md) |
 
 ## d.run 优势
 
