@@ -260,6 +260,7 @@ nav:
                   - 语言设置: ghippo/user-guide/personal-center/language.md
   - AI 行业新闻:
       - 索引: news/index.md
+      - 2024 年大规模AI基础设施形势调研: news/0429-ai-survey.md
       - 云原生人工智能白皮书: news/0410-cnai-wp.md
       - Kimi火了后国内其他大模型: news/0408-after-kimi.md
       - DBRX 开源 LLM 介绍: news/0407-dbrx.md
