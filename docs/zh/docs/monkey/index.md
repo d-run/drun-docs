@@ -13,4 +13,6 @@ hide:
 <video controls src="https://harbor-test2.cn-sh2.ufileos.com/drun/monkey-use.mp4" preload="metadata" poster="../buy/images/buy02.png"></video>
 </div>
 
+<!-- 更多参阅 [Helm Chart 一键安装文档](https://inf-monkeys.github.io/docs/zh-cn/installation/helm/)。 -->
+
 [注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
