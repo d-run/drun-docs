@@ -186,15 +186,16 @@ nav:
           - 流程编排:
               - 什么是流程编排: monkey/index.md
               - 功能特性: monkey/features.md
+          - 魔搭社区: mscope/index.md
       - 模型工具:
-          - 算法开发:
-              - 什么是算法开发: baize/index.md
-              - 算法开发功能特性: baize/features.md
           - 模型微调:
               - 什么是模型微调: dtx/index.md
               - 功能特性: dtx/features.md
               - 微调实验: dtx/fine-tuning-lab.md
               - 参数组: dtx/parameters.md
+          - 算法开发:
+              - 什么是算法开发: baize/index.md
+              - 算法开发功能特性: baize/features.md
           - 模型中心:
               - 什么是模型中心: dmc/index.md
               - 功能特性: dmc/features.md
