@@ -31,22 +31,6 @@ d.run 面向用户提供功能丰富、易用性好、性能高效的模型套�
 **高效的模型开发与训练支持** 能够提供易用的集成开发环境，支持交互式开发和拖拉拽的可视化建模，
 通过分布式训练架构提升训练效率，降低算力成本，实现模型快速高效部署，打通开发训练和生产环境。
 
-## 功能特性
-
-查阅各模块的功能清单：
-
-| **领域** | **产品模块** |
-| --- | --- |
-| 智能算力 | [购买算力](./buy.md) |
-|  | [算力集群](../kpanda/intro/features.md) |
-|  | [可观测性](../insight/intro/features.md) |
-| 模型应用 | [智能问答](../dak/features.md) |
-|  | [流程编排](../monkey/features.md) |
-| 模型工具 | [模型微调](../dtx/features.md) |
-|  | [算法开发](../baize/features.md) |
-|  | [模型中心](../dmc/features.md) |
-| 管理 | [全局管理](../ghippo/intro/features.md) |
-
 ## d.run 优势
 
 - **灵活的资源调度** ：提供灵活的计算、网络、存储资源调度方案，有效提高资源利用率，用户可按需使用算力资源，显著降低算力使用成本。
@@ -78,6 +62,12 @@ d.run 的这些优势来自于丰富的产品模块和功能特性：
 
 通过 AI 流程可以为各行业、各场景分门别类地生成不同[智能问答](../dak/index.md)，
 一站式管理智能问答的上下层、前后端设施，把控用户需求，洞察前沿趋势。
+
+参阅演示视频：
+
+<div class="responsive-video-container">
+<video controls src="https://harbor-test2.cn-sh2.ufileos.com/drun/d.run-workflow.mov" preload="metadata" poster="./images/workflow.png"></video>
+</div>
 
 ## 行业背景
 
