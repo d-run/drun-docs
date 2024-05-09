@@ -7,6 +7,11 @@ hide:
 
 本频道将紧跟技术趋势，收集 AI 行业新闻。
 
+- [OpenAI 大语言模型规范](./0509-model-spec.md)
+
+    这是 OpenAI 最新发布的模型规范，它是一个指定 OpenAI API 和 ChatGPT 中模型期望行为的文件，
+    包括一套核心目标，以及如何处理冲突目标或指令的指导。
+
 - [2024 年大规模 AI 基础设施形势调研](./0429-ai-survey.md)
 
     ClearML 发布了与 FuriosaAI 和人工智能基础设施联盟（AIIA）进行的一项全球 AI 调研结果。
