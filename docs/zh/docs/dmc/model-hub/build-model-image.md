@@ -1,4 +1,140 @@
-# 如何构建模型镜像
+# 接入模型镜像
+
+## 支持的模型
+
+当前模型中心支持在 [HuggingFace Transformers](https://huggingface.co/models) 中的各种生成式 Transformer 模型。
+以下是目前支持的模型架构列表。
+
+.. list-table::
+  :widths: 25 25 50 5
+  :header-rows: 1
+
+  * - Architecture
+    - Models
+    - Example HuggingFace Models
+    - :ref:`LoRA <lora>`
+  * - :code:`AquilaForCausalLM`
+    - Aquila
+    - :code:`BAAI/Aquila-7B`, :code:`BAAI/AquilaChat-7B`, etc.
+    - ✅︎
+  * - :code:`BaiChuanForCausalLM`
+    - Baichuan
+    - :code:`baichuan-inc/Baichuan2-13B-Chat`, :code:`baichuan-inc/Baichuan-7B`, etc.
+    - ✅︎
+  * - :code:`ChatGLMModel`
+    - ChatGLM
+    - :code:`THUDM/chatglm2-6b`, :code:`THUDM/chatglm3-6b`, etc.
+    - ✅︎
+  * - :code:`CohereForCausalLM`
+    - Command-R
+    - :code:`CohereForAI/c4ai-command-r-v01`, etc.
+    -
+  * - :code:`DbrxForCausalLM`
+    - DBRX
+    - :code:`databricks/dbrx-base`, :code:`databricks/dbrx-instruct`, etc.
+    -
+  * - :code:`DeciLMForCausalLM`
+    - DeciLM
+    - :code:`Deci/DeciLM-7B`, :code:`Deci/DeciLM-7B-instruct`, etc.
+    -
+  * - :code:`BloomForCausalLM`
+    - BLOOM, BLOOMZ, BLOOMChat
+    - :code:`bigscience/bloom`, :code:`bigscience/bloomz`, etc.
+    -
+  * - :code:`FalconForCausalLM`
+    - Falcon
+    - :code:`tiiuae/falcon-7b`, :code:`tiiuae/falcon-40b`, :code:`tiiuae/falcon-rw-7b`, etc.
+    -
+  * - :code:`GemmaForCausalLM`
+    - Gemma
+    - :code:`google/gemma-2b`, :code:`google/gemma-7b`, etc.
+    - ✅︎
+  * - :code:`GPT2LMHeadModel`
+    - GPT-2
+    - :code:`gpt2`, :code:`gpt2-xl`, etc.
+    -
+  * - :code:`GPTBigCodeForCausalLM`
+    - StarCoder, SantaCoder, WizardCoder
+    - :code:`bigcode/starcoder`, :code:`bigcode/gpt_bigcode-santacoder`, :code:`WizardLM/WizardCoder-15B-V1.0`, etc.
+    -
+  * - :code:`GPTJForCausalLM`
+    - GPT-J
+    - :code:`EleutherAI/gpt-j-6b`, :code:`nomic-ai/gpt4all-j`, etc.
+    -
+  * - :code:`GPTNeoXForCausalLM`
+    - GPT-NeoX, Pythia, OpenAssistant, Dolly V2, StableLM
+    - :code:`EleutherAI/gpt-neox-20b`, :code:`EleutherAI/pythia-12b`, :code:`OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5`, :code:`databricks/dolly-v2-12b`, :code:`stabilityai/stablelm-tuned-alpha-7b`, etc.
+    -
+  * - :code:`InternLMForCausalLM`
+    - InternLM
+    - :code:`internlm/internlm-7b`, :code:`internlm/internlm-chat-7b`, etc.
+    - ✅︎
+  * - :code:`InternLM2ForCausalLM`
+    - InternLM2
+    - :code:`internlm/internlm2-7b`, :code:`internlm/internlm2-chat-7b`, etc.
+    -
+  * - :code:`JAISLMHeadModel`
+    - Jais
+    - :code:`core42/jais-13b`, :code:`core42/jais-13b-chat`, :code:`core42/jais-30b-v3`, :code:`core42/jais-30b-chat-v3`, etc.
+    -
+  * - :code:`LlamaForCausalLM`
+    - LLaMA, Llama 2, Meta Llama 3, Vicuna, Alpaca, Yi
+    - :code:`meta-llama/Meta-Llama-3-8B-Instruct`, :code:`meta-llama/Meta-Llama-3-70B-Instruct`, :code:`meta-llama/Llama-2-13b-hf`, :code:`meta-llama/Llama-2-70b-hf`, :code:`openlm-research/open_llama_13b`, :code:`lmsys/vicuna-13b-v1.3`, :code:`01-ai/Yi-6B`, :code:`01-ai/Yi-34B`, etc.
+    - ✅︎
+  * - :code:`MiniCPMForCausalLM`
+    - MiniCPM
+    - :code:`openbmb/MiniCPM-2B-sft-bf16`, :code:`openbmb/MiniCPM-2B-dpo-bf16`, etc.
+    -
+  * - :code:`MistralForCausalLM`
+    - Mistral, Mistral-Instruct
+    - :code:`mistralai/Mistral-7B-v0.1`, :code:`mistralai/Mistral-7B-Instruct-v0.1`, etc.
+    - ✅︎
+  * - :code:`MixtralForCausalLM`
+    - Mixtral-8x7B, Mixtral-8x7B-Instruct
+    - :code:`mistralai/Mixtral-8x7B-v0.1`, :code:`mistralai/Mixtral-8x7B-Instruct-v0.1`, :code:`mistral-community/Mixtral-8x22B-v0.1`, etc.
+    - ✅︎
+  * - :code:`MPTForCausalLM`
+    - MPT, MPT-Instruct, MPT-Chat, MPT-StoryWriter
+    - :code:`mosaicml/mpt-7b`, :code:`mosaicml/mpt-7b-storywriter`, :code:`mosaicml/mpt-30b`, etc.
+    -
+  * - :code:`OLMoForCausalLM`
+    - OLMo
+    - :code:`allenai/OLMo-1B-hf`, :code:`allenai/OLMo-7B-hf`, etc.
+    -
+  * - :code:`OPTForCausalLM`
+    - OPT, OPT-IML
+    - :code:`facebook/opt-66b`, :code:`facebook/opt-iml-max-30b`, etc.
+    -
+  * - :code:`OrionForCausalLM`
+    - Orion
+    - :code:`OrionStarAI/Orion-14B-Base`, :code:`OrionStarAI/Orion-14B-Chat`, etc.
+    -
+  * - :code:`PhiForCausalLM`
+    - Phi
+    - :code:`microsoft/phi-1_5`, :code:`microsoft/phi-2`, etc.
+    -
+  * - :code:`Phi3ForCausalLM`
+    - Phi-3
+    - :code:`microsoft/Phi-3-mini-4k-instruct`, :code:`microsoft/Phi-3-mini-128k-instruct`, etc.
+    -
+  * - :code:`QWenLMHeadModel`
+    - Qwen
+    - :code:`Qwen/Qwen-7B`, :code:`Qwen/Qwen-7B-Chat`, etc.
+    -
+  * - :code:`Qwen2ForCausalLM`
+    - Qwen2
+    - :code:`Qwen/Qwen2-beta-7B`, :code:`Qwen/Qwen2-beta-7B-Chat`, etc.
+    - ✅︎
+  * - :code:`Qwen2MoeForCausalLM`
+    - Qwen2MoE
+    - :code:`Qwen/Qwen1.5-MoE-A2.7B`, :code:`Qwen/Qwen1.5-MoE-A2.7B-Chat`, etc.
+    -
+  * - :code:`StableLmForCausalLM`
+    - StableLM
+    - :code:`stabilityai/stablelm-3b-4e1t/` , :code:`stabilityai/stablelm-base-alpha-7b-v2`, etc.
+    -
+
+## 如何为模型构建镜像
 
 以下是完整的指导流程，包含拉取模型、构建 Docker 镜像、配置私有仓库，以及将镜像推送到自定义仓库的步骤。
 
