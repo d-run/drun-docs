@@ -176,17 +176,15 @@ nav:
               - 插件管理: dak/user-guide/plugins/create-plugin.md
               - 数据分析:
                   - 问答质量: dak/data-analysis/qa-quality.md
-                  - 分片质量: dak/data-analysis/shard-quality.md
-                  - 改进意见: dak/data-analysis/suggestions.md
-                  - 分片命中率: dak/data-analysis/shard-hit-ratio.md
-                  - 登录次数: dak/data-analysis/number-of-login.md
                   - 问答次数: dak/data-analysis/number-of-qa.md
+                  - 分片质量: dak/data-analysis/shard-quality.md
+                  - 分片命中率: dak/data-analysis/shard-hit-ratio.md
+                  - 改进意见: dak/data-analysis/suggestions.md
               - 我的反馈: dak/my-feedback/my-feedback.md
               - 系统配置: dak/user-guide/system-config.md
           - 流程编排:
               - 什么是流程编排: monkey/index.md
               - 功能特性: monkey/features.md
-          - 魔搭社区: mscope/index.md
       - 模型工具:
           - 模型微调:
               - 什么是模型微调: dtx/index.md
@@ -262,7 +260,7 @@ nav:
   - AI 行业新闻:
       - 索引: news/index.md
       - OpenAI 大型语言模型规范: news/0509-model-spec.md
-      - 2024 年大规模AI基础设施形势调研: news/0429-ai-survey.md
+      - 2024大规模AI基础设施形势调研: news/0429-ai-survey.md
       - 云原生人工智能白皮书: news/0410-cnai-wp.md
       - Kimi火了后国内其他大模型: news/0408-after-kimi.md
       - DBRX 开源 LLM 介绍: news/0407-dbrx.md
