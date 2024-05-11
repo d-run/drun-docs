@@ -8,7 +8,7 @@
 
     ![按字符长度分割](./images/picture1.png)
 
-2.  也支持手工用 `<split></split>` 标签，提前规划好文档分割段落。
+2. 也支持手工用 `<split></split>` 标签，提前规划好文档分割段落。
 
     ![手动 split 分割](./images/picture2.png)
 
@@ -28,6 +28,8 @@ Q：问题，A：答案。
 
 ### 准备环境
 
+我们提供了基础镜像来处理图文：`release.daocloud.io/aigc/aitools:1.0`
+
 - `/home/aitools/input` 替换成实际输入文件的目录
 - `/home/aitools/output` 替换成实际输出处理后文件的目录
 
@@ -38,10 +40,10 @@ chmod 777 -R /home/aitools/output /home/aitools/input
 
 # 运行常驻服务到后台
 docker run -d -p 8888:8888 --name aitools \
-    -v /home/aitools/output:/app/corpus_processing/output \
     -v /home/aitools/input:/app/corpus_processing/input \
+    -v /home/aitools/output:/app/corpus_processing/output \
     -e JUPYTER_TOKEN=aitools \
-    --restart=always xxxxxx/aitools:4.3
+    --restart=always release.daocloud.io/aigc/aitools:1.0
 ```
 
 ### 处理数据
