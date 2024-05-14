@@ -7,6 +7,10 @@ hide:
 
 本频道将紧跟技术趋势，收集 AI 行业新闻。
 
+- [OpenAI GPT-4o 完全免费](./0514-gpt4o.md)
+
+    OpenAI 正在颠覆世界：GPT-4o 现在完全免费，实时语音视频交互震撼全场，直接进入科幻时代！
+
 - [OpenAI 大语言模型规范](./0509-model-spec.md)
 
     这是 OpenAI 最新发布的模型规范，它是一个指定 OpenAI API 和 ChatGPT 中模型期望行为的文件，
