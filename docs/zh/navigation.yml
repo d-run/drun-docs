@@ -259,15 +259,15 @@ nav:
                   - 访问密钥: ghippo/user-guide/personal-center/accesstoken.md
                   - 语言设置: ghippo/user-guide/personal-center/language.md
   - AI 行业新闻:
-      - 索引: news/index.md
-      - OpenAI 大型语言模型规范: news/0509-model-spec.md
-      - 2024大规模AI基础设施形势调研: news/0429-ai-survey.md
-      - 云原生人工智能白皮书: news/0410-cnai-wp.md
-      - Kimi火了后国内其他大模型: news/0408-after-kimi.md
-      - DBRX 开源 LLM 介绍: news/0407-dbrx.md
-      - “AI 流程编排”化算力为“算利”: news/0403-cp-to-profit.md
-      - 谁将替代 Transformer: news/0327-transformer.md
-      - 金融行业迎来大模型时代: news/0326-compute-power.md
+      - 索引: blogs/index.md
+      - OpenAI 大型语言模型规范: blogs/0509-model-spec.md
+      - 2024大规模AI基础设施形势调研: blogs/0429-ai-survey.md
+      - 云原生人工智能白皮书: blogs/0410-cnai-wp.md
+      - Kimi火了后国内其他大模型: blogs/0408-after-kimi.md
+      - DBRX 开源 LLM 介绍: blogs/0407-dbrx.md
+      - “AI 流程编排”化算力为“算利”: blogs/0403-cp-to-profit.md
+      - 谁将替代 Transformer: blogs/0327-transformer.md
+      - 金融行业迎来大模型时代: blogs/0326-compute-power.md
   - 智海拾贝:
       - 索引: open/index.md
       - 大模型:
