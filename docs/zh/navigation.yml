@@ -264,7 +264,7 @@ nav:
       - 动态资源分配 DRA: eco/dra.md
       - Fluid: eco/fluid.md
       - GPU Operator: eco/gpu-operator.md
-      - GPUDirect RDMA: eco/gpu-rdma
+      - GPUDirect RDMA: eco/gpu-rdma.md
       - vLLM: eco/vllm.md
       - HwameiStor: eco/hwameistor.md
       - InfiniBand: eco/infiniband.md
