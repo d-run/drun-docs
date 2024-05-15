@@ -49,9 +49,9 @@ d.run 模型中心支持接入 [HuggingFace Transformers](https://huggingface.co
 2. 找到目标模型，例如 "chatglm3-6b"
 3. 复制模型的 Git URL 以用于克隆，例如：
 
-    ```bash
-    https://huggingface.co/THUDM/chatglm3-6b
-    ```
+   ```bash
+   https://huggingface.co/THUDM/chatglm3-6b
+   ```
 
 #### Clone 模型
 
@@ -77,44 +77,40 @@ git lfs pull
 git lfs install --force
 ```
 
-### 构建 Docker 镜像
+### 构建镜像
 
 #### 创建 Dockerfile
 
-创建一个名为 `Dockerfile` 的文件，并粘贴以下内容。确保根据实际需求设置 `MODEL_NAME`。
+创建一个名为`Dockerfile`的文件，并粘贴以下内容。确保根据实际需求设置`MODEL_NAME`。
 
-```dockerfile title="Dockerfile"
-FROM vllm/vllm-openai:v0.3.3
+```dockerfile
+# 基于vllm/vllm-openai:v0.4.1构建
+FROM vllm/vllm-openai:v0.4.1
 
-ARG MODEL_NAME
-ENV MODEL_NAME=${MODEL_NAME}
-
+# 安装Python包
 RUN pip install tiktoken
 
-COPY ./${MODEL_NAME} /${MODEL_NAME}
+# 复制模型到容器
+COPY . /data
 
-CMD ["--model", "/${MODEL_NAME}", "--trust-remote-code", "--served-model-name", "${MODEL_SERVICE_NAME}"]
+# 使用shell形式的CMD
+ENTRYPOINT ["python3", "-m", "vllm.entrypoints.openai.api_server", "--model", "/data", "--trust-remote-code"]
 ```
-
-!!! note
-
-    请手动替换 Dockerfile 最后一行中的 `MODEL_NAME` 和 `MODEL_SERVICE_NAME`。  
-    MODEL_SERVICE_NAME 与模型仓库中填入的名称保持一致:
-    
-    ![create-model](../images/create-model.png)
-    
-    示例：
-    
-    ```dockerfile
-    CMD ["--model", "/chatglm3-6b", "--trust-remote-code", "--served-model-name", "new-chatglm3-6b"]
-    ```
 
 #### 构建 Docker 镜像
 
-使用正确的 `MODEL_NAME` 和镜像标签构建 Docker 镜像。示例中使用 `vllm-openai-tiktoken-chatglm3-6b-server` 作为镜像名称。
+构建 Docker 镜像时，示例中使用`vllm-openai-tiktoken-chatglm3-6b-server`作为镜像名称，
+`/data/chatglm3-6b/Dockerfile` 是上面的 Dockerfile 文件位置，
+`/data/llms/chatglm3-6b` 是下载的大模型文件的目录。
 
 ```bash
-docker build --build-arg MODEL_NAME=chatglm3-6b -t vllm-openai-tiktoken-chatglm3-6b-server .
+docker build -t vllm-openai-tiktoken-chatglm3-6b-server:v2.0.1 -f /data/chatglm3-6b/Dockerfile /data/llms/chatglm3-6b
+```
+
+为了减小镜像大小，确保 .dockerignore 文件在 /data/llms/chatglm3-6b 目录中，并且其中包含需要忽略的文件或目录，如：
+
+```plaintext
+.git
 ```
 
 ### 推送镜像到自定义 Docker 仓库
