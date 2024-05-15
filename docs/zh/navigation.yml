@@ -260,6 +260,12 @@ nav:
                   - 语言设置: ghippo/user-guide/personal-center/language.md
   - 产品生态:
       - 生态产品: eco/index.md
+      - Colossal-AI: eco/colossal-ai.md
+      - 动态资源分配 DRA: eco/dra.md
+      - vLLM: eco/vllm.md
+      - HwameiStor: eco/hwameistor.md
+      - Spiderpool: eco/spiderpool.md
+      - SR-IOV: eco/sriov.md
   - AI 行业新闻:
       - 索引: blogs/index.md
       - OpenAI GPT-4o 完全免费: blogs/0514-gpt4o.md
