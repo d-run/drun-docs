@@ -1,0 +1,449 @@
+1,什么是边缘原生应用准则白皮书？,边缘原生应用准则白皮书是物联网边缘工作组（IOT Edge Working Group）发布的一个文件，探索边缘原生的定义，以及“云原生”和“边缘原生”之间的异同。
+2,DCE 5.0 社区版包含哪些开源项目？,"DCE 社区版包含的开源软件有：\n\ncloudtty：Kubernetes 网页版控制台，易于使用\nClusterpedia：Kubernetes 多集群资源百科全书，已入选 CNCF 沙箱孵化，中国移动等已部署至生产\nFerry：Kubernetes 多集群通信组件，消除多集群复杂度\nHwameiStor：高可用的本地存储方案，更快、更强、更可靠，已入选 CNCF 全景图，正在申请 Sandbox\nKLTS：对 k8s（最新版本 - 0.03）等 10 多个版本的持续维护\nKubean：容器化集群的全生命周期管理工具，正在申请 Landscape\nKWOK：模拟成千上万的 kubelet\nMerbridge：使用 eBPF 加速服务网格，已入选 CNCF 全景图和 Sandbox\nSpiderpool：云原生网络 IPAM 自动化管理软件，建议作为插件用于 Underlay CNI，正在申请 Landscape 和 Sandbox\n公开镜像加速：加速国外镜像的下载\n以上只是 ""DaoCloud 道客"" 技术的冰山一角，还有更多项目。"
+3,KWOK 是什么？,KWOK 是 Kubernetes WithOut Kubelet 的缩写，帮助用户在几秒钟内搭建一个由数千个节点构成的集群，用少量资源模拟几千个真实的节点。
+4,Karmada 是用于什么场景的项目？,Karmada 是用于多云和混合云场景中的项目，可以实现应用跨数据中心、跨可用区和跨集群高可用。
+5,VictoriaMetrics 是什么？,VictoriaMetrics 是一个快速、经济高效且可扩展的监控解决方案和时间序列数据库，通常与 Prometheus+AlertManager+Grafana 一套解决方案搭配使用。
+6,Kubernetes 1.27 中增加了多少个 enhancements？,Kubernetes 1.27 中增加了 60 个 enhancements。
+7,Cilium 是如何实现 socket 层加速效果的？,Cilium 基于 eBPF 技术实现 socket 层加速效果。eBPF 技术通过映射存储 socket 信息，利用帮助函数实现将数据包重定向到对端 socket 层的能力。
+8,KLTS 是什么？,KLTS (Kubernetes Long Term Support) 是 DaoCloud 自主维护的 Kubernetes 长期支持版本，旨在为企业提供更加稳定和可靠的 Kubernetes 部署选择。
+9,什么是 Chaos Mesh？,Chaos Mesh 是一个云原生混沌工程实践项目，旨在为 Kubernetes 应用提供完整的混沌测试方案。它可以帮助用户模拟各种故障场景，例如网络中断、应用崩溃和节点失效等。
+10,什么是 Security Profiles Operator (SPO)？,Security Profiles Operator (SPO) 是一个 Kubernetes Operator，可以简化 seccomp、SELinux 和 AppArmor 配置文件的管理。它可以从头开始记录这些配置文件，通常涉及与大型 CI/CD 系统集成。
+11,如何使用 Chaos Mesh？,安装好 Chaos Mesh 后，需要安装并授权账户，登录后可以执行混沌测试场景。具体使用可以参考官方文档。
+12,如何制作 pv 和 pvc？,"创建一个 PersistentVolumeClaim（PVC）并定义要使用的存储量，以及创建一个 PersistentVolume（PV）以适应 PVC 中定义的存储量。示例如下：\n```yaml\napiVersion: v1\nkind: PersistentVolumeClaim\nmetadata:\nname: mysql-pv-claim\nlabels:\napp: mysql\nspec:\naccessModes:\n- ReadWriteOnce\nresources:\nrequests:\nstorage: 20Gi\napiVersion: v1\nkind: PersistentVolume\nmetadata:\nname: my-pv-volume\nspec:\ncapacity:\nstorage: 20Gi # 这里是环境变量大小 \nvolumeMode : Filesystem # 就是文件系统的模式 \n​ accessModes :\n- ReadWriteOnce# 就是表示只能单机读写 \n​ hostPath :\n​ path : /data/mysqldata# 这个就是挂载到宿主机上路径 \n​ type : """" # 这里是类型，没有就不写 \n```"
+13,如何安装 nfs server？,NFS 服务器可以安装并启用，使用以下命令：\n```\nsudo dnf install nfs-utils\nsudo systemctl enable --now nfs-server\n```
+14,什么是 Chaos Mesh？,Chaos Mesh 是一个云原生的混沌工程平台，可以模拟和测试生产环境中的各种故障和故障恢复场景，以提高应用程序的健壮性和稳定性。
+15,如何修改 seccomp 配置文件并测试更改后的结果？,可以使用 `jq` 命令修改 JSON 格式的配置文件，然后使用 `-p [profile file]` 标志指定新的配置文件路径运行应用程序进行测试，例如： `sudo ./spoc run -p /tmp/no-uname-profile.json ./main`.
+16,如何使用 `spoc run` 运行 seccomp 配置文件？,使用命令 `sudo ./spoc run [binary file]` 可以运行应用程序的 seccomp 配置文件，并通过日志提示哪些系统调用被阻止或允许。
+17,如何使用 `spoc` 生成原始的 seccomp 配置文件？,使用 `--type`/`-t` `raw-seccomp` 标志可以生成原始的 seccomp 配置文件（格式为 JSON），例如： `sudo ./spoc record --type raw-seccomp ./main`
+18,`spoc` 是什么？它有哪些功能？,`spoc` 是一个实用程序，用于记录和测试 seccomp 配置文件。它支持生成原始的 seccomp 配置文件，并可以修改配置文件并使用 `spoc run` 进行测试。
+19,Security Profiles Operator 是什么？,Security Profiles Operator 是一个 Kubernetes 运算符，它支持在 Kubernetes 中集中管理各种安全配置文件。
+20,如何使用 spoc 运行已应用了 seccomp 配置文件的二进制文件？,使用 `spoc` 命令行工具的 `run` 子命令，例如 `sudo ./spoc run ./main`，其中 `main` 是已应用了 seccomp 配置文件的应用程序二进制文件。可以使用 `--profile/-p` 标志指定配置文件位置。
+21,如何禁用或自定义生成的 seccomp 配置文件中的基本系统调用？,可以在 `spoc record` 中使用 `--no-base-syscalls/-n` 标志禁用基本系统调用，或使用 `--base-syscalls/-b` 命令行标志进行自定义。
+22,如何使用 spoc 记录 seccomp 配置文件？,使用 `spoc` 命令行工具的 `record` 子命令，例如 `sudo ./spoc record ./main`，其中 `main` 是需要记录 seccomp 配置文件的应用程序二进制文件。
+23,Security Profiles Operator 的关键特性之一是什么？,从头开始记录 seccomp、SELinux 和 AppArmor 配置文件是该 Operator 的关键特性之一。
+24,什么是 Security Profiles Operator？,Security Profiles Operator 是一个功能丰富的 Kubernetes Operator，可以简化 seccomp、SELinux 和 AppArmor 配置文件的管理。
+25,什么是云原生全景图？它有什么作用？,云原生全景图是由 CNCF 维护的一个汇总了社区成熟和使用范围较广、具有最佳实践的产品和方案，并加以分类的参考图谱。它为企业构建云原生体系提供了参考，在云计算研发、运维等领域具有广泛的影响力。
+26,什么是 CNCF？它的作用是什么？,CNCF 全称 Cloud Native Computing Foundation（云原生计算基金会），它致力于培育和维护一个厂商中立的开源生态系统，推广云原生技术，使其更加普及和成熟。
+27,什么是可观测性？在云原生领域中有什么作用？,可观测性是指主动观测应用关联的各类数据，以实现全面监控和故障排查。在云原生领域中，可观测性成为了最热门话题之一，能够取代传统的系统监控，为云原生应用带来更好的管理和运维体验。
+28,DaoCloud Enterprise 5.0 的研发背景是什么？,DaoCloud Enterprise 5.0 是新一代云原生操作系统，其研发背景主要是为了满足云原生应用快速部署、运维、管理的需求。
+29,Merbridge CNI 模式的出现解决了哪些问题？,Merbridge CNI 模式的出现能够更好地适配服务网格的功能，解决了无法适配注入 Istio 的 Sidecar Annotation、无法排除某些端口或 IP 段流量以及无法处理外部发送到 Pod 的流量等问题。
+30,KubeCon + CloudNativeCon Europe 2022 上有哪些热门云原生开源项目？,KubeCon + CloudNativeCon Europe 2022 上涌现了许多热门的云原生开源项目，包括 Istio、Kubernetes、Prometheus、Envoy、Harbor 等。
+31,CloudTTY 是什么？它解决了哪些问题？,CloudTTY 是一个基于 kubernetes 的云原生开源项目，解决了网页命令行在权限控制下的一系列功能需求。
+32,什么是 Clusterpedia？它的作用是什么？,Clusterpedia 是一个开源项目，可以通过 kubectl 对多个集群进行资源复杂检索，它的主要作用是在多云环境下进行信息检索。
+33,KubeCon + CloudNativeCon Europe 2022 是什么活动？该活动上有哪些热门云原生开源项目？,KubeCon + CloudNativeCon Europe 2022 是全球顶级的云原生旗舰会议。该活动上涉及了许多热门云原生开源项目，例如 Cluster-api、Karmada/Clusternet 等。
+34,"""云边协同超融合一体机"" 是由哪两个公司联合推出的？它的目标是什么？","""云边协同超融合一体机"" 是由华为和上海道客网络科技有限公司联合推出的。它的目标是将云原生能力下沉至边缘，提供实时的虚拟数字世界体验，实现真正的云边一体化元宇宙。"
+35,CloudTTY 是什么？它基于哪个平台？,CloudTTY 是一个基于 Kubernetes 平台的云原生开源项目，解决了一系列集群之上的 “网页命令行” 权限控制下的功能需求。
+36,Clusterpedia 是什么？它解决了什么问题？,Clusterpedia 是一个 CNCF 沙箱项目，用于跨集群复杂的资源检索。它解决多集群内部资源管理和检索越来越复杂，多云管理面临巨大挑战等问题。
+37,Merbridge 被收录在 CNCF 的哪个象限中？它为什么推出了 CNI 模式？,Merbridge 被收录在 CNCF 云原生全景图中的 Orchestration & Management（编排与管理）层的 Service Mesh（服务网格）象限。Merbridge 推出了 CNI 模式是为了更好地适配服务网格的功能，以便更好地处理 Pod 内部和外部的流量。
+38,DCE  提供了哪些模块的能力介绍？,DaoCloud Enterprise 5.0 是一款高性能可扩展的云原生操作系统，具有以下主要特点和优势：\n\n多云编排：支持跨云资源检索、多云的应用部署、发布和运维能力，助力企业构建多云、混合云的数字基础设施。\n数据中间件服务：为有状态应用设计的云原生本地存储能力，提供中间件管理能力，实现数据服务的自助化申请、弹性扩展、高并发处理和稳定高可用。\n微服务治理：提供非侵入式流量治理功能，实现全生命周期管理，保证微服务应用的连续可用性。\n可观测性：基于日志、链路、指标、eBPF 等技术手段，全面采集服务数据，通过统一控制面实现所有集群及负载观测数据的查询，实现秒级故障定位。\n应用商店：收录来自大数据、AI、中间件等十大领域生态伙伴的软件产品，提供开箱即用的生态应用软件，打造完整的解决方案体系。\n应用交付：通过自助式上云、柔性租户体系、自动化完成应用的构建、部署等方式，实现应用更精细的管理运维。\n信创异构：兼容国产芯片及服务器，支持信创操作系统及信创应用生态体系，保证信创应用运行环境的稳定高可靠。\n云边协同：将云原生能力延伸至边缘，解决在海量边、端设备上统一完成大规模应用交付、运维、管控的诉求，实现云边的真正一体化。\n云原生底座：提供云原生计算、网络、存储等能力，突破 K8s API 性能瓶颈，实现企业超大规模用户并发使用多集群。
+39,「DaoCloud 道客」主办了哪个活动？该活动主要分享了哪方面内容？,「DaoCloud 道客」主办了「论道原生｜云原生数字生态私享会・上海」活动。该活动从云原生思维和技术出发，分享了云原生在医疗和人工智能方面的应用与实践。
+40,Kubean 是什么？它采用什么作为底层技术依赖？,Kubean 是一个集群生命周期管理工具。它采用 Kubespray 作为底层技术依赖。
+41,什么是云原生本地存储系统 HwameiStor？它在哪个 CNCF 云原生全景图象限中被收录？,HwameiStor 是「DaoCloud 道客」自主开源的云原生本地存储系统。它被收录在 CNCF 云原生全景图中的 RunTime（运行时）层的 Cloud Native Storage（云原生存储）象限。
+42,什么是 CNCF？,CNCF（云原生计算基金会，Cloud Native Computing Foundation）是一个致力于推广云原生技术的非营利性组织，旨在通过开源项目的方式推动云原生技术的发展和普及。
+43,如何拉取依赖镜像（国内加速 🚀）？,执行以下命令 pull 依赖的
+44,如何拉取依赖镜像（默认）？,执行以下命令 pull 依赖的镜像：\n```bash\nVERSION=1.18.20-lts.2\nREPOS=ghcr.io/klts-io/kubernetes-lts\nkubeadm config images pull --image-repository ${REPOS} --kubernetes-version v${VERSION}\n```
+45,如何开机自动启动 Kubelet？,执行以下命令开机自动启动 Kubelet：\n```bash\nsystemctl enable kubelet\n```
+46,如何安装 KLTS（基于 Debian 的发行版）？,执行以下命令安装：\n```bash\napt-get install kubeadm kubelet kubectl\n```
+47,如何安装 KLTS（基于 Red Hat 的发行版）？,执行以下命令安装：\n```bash\nyum install kubeadm kubelet kubectl\n```
+48,如何设置 KLTS 的软件源（基于 Debian 的发行版，国内加速 🚀）？,执行以下代码设置下载 KLTS 的软件源：\n```bash\ncurl https://raw.githubusercontent.com/wzshiming/github-hosts/master/hosts >>/etc/hosts\nVERSION=1.18.20-lts.2\ncat << EOF > /etc/apt/sources.list.d/klts.list\ndeb [trusted=yes] https://raw.githubusercontent.com/klts-io/kubernetes-lts/deb-v${VERSION} stable main\ndeb [trusted=yes] https://raw.githubusercontent.com/klts-io/others/deb stable main\nEOF\napt-get update\n```
+49,如何设置 KLTS 的软件源（基于 Red Hat 的发行版，国内加速 🚀）？,执行以下代码设置下载 KLTS 的软件源：\n```bash\ncurl https://raw.githubusercontent.com/wzshiming/github-hosts/master/hosts >>/etc/hosts\nVERSION=1.18.20-lts.2\ncat << EOF > /etc/yum.repos.d/klts.repo\n[klts]\nname=klts\nbaseurl=https://raw.githubusercontent.com/klts-io/kubernetes-lts/rpm-v${VERSION}/\$basearch/\nenabled=1\ngpgcheck=0\n[klts-other]\nname=klts-others\nbaseurl=https://raw.githubusercontent.com/klts-io/others/rpm/\$basearch/\nenabled=1\ngpgcheck=0\nEOF\nyum makecache\n```
+50,如何设置 KLTS 的软件源（基于 Debian 的发行版）？,执行以下代码设置下载 KLTS 的软件源：\n```bash\nVERSION=1.18.20-lts.2\ncat << EOF > /etc/apt/sources.list.d/klts.list\ndeb [trusted=yes] https://raw.githubusercontent.com/klts-io/kubernetes-lts/deb-v${VERSION} stable main\ndeb [trusted=yes] https://raw.githubusercontent.com/klts-io/others/deb stable main\nEOF\napt-get update\n```
+51,如何设置 KLTS 的软件源（基于 Red Hat 的发行版）？,执行以下代码设置下载 KLTS 的软件源：\n```bash\nVERSION=1.18.20-lts.2\ncat << EOF > /etc/yum.repos.d/klts.repo\n[klts]\nname=klts\nbaseurl=https://raw.githubusercontent.com/klts-io/kubernetes-lts/rpm-v${VERSION}/\$basearch/\nenabled=1\ngpgcheck=0\n[klts-other]\nname=klts-others\nbaseurl=https://raw.githubusercontent.com/klts-io/others/rpm/\$basearch/\nenabled=1\ngpgcheck=0\nEOF\nyum makecache\n```
+52,如何安装 KLTS？,KLTS 提供了基于 deb 和 rpm 软件源的安装方式，可以设置 KLTS 软件源并使用相应的命令进行安装。
+53,如何构建 containerd？,```bash\nVERSION=1.5.4\nwget -c https://github.com/containerd/containerd/releases/download/v${VERSION}/containerd-${VERSION}-linux-amd64.tar.gz\ntar xvf containerd-${VERSION}-linux-amd64.tar.gz -C /usr/local/\nmkdir /etc/containerd/ && containerd config default > /etc/containerd/config.toml\nwget -c -O /etc/systemd/system/containerd.service https://raw.githubusercontent.com/containerd/containerd/main/containerd.service\nsystemctl start containerd && systemctl enable containerd\n```
+54,对于 containerd，在哪里可以找到各自的 Linux 发行版设置 Docker 存储库和安装 containerd.io 软件包的有关说明？,在[安装 Docker 引擎](https://docs.docker.com/engine/install/#server)中找到为各自的 Linux 发行版设置 Docker 存储库和安装 containerd.io 软件包的有关说明。
+55,如何安装基于 Debian 发行版的 Docker？,执行以下命令安装基于 Debian 发行版的 Docker：\n```bash\napt-get install docker.io\n```
+56,如何安装基于 Red Hat 发行版的 Docker？,执行以下命令安装基于 Red Hat 发行版的 Docker：\n```bash\nyum install docker\n```
+57,什么是 containerd？,containerd 是一个面向云、开放且可移植的容器运行时，由 Docker 开源，用于管理容器生命周期、与高层次的编排系统（如 Kubernetes）进行集成等。
+58,如何安装 containerd？,您可以从 Docker 官方仓库安装 `containerd.io` 软件包，也可以使用源代码构建。具体方法请参阅文章中的内容。
+59,如何安装基于 Debian 发行版的 Docker？,执行命令 `apt-get install docker.io` 可以安装基于 Debian 发行版的 Docker。
+60,如何安装基于 Red Hat 发行版的 Docker？,执行命令 `yum install docker` 可以安装基于 Red Hat 发行版的 Docker。
+61,Kubernetes 使用哪些容器运行时（Container Runtime）来在 Pod 中运行容器？,Kubernetes 使用容器运行时接口（Container Runtime Interface，CRI）来与您所选择的容器运行时交互。默认情况下，kubeadm 使用 docker 作为容器运行时。kubelet 通过内置的 `dockershim` CRI 实现与 Docker 集成。如果您不指定运行时，则 kubeadm 会自动尝试检测系统上已经安装的运行时。
+62,如何禁用 Selinux？,执行 `setenforce 0` 命令可以临时关闭 Selinux。如果需要永久关闭，请编辑 `/etc/sysconfig/selinux` 将 `SELINUX=enforcing` 替换为 `SELINUX=disabled`。
+63,为什么需要禁用交换分区？,为了保证 kubelet 正常工作，您必须禁用交换分区。
+64,如何设置节点名字？,使用命令 `hostnamectl set-hostname your-new-host-name` 来设置节点名字，并添加 `127.0.0.1 $(hostname)` 和 `::1 $(hostname)` 到 `/etc/hosts` 文件中。
+65,工作节点需要开启哪些端口？,工作节点需要开启 TCP 入站端口 10250 和 30000-32767 等端口（默认的 NodePort 服务端口范围）。
+66,控制平面节点需要开启哪些端口？,控制平面节点需要开启 TCP 入站端口 6443、2379-2380、10250、10251 和 10252 等端口。
+67,如何检查网络适配器？,如果您有一个以上的网络适配器，同时您的 Kubernetes 组件通过默认路由不可达，我们建议您预先添加 IP 路由规则，这样 Kubernetes 集群就可以通过对应的适配器完成连接。
+68,检查节点上 MAC 地址和 product_uuid 的唯一性为什么很重要？,Kubernetes 使用 MAC 地址和 product_uuid 来确定集群中的唯一节点。如果这些值在每个节点上不唯一，可能会导致安装失败。
+69,集群中每个主机至少需要多少内存和 CPU？,每台主机至少需要 2 GB 或更多的内存，CPU 2 核或更多。
+70,KLTS 是指什么？,KLTS (Kubernetes Long Term Support) 是 DaoCloud 自主维护的 Kubernetes。
+71,Kubernetes 项目为基于哪些发行版的 Linux？,Kubernetes 项目为基于 Debian 和 Red Hat 的 Linux 发行版以及一些不提供包管理器的发行版提供通用的指令。
+72,在这个示例中，最多允许多少次失败才算成功？,在这个示例中，最多允许 3 次失败才算成功。
+73,检查状态时，应该使用哪个命令？,检查状态时，应该使用 kubectl describe StatusCheck status-check-example 命令。
+74,HTTP 请求的地址是什么？,HTTP 请求的地址是 http://10.1.3.210:30028。
+75,StatusCheck 的 mode 是什么？,StatusCheck 的 mode 是 Synchronous。
+76,这个示例中的 StatusCheck 用于什么？,这个示例中的 StatusCheck 用于检查一个 HTTP 服务是否正常运行。
+77,怎样才能更好地理解使用 Chaos Mesh 的一些方式？有哪些参考文献？,可以安装并实践使用 Chaos Mesh，并参考官方文档进行更多理解。官方文档网址为 https://chaos-mesh.org/zh/docs/。
+78,Chaos Mesh 中的 StatusCheck 类型有哪些？请分别举例说明。,Chaos Mesh 中的 StatusCheck 类型有 Continuous 和 Synchronous 两种方式。Continuous 类型和 Synchronous 类型的 YAML 格式和检查状态方式均不同，请参考原文进行了解。
+79,在 Chaos Mesh 的设置中，有哪些设置开关？,在 Chaos Mesh 的设置中，包含登录/登出，主题色彩，中英文设置等一些其它的设置开关。
+80,在 Chaos Mesh 中，已经归档的实验、计划、工作流对象能否查看详情？,已经归档的实验、计划、工作流对象是不能查看详情了，因为归档的资源对象在 Kubernetes 中已经不存在了。
+81,Chaos Mesh 的数据是保存在哪里？,Chaos Mesh 的数据保存在数据库中。
+82,如何创建一个在每小时的 05 分会定时执行的计划，并在其中删除选中的 nginx Pod？,"可以通过以下 yaml 定义创建一个在每小时的 05 分会定时执行的计划，并在其中删除选中的 nginx Pod：\n```yaml\napiVersion: chaos-mesh.org/v1alpha1\nkind: Schedule\nmetadata:\nname: schedule-delay-example\nnamespace: default\nspec:\nschedule: ""5 * * * *""\nhistoryLimit: 2\nconcurrencyPolicy: Allow\ntype: ""PodChaos""\npodChaos:\naction: ""pod-kill""\nmode: one\nselector:\nnamespaces:\n- default\nlabelSelectors:\n""app.kubernetes.io/instance"": ""nginx""\n```"
+83,如何创建一个 PodChaos 实验并删除选中的 nginx Pod？,"可以通过以下 yaml 定义创建一个 PodChaos 实验并删除选中的 nginx Pod：\n```yaml\napiVersion: chaos-mesh.org/v1alpha1\nkind: PodChaos\nmetadata:\nname: pod-kill-example2\nnamespace: default\nspec:\naction: pod-kill\nmode: one\nselector:\nnamespaces:\n- default\nlabelSelectors:\n""app.kubernetes.io/instance"": ""nginx""\n```"
+84,Chaos Mesh 的仪表盘是什么样子的？,Chaos Mesh 的仪表盘展示了故障注入的相关信息，包括实验列表、实验详情、计划列表、计划详情、工作流列表等。
+85,Chaos Mesh 支持哪些故障注入类型？,Chaos Mesh 支持的故障注入类型包括：PodChaos、NetworkChaos、IOChaos、TimeChaos、KernelChaos。
+86,除了容器镜像拉取和 API 查询限制，还有哪些因素可能影响节点上的 Pod 启动速度？,在文章中提到了其他可能会影响 Pod 启动的因素包括容器运行时、磁盘速度、节点上的 CPU 和内存资源。
+87,为了加快容器启动速度，哪个特性通过挂载具有正确 SELinux 标签的卷来代替递归地更改卷上的每个文件？,SELinux 挂载选项重标记功能。
+88,在 Kubernetes v1.27 中，kubelet 配置中的 `memoryThrottlingFactor` 默认值是多少？,默认值为 0.9。
+89,在 Kubernetes v1.22 中引入的名为 MemoryQoS 的特性门控有什么作用？,Memory
+90,如何切换节点使用基于事件的生命周期变更检测？,可以显式切换为基于事件的生命周期变更检测来加速 kubelet 的启动速度。
+91,在 Kubernetes v1.27 中，kubelet 将默认的 `kubeAPIQPS` 和 `kubeAPIBurst` 的值分别提高到了多少？,分别提高到了 50 和 100。
+92,为什么需要提高 kubelet 默认 API 每秒查询限值？,在具有多个 Pod 的节点中，kubelet 需要同步 Pod 状态并准备 ConfigMap、Secret 或卷，需要大带宽访问 kube-apiserver。提高 kubelet 默认 API 每秒查询限值可以加快 Pod 启动速度。
+93,如何限制节点上的并行容器镜像拉取数量？,可以在 kubelet 配置中设置 `maxParallelImagePulls` 字段来限制并行镜像拉取数量。
+94,如何启用并行容器镜像拉取？,将 kubelet 配置中的 `serializeImagePulls` 字段设置为 false。
+95,为什么并行容器镜像拉取有助于加快节点上的 Pod 启动？,并行容器镜像拉取可以同时拉取多个镜像，从而加速镜像拉取的时间。
+96,在 eBPF socket 加速和 TCP/IP 栈延迟对比中，哪一个更优？,在 eBPF socket 加速和 TCP/IP 栈延迟对比中，eBPF socket 加速优于常规 TCP/IP 栈，性能优于常规 TCP/IP 栈近 50%。
+97,请求消息大小的大小对 eBPF socket 加速的延迟是否有影响？,请求消息大小的大小对 eBPF socket 加速的延迟没有影响。
+98,在使用 eBPF 进行加速时，有哪些协议级别的开销被消除了？,使用 eBPF 进行加速时，通过将数据包从源套接字的传输队列重定向到目标套接字的接收队列，消除了任何协议级别的开销（慢启动、拥塞避免、流量控制等）。
+99,在禁用 Nagle 算法的情况下，TCP/IP 栈和 eBPF socket 加速的性能对比如何？,在禁用 Nagle 算法的情况下，TCP/IP 栈和 eBPF socket 加速的性能对比中，TCP/IP 栈的吞吐量增益完全消失了。此时 eBPF socket 加速凭借其低开销远远超过启用 Nagle 算法的 TCP/IP 栈的吞吐量。但随着发送消息越来越大，超过 MSS，TCP/IP 栈就会失去其批处理优势，在这些大数据包发送大小下，eBPF socket 加速凭借其低开销仍然优于常规 TCP/IP 栈。
+100,什么是 Nagle 算法？,Nagle 算法是用来解决小数据包在慢速网络中泛滥导致拥塞的问题，在该算法中只要有一个 TCP 段在小于 TCP MSS 大小的情况下未被确认，就会进行批处理传输数据操作。
+101,Cilium 使用哪些 eBPF 程序和映射实现 socket 层加速？,Cilium 使用以下 eBPF 程序和映射实现 socket 层加速：\n- eBPF 映射：Cilium_sock_ops（类型：BPF_MAP_TYPE_SOCKHASH）：存储 socket 信息。\n- eBPF 程序：\n- obpf_sockmap （类型：BPF_PROG_TYPE_SOCK_OPS）：拦截系统中 socket 建立连接操作，并将 socket 信息存储到 cilium_sock_ops。\n- obpf_redir_proxy（类型：BPF_PROG_TYPE_SK_MSG）：拦截系统中 sendmsg 系统调用，提取 key，将数据直接重定向到对端 socket。
+102,Cilium 在处理源端和目标端在同一个节点的时候，是如何进行加速的？,Cilium 在处理源端和目标端在同一个节点的时候，在 socket 层将流量直接重定向到目标端 socket，这样直接绕过了整个 TCP/IP 协议栈，进而达到加速的效果。
+103,Cilium 的整体架构是怎样的？,Cilium 的整体架构包含多个组件，其中 daemon 组件实现了 socket 层加速。daemon 组件会在集群中每个节点都启动一个 Pod，所以 socket 加速效果会应用在每个节点上。
+104,在同一节点上调用的应用为什么需要 socket 层加速？,为了达到更快的服务速度，当两个互相调用的应用部署在同一个节点上的时候，每次请求和返回都需要经过 socket 层、TCP/IP 协议栈、数据链路层、物理层。如果请求和返回绕过 TCP/IP 协议栈，直接在 socket 层将数据包重定向到对端 socket，可以大大减少发送数据包耗时，从而加快服务速度。
+105,Cilium 是基于什么技术实现 socket 层加速的？,Cilium 基于 eBPF 技术实现 socket 层加速。
+106,在 Karmada 控制平面部署应用配置时，如何指定应用调度到哪些集群上？,应用配置中可以通过传播策略中的 clusterNames 指定应用调度到哪些集群上。
+107,Karmada 中哪些控制器和调度器参与到跨集群故障恢复过程中？,跨集群故障恢复过程中，Karmada 中的 ReplicaScheduler 控制器、ReplicaReconciler 控制器、PropagationReconciler 控制器和 PodHook 调度器参与其中。
+108,Divided 故障转移策略是如何工作的？,当集群故障时，调度器和控制器配合尝试将故障集群副本迁移到其他运行正常的集群。
+109,Karmada 故障恢复支持哪两种方式？,Karmada 故障恢复支持 Duplicated 和 Divided 两种方式。
+110,Karmada 的目标是什么？,Karmada 旨在为多云和混合云场景下的多集群应用管理提供便捷的自动化，具有集中式多云管理、高可用性和故障恢复等关键特性。
+111,VictoriaMetrics 与 Prometheus 相比，有哪些优势和劣势？,优势：\n1. 性能优势；\n2. 更优秀的横向拓展、高可用方案；\n3. 数据多租户能力。\n劣势：\n1. 没有类似 Prometheus 的 WAL 日志；\n2. 为了更大程度优化存储，会选择丢失部分数据精度。
+112,在 Grafana 仪表板上，如何查看 VictoriaMetrics 的缓存指标？,在 Grafana 仪表板上，可以查看每种类型缓存的当前内存使用情况和缓存命中率。使用 vm_cache_size_bytes、vm_cache_size_max_bytes、vm_cache_requests_total、vm_cache_misses_total 和 vm_cache_entries 指标，在面板上显示每种类型的缓存指标。
+113,在 VictoriaMetrics 中，每种类型的缓存指标可以在哪个页面导出？,在 VictoriaMetrics 中，每种类型的缓存指标可以在“/metrics”页面导出。
+114,VictoriaMetrics 的缓存存储在哪个目录中？如何在下次启动时删除这些缓存？,VictoriaMetrics 的缓存存储在“<-storageDataPath>/cache”目录中，在正常关机期间，这些缓存会被存储到该目录。如果需要在下次启动时删除这些缓存，可以通过在重启 VictoriaMetrics 之前将 reset_cache_on_startup 文件放置在“<-storageDataPath>/cache”目录中来执行。
+115,VictoriaMetrics 支持以什么形式给 push 数据增加标签？,"VictoriaMetrics 支持以 label=""value"" 的形式给 push 数据增加标签，使用 pushmetrics.extraLabel 配置。"
+116,与 Prometheus 相比，VictoriaMetrics 有哪些优势？,VictoriaMetrics 在性能、横向拓展、高可用方案和数据多租户等
+117,如何进行 VictoriaMetrics 的缓存管理？,VictoriaMetrics 使用各种内部缓存，并支持在重启 VictoriaMetrics 之前将 reset_cache_on_startup 文件放置在“<-storageDataPath>/cache” 目录中来执行删除缓存操作。同时，VictoriaMetrics 使用各种内存缓存来加快数据摄取和查询性能，缓存指标可以在 “/metrics” 页面导出。
+118,VictoriaMetrics 支持哪些数据推送方式？,当出现无法拉取指标的场景下，VictoriaMetrics 支持以 Prometheus 数据格式的方式，通过 push 模式进行指标推送，可使用 “-pushmetrics.url” 配置推送地址，“-pushmetrics.extraLabel” 配置拓展标签，“-pushmetrics.interval” 配置推送周期。
+119,VictoriaMetrics 如何进行监控？,VictoriaMetrics 在 “/metrics” 页面以 Prometheus exposion 格式导出内部度量，并在 “/api/v1/status/active_queries“ 页面上公开当前正在运行的查询及其执行时间，在 ”/api/v1/status/top_queries” 页面上公开了执行时间最长的查询，在 “/api/v1/status/TSDB“ 页面返回 TSDB 统计信息。
+120,VictoriaMetrics 的存储方式是什么？,VictoriaMetrics 将以类似 MergeTree 的数据结构存储时间序列数据。插入时，VictoriaMetrics 累积最多 1s 的数据，并将其转储到磁盘上的 `<storageDataPath>/data/small/YYYY_MM/` 子目录，形成具有以下名称模式的 `part：“rowsCount_blocksCount_minTimestamp_maxTimestamp”`。每个 part 由两个 “列” 组成：值和时间戳。此外，part 包含索引文件，用于在值和时间戳文件中搜索特定 series。part 会定期合并为较大的 part，生成的部分在 `<storageDataPath>/data/{small，big}/YYYY_MM/tmp` 子目录下构造。
+121,如何消除 VictoriaMetrics 中的重复数据？,VictoriaMetrics 会根据 “-dedup.minScrapeInterval” 配置的值进行去重，只留下一个原始样本，保留配置周期中时间戳最大的数据。多个相同配置的 vmagent 或 Prometheus 实例将数据写入同一 VictoriaMetrics 实例，则消除重复数据可减少磁盘空间的使用。
+122,VictoriaMetrics 支持哪些数据格式的导入导出？,VictoriaMetrics 支持使用专属 Agent 接口导入数据（Prometheus remote_write API、DataDog submit metrics API、Graphite plaintext protocol、OpenTSDB telnet put protocol、OpenTSDB http api/put protocol）和使用统一接口导入数据（/api/v1/import 导出 json 格式，/api/v1/import/csv 导出 csv 格式，/api/v1/import/native 导出二进制格式）。同时，也支持使用导出接口导出数据（/api/v1/export 导出 json 格式，/api/v1/export/csv 导出 csv 格式，/api/v1/export/native 导出二进制格式）。
+123,如何进行 VictoriaMetrics 数据的强制合并？,可以使用 “<http://victoriametrics:8428/internal/force_merge?partition_prefix=YYYY_MM>” 进行强制数据压缩，会以异步的形式，立马返回请求结果，并在后台执行数据压缩任务。当需要立即删除数据的时候，可以使用强制合并触发数据删除。
+124,如何手动删除 VictoriaMetrics 中的数据？,可以使用 “<http://<victoriametrics-addr>:8428/api/v1/admin/tsdb/delete_series?match[>]=<timeseries_selector_for_delete>”。删除的时间序列的存储空间不会立即释放，而是在随后的数据文件后台合并过程中释放。请注意，对于前几个月的数据，后台合并可能永远不会发生，因此不会为历史数据释放存储空间。在这种情况下，强制合并可能有助于释放存储空间。
+125,如何配置 VictoriaMetrics 的数据保存时间？,可以使用 “-retentionPeriod”命令行标志进行配置，该标志采用一个数字，后跟一个时间单位字符 “-h（ours）、d（ays）、w（eeks）、y（ears）”。如果未指定时间单位，则假定为月。例如，“-retentionPeriod=3” 表示数据将存储 3 个月，然后删除。默认保留期为一个月。
+126,如何消除重复数据？,VictoriaMetrics 会根据 “-dedup.minScrapeInterval” 命令行标志进行配置，该标志采用一个数字，表示保留在给定时间间隔内的数据。默认值为 0.01s，可以通过增加该值来消除重复数据。
+127,VictoriaMetrics 支持哪些数据导入导出方式？,VictoriaMetrics 支持使用专属 Agent 接口导入数据：Prometheus remote_write API、DataDog submit metrics API、Graphite plaintext protocol、OpenTSDB telnet put protocol 和 OpenTSDB http api/put protocol。同时，也支持使用统一接口进行导入：/api/v1/import（导出 json 格式）、/api/v1/import/csv（导出 csv 格式）和 /api/v1/import/native（导出二进制格式）。相对的，也可以使用导出接口导出数据：/api/v1/export（导出 json 格式）、/api/v1/export/csv（导出 csv 格式）和 /api/v1/export/native（导出二进制格式）。
+128,如何进行数据删除和强制合并？,可以使用VictoriaMetrics提供的API进行数据删除和强制合并，具体操作方式可以参考文中的描述。
+129,VictoriaMetrics 的架构是怎样的？,VictoriaMetrics 集群由以下服务组成：vmstorage、vminsert、vmselect。每个服务可以独立扩展，并且可以在最合适的硬件上运行。Vmstorage 节点不了解彼此，不相互通信，也不共享任何数据。VictoriaMetrics 在开源层面，提供以下组件：vmui、vmagent、vminsert、vmstorage、vmselect、vmalert、vmbackup、vmrestore。
+130,VictoriaMetrics 支持哪些数据源？,VictoriaMetrics 支持以下数据源：Prometheus、DataDog agent、InfluxDB-compatible agents such as Telegraf、Graphite-compatible agents such as StatsD、OpenTSDB-compatible agents。
+131,如何快速接入 Prometheus 获取数据源？,可以在 VictoriaMetrics 配置文件中添加以下配置：\n```yaml\nremote_write:\n- url: http://<victoriametrics-addr>:8428/api/v1/write\nglobal:\nexternal_labels:\ndatacenter: dc-123\n```
+132,VictoriaMetrics 相对于 Prometheus 的优势有哪些？,VictoriaMetrics 相对于 Prometheus 的优势包括：部署简单，使用 vmbackup/vmrestore 工具可以轻松快速地将即时快照备份到 S3 或 GCS；读写性能比 InfluxDB 和 TimescaleDB 高达 20 倍；百万时间序列数据下，内存使用比 InfluxDB 少 10 倍，比 Prometheus、Thanos 或 Cortex 少 7 倍；数据高压缩，与 Prometheus、Thanos 或 Cortex 相比，所需的存储空间最多可减少 7 倍。
+133,VictoriaMetrics 是什么？,VictoriaMetrics 是一个快速、经济高效且可扩展的监控解决方案和时间序列数据库，可以作为 Prometheus 的长期储存，且支持 Prometheus 查询 API，可以在 Grafana 中用作 Prometheus 的代替品。
+134,如何确定影响 Pod 启动缓慢的原因？,可以分析指标和日志，并考虑容器运行时、磁盘速度、节点上的 CPU 和内存资源等因素来确定影响 Pod 启动缓慢的原因。
+135,SELinux 挂载选项重标记功能是什么？,SELinux 挂载选项重标记功能是一种 Kubernetes 的特性，通过挂载具有正确 SELinux 标签的卷来加快容器启动速度，而不是递归地更改卷上的每个文件。
+136,在 Kubernetes v1.26 中新增了哪些与 Pod 启动相关的指标和日志信息？,Kubernetes v1.26 中新增了一个名为 pod_start_sli_duration_seconds 的直方图指标，用于显示 Pod 启动延迟 SLI/SLO 详情。此外，kubelet 日志现在会展示更多与 Pod 启动相关的时间戳信息。
+137,如何设置内存 QoS？,可以在 Pod 中通过设置 cgroupv2 memory.high 值来执行 Memory
+138,什么是内存 QoS？,内存
+139,execution controller 的能力是什么？,execution controller 的能力是将成员集群对应执行命名空间的 work 中存放的实际需要下发的资源在对应成员集群创建、更新或删除。
+140,binding controller 的核心逻辑是什么？,binding controller 的核心逻辑是移除孤儿 work，确保 rb (ResourceBinding) 期望 work 符合预期，聚合 work 的状态，记录到 rb(ResourceBinding) 的状态中，并根据 rb(ResourceBinding) 的聚合状态更新 resource template 状态。
+141,gracefulEviction controller 的核心逻辑是什么？,gracefulEviction controller 的核心逻辑是保证了新的副本在符合要求的集群上 Ready 后，再移除优雅驱逐任务，也就是才能删除调度到故障集群的旧资源。
+142,Karmada 故障恢复是由哪些控制器协同完成的？,Karmada 故障恢复是由 binding controller、gracefulEviction controller 和 execution controller 协同完成的。
+143,Karmada 是什么？,Karmada 是一个 Kubernetes 跨集群调度器，能够在不同的 Kubernetes 集群中调度应用程序。
+144,什么情况下会触发 Karmada scheduler 的重调度操作？,当 rb.spec.clusters（资源调度集群结果）下所有的副本之和不等于 rb.spec.replicas（资源期望副本）时，调度器认为这是一次扩容或者缩容操作，从而触发重调度操作。
+145,taint-manager controller 是做什么的？,taint-manager controller 控制器感知集群拥有 effect 为 NoExecute 的污点时，\n会获取到该集群上的所有命名空间级别和集群级别的 rb (ResourceBinding)，然后放入对应的驱逐处理队列。\n驱逐处理消费者（worker）会判断获取到 rb(ResourceBinding) 对应的 pp (PropagationPolicy)，看\npp (PropagationPolicy) 中是否存在集群污点容忍，如果 pp (PropagationPolicy) 中的集群污点容忍和集群污点匹配，\n那么直接跳过，认为该集群上的资源不需要驱逐。否则认为需要驱逐。
+146,怎样添加 effect 为 NoSchedule 和 NoExecute 的污点？,"在 cluster conntroller 中，当 conditions 中 type 为 Ready 的 condition 状态为 ""False"" 时，调用 UpdateClusterControllerTaint 函数添加 effect 为 NoSchedule 和 NoExecute 的污点。"
+147,clusterStatus controller 在哪种情况下会更新集群对象的条件（conditions）？,当集群下线后，初始化的 condition 状态不为 ‘True’ 时，认为需要更新 cluster 资源对象的 condiitions。conditions 中 type 为 Ready 的 condition 状态将会被修改为 ‘False’。
+148,为什么需要 clusterStatus controller？,clusterStatus controller 是用于监控和维护集群状态的控制器，它会根据集群的健康状态向集群对象中写入状态条件，以供后续的调度器和驱逐组件使用。
+149,Karmada 中哪个控制器负责根据成员集群对应执行命名空间下的 work，在成员集群中创建资源？,execution controller 负责根据成员集群对应执行命名空间下的 work，在成员集群中创建资源。
+150,Karmada 中哪个控制器负责保证在新的调度集群上资源状态健康后，再移除驱逐集群上的资源对象？,gracefulEviction controller 负责保证在新的调度集群上资源状态健康后，再移除驱逐集群上的资源对象。
+151,Karmada 中哪个控制器负责判断是否需要为故障集群打上不可调度和不可执行污点？,cluster controller 负责判断是否需要为故障集群打上不可调度和不可执行污点，并根据 conditions 中 type 为 Ready 的 condition 状态来确定添加哪种污点。
+152,Karmada 是如何感知集群状态的？,Karmada 是通过 clusterStatus controller 探测成员集群 kube-apiserver 的 ‘/readyz’ 和 ‘/healthz’，获取到成员集群的在线状态和健康状态，并将其同步到控制平面的 cluster 资源对象中。
+153,Karmada 中的故障恢复是如何实现的？,Karmada 中的故障恢复是通过在集群发生故障时，将集群状态标记为不可用，并添加两个污点，然后移除应用并将其调度到满足要求的其他集群。故障转移保证了用户业务的高可用性和连续性。
+154,在 Karmada 中如何使用传播策略和覆盖策略来控制资源下发？,可以使用 yaml 文件中的 propagationPolicy 字段来定义传播策略和覆盖策略。其中 propagationPolicy 字段包括两个子字段：staticWeightList 和 dynamicWeightList。通过定义这两个字段来实现传播策略和覆盖策略的控制。其中，staticWeightList 可以控制资源在集群间的传播，dynamicWeightList 可以控制资源在集群内部的调度。
+155,Karmada 中如何实现故障转移？,当集群发生故障时，Karmada 会自动调节其余成员集群上的副本，从而来满足用户整体的副本期望，从而达到集群级别的故障恢复。当故障集群恢复后，转移的副本会保持不变，原有调度集群上资源会被删除，资源不会调度回故障的集群。
+156,Karmada 中集群发生故障后会发生什么？,当集群发生故障或用户不想继续在集群上运行应用时，集群状态将被标记为不可用，并添加两个污点。检测到集群故障后，控制器将从故障集群中移除应用。然后，被移除的应用将被调度到满足要求的其他集群。
+157,什么是信创异构？,信创异构采用信创云原生技术架构，兼容国产芯片及服务器，屏蔽底层异构基础设施的复杂性，实现混合异构集群的灵活调度，保证信创应用运行环境的稳定高可靠。
+158,DCE 的云原生底座提供哪些能力？,DCE 的云原生底座提供云原生计算、网络、存储等能力，支持集群从部署、版本升级、证书变更、配置变更、回收等全生命周期管理，实现企业超大规模用户并发使用多集群。
+159,DCE 的云边协同能力是指什么？,DCE 的云边协同能力将云原生能力延伸至边缘，采用边缘集群、边缘节点模式，将数据中心算力下移，端设备算力上移，实现云边的真正一体化。
+160,DCE 的应用商店是针对什么人群的？,DCE 的应用商店是针对企业实际业务需求的，收录来自大数据、AI、中间件等十大领域生态伙伴的软件产品，提供开箱即用的生态应用软件。
+161,DCE 是什么？,DaoCloud Enterprise 5.0 是一款高性能可扩展的云原生操作系统，具有以下主要特点和优势：\n\n多云编排：支持信创异构、边云协同、多云编排，可以在任何基础设施上、任意环境上提供一致、稳定的体验。\n微服务架构：融合前沿的服务网格和微服务技术，将可观测性贯穿于每一个流量生发的始终，助力洞察集群、节点、应用和服务的详细指标。\nDevOps开发运维：原生支持 DevOps 开发运维模式，实现应用交付的全流程标准化和自动化。\n灵活可扩展：DCE 5.0 的各个产品模块独立解耦，灵活升级，业务无感知，可以与超百家云原生生态产品开放对接，形成完整的解决方案体系。\n可观测性：提供一站式图形化仪表盘，通过动态仪表盘和拓扑大图可视化掌握应用健康状态。\n中间件集成：原生集成各类精选数据库和中间件，使得运维治理更高效。\n乐高搭积木式的模块化设计：可以根据企业的具体需求，灵活搭建自己的云原生容器化综合平台，以应对海量应用场景。\n安装方便：提供社区版和商业版，安装简便。\nDCE 5.0 可以助力企业定义数字边界，构建坚实可靠的数字底座，释放云原生生产力。
+162,DCE 5.0 的应用交付模块实现了哪些功能？,DCE 5.0 的应用交付模块通过一致性可推广的应用交付流程实现自助式上云，支持柔性租户体系，动态适配用户组织架构规划和实时资源分配，并基于云原生化的 CI/CD 流水线，集成丰富的工具链并支持流水线高效并发执行流转，自动化完成应用的构建、部署，并创新性引入 Gitops、渐进式交付能力体系，实现应用更精细的管理运维。
+163,DCE 5.0 的可观测性模块是基于哪些技术手段实现的？,DCE 5.0 的可观测性模块基于日志、链路、指标、eBPF 等技术手段，全面采集服务数据，深入获取请求链路信息，动态观测、多维度掌控集群、节点、应用和服务的实时变化，并通过统一控制面实现所有集群及负载观测数据的查询，引入拓扑分析技术可视化掌握应用健康状态。
+164,DCE 5.0 的微服务治理模块提供了哪些功能？,DCE 5.0 的微服务治理模块提供了非侵入式流量治理功能，支持无感接入传统微服务、云原生微服务和开源微服务框架，并支持微服务从开发、部署、接入、观测、运维的全生命周期管理，提供高性能云原生微服务网关，并引入自主开源的 eBPF 网格加速技术。
+165,DCE 5.0 的多云编排模块提供了哪些能力？,DCE 5.0 的多云编排模块提供了支持多云和混合云的统一集中管理，提供跨云资源检索及跨云的应用部署、发布和运维能力，实现多云应用高效管控，提供基于集群资源的应用弹性扩缩，实现全局负载均衡，具备故障恢复能力，有效解决多云应用灾备问题。
+166,DCE 5.0 的模块有哪些？,DCE 5.0 的模块有：容器管理、全局管理、可观测性、应用工作台、多云编排、微服务引擎、服务网格、中间件、镜像仓库、云原生网络和云原生存储。
+167,DCE 5.0 支持哪些云环境？,DCE 5.0 能够在任何基础设施和任意环境中提供一致、稳定的体验，支持异构云、边缘云和多云编排。
+168,什么是 DaoCloud Enterprise 5.0？,DaoCloud Enterprise 5.0 是一款高性能、可扩展的云原生操作系统，能够在任何基础设施和任意环境中提供一致、稳定的体验，支持异构云、边缘云和多云编排。
+169,内部平台实施者需要注意哪些挑战？,内部平台实施者需要注意以下挑战：1. 平台团队必须像对待产品一样对待他们的平台，并与用户一起开发它们；2. 平台团队必须谨慎选择优先级，和初始合作的应用开发团队；3. 平台团队必须寻求企业领导层的支持并展示对价值流的影响。
+170,平台团队需要注意哪些工作？,平台团队需要注意以下工作：1. 研究平台用户需求并规划 Roadmap；2. 在企业内宣扬和传播平台的价值；3. 管理和开发界面，包括门户、API、文档、模板、以及 CLI 工具。
+171,平台团队需要注意哪些属性？,平台团队需要注意以下属性：1. 平台即产品（Platfrom as a Product）；2. 用户体验；3. 文档和快速入门；4. 自助式；5. 减少认知负担；6. 可选和可组合；7. 默认安全。
+172,平台成熟度有哪些过程？,平台成熟度经历以下过程：1. 产品开发人员按需提供能力，并立即使用它们来运行系统；2. 产品开发人员按需提供服务空间，并使用它们来运行管道和任务；3. 第三方软件管理员按需提供依赖项，并轻松安装和运行之；4. 产品开发人员从模板中按需提供完整的环境，例如 Web 开发或 MLOps；5. 产品开发人员和经理观察已部署服务的功能、性能和成本。
+173,什么是内部平台？,内部平台是为企业内部团队提供资源和能力的一致性“最薄合理层”，以满足组织的要求。它们通过单个能力或能力组合，提供一致、符合要求的体验，最终使其用户更轻松、更高效地交付有价值的产品。
+174,内部平台的成熟度经历了哪些过程？,内部平台在使用中可能经历了以下过程：提供单一服务的能力和一致性体验、提供服务空间、提供依赖项、提供模板和环境、观察已部署服务的功能、性能和成本。
+175,什么是内部平台？,内部平台是指针对企业内部使用者提供服务能力，并以一种能够被应用简单集成的方式来提供。例如，内部平台可以提供自助式 API、项目模板和一致的用户体验等。
+176,为什么需要一个平台？,通过投资平台，企业可以实现减轻产品团队认知负担、提高产品可靠性和弹性、加速产品开发和交付、重用共享平台工具和知识以及治理相关风险等好处。
+177,平台工程在云计算方面有何价值？,平台工程在云计算方面帮助企业实现了云计算长期承诺的价值，如快速产品发布、跨基础设施的可移植性、更安全更弹性的产品，以及更高的开发者生产力。
+178,什么是平台工程？,平台工程是指在企业中作为明确的协作形式而涌现的提供基础能力、框架和经验，提供便利并加速着内部用户的工作（如应用程序开发者、数据科学家和信息处理者）的工作形式。
+179,Karmada 的参考资料有哪些？,Karmada 的参考资料包括 Karmada 源码、Karmada 官方文档、云原生多云应用利器 -- Karmada 总览篇、云原生多云应用利器 -- Karmada 控制器和云原生多云应用利器 -- Karmada 调度器等。
+180,Karmada 在 CNCF 项目贡献中表现如何？,在笔者参与贡献的 CNCF 项目贡献中，目前，Karmada 是 issue 回复最快，代码合并请求处理最快的项目。
+181,Karmada 社区在最新的会议中有讨论什么 feature？,在最新的社区会议中，有讨论增强 Failover 的 feature，会在传播策略中增加 Failover 更多配置能力。
+182,Karmada 是否支持用户自定义是否要调度回恢复的集群？为什么？,目前社区的方向是，将来可能会提供给客户选择是否重调度的能力。考虑到重调度对应用稳定性的影响，目前没有调度回原集群的原因。
+183,Karmada 如何实现集群级别的高可用？,Karmada 实现了基于故障转移模式、容器生命周期钩子和客户端负载均衡等机制来实现集群级别的高可用。
+184,Karmada 如何实现跨云服务商的多云管理？,Karmada 通过将不同云提供商的 Kubernetes 集群连接到一个控制平面上，将不同云提供商的 Kubernetes 集群组合成一个虚拟的超级集群。
+185,Karmada 的核心功能是什么？,Karmada 的核心功能是集群间应用编排和调度管理，支持多云服务商、多种容器编排工具和多种部署模式。
+186,Karmada 是什么？,Karmada 是一个开源的多云应用编排和调度平台，旨在使基于云原生技术的应用程序可以跨越多个云提供商进行部署和管理。
+187,Karmada 中的 Execution 控制器是做什么的？,Execution 控制器是负责将成员集群对应执行命名空间的 Work 中存放的实际需要下发的资源在对应成员集群创建、更新或删除。
+188,Karmada 中如何实现故障转移？,故障转移是由多个控制器和调度器协同完成的，当集群发生故障后，其他集群会接管这部分工作，保证应用的高可用性。
+189,Karmada 中的 Scheduler 控制器是做什么的？,Scheduler 控制器是负责将用户提交的 Work 调度到合适的集群上，并根据调度策略进行副本拆分或全量部署。
+190,Karmada 中的 ClusterPlan 控制器是做什么的？,ClusterPlan 控制器是负责将用户提交的 ClusterPlan 转换为对应的 Kubernetes 资源，并在集群中创建这些资源。
+191,Karmada 可以实现什么功能？,Karmada 可以实现跨云平台部署、编排和调度应用程序，并支持故障转移和副本拆分等功能。
+192,Karmada 基于哪个 Kubernetes 版本开发？,Karmada 版本发布与 Kubernetes 版本发布没有直接关联，但是目前稳定版本是基于 Kubernetes 1.19.0 开发的。
+193,Karmada 是什么？,Karmada 是一个开源的、云原生多云应用管理平台，可以实现在多个云平台上部署、编排和调度应用程序。
+194,什么是容器镜像？它包含哪些内容？,容器镜像是一个不可改变的静态文件，包含创建容器的依赖性。这些依赖可能包括一个可执行的二进制文件、系统库、系统工具、环境变量和其他必要的平台设置。
+195,什么是 ConfigMap？它有哪些作用？,ConfigMap 是一种 API 对象，用来将非机密性的数据保存到键值对中。使用时可以用作环境变量、命令行参数或者存储卷中的配置文件。ConfigMap 将您的环境配置信息和容器镜像解耦，便于应用配置的修改。
+196,什么是集群？,集群是运行容器化应用程序的一组计算节点。在 Kubernetes 中，集群通常运行多个节点，提供容错性和高可用性。
+197,云提供商是什么？它们通常提供哪些服务？,云提供商是一个提供云计算平台的商业机构或其他组织。很多云提供商提供托管的基础设施（也称作基础设施即服务或 IaaS）。针对托管的基础设施，云提供商负责服务器、存储和网络，而用户负责管理其上运行的各层软件，例如运行一个 Kubernetes 集群。
+198,什么是云原生技术？,云原生技术是用于构建云原生应用程序的技术，使组织能够在现代动态环境中构建和运行可扩缩的应用程序，他们坚持“云的承诺”并充分利用云计算的优势。
+199,什么是混沌工程？,混沌工程或 CE 是在生产中对分布式系统进行实验的学科，以建立对系统承受动荡和意外情况时能力的信心。
+200,什么是控制组？,控制组（cgroup）是一个 Linux 内核特性，对一组进程的资源使用（CPU、内存、磁盘 I/O 和网络等）进行限制、审计和隔离。
+201,什么是证书？,证书是个安全加密文件，用来确认对 Kubernetes 集群访问的合法性。
+202,什么是cAdvisor？,cAdvisor (Container Advisor) 是一个守护进程，负责收集、聚合、处理并输出运行中容器的信息。
+203,什么是金丝雀部署？,金丝雀部署是一种部署策略，开始时有两个环境：一个有实时流量，另一个包含没有实时流量的更新代码。
+204,什么是蓝绿部署？,"蓝绿部署是一种以最小的停机时间更新运行中的计算机系统的策略。运营商维护两个环境，被称为 ""蓝"" 和 ""绿""。一个为生产流量服务（所有用户目前正在使用的版本），而另一个则被更新。"
+205,什么是裸机？,裸机是指一台物理计算机，更具体地说是一台服务器，它只有一个操作系统。
+206,什么是自动扩缩？,自动扩缩通常是指在计算资源方面，系统能够进行自动扩缩的能力。自动扩缩系统可在需要时自动添置资源，通过扩缩来满足不断变化的用户需求。
+207,什么是授权？,授权指将用户完成具体工作所需的权限授予用户，授权通过系统角色或自定义角色的权限生效。用户获得具体的权限后，可以对资源或服务进行操作。
+208,什么是审计日志？,审计日志提供了对系统中对象所做更改的历史记录。
+209,什么是 Autoscaling？,Autoscaling 是指系统能够进行自动扩缩的能力。它通常基于不同指标进行配置，例如内存或处理时间，并在需要时自动添置资源，通过扩缩来满足不断变化的用户需求。
+210,什么是 App Container？,App Container 是在 Pod 中运行部分工作负载的容器。与 Init 容器不同，它是在 Init 容器启动完毕后才开始启动。如果 Pod 没有配置 Init 容器，则该 Pod 中的所有容器都是应用程序容器。
+211,什么是 API-initiated eviction？,API-initiated eviction 是一种先调用 Eviction API 创建驱逐对象，再通过该对象优雅地中止 Pod 的过程。它可以通过 kube-apiserver 的客户端直接调用 Eviction API 发起驱逐。
+212,什么是 Admission Controller？,Admission Controller 是在请求通过认证和鉴权之后、对象被持久化之前拦截到达 API 服务器的请求。它可以执行验证和/或变更操作，限制创建、删除、修改对象的请求。
+213,什么是 Abstraction？,Abstraction 是一种对服务的消费，隐藏服务的细节，使整个系统更通用也更容易理解。
+214,CSIStorageCapacity的哪个API版本在v1.27中被移除？,CSIStorageCapacity的storage.k8s.io/v1beta1 API版本在v1.27中被移除。
+215,KMSv2升级为Beta，在插件key ID不变的情况下，重用DEK数据加密密钥的优化有什么好处？,KMSv2升级为Beta，在插件key ID不变的情况下，重用DEK数据加密密钥可以减少DEK重新生成所需的时间和计算资源开销。该优化在服务器启动时进行重新随机生成。
+216,将SelfSubjectReview提升为哪个级别？,将SelfSubjectReview提升为Beta级别。
+217,AdmissionWebhookMatchConditions功能已进入哪个阶段？,AdmissionWebhookMatchConditions功能已进入Alpha阶段，在v1Beta和v1 API中，为ValidatingWebhookConfiguration和MutatingWebhookConfiguration添加了MatchConditions字段。
+218,在v1.27中，Kubernetes为聚合发现提供了什么支持？,在v1.27中，Kubernetes为聚合发现提供了Beta支持，通过/api和/apis发布集群支持的所有资源，而不是每个Group分别提供。
+219,什么是ValidatingAdmissionPolicy？,ValidatingAdmissionPolicy是一个新资源，在Kubernetes v1.25提供了KEP-2876 CRD验证表达式语言后引入。它允许进行字段验证时不使用Validation Webhook，并支持自定义匹配条件等功能。
+220,Indexed Job的API验证已放宽，允许通过同时更改哪两个参数来扩展或者缩小Indexed Job？,Indexed Job的API验证已放宽，允许通过同时更改parallelism和completions来扩展或者缩小Indexed Job，但需要保持parallelism == completions同步修改。
+221,CronJob支持哪个功能进阶至GA？,CronJob支持Timezone功能进阶至GA。
+222,StatefulSetStartOrdinal功能升级为Beta，允许在StatefulSet中配置起始序号，这个序号指的是什么？,StatefulSetStartOrdinal功能升级为Beta，默认允许在StatefulSet中配置起始序号。这个序号指的是StatefulSet中第一个Pod的索引。
+223,什么是 PodDisruptionBudget，新添加了哪个字段？,PodDisruptionBudget是控制在进行节点维护或节点故障期间终止Pod的数量的机制。新添加了unhealthyPodEvictionPolicy字段，用于指定不健康Pod应该发生什么行为。该字段在v1.27中升级为Beta。
+224,DaoCloud 在 Kubernetes v1.27 中贡献了哪些功能？,DaoCloud 在 Kubernetes v1.27 中重点贡献了 sig-node、sig-scheduling 和 kubeadm 相关的内容。具体包括修复尝试获取 leader lease 的等待时间的问题、\nMinDomainsInPodTopologySpread 功能升级为 Beta、Kubeadm 添加特性门控 EtcdLearnerMode 等。此外，DaoCloud 还参与了上百个问题修复和功能研发，并有多名研发工程师取得不少成就。
+225,什么是 kubectl apply --prune 功能？,kubectl apply --prune 功能是 Kubernetes 中用于自动清理 apply yaml 删除的部分对象的功能。在 v1.5 中引入了该功能作为 Alpha 版本，并在 v1.27 中进行了重新设计并升级为 Alpha 版本。新版本中增加了 --applyset 配合使用，并且能够更好地支持复杂场景。
+226,什么是 NodeLogQuery 特性门控？,NodeLog
+227,什么是 CustomResourceValidationExpressions？,CustomResourceValidationExpressions 是 Kubernetes 中一种用于验证 CRD 的规则。在 v1.25 中，CustomResourceValidationExpressions 已经升级为 Beta 版本。在 v1.27 中，ValidationRule 新增了字段 messageExpression，可以更好地展示验证提示信息。
+228,什么是 PodTopologySpread 调度策略？,PodTopologySpread 调度策略是 Kubernetes 中的一种调度策略，它可以在滚动更新 Deployment 时，更加均匀地调度新的 Pod 实例。在 v1.27 中，PodTopologySpread 调度策略可以区分调度 Pod 标签的值，从而使得新的 Pod 实例被调度得更加均匀。
+229,NodeLogQuery 特性门控提供了什么功能？,NodeLog
+230,PodTopologySpread 调度策略如何区分新旧实例，能够解决什么问题？,PodTopologySpread 调度策略可以区分调度 Pod 标签的值，这样滚动更新后，新的 Pod 实例会被调度得更加均匀。这能够解决在滚动更新 Deployment 时新实例调度不均匀的问题。
+231,Pod 资源的纵向弹性伸缩是在哪个版本中支持的？,Pod 资源的纵向弹性伸缩是在 1.25 版本中支持的。
+232,APIServerTracing 已经升级为什么状态并默认启用？,APIServerTracing 已经升级为 Beta 状态并默认启用。
+233,MinimizeIPTablesRestore 是解决什么问题而被引入的？在哪个版本引入，升级为 Beta 并默认启用在哪个版本中？,MinimizeIPTablesRestore 是解决大型集群中 kube-proxy 的 iptables 模式性能问题而被引入。该功能在 1.26 版本中引入，并在 1.27 版本中升级为 Beta 并默认启用。
+234,Retain 和 Delete 行为针对哪种 StatefulSet 触发对应的 PVC 删除动作？,只有配置了 Delete 策略的 StatefulSet 在被删除时才会触发对应的 PVC 删除动作。
+235,StatefulSetAutoDeletePVC 功能是在哪个版本引入的？,StatefulSetAutoDeletePVC 功能是在 v1.23 中引入的。
+236,Kubernetes 容器镜像仓库域名已经从哪里更改为 registry.k8s.io？,Kubernetes 容器镜像仓库域名已经从 k8s.gcr.io 更改为 registry.k8s.io。
+237,Kubernetes 1.27 中 enhancements 的数量比之前版本多了多少个？,Kubernetes 1.27 中跟踪了60个 enhancements，比之前版本都要多得多。
+238,Kubernetes 1.27 是2023年的第几个版本？,Kubernetes 1.27 是2023年的第一个版本。
+239,ArtifactHub、Harbor、Distribution、Porter等是关于什么技术性比克？,ArtifactHub、Harbor、Distribution、Porter等是关于工件存储技术性比克，主要用于存储、发布和保护用于生产目的的构建工件，缓存和分析第三方工件，存储源代码等。
+240,什么是最薄可行平台（TVP）？,最薄可行平台是一个概念，保持一种谨慎的平衡：保持平台的小，同时平衡平台加速和简化软件交付效果之间的关系。
+241,平台团队由哪些角色构成？,平台团队由平台产品经理、开发人员等角色构成，其他角色也可以成为平台团队的一部分。这些角色负责开发和维护平台功能的接口和体验。
+242,平台能力提供者是谁？能力包括什么？,平台能力提供者是开发和维护平台提供的能力的组织或团队，能力包括基础设施、运行时或其他支持服务。
+243,什么是平台？,平台是集成了开发和交付软件所需能力的实体，能够提供和管理通用能力，从而使开发人员和运营商更快地交付应用和服务。
+244,什么是 TVP？,TVP 指最薄可行平台，保持一种谨慎的平衡：保持平台的小，和平台加速和简化软件交付效果之间的平衡。
+245,平台团队由谁来管理？,平台团队由平台产品经理管理。
+246,平台能力提供者可以是哪些组织或团队？,平台能力提供者可以是外部组织或内部团队。
+247,一个好的平台反映了什么？,一个好的平台反映了其用户的需求。
+248,谷歌的 DORA 研究所建议跟踪哪些指标？,部署频率、更改准备时间、故障后恢复服务时间、更改失败率。
+249,平台的最终目标是什么？,平台的最终目标是更快地为客户提供商业价值。
+250,什么是容器存储接口(CSI)？它有什么作用？,容器存储接口(CSI)定义了存储系统暴露给容器的标准接口。CSI允许存储驱动提供商为Kubernetes创建定制化的存储插件，而无需将这些插件的代码添加到Kubernetes代码仓库(外部插件)。要使用某个存储提供商的CSI驱动，您首先要将它部署到您的集群上。然后您才能创建使用该CSI驱动的StorageClass。
+251,什么是CronJob？它有哪些功能？,CronJob管理定期运行的任务。与crontab文件中的一行命令类似，周期调度任务(CronJob)对象使用cron格式设置排期表。
+252,什么是数据库即服务(DBaaS)？它有哪些优点？,数据库即服务(DBaaS)是由云运营商(公共或私有)管理的服务，支持应用程序而无需应用程序团队执行传统的数据库管理功能。DBaaS允许应用程序开发人员利用数据库而无需成为专家或聘请数据库管理员(DBA)来保持数据库最新状态。它帮助组织更快地开发企业级应用程序，并最大限度地降低数据库成本。
+253,什么是DaemonSet？它的作用是什么？,DaemonSet确保Pod的副本在集群中的一组节点上运行。它用来部署系统守护进程，例如日志搜集和监控代理，这些进程通常必须运行在每个节点。
+254,什么是 Contour？它在微服务网关中的作用是什么？,Contour是微服务网关的控制面，被部署为控制节点，充当Envoy的后端管理服务能力。它提供便捷的网关配置，支持动态配置更新，多集群部署能力。同时提供了HTTPProxy CRD用于增强Kubernetes Ingress的核心配置能力。
+255,什么是周期调度任务（CronJob）？,周期调度任务管理定期运行的任务，类似于 crontab 文件中的一行命令，CronJob 对象使用 cron 格式设置排期表。
+256,什么是容器运行时接口（CRI）和容器运行时（CR）？,CRI 是一组与节点上 kubelet 集成的容器运行时 API，是 kubelet 和容器运行时之间通信的主要协议。CR 是负责运行容器的组件，Kubernetes 支持许多容器运行环境，例如 containerd、cri-o 等。
+257,什么是自定义资源定义（CRD）？,CRD 是一种 API 扩展方式，它通过定制化的代码给您的 Kubernetes API 服务器增加资源对象，无需编译完整的定制 API 服务器。当 Kubernetes 公开支持的 API 资源不能满足您的需要时，CRD 让您可以在自己的环境上扩展 Kubernetes API。
+258,什么是控制平面？,控制平面是指容器编排层，它暴露 API 和接口来定义、部署容器和管理容器的生命周期。这个编排层是由多个不同的组件组成，例如 etcd、API 服务器、调度器、控制器管理器、云控制器管理器等。
+259,什么是持续交付和持续部署？,持续交付是一种实践，其中代码的变化被自动部署到验收环境中（或者，在持续部署的情况下，部署到生产中）。持续部署通过将已经完成的软件直接部署到生产环境，比持续交付更进了一步。
+260,如何安装 DCE 5.0 社区版？,执行以下步骤：\n1. 安装基础依赖：\n```bash\ncurl -LO https://proxy-qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/install_prerequisite.sh\nbash install_prerequisite.sh online community \n```\n2. 下载 dce5-installer：\n```bash\nexport VERSION=v0.5.0\ncurl -Lo ./dce5-installer https://proxy-qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/dce5-installer-$VERSION\nchmod +x ./dce5-installer \n```\n3. 确认节点的外部可达 IP 地址。\n4. 执行安装：\n- 如果浏览器跟 master 节点的 IP 可以直通，执行以下命令：\n```bash\n./dce5-installer install-app -z -k\n```\n- 如果 master 节点的 IP 是内网，请在公有云中为其创建外网可达的 IP，并在防火墙规则中允许 32088 端口的进出，并执行以下命令：\n```bash\n./dce5-installer install-app -z -k $外部IP:32088 # $外部IP 为 master 节点外网 IP。\n```
+261,如何安装默认存储 CSI（使用本地存储）？,"执行以下命令：\n```bash\nwget https://raw.githubusercontent.com/rancher/local-path-provisioner/v0.0.24/deploy/local-path-storage.yaml # 下载 CSI 配置文件。\nsed -i ""s/image: rancher/image: docker.m.daocloud.io\/rancher/g"" local-path-storage.yaml # 替换 docker.io 为实际镜像。\nsed -i ""s/image: busybox/image: docker.m.daocloud.io\/busybox/g"" local-path-storage.yaml \nkubectl apply -f local-path-storage.yaml # 应用配置文件。\nkubectl get po -n local-path-storage -w # 等待 Pod 都 running。\nkubectl patch storageclass local-path -p ""{""metadata"": {""annotations"":{""storageclass.kubernetes.io/is-default-class"":""true""}}}"" # 把 local-path 设置为默认 SC。\nkubectl get sc # 可以看到形如：local-path (default)。\n```"
+262,如何接入其他 worker 工作节点？,"在其他 worker 节点执行 join 命令。在上述 master 节点执行 `kubeadm init` 时最后会在屏幕打出：\n```bash\nkubeadm join $第一台master的IP:6443 --token p...7 --discovery-token-ca-cert-hash s....x\n```\n成功 join 之后，输出类似于：\n```none\nThis node has joined the cluster:\n* Certificate signing request was sent to apiserver and a response was received.\n* The Kubelet was informed of the new secure connection details.\nRun ""kubectl get nodes"" on the control-plane to see this node join the cluster.\n```\n在 master 节点确认节点都被接入，并且等待其都变为 Ready 状态：\n```bash\nkubectl get no -w # 等待节点状态变为 ready。\n```"
+263,以 calico 为例，如何安装 CNI？,1. 先安装 calico-operator：\n```bash\nkubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/tigera-operator.yaml\n```\n2. 再下发经过修改/配置过的 CR：\n```bash\ncurl -LO https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/custom-resources.yaml # 下载配置文件模板\ngrep cidr custom-resources.yaml #打印出默认的CIDR\n# 请确认 calico 配置文件里的 CIDR 和之前 kubeadm init 时的 CIDR 是一致的！！！否则请修改!!!⚠️ \nvim custom-resources.yaml # 修改文件中的参数，如CIDR等。\nkubectl apply -f custom-resources.yaml # 执行修改后的配置文件。\n```\n3.等待部署成功：\n```bash\nkubectl get po -n calico-system -w # 等待 Pod 都 Running。\nkubectl get no # 可以看到第一个节点变为 ready 状态了。\n```
+264,如何配置 kubeconfig 文件？,执行以下命令：\n```bash\nmkdir -p $HOME/.kube\nsudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config\nsudo chown $(id -u):$(id -g) $HOME/.kube/config\n```
+265,安装Kubernetes组件的版本号是多少？,版本以 1.25.8 为例
+266,安装Containerd后，如何修改Containerd的配置文件？,"```bash\n#删除自带的 config.toml\nmv /etc/containerd/config.toml /etc/containerd/config.toml.old\n#重新初始化配置\nsudo containerd config default | sudo tee /etc/containerd/config.toml\n#更新配置文件内容: 使用systemd作为cgroup 驱动，并且替代pause镜像地址\nsed -i ""s/SystemdCgroup\ =\ false/SystemdCgroup\ =\ true/"" /etc/containerd/config.toml\nsed -i ""s/k8s.gcr.io\/pause/k8s-gcr.m.daocloud.io\/pause/g"" /etc/containerd/config.toml # 老的 pause 地址\nsed -i ""s/registry.k8s.io\/pause/k8s-gcr.m.daocloud.io\/pause/g"" /etc/containerd/config.toml\nsudo systemctl daemon-reload \nsudo systemctl restart containerd \nsudo systemctl enable containerd\n```"
+267,在安装容器运行时时，如何卸载系统预装的Podman？,`yum erase podman buildah -y`
+268,适用于DCE 5.0社区版的Kubernetes版本是多少？,Kubernetes：1.25.8
+269,在 Calico underlay 场景下，如何帮助 Deployment 等类型应用实现固定 IP 的需求？,利用 Spiderpool 的手动指定 IP 池功能即可。具体操作可以参考上文的代码示例。
+270,Spiderpool 能否实现固定 IP 的需求？,可以，通过手动指定 IP 池并将其绑定到应用上，就可以让该应用固定使用该池中的某个特定 IP。
+271,Spiderpool 的 IP 分配方式是什么？,默认情况下，Spiderpool 会从已配置的 IP 池中随机分配一个可用的 IP 给应用使用。
+272,如何手动指定 IP 池？,需要先创建一个 IP 池对象，指定 IP 范围，然后在创建应用时通过注解 `ipam.spidernet.io/ippool` 指定该 IP 池。具体操作可以参考上文的代码示例。
+273,如何查看 Kubernetes 集群中所有 IP 池？,使用命令 `kubectl get sp`
+274,如何手动指定应用使用哪个 IP 池？,可以在应用的 Deployment 中添加注解 `ipam.spidernet.io/ippool`，并指定使用哪个 IP 池。
+275,如何手动指定 IP 池？,需要创建一个名为 SpiderIPPool 的 CRD 资源，在该资源中指定 spec.subnet 和 spec.ips 两个参数，分别表示该 IP 池属于哪一个子网，以及固定 IP 地址范围。
+276,如何使用 Spiderpool 自动池功能为应用固定 IP 池？,需要在应用的 Deployment 中添加以下注解：\n- `ipam.spidernet.io/subnet`：指定从哪个子网中自动创建 IP 池，并绑定到应用 Pod\n- `ipam.spidernet.io/ippool-ip-number`：指定 IP 池的 IP 总量，数量为比副本数多三个。
+277,Spiderpool 主要具有哪些特点？,Spiderpool 主要具有以下几个特点：\n- 能为 Deployment、StatefulSet 类型自动化分配固定 IP 地址，并且做到 IP 地址数量随副本数量自动扩缩容\n- 以 CRD 方式管理、配置 IP 池，极大减少运维成本\n- 支持第三方控制器创建的 Pod\n- 支持为 Pod 多网卡指定不同子网
+278,Spiderpool 是针对于哪种网络模式的 IP 地址管理需求而设计的？,Spiderpool 是针对于 Underlay 网络模式的 IP 地址管理需求而设计的。
+279,Calico 的哪个注解可以实现 Pod 级别的 IP 固定？,`cni.projectcalico.org/ipAddrs`。
+280,Calico 通过什么方式来实现集群外客户端访问 Pod？,Calico BGP 模式宣告 Pod 子网的路由到网关，来自集群外的客户端可以直接通过 Pod 的 IP 访问 Pod，同时还可以保留客户端的源 IP。
+281,什么是 Calico？,Calico 是一套开源的网络和网络安全解决方案，也是作为 Kubernetes 容器网络解决方案 (CNI: Container Network Interface) 的一种实现。
+282,Linux/arm 将会在 Kubernetes v1.27 中发布吗？为什么？,Linux/arm 将不会在 Kubernetes v1.27 中发布，因为使用 golang 1.20.2 构建时遇到问题。注意，arm64仍然支持。
+283,Kubernetes 中哪个特性门控已经废弃，将在未来版本移除？,SecurityContextDeny 特性门控已经废弃，将在未来版本移除。
+284,kube-controller-manager 中哪些命令行参数被移除？,kube-controller-manager 命令行参数 --enable-taint-manager 和 --pod-eviction-timeout 被移除。
+285,CSIStorageCapacity 的哪个 API 版本已经被弃用，将在 Kubernetes v1.27 中被移除？,CSIStorageCapacity 的 storage.k8s.io/v1beta1 API 版本已经被弃用，将在 Kubernetes v1.27 中被移除。
+286,本文提到了哪些需要重点关注的 Kubernetes 版本变化？,本文提到了需要重点关注的 Kubernetes 版本变化：IPv6DualStack 外部云供应商特性门控被删除，以及 k8s.gcr.io 重定向到 registry.k8s.io。
+287,如何创建kind集群？,"创建kind集群的步骤为：\n1. 下载kind的二进制文件包。\n```bash\ncurl -Lo ./kind https://qiniu-download-public.daocloud.io/kind/v0.17.0/kind-linux-amd64\nchmod +x ./kind\nold_kind=$(which kind)\nif [ -f ""$old_kind"" ]; then mv ./kind $old_kind; else mv ./kind /usr/bin/kind ; fi\n```\n2. 创建`kind_cluster.yaml`配置文件。\n```bash\ncat > kind_cluster.yaml << EOF\napiVersion: kind.x-k8s.io/v1alpha4\nkind: Cluster    \nnodes:\n- role: control-plane \nextraPortMappings:\n- containerPort: 32088 \nhostPort: 8888        \nEOF\n```\n3. 通过 kind 创建一个名为 `fire-kind-cluster` 的 K8s 集群，以 k8s 1.25.3 为例。\n```bash\nkind create cluster --image docker.m.daocloud.io/kindest/node:v1.25.3 --name=fire-kind-cluster --config=kind_cluster.yaml \n```"
+288,如何检查系统资源和联网情况？,"可以按照文中的命令设置-e参数来检查系统资源和联网情况：\n```bash\nset -e\nif [ $(free -g|grep Mem | awk ""{print $2}"") -lt 12 ]; then (echo ""insufficient memory! (should >=12G)""; exit 1); fi\nif [ $(grep ""processor"" /proc/cpuinfo |sort |uniq |wc -l) -lt 8 ]; then (echo ""insufficient CPU! (should >=8C)""; exit 1); fi\nif [ $(df -m / |tail -n 1 | awk ""{print $4}"") -lt 30720 ]; then (echo ""insufficient free disk space of root partition!(should >=30G)""; exit 1); fi\nping daocloud.io -c 1 &> /dev/null || ( echo ""no connection to internet! abort."" && exit 1; )\necho ""precheck pass..""\n```"
+289,在安装DCE之前需要安装什么？,在安装DCE之前需要先安装Docker，并且版本要高于1.18。
+290,该文介绍了在一台Linux机器上如何在线安装单机DCE 5.0社区版，需要准备哪些条件？,需要一台Linux机器，建议资源：CPU > 8核、内存 > 12G、磁盘空间 > 100GB，要确保该机器能够连通公网，操作系统为CentOS7或Ubuntu22.04。
+291,如何卸载 Docker Desktop？,在应用列表中找到 Docker Desktop 并进行卸载。
+292,如何卸载 kind？,执行命令 `rm -f $(which kind)`。
+293,如何确认 DCE 5.0 社区版是否安装成功？,"执行命令 `docker exec -it fire-kind-cluster-control-plane kubectl get po -A -w`，观察 Pod 启动情况。当看到 ""DCE 5.0 社区版安装成功"" 的提示时，即可确认安装成功。"
+294,如何安装 DCE 5.0 社区版？,"- 安装依赖项：执行命令 `cat <<EOF | docker exec -i fire-kind-cluster-control-plane bash ... EOF`\n- 下载 dce5-installer 二进制文件：执行命令 `docker exec -it fire-kind-cluster-control-plane /bin/bash`，然后执行 `export VERSION=v0.5.0; curl -Lo ./dce5-installer https://proxy-qiniu-download-public.daocloud.io/DaoCloud_Enterprise/dce5/dce5-installer-$VERSION && chmod +x ./dce5-installer && exit`\n- 安装 DCE 5.0 社区版：先获取本机 IP，然后执行命令 `docker exec -it fire-kind-cluster-control-plane bash -c ""./dce5-installer install-app -z -k $myIP:8888""`。"
+295,如何创建 kind 集群？,执行命令 `kind create cluster --image docker.m.daocloud.io/kindest/node:v1.25.3 --name=fire-kind-cluster --config=kind_cluster.yaml`。
+296,如何创建 kind 配置文件？,执行命令 `cat > kind_cluster.yaml << EOF ... EOF`，即可创建 kind_cluster.yaml 文件。
+297,如何安装 kind？,"- Mac 是 Intel 芯片：执行命令 `[ $(uname -m) = x86_64 ]&& curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-amd64`\n- Mac 是 M1/ARM 芯片：执行命令 `[ $(uname -m) = arm64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-darwin-arm64`；然后执行 `chmod +x ./kind` 和 `sudo mv kind /usr/local/bin/kind`\n- 通过 Homebrew 安装 kind：先安装 Homebrew `/bin/bash -c ""$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)""`，然后执行 `brew install kind`"
+298,如何调整容器的资源上限？,启动 Docker Desktop 后点击右上角的 ⚙️，打开 `Settings` -> `Resources`，将启动容器的资源上限调整到 8C14G，然后点击 `Apply & Restart` 按钮。
+299,如何安装 Docker Desktop？,根据 MacBook 的芯片（Intel 或 M1），安装 [Docker Desktop](https://docs.docker.com/desktop/install/mac-install/)。
+300,如何确认 MacBook 的硬件环境是否满足要求？,确认 MacBook 的 CPU 至少为 8 核，内存至少为 16G，剩余磁盘空间大于 20G。
+301,边缘计算市场报告按什么方式分析市场？,边缘计算市场规模、份额和趋势分析报告按组件（硬件、软件、服务、边缘管理平台）和应用区分（智能工厂、智能城市、智能零售等）分析边缘计算市场。
+302,边缘原生准则分为哪些组别？,硬件和资源管理、可变连接感知(网络)以及外部设备连接可以在更广泛的资源和硬件管理准则下考虑。而边缘应用的大规模管理、可集中观测以及具有可管理的基础设施和平台，这些都可以归类为大规模管理的准则。剩余的准则包括：跨区域，资源使用优化，可移植和可重用限制，资源和硬件管理以及规模管理。
+303,什么是边缘原生应用？,边缘原生应用是为边缘设计的应用和服务，在硬件管理能力、外部设备连接、可变连接感知、集中可观测、大规模基础设施和平台管理、大规模应用管理、跨区域、资源使用优化以及可移植和可重用等方面有一系列准则。
+304,边缘原生应用应遵循哪些准则？,边缘原生应用应遵循硬件管理能力、自治性、性能和可靠性、安全性、高度可移植性的准则。
+305,边缘原生和云原生有哪些区别？,边缘原生和云原生在应用模型、数据模型、弹性、稳定性、规模、编排、管控、网络、安全、硬件配置和与外部资源交互等方面存在差异。
+306,边缘原生和云原生有哪些相似之处？,边缘原生和云原生都注重应用和服务的可移植性、可观测性、可管理性，以及支持多种语言和框架。
+307,什么是边缘原生应用？,边缘原生应用是利用边缘计算能力构建的应用，不适合在中心云运行，需要考虑边缘的独特特性，例如资源限制、安全性、延迟和自治性。
+308,边缘计算的好处有哪些？,边缘计算可以减少延迟、带宽管理、增强隐私数据的安全以及在不可靠网络下的稳定运行。
+309,什么是边缘原生应用准则白皮书？,边缘原生应用准则白皮书是一份关于边缘原生应用的技术性比克，旨在为边缘原生应用提供指导和准则。
+310,本文提到的直接集成和间接调用的可观测性模块分别有哪些开源项目？,直接集成包括但不限于：elastic/go-elasticsearch/v7、gorilla/mux、json-iterator/go等；间接调用包括但不限于：go.uber.org/multierr、golang.org/x/crypto、sigs.k8s.io/structured-merge-diff/v4等。
+311,在间接调用的可观测性模块中，使用了哪些开源项目？,包括但不限于：go.uber.org/multierr、golang.org/x/crypto、sigs.k8s.io/structured-merge-diff/v4等。
+312,在直接集成的可观测性模块中，使用了哪些开源项目？,包括但不限于：elastic/go-elasticsearch/v7、gorilla/mux、json-iterator/go等。
+313,本文提到的全局管理模块间接调用的项目有哪些？,包括但不限于：github.com/cenkalti/backoff/v4、github.com/decred/dcrd/dcrec/secp256k1/v4、github.com/emicklei/go-restful/v3等。
+314,容器管理模块间接调用的开源项目有哪些？,容器管理模块间接调用的开源项目包括但不限于：\n-Azure/go ansiterm\n-Masterminds/semver/v3 \n-NYTimes/gziphandler \n-PuerkitoBio/purell \n-PuerkitoBio/urlesc \n-alicebob/gopher-json \n-asaskevich/govalidator ...\n共13个。
+315,容器管理模块直接集成的开源项目有哪些？,容器管理模块直接集成的开源项目包括但不限于：\n- DATA-DOG/go-sqlmock\n- Miniredis\n- cloudtty\n- clusterpedia-io/api\n- clusterpedia-io/client-go\n- clusterpedia-io/fake-apiserver\n- Docker\n- fsnotify\n- yaml\n- go-openapi/runtime\n- go-openapi/strfmt\n- go-redis/redis\n- golang/mock \n- google/go-cmp \n- google/uuid \n- gorilla/mux \n- grpc-ecosystem/go-grpc-middleware \n- grpc-ecosystem/grpc-gateway \n- heroku/docker registry client \n...\n共41个。
+316,如何开始使用 KWOK？,可以查阅 KWOK 官方文档了解详情，并通过 `kwokctl` 来创建和管理集群。
+317,KWOK 有哪些限制需要注意？,#NAME?
+318,使用场景有哪些？,KWOK 可用于各种用途，包括学习、开发和测试。其中测试包括衡量应用程序或控制器在使用节点和 Pod 时的扩缩表现如何，创建大量 Pod 或服务，在集群上营造高负载的环境，模拟节点故障或网络分区等。
+319,使用 KWOK 有哪些优势？,#NAME?
+320,KWOK 提供了哪两个工具？,`kwok` 和 `kwokctl`。其中 `kwok` 负责模拟伪节点、Pod 和其他 Kubernetes API 资源的生命周期，`kwokctl` 则是一个 CLI 工具，设计用于简化创建和管理由 `kwok` 模拟节点组成的集群。
+321,KWOK 是什么？,KWOK 是 Kubernetes WithOut Kubelet 的缩写，是一个工具包，能让你在几秒钟内创建数千个节点构成的集群。
+322,「DaoCloud 道客」未来的产品研发将以什么为基础？,「DaoCloud 道客」未来的产品研发将继续以 Kubernetes 为基础。
+323,「DaoCloud 道客」举办过哪些活动？,「DaoCloud 道客」曾经举办过「Kubernetes Community Days 成都站」活动，聚集了来自云原生领域开源社区的最终用户、贡献者和技术专家，分享关于云原生的多行业实践、热门开源项目、社区贡献心得等丰富内容。
+324,「DaoCloud 道客」在云原生技术方面做了哪些贡献？,「DaoCloud 道客」在云原生技术方面持续贡献 Kubernetes 开源项目，是首批通过 CNCF Kubernetes 兼容性认证的厂家，并成为全球首批获得 CNCF 官方认证的 Kubernetes 培训合作伙伴。
+325,「DaoCloud 道客」的产品有哪些特点？,「DaoCloud 道客」的产品具有高性能、高可用性、简单安全等特点。
+326,「DaoCloud 道客」是什么？,「DaoCloud 道客」是一家致力于让以 Kubernetes 为代表的云原生技术更平稳、高效地落地到产品和生产实践中的企业。
+327,DaoCloud作为CNCF Kubernetes兼容性认证的厂家，还有哪些荣誉？,DaoCloud成为CNCF认证的Kubernetes服务提供商，并成为全球首批获得CNCF官方认证的Kubernetes培训合作伙伴。在2022 Kubecon北美站上，DaoCloud的Kante Yin荣获Kubernetes 2022年度贡献者奖。
+328,DaoCloud在哪些方面对Kubernetes做出了贡献？,DaoCloud在Kubernetes社区中持续增加参与度和贡献度，并开源了Clusterpedia、Kubean、CloudTTY、KLTS.io、Merbridge、HwameiStor、Spiderpool、Piraeus等优秀项目，不断完善Kubernetes生态体系。在过去一年里，DaoCloud在Kubernetes的开源榜单累计贡献度位居全球第三。
+329,DaoCloud在哪些行业中提供了基于Kubernetes的云原生解决方案？效果如何？,DaoCloud在金融、汽车、零售等行业中提供了基于Kubernetes的云原生解决方案，并取得了良好的效果。例如，在上海浦发银行部署Kubernetes平台后，应用部署效率提升82%，交付周期从半年缩短到一个月，交易成功率达到99.999%。
+330,为什么DaoCloud选择基于Kubernetes进行产品研发和部署？,DaoCloud选择Kubernetes作为底层的容器编排技术，因为在如今的云原生生态体系里，这些功能都离不开Kubernetes作为底层的容器编排技术。此外，DaoCloud也参与了贡献Kubernetes等多项云原生开源项目，在云原生开源社区中持续增加参与度和贡献度。
+331,「DaoCloud 道客」的产品以及客户案例有哪些？,「DaoCloud 道客」的产品是 DaoCloud Enterprise 云原生应用云平台，包括应用商店、应用交付、微服务治理、可观测性、数据服务、多云编排、信创异构、云边协同等能力。客户案例有浦发银行、华泰证券、富国基金、上汽集团、海尔、复旦大学、屈臣氏等。
+332,「DaoCloud 道客」采用了哪些 Kubernetes 版本？,「DaoCloud 道客」采用了 Kubernetes 1.6.7、1.10、1.18和支持1.23至1.26版本。
+333,为什么「DaoCloud 道客」选择了 Kubernetes 作为容器编排工具？,Kubernetes 作为容器编排的事实标准，具有多样的功能、稳定的性能、及时的社区支持、强大的兼容性等优势，并且被大公司广泛采用。在众多技术方案中，「DaoCloud 道客」坚持以 Kubernetes 为核心，在其基础上整合周边最佳实践和先进技术，打造出适合自身产品架构的云原生解决方案。
+334,「DaoCloud 道客」面临的首要挑战是什么？,「DaoCloud 道客」面临的首要挑战是如何高效管理调度多个容器，如何保证容器间的正常通信。
+335,什么是「DaoCloud 道客」？,「DaoCloud 道客」是云原生领域的创新领导者，成立于2014年底，致力于打造开放的云操作系统，为企业数字化转型赋能。
+336,什么是Prometheus？,Prometheus是一种开源监控系统，可以收集各种应用程序和系统性能指标，并提供灵活的查询和可视化功能。
+337,什么是protobuf扩展？,protobuf扩展是对Google Protocol Buffers二进制数据序列化库的扩展，可以支持更多类型和特性，并提供更好的性能。
+338,什么是SQL驱动？,S
+339,什么是OpenAPI？,OpenAPI是一种描述RESTful API的规范，它使用JSON或YAML格式来描述API的请求和响应、参数、错误等信息。它有助于生成客户端SDK、服务器框架和文档等工具。
+340,间接调用的可观测性模块中都包含哪些项目？,"间接调用的可观测性模块中包括了许多项目，如：json-patch, gofuzz, go-toml, protoc-gen-validate等。"
+341,直接集成的可观测性模块中都包含哪些项目？,"直接集成的可观测性模块中包含了许多项目，如：gomock, go-sqlmock, go-elasticsearch, mux, json-iterator, ulid, errors, prom-label-proxy, client_golang等。"
+342,这份列表中都包含哪些可观测性模块的开源项目？,这份列表中包含了直接集成和间接调用两种方式的可观测性模块的开源项目。
+343,DaoCloud 是做什么的公司？有哪些标杆客户？,DaoCloud 是云原生领域的创新领导者，致力于打造开放的云操作系统为企业数字化转型赋能。标杆客户包括交通银行、浦发银行、上汽集团、东风汽车、海尔集团、屈臣氏、金拱门（麦当劳）等。
+344,为什么组织需要 OSPO？,随着我们依赖的越来越多的软件是基于开源的，组织需要一种战略方法来管理创新和安全风险。
+345,什么是 OSPO？,OSPO 是开源项目办公室（Open Source Program Office）的缩写，是一种战略方法，用于组织管理开源项目以及管理创新和安全风险。
+346,游戏引擎行业的开源创新如何发展？,开源游戏引擎的出现，如 Bevy、Godot 和 O3DE，使得游戏引擎行业的开源创新飞速发展。
+347,RISC-V 在哪些领域将得到广泛应用？,RISC-V 将在嵌入式和移动领域得到广泛应用，并被谷歌支持作为 Android 的“Tier 1”架构。
+348,VSCode 在什么领域将继续增长并主导 IDE 领域？,VSCode 将成为几乎所有主流编程语言的主流 IDE，甚至包括在 Codespaces 和 Gitpod 中的嵌入式使用。
+349,在生成式人工智能领域，哪些问题可能引起开源社区内外的摩擦？,由于版权、归属和遵守开源基金会和公司政策等问题，生成式人工智能可能引起开源社区内外的摩擦。
+350,什么是生成式人工智能？,生成式人工智能是指通过机器学习算法学习大量数据并生成新的数据，例如代码生成工具 CoPilot。
+351,Kubernetes 在哪些地方被广泛使用？,Kubernetes 在云原生生态系统内外被广泛使用，包括在 Chick-Fil-A 餐厅、边缘计算和太空等环境中运行。
+352,什么是 Kubernetes？,Kubernetes 是一个开源的容器编排平台，用于自动化部署、扩展和管理容器化应用程序。
+353,RISC-V 在开源社区中扮演着什么角色？,RISC-V 是一个开源指令集架构，它正在作为一个开源社区来推动计算机架构发展。
+354,什么是 VSCode？,VSCode 是一款由 Microsoft 开发的免费、开源且功能丰富的跨平台 IDE。
+355,Kubernetes 正在经历其什么样的成熟时刻？,Kubernetes 正在经历其 Linux 风格的成熟时刻，扩展到在该项目最初没有设计的新型环境中运行。
+356,精品云将从哪个趋势中受益？,精品云将从成本管理趋势中受益。
+357,WebAssembly 将成为计算的主导形式吗？,是的，文章作者认为 WebAssembly 将在不久的将来成为计算的主导形式。
+358,Backstage 是什么？哪些企业正在使用 Backstage？,Backstage 是一个开源项目，旨在提供一个开发者门户网站，以简化云原生应用程序开发和部署过程。银行、航空公司和 Spotify 等传统企业正在使用 Backstage。
+359,在 CNCF 的开源项目速度数据中，OpenTelemetry 排名第几？,OpenTelemetry 在 CNCF 的开源项目速度数据中排名第二。
+360,什么是 OpenTelemetry？,OpenTelemetry 是一个开源项目，旨在提供一致和可扩展的方式来收集、处理和导出度量、日志和分布式跟踪数据。它旨在统一云原生生态系统中各种工具之间的数据格式。
+361,哪些项目在 CNCF 中已经毕业并成为成熟的 GitOps 工具？,Argo 和 Flux 项目已经在 CNCF 中毕业并成为成熟的 GitOps 工具。
+362,什么是 GitOps？,GitOps 是一种使用 Git 作为单一真实来源来声明和管理基础设施和应用程序的方法。它将应用程序的声明性配置存储在 Git 存储库中，并使用 CI/CD 自动化流程来实现这些配置。
+363,什么是 OpenTelemetry？,OpenTelemetry 是一个开源项目，旨在为云原生环境提供统一的可观测性标准，并支持多种语言和平台。它提供了一个用于跟踪、日志记录和指标收集的 SDK 和工具。
+364,什么是 GreenOps？,GreenOps 是一种专注于云工作负载碳足迹的 FinOps 形式，旨在优化云资源使用以减少环境影响。
+365,什么是 SBOM？,SBOM（Software Bill of Materials，软件材料清单）是软件供应链安全的基础，它列出了组成软件的所有组件、版本信息和相关元数据。
+366,什么是 FinOps？,FinOps 是一种将财务和运维团队合作来优化云成本、可用性和性能的方法，通过监测和分析云资源使用情况来实现这一目标。
+367,什么是 GitOps？,GitOps 是一种将 Git 作为单一可信源的运维模式，通过对 Kubernetes 集群的 Git 存储库进行操作，实现自动化部署和管理。
+368,文章中引用了谁的话？,引用了海明威的话：“生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。”
+369,本文共涉及几个主题？,两个，分别是“11月我还行”和“12月放开管控”。
+370,这篇文章的作者是谁？,未提及，无法确定。
+371,DCE 5.0 的架构是怎样的？,DCE 5.0 的架构分为三层：\n- 用户层：提供 Web 界面和 API 接口，支持用户对集群进行管理和操作；\n- 管理层：负责集群管理，包括节点管理、应用管理、监控告警等，并提供 API 接口给用户层进行调用；\n- 数据层：存储集群配置信息和应用数据。
+372,DCE 5.0 的优势是什么？,DCE 5.0 的优势包括：\n- 全生命周期管理：DCE 5.0 提供从应用部署到底层基础设施管理等方面的全生命周期管理能力；\n- 灵活扩展：DCE 5.0 支持多种扩展方式，包括集群扩容、镜像仓库扩容、节点扩容等；\n- 一站式服务：DCE 5.0 集成了应用市场、镜像仓库、节点管理、监控告警等多种服务，为用户提供一站式服务；\n- 高可用性：DCE 5.0 支持多节点部署，提供故障转移和负载均衡等功能，保证了集群的高可用性；\n- 安全可靠：DCE 5.0 支持多种安全机制，包括用户认证、访问控制等，保证了平台的安全可靠性。
+373,DCE 5.0 的主要功能有哪些？,DCE 5.0 的主要功能包括：\n- 应用部署：通过应用市场和自定义镜像来快速部署应用；\n- 应用管理：支持应用伸缩、容器重启、日志查看等操作；\n- 应用监控：提供实时监控和告警，使用户能够及时发现和解决问题；\n- 镜像仓库：提供 Docker 镜像仓库，方便用户存储和管理自己的镜像；\n- 节点管理：支持节点添加、节点维护等操作，确保集群的高可用性。
+374,什么是 MinimizeIPTablesRestore？如何控制是否开启该功能？,MinimizeIPTablesRestore 是用来优化 kube-proxy 性能的一个机制，它只发送在调用 iptables-restore 中更改的规则，而不是整个规则集。可以通过控制 `--feature-gates=MinimizeIPTablesRestore=true/false` flag 来开启或关闭该功能。
+375,Kubernetes 中是否支持跨命名空间从快照中分配卷？如何控制开启该功能？,是的，Kubernetes 中支持跨命名空间从快照中分配卷。可以通过控制 `--feature-gates=CrossNamespaceVolumeDataSource=true/false` flag 来开启或关闭该功能。
+376,什么是 CPUManager 和 DevicePlugins？它们最近升级为哪个级别的 Feature Gate？,CPUManager 和 DevicePlugins 分别是 Kubernetes 中的一种资源管理方式和一种设备插件管理方式。它们最近被升级为 GA（General Availability）级别的 Feature Gate。
+377,如何在 Windows 中允许指定 Pod 是否加入到节点的网络命名空间？该功能需要开启什么 Feature Gate？,可以通过控制 `--feature-gates=WindowsHostNetworking=true/false` flag 来开启或关闭在 Windows 中允许指定 Pod 是否加入到节点的网络命名空间功能。
+378,什么是 kubelet Evented PLEG？如何开启该功能？,kubelet Evented PLEG 是用来优化节点中 Pod 状态跟踪的方式，通过尽可能依赖容器运行时接口(CRI) 的通知来减少定期轮训，这会减少 kubelet 对 CPU 的使用。可以通过控制 `--feature-gates=EventedPLEG=true/false` flag 来开启或关闭该功能。
+379,Topology Manager 的优化是用来处理什么问题的？如何配置 Topology Manager Policy 的额外配置？,Topology Manager 的优化是用来更好地处理 NUMA (Non-Uniform Memory Access) 节点。可以通过在 kubelet config 和 kubectl 命令中分别设置 `topologyManagerPolicyOptions` 字段和 `--topology-manager-policy-options` flag 来配置 Topology Manager Policy 的额外配置。新增三个 Alpha Feature Gate 来控制对 Topology Manager Policy 的配置：`TopologyManagerPolicyOptions`、`TopologyManagerPolicyAlphaOptions` 和 `TopologyManagerPolicyBetaOptions`。
+380,什么是动态资源分配？如何在 Kubernetes 中开启该功能？,动态资源分配是 Kubernetes 中的一种资源管理方式，允许 Pod 请求特殊类型的资源，这些资源可以在节点级、集群级或按照用户设置的其他模式提供。可以通过控制 `--feature-gates=DynamicResourceAllocation=true/false` flag 来开启或关闭该功能。
+381,Kubernetes 中的 gzip 压缩目前存在什么问题？如何禁用响应压缩？,根据从数千个生产 Kubernetes 集群收集的负载测试和生产数据，社区观察到 Kubernetes APIServer 中的 gzip 压缩目前不是最优的。可以通过在 kubeconfig 中增加 `DisableCompression` 字段，或者在 kubectl 命令中增加 `--disable-compression` flag 来禁用响应压缩。
+382,如何设置 APIServer 的 `--aggregator-reject-forwarding-redirect` flag？该 flag 的作用是什么？,可以通过在 APIServer 启动时设置 `--aggregator-reject-forwarding-redirect=false` flag 来允许继续转发 Aggregated API Server 的重定向响应。该 flag 的作用是允许终端用户获得更好的服务发现和服务路由体验。
+383,什么是 APISelfSubjectAttributesReview？如何控制该功能是否开启？,APISelfSubjectAttributesReview 是 Kubernetes 中的一种授权机制，用于检查 API 请求的身份验证主体是否具有执行该请求所需的必要属性。可以通过控制 `--feature-gates=SelfSubjectAPIReview=true/false` flag 来控制该功能是否开启。
+384,Kubernetes v1.26 对于节点 (Kubelet) 有哪些更新？,Kubernetes v1.26 对于节点 (Kubelet) 的更新主要包括新增动态资源分配相关的 API 资源和支持 NUMA 节点优化等。
+385,Kubernetes v1.26 中哪些 Feature Gates 被移除了？,根据 Kubernetes 的版本迭代策略，在 Kubernetes v1.26 中移除了 11 个 Feature Gates，如果在组件命令中继续设置这些 Feature Gate，那么组件会无法正常启动。
+386,Kubernetes v1.26 中增加了哪些新的 API 资源？,Kubernetes v1.26 新增加了多个 API 资源，包括 ValidatingAdmissionPolicy、SelfSubjectReview 和动态资源分配相关资源等。
+387,Kubernetes v1.26 中一个重要的 KEP 功能是什么？,一个重要的 KEP 功能是 PodSchedulingReadiness，用于控制 Pod 何时可以被调度器调度。
+388,Kubernetes v1.26 增加了哪些新的功能？,Kubernetes v1.26 增加了多个新的功能，包括在 Kube APIServer、节点、存储、网络、资源控制与调协、调度器和可观测性等方面的更新和优化。
+389,什么是 Kubernetes 中的在线离线混部？,在线离线混部是指在一个 Kubernetes 集群中同时运行离线业务和在线业务，通过设置不同类型服务
+390,什么是 Kubernetes 中的错峰调度策略？,Kubernetes 中的错峰调度策略是一种控制同时运行作业数量的策略，可以通过设置 Pod 的调度策略来实现。目的是避免在系统负载过高的情况下运行大量作业，并允许在系统负载较低的时间运行更多的作业。可以使用 Kubernetes 的调度程序或第三方调度程序来实现错峰调度。
+391,什么是 Kubernetes 中的集群节点自动扩缩容？,集群节点自动扩缩容指根据集群的资源使用情况动态调整节点数量，通过监控集群的资源使用情况，并根据设定的阈值自动调整节点数量。例如，如果集群的 CPU 使用率超过了阈值，就会增加节点数量；如果集群的 CPU 使用率低于阈值，就会减少节点数量。
+392,什么是 Kubernetes 中的垂直自动扩缩容？,垂直自动扩缩容指将更多资源（例如内存或 CPU）分配给正在运行中的 Pod。通过监控 Pod 的资源使用情况，并根据设定的目标使用率自动调整容器的资源请求和限制。例如，如果 Pod 的 CPU 使用率较低，就会减少容器的 CPU 请求和限制；如果 Pod 的 CPU 使用率较高，就会增加容器的 CPU 请求和限制。
+393,什么是 Kubernetes 中的横向自动扩缩容？,横向自动扩缩容指根据实际负载动态调整 Pod 的副本数量，通过定期监控 Pod 的资源使用情况，根据设定的规则动态调整副本数量。例如，可以设定当 CPU 使用率超过 80% 时，增加副本数量；当 CPU 使用率低于 50% 时，减少副本数量。
+394,什么是 Kubernetes 中的自动伸缩功能？,Kubernetes 中的自动伸缩功能可以根据实际负载动态调整 Pod 或节点的副本数量，包括横向自动扩缩容、垂直自动扩缩容和集群节点自动扩缩容。
+395,VPA 和 HPA 有什么区别？VPA 有哪些优势？,VPA 意味着将更多资源分配给正在运行中的 Pod，通过监控 Pod 的资源使用情况自动调整容器的资源请求和限制。与 HPA 不同，VPA 能够提高节点的利用率、不必进行基准测试任务和随时调整 CPU 和内存请求等优势。
+396,HPA 是如何工作的？有哪些优势？,HPA 会定期监控 Pod 的资源使用情况，并根据设定的规则动态调整 Pod 的副本数量。HPA 的优势在于能够提高 Deployment、ReplicationController、ReplicaSet 或者 StatefulSet 中 Pod 的资源利用率。
+397,Kubernetes 中有哪些自动扩缩容的方式？,Kubernetes 提供了三种自动扩缩容的方式：横向自动扩缩容（HPA）、垂直自动扩缩容（VPA）和集群节点自动扩缩容（CA）。
+398,为什么需要合理设置 Request 和 Limit？,合理地为容器设置 Request 和 Limit 值对优化资源利用率至关重要，能够避免浪费资源、提高集群的效率。同时，也能够满足各个团队对资源的需求。
+399,什么是资源利用率？如何衡量资源利用率？,资源利用率是指计算资源被充分利用的程度，一般通过 CPU、内存、磁盘、进出带宽等指标数据来衡量。
+400,什么是 Prometheus 的采集目标（Objective）？,采集目标（Objective）是 Prometheus 抓取的目标。采集目标暴露自身状态，或者代理暴露监控对象的运行、业务指标。
+401,什么是对象（Object）？在 Kubernetes 中扮演着什么角色？,对象（Object）是 Kubernetes 系统中用于表示集群部分状态的实体，Kubernetes API 用这些实体表示集群状态。创建一个对象相当于告知 Kubernetes 系统：您期望这部分集群负载看起来像什么；这也就是您集群的期望状态。
+402,什么是节点（Node）？它在云原生平台中扮演着什么角色？,节点（Node）是一台能与其他计算机（或节点）协同工作以完成一个共同任务的计算机。在云原生平台中，一个节点代表一个可执行工作的单元。理想情况下，单个节点是不作区分的，因为任何特定类型的节点与其相同类型的节点应该是不可区分的。
+403,什么是网络策略（Network Policy）？它的作用是什么？,网络策略（Network Policy）是一种规范，规定了允许 Pod 组之间、Pod 与其他网络端点之间以怎样的方式进行通信。网络策略帮助您声明式地配置允许哪些 Pod 之间、哪些命名空间之间允许进行通信，并具体配置了哪些端口号来执行各个策略。它由网络提供商提供的并被 Kubernetes 支持的网络插件实现。
+404,什么是命名空间？它在 Kubernetes 中有什么作用？,命名空间（Namespace）是 Kubernetes 用来支持隔离单个集群中资源组的一种抽象，用于组织集群中对象，并为集群资源划分提供了一种方法。同一命名空间内的资源名称必须唯一，但跨命名空间时不作要求。在微服务引擎中，命名空间指的是 Nacos 命名空间，主要用于实现租户层级的配置隔离。
+405,什么是双向传输层安全性协议（mTLS）？它的作用是什么？,双向传输层安全性协议（mTLS）是一种用于对两个服务之间发送的消息进行身份验证和加密的技术。mTLS 是标准的传输层安全性协议 (TLS)，但不是仅验证一个连接的身份，而是验证双方。它可以防止诸如路径上的攻击、欺骗攻击、凭证填充、暴力攻击等攻击，并为进入网络或应用程序的用户提供了额外的安全层。它还能够验证不遵循登录过程的客户端设备连接，例如物联网 (IoT) 设备。
+406,什么是多租户模式？它能够带来哪些好处？,多租户模式指的是通过单次软件安装为多个租户提供服务。租户可以是一个用户、一个应用程序或一组用户/应用程序，它们使用各自的数据集来操控同一个软件。多租户软件示例包括 Google Mail、Google Docs、Microsoft Office 365、Salesforce CRM 和 Dropbox 等。多租户模式能够带来资源利用效率提高、维护成本降低和用户软件成本降低等好处。
+407,什么是单体应用？为什么在产品确定成功前使用单体应用比使用微服务更有利？,单体应用是一种将整个应用程序作为一个单独的可执行文件运行的架构。在产品确定成功前使用单体应用比使用微服务更有利，因为精心设计的单体可以坚持精益原则，并且是启动和运行应用程序的最简单方式。当单体应用的商业价值被证明是成功的，它可以被分解成微服务。如果应用程序没有产生任何价值，而制作了基于微服务的应用程序，这些努力就会被浪费掉。
+408,什么是kube-apiserver？它的作用是什么？,kube-apiserver是提供Kubernetes API服务的控制面组件。它验证并配置API对象的数据，这些对象包括Pod、Service、replicationcontroller等。API服务器为REST操作提供服务，并为集群的共享状态提供前端
+409,什么是Kubernetes(k8s)？它提供了哪些功能？,Kubernetes通常缩写为k8s，是一种流行的现代基础设施自动化的开源工具。它管理在分布式系统上运行的应用程序，并捆绑了几个基础设施结构，如应用程序实例、负载平衡器、持久性存储等，以一种可以被组成应用程序的方式。Kubernetes实现了自动化和可扩展性，使用户能够以可重复的方式声明性地部署应用程序。它提供了资源管理、负载均衡、存储编排、自动扩缩、自动恢复等功能。
+410,什么是Kops？它有哪些特点？,Kops是一个命令行工具，可以帮助您创建、销毁、升级和维护生产级、高可用性的Kubernetes集群。Kops目前仅支持AWS，对GCE、VMware vSphere及其他第三方PaaS平台的支持还处于Alpha阶段。使用Kops构建集群可以获得高度可靠性，并且支持自动化冗余和自我修复功能。
+411,什么是Job？它有什么作用？,Job是需要运行完成的确定性的或批量的任务。它创建一个或多个Pod对象，并确保指定数量的Pod成功终止。随着各Pod成功结束，Job会跟踪记录成功完成的个数。
+412,什么是Istio？它的作用是什么？,Istio是一个免费开源的服务网格，提供了一种统一的方式来集成微服务、管理流量、实施策略和汇总度量数据。Istio添加到应用程序时不需要修改应用程序代码，它介于服务和网络之间，构成了通常所谓的服务网格（Service Mesh），帮助简化微服务架构的管理和监控。
+413,什么是Init容器？它有哪些特点？,Init容器是应用容器运行前必须先运行完成的一个或多个容器。Init容器必须在应用容器启动前运行完成，且必须在下一个Init容器开始前运行完成。Init容器通过在应用程序启动前完成一些额外处理来帮助确保应用程序正确启动。
+414,什么是Ingress？它提供了哪些功能？,Ingress是对集群中服务的外部访问进行管理的API对象，典型的访问方式是HTTP。Ingress可以提供负载均衡、SSL终结和基于名称的虚拟托管等功能。
+415,什么是基础设施即代码(Infrastructure as Code)？它解决了哪些问题？,基础设施即代码是将基础设施的定义存储为一个或多个文件的做法。通过将服务器、负载均衡器和子网等数据中心资源表示为代码，它允许基础架构团队对所有配置拥有单一的数据源，并允许他们在CI/CD通道中管理数据中心，实现版本控制和部署策略。基础设施即代码解决了手动配置基础架构时可能遇到的复杂性、扩缩瓶颈和错误配置等问题。
+416,什么是基础设施即服务(IaaS)？它为用户提供了哪些好处？,基础设施即服务(IaaS)是一种云计算服务模型，它提供物理或虚拟的计算、存储和网络资源，使用按需按量的计费模式。IaaS允许用户根据需要租用计算资源，并推迟大型资本支出，同时给予他们扩大或缩小规模的灵活性。IaaS降低了试验或尝试新应用程序的初期成本，并提供了快速部署基础设施的工具。用户无需购买和维护计算和数据中心资源，从而避免了搭建传统本地设施时可能面临资源的空闲和短缺问题。
+417,Kubernetes 1.26 发布于哪一年？,文章没有明确指出，无法确定。
+418,Kubernetes 1.25 中将那些 Beta 功能降级为 Alpha？,Kubernetes 1.25 中将 LocalStorageCapacityIsolationFS
+419,Kubernetes 1.25 移除了哪些已经 GA 的功能 Feature Gate？,Kubernetes 1.25 移除了 ServiceLoadBalancerClass、ServiceLBNodePortControl、CSRDuration、DefaultPodTopologySpread、NonPreemptingPriority、PodAffinityNamespaceSelector、PreferNominatedNode、PodOverhead、UnversionedKubeletConfigMap、IndexedJob 和 SuspendJob 这些已经 GA 的功能 Feature Gate。
+420,Kubernetes 的 kubeadm reset 在执行时会清理哪些数据？,kubeadm reset 在执行时会尽可能的去清理掉陈旧的数据，旧数据会在每个 reset 阶段执行时被清除，默认的 etcd 数据目录会在 remove-etcd-member 阶段执行时被删除。
+421,什么是 DSA 格式的 key？,DSA（Digital Signature Algorithm）格式的 key 是一种数字签名算法，用于生成公钥和私钥对。
+422,Kubernetes 1.25 移除了哪些已经 GA 的功能 Feature Gate？,Kubernetes 1.25 移除了多项已经 GA 的功能 Feature Gate，包括 ServiceLoadBalancerClass、ServiceLBNodePortControl、CSRDuration、DefaultPodTopologySpread、NonPreemptingPriority、PodAffinityNamespaceSelector、PreferNominatedNode、PodOverhead、UnversionedKubeletConfigMap、IndexedJob 和 SuspendJob。
+423,Kubernetes 1.25 对 kubeadm 命令进行了哪些修复和增强？,Kubernetes 1.25 对 kubeadm 命令进行了多项修复和增强，包括 kubeadm join phase control-plane-preapare certs 支持使用 --dry-run 运行、支持子阶段的 dry-run 模式、kubeadm init 增加一个新 phase —— show-join-command 等。
+424,Kubernetes 1.25 对 kubectl 命令进行了哪些增强和修复？,Kubernetes 1.25 对 kubectl 命令进行了多项增强和修复，包括 kubectl wait 命令支持在 -o jsonpath= 中设置不存在的字段、kubectl api-resources 在 -o wide 输出时增加 categories 列并增加 --categories 参数来支持根据 categories 过滤、kubectl alpha event 移动为顶级命令 kubectl events 等。
+425,在 Kubernetes 中如何使用 Health SLIs？,在每个组件中增加一个新的路径 /metrics/slis，以 Prometheus 格式来公开服务级别指标 (ServiceLevelIndicator)。每个组件都需要暴露两个 metrics，一个是 gauge，一个是 counter。
+426,什么是 Health SLIs？,Health SLIs 是一种标准格式，用于暴露 Kubernetes 组件的健康信息，包括指标类型、组件名称、健康检查状态和状态计数。
+427,Kubernetes 1.26 中有哪些 kubectl 命令方面的改进？,Kubernetes 1.26 中有以下 kubectl 命令方面的改进：\n- kubectl wait 命令支持在 -o jsonpath= 中设置不存在的字段，这在某些字段被异步设置时会很有用。\n- kubectl api-resources 在 -o wide 输出时增加 categories 列，并且增加 --categories 参数来支持根据 categories 过滤。\n- kubectl alpha event 移动为顶级命令 kubectl events。\n- 修复了 kubectl rollout history --revision=<version>-o json|yaml <resource> 命令在输出 json/yaml 时返回最新版本而不是指定的 revision。\n- 优化 kubectl label --dry-run 命令的提示信息，避免用户误解为 label 已被设置。
+428,Kubernetes 1.26 的可观测性方面有哪些改进？,Kubernetes 1.26 中新增了 KEP-3466 Kubernetes Component Health SLIs，为每个组件增加了一个新的路径/metrics/slis，以 Prometheus 格式来公开服务级别指标 (ServiceLevelIndicator)，便于组件健康状态的监控和调试。需要开启 Alpha Feature Gate —— ComponentSLIs 才能使用该功能。
+429,Kubernetes 1.26 中有哪些资源控制与协调方面的新功能？,Kubernetes 1.26 中有以下资源控制与协调方面的新功能：\n- 在 PodDisruptionBudget 资源中新增 spec.unhealthyPodEvictionPolicy 字段来控制不健康的 Pod 何时应该被考虑驱逐。需要开启 Alpha Feature Gate —— PDBUnhealthyPodEvictionPolicy 才能使用该功能。\n- StatefulSet 当前是从 0 开始对 Pod 进行编号。该功能在 StatefulSet 中增加一个 spec.ordinals.start 字段来控制 Pod 的起始编号。需要开启 Alpha Feature Gate —— StatefulSetStartOrdinal 才能使用该功能。
+430,Kubernetes 1.26 中关于网络方面有哪些改进？,"Kubernetes 1.26 中对网络方面进行了多项优化和改进：\n- 优化 kube-proxy 性能，它只发送在调用 iptables-restore 中更改的规则，而不是整个规则集。需要开启 Alpha Feature Gate —— MinimizeIPTablesRestore 才能使用该功能。\n- kube-proxy 新增 flag --iptables-localhost-nodeports 来允许用户禁止通过 localhost 访问 NodePort 的 Service。\n- 如果用户要求使用 ipvs，但是系统没有正确配置时，不再回退到 iptables 模式，而是返回错误。\n- 如果 kube-proxy 检测到分配给 Node 的 pod.Spec.PodCIDRs 已经改变，那么它将重新启动。\n- 移除已经废弃的 ""userspace"" 代理模式。"
+431,什么是 Provision volumes from cross-namespace snapshots 功能，它是如何实现的？,Provision volumes from cross-namespace snapshots 是 Kubernetes 1.26 中新增的功能，可以让用户从跨命名空间的 VolumeSnapshots 中分配卷。该功能通过在 PersistentVolumeClaim 中新增 `spec.dataSourceRef.namespace` 字段来实现。需要开启 Alpha Feature Gate —— CrossNamespaceVolumeDataSource 才能使用该功能。
+432,什么是软件即服务？,软件即服务（SaaS）允许用户通过互联网连接或使用云服务，以按需付费的方式提供完整的软件解决方案。所有运维任务和应用数据由服务提供商处理，扩缩、可用性和容量问题由服务提供商处理，采用按需付费的模式。
+433,什么是网站可靠性工程？,网站可靠性工程（SRE）是一门结合运营和软件工程的学科，特别适用于基础设施和运营问题。它通过不断改进底层系统来最小化软件开发过程的成本、时间和工作量。
+434,什么是自愈系统？,自愈系统无需任何人为干预就能从某些类型的故障中恢复。它通过主动查看系统实际状态并将其与运营商最初期望的状态进行比较，自动采取修正措施。
+435,什么是服务代理？,服务代理是拦截进出某项服务的流量、对其应用逻辑、并将该流量转发给另一项服务的中间人。它收集有关网络流量的信息，并决定是否对其应用规则。
+436,什么是服务名称？,服务名称是服务唯一的名字，是服务在服务网格里的唯一标识，不得重复。
+437,什么是 Selector？它可以用来做什么？,Selector 允许用户通过标签对一组资源对象进行筛选过滤，并可以通过标签对资源进行过滤筛选。Selector 可以用于查询资源列表，在 Pod 中使用标签选择器使容器挂载卷和环境变量引用 Secret 和 ConfigMap 等资源对象，并且可以使用 LabelSelector 来控制 Pod 调度策略。
+438,什么是 Service Discovery？它的作用是什么？,Service Discovery 是查找组成服务各个实例的过程。它持续跟踪构成服务的各种节点或端点，为需要找到彼此的应用程序提供一个公共地方来查找和识别不同服务。在云原生架构中，容器化的应用程序可能会多次启动和停止，并且每次启动后会有一个新地址。Service Discovery 可以持续跟踪网络中的应用程序，以便在需要时可以找到彼此。
+439,什么是 Service Mesh？它解决了哪些问题？,Service Mesh 是一种解决微服务架构中网络通信可靠性、可观测性和安全性等问题的技术。它通过管理服务之间的流量，并在所有服务中统一添加可靠性、可观测性和安全功能来解决这一系列新的挑战。在转向微服务架构后，工程师们现在要处理数百个，甚至数千个单独的服务，都需要进行通信。服务网格通过管理服务之间的流量（即通信），并在所有服务中统一添加可靠性、可观测性和安全功能来解决这一系列新的挑战。
+440,什么是 ServiceAccount？它的作用是什么？,ServiceAccount 是 Kubernetes 中为在 Pod 中运行的进程提供标识的一种方法。当 Pod 中进程访问集群时，API 服务器将它们作为特定的 ServiceAccount 进行身份验证。如果创建 Pod 时没有指定 ServiceAccount，则会自动分配 default ServiceAccount。ServiceAccount 的作用是提供安全身份验证和授权，以便访问 Kubernetes API 和其他资源。
+441,什么是 Secret？它的作用是什么？可以配置为静态加密吗？,Secret 是用于存储敏感信息的 Kubernetes 对象，可以存储密码、OAuth 令牌和 SSH 密钥等。它的作用是让用户对敏感信息的使用进行更多的控制，并减少信息意外暴露的风险。Secret 值被编码为 base64 字符串并以非加密形式存储，但可以配置为静态加密。
+442,什么是安全上下文？,securityContext 字段定义 Pod 或容器的特权和访问控制设置，包括运行时 UID 和 GID。在一个 `securityContext` 字段中，您可以设置进程所属用户和用户组、权限相关设置。
+443,什么是滚动更新？,滚动更新指一次只更新一小部分副本、成功后再更新更多的副本、最终完成所有副本的更新。滚动更新具有零停机的优点，整个更新过程始终有副本在运行，从而保证了业务连续性。
+444,什么是资源配额？,资源配额提供了限制每个命名空间的资源消耗总和的约束。它限制了命名空间中每种对象可以创建的数量，也限制了项目中可被资源对象利用的计算资源总数。
+445,什么是注册中心？,注册中心是微服务架构中的“通讯录”，负责记录服务和服务地址的映射关系。在 DCE 中，支持多种类型的注册中心，如 Eureka、Zookeeper、Nacos、Mesh、Kubernetes。
+446,什么是 RBAC？,RBAC 是基于角色的访问控制，是管理授权决策的一种方式，允许管理员通过 Kubernetes API 动态配置访问策略。RBAC 使用角色和角色绑定，向用户组授权一组权限。
+447,什么是 Operator？,Operator 是打包、部署和管理 Kubernetes 应用程序的一种方法。它是一个用于管理自定义资源的专用控制器，可以将控制器关联到一个或多个自定义资源，从而扩展 Kubernetes。
+448,什么是可观测性？,可观测性指从所观测系统采集信号、持续生成并发现可执行洞察力。可观测性允许用户从某个系统的外部输出中洞察该系统的状态并采取（修正）措施。计算机系统衡量机制为观测 CPU 时间、内存、磁盘空间等底层信号以及每秒 API 响应次数、每秒错误率、每秒处理的事务数等高级信号和业务信号。
+449,什么是对象？,对象是 Kubernetes 系统中代表集群部分状态的实体。Kubernetes API 用这些实体表示集群状态。Kubernetes 对象通常是一个“目标记录”，一旦创建对象，Kubernetes 控制平面就会持续工作，确保对象所代表项目切实存在。
