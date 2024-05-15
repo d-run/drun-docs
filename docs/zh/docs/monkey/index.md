@@ -31,6 +31,6 @@ DaoCloud 围绕大模型应用构建生命周期管理，提供端到端解决�
 <video controls src="https://harbor-test2.cn-sh2.ufileos.com/drun/monkey-use.mp4" preload="metadata" poster="../buy/images/buy02.png"></video>
 </div>
 
-<!-- 更多参阅 [Helm Chart 一键安装文档](https://inf-monkeys.github.io/docs/zh-cn/installation/helm/)。 -->
+<!-- 更多参阅 [Helm Chart 一键安装文档](https://inf-monkeys.github.io/docs/zh-cn/getting-started/helm/)。 -->
 
 [注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
