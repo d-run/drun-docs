@@ -258,6 +258,7 @@ nav:
                   - 安全设置: ghippo/user-guide/personal-center/security-setting.md
                   - 访问密钥: ghippo/user-guide/personal-center/accesstoken.md
                   - 语言设置: ghippo/user-guide/personal-center/language.md
+  - 产品生态: eco/index.md
   - AI 行业新闻:
       - 索引: blogs/index.md
       - OpenAI GPT-4o 完全免费: blogs/0514-gpt4o.md
