@@ -23,6 +23,10 @@ Colossal-AI 旨在成为一个统一的系统，为用户提供一整套训练�
 
 我们将在 `基础教程` 部分涵盖整个工作流程。
 
+<div className="video-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KnXSfjqkKN0?si=U6onkgFaVzJGBmag" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
 ## 未来发展
 
 Colossal-AI 系统将扩展以包含更多的训练技能，这些新开发可能包括但不限于：
@@ -33,12 +37,6 @@ Colossal-AI 系统将扩展以包含更多的训练技能，这些新开发可�
 4. 扩展现有的并行方法
 
 我们欢迎来自社区的想法和贡献，您可以在我们的论坛上发布您的未来发展想法。
-
-## 演示视频
-
-<div class="responsive-video-container">
-<video controls src="https://www.youtube.com/watch?v=KnXSfjqkKN0" preload="metadata" poster="./images/colossal-ai-video.png"></video>
-</div>
 
 ## 参考
 
