@@ -2,7 +2,9 @@
 nav:
   - 首页: https://d.run
   - d.run 文档:
-      - d.run 简介: buy/index.md
+      - d.run 简介:
+          - buy/index.md
+          - 快速入门: buy/quick-start.md
       - 智能算力:
           - 购买算力: buy/buy.md
           - 算力集群:
