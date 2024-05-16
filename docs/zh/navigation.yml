@@ -263,7 +263,7 @@ nav:
   - 产品生态:
       - 生态索引: eco/index.md
       - Colossal-AI: eco/colossal-ai.md
-      - 动态资源分配 DRA: eco/dra.md
+      - DRA 动态资源分配: eco/dra.md
       - Fluid: eco/fluid.md
       - GPU Operator: eco/gpu-operator.md
       - GPUDirect RDMA: eco/gpu-rdma.md
@@ -271,6 +271,8 @@ nav:
       - HwameiStor: eco/hwameistor.md
       - InfiniBand: eco/infiniband.md
       - JuiceFS: eco/juicefs.md
+      - Kueue: eco/kueue.md
+      - MIG: eco/mig.md
       - Spiderpool: eco/spiderpool.md
       - SR-IOV: eco/sriov.md
   - AI 行业新闻:
