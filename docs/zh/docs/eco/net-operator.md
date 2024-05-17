@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # Network Operator
 
 NVIDIA Network Operator 简化了在 Kubernetes 集群中配置和管理 NVIDIA 网络资源的过程。

@@ -11,6 +11,8 @@ InfiniBand 是一种强大的新架构，旨在支持互联网基础设施的 I/
 还提供外部互连和“箱外带宽”，从而以往仅限于传统网络互连的方式提供连接。
 这种 I/O 和系统区域网络的统一需要一种新的架构，以支持这两个以前分离的领域的需求。
 
+![InfiniBand 组件](./images/infiniband.png)
+
 ## 参考
 
 - [InfiniBand 维基百科定义](https://en.wikipedia.org/wiki/InfiniBand)

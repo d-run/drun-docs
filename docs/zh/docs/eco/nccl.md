@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # NCCL 调优
 
 NCCL（NVIDIA Collective Communications Library，Nvidia 集合通信库）可针对 NVIDIA GPU 和网络进行性能优化，这是一个多 GPU 和多节点的通信基元。
