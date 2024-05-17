@@ -267,14 +267,17 @@ nav:
       - Fluid: eco/fluid.md
       - GPU Operator: eco/gpu-operator.md
       - GPUDirect RDMA: eco/gpu-rdma.md
-      - vLLM: eco/vllm.md
       - HwameiStor: eco/hwameistor.md
       - InfiniBand: eco/infiniband.md
       - JuiceFS: eco/juicefs.md
       - Kueue: eco/kueue.md
       - MIG: eco/mig.md
+      - NCCL: eco/nccl.md
+      - Network Operator: eco/net-operator.md
+      - Ray: eco/ray.md
       - Spiderpool: eco/spiderpool.md
       - SR-IOV: eco/sriov.md
+      - vLLM: eco/vllm.md
   - AI 行业新闻:
       - 索引: blogs/index.md
       - OpenAI GPT-4o 完全免费: blogs/0514-gpt4o.md
