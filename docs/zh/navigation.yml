@@ -276,6 +276,7 @@ nav:
       - NCCL: eco/nccl.md
       - Network Operator: eco/net-operator.md
       - Ray: eco/ray.md
+      - RDMA: eco/rdma.md
       - Spiderpool: eco/spiderpool.md
       - SR-IOV: eco/sriov.md
       - vLLM: eco/vllm.md
