@@ -196,6 +196,7 @@ nav:
           - 算法开发:
               - 什么是算法开发: baize/index.md
               - 算法开发功能特性: baize/features.md
+              - 快速开始: baize/quick-start.md
           - 模型中心:
               - 什么是模型中心: dmc/index.md
               - 功能特性: dmc/features.md
