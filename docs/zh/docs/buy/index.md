@@ -66,7 +66,7 @@ d.run 的这些优势来自于丰富的产品模块和功能特性：
 参阅演示视频：
 
 <div class="responsive-video-container">
-<video controls src="https://harbor-test2.cn-sh2.ufileos.com/drun/d.run-workflow.mov" preload="metadata" poster="./images/workflow.png"></video>
+<video controls src="https://harbor-test2.cn-sh2.ufileos.com/drun/d.run-workflow.mp4" preload="metadata" poster="./images/workflow.png"></video>
 </div>
 
 ## 行业背景
