@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # Kueue
 
 Kueue 是一个 Kubernetes 原生的系统，用于管理配额及 Job 如何消耗配额的使用。
