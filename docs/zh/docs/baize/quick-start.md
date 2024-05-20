@@ -8,11 +8,11 @@ hide:
 本文提供了简单的操作手册以便用户使用 d.run 算法开发进行数据集、Notebook、任务训练的整个开发、训练流程。
 
 1. 点击导航栏的 **数据管理** -> **数据集列表** ，点击 **创建** 。创建三个数据集，分别为：
-    - 代码： `https://github.com/samzong/training-sample-code`
-        - 国内慢可以使用 gitee 加速： `https://gitee.com/samzong_lu/training-sample-code.git`
-    - 数据： `https://github.com/zalandoresearch/fashion-mnist`
-        - 国内慢可以使用 gitee 加速： `https://gitee.com/samzong_lu/fashion-mnist.git`
-    - 空的 PVC：创建一个空的 PVC 以便输出训练结束的模型和日志。
+    - 代码： [https://github.com/d-run/drun-samples](https://github.com/d-run/drun-samples/tree/main/tensorflow/tf-fashion-mnist-sample)
+        - 国内慢可以使用 gitee 加速： [https://gitee.com/samzong_lu/training-sample-code.git](https://gitee.com/samzong_lu/training-sample-code.git)
+    - 数据： [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
+        - 国内慢可以使用 gitee 加速： [https://gitee.com/samzong_lu/fashion-mnist.git](https://gitee.com/samzong_lu/fashion-mnist.git)
+    - 空 PVC：创建一个空的 PVC 以便输出训练结束的模型和日志。
 
     !!! note
 
