@@ -277,8 +277,11 @@ nav:
       - Network Operator: eco/net-operator.md
       - Ray: eco/ray.md
       - RDMA: eco/rdma.md
+      - RoCE: eco/roce.md
+      - Triton: eco/triton.md
       - Spiderpool: eco/spiderpool.md
       - SR-IOV: eco/sriov.md
+      - vGPU: eco/vgpu.md
       - vLLM: eco/vllm.md
   - AI 行业新闻:
       - 索引: blogs/index.md
