@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # Fluid
 
 Fluid 是一个 CNCF Sandbox 项目，主要在云上为大数据以及AI应用的弹性数据提供抽象和加速服务。

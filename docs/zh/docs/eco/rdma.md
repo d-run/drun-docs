@@ -17,6 +17,8 @@ RDMA 支持零复制网络传输，通过使网络适配器直接在应用程序
 
 常见的 RDMA 实现包括虚拟接口架构、基于融合以太网的 RDMA（RoCE）、[InfiniBand](./infiniband.md)、iWARP。
 
+![rdma and traditional](./images/rdma.png)
+
 ## 参考
 
 - [RDMA 维基百科词条](https://zh.wikipedia.org/wiki/%E8%BF%9C%E7%A8%8B%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98%E8%AE%BF%E9%97%AE)
