@@ -21,12 +21,12 @@ d.run 智能问答支持查看用户本人发出的反馈详情。
     - 相关信息：助手名称、模型名称、引用条数、处理时间以及问答详情。
     - 处理意见：管理员处理反馈后发出的意见。
 
-        ![my feedback detail](images/my-feedback-detail.png)
+    ![my feedback detail](images/my-feedback-detail.png)
 
     - 历史引用
     - 最新引用
 
-        ![quote](images/quote.png)
+    ![quote](images/quote.png)
 
 4. 当有用户本人提出新的反馈，可点击右上角 **刷新** 按钮查看最新生成的反馈。
 
