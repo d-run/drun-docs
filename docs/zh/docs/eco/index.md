@@ -7,7 +7,7 @@ hide:
 
 d.run 不是一个简单的产品，它是很多 AI 新兴技术和项目聚合而成的生态体系，这些模块可以按需添加。
 
-![product landscape](./images/architecture.png)
+![product landscape](../buy/images/landscape.png)
 
 产品全景图中涉及的功能和组件如下：
 
