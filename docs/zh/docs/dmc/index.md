@@ -16,14 +16,14 @@ d.run 模型中心是一款功能强大的模型管理和服务平台，旨在�
 - **API Key 管理** ：提供在线模型服务的 API Key 管理功能，保证模型服务的安全性和可控性。
 
 d.run 模型中心内置了[模型仓库](./model-hub/built-in.md)，可以一站式管理各类大模型，按需部署。
-另外通过[模型服务](./model-service/local.md)，您可以从本地、在线提供大语言模型服务、向量化模型服务。
+另外通过[模型服务](./model-service/local.md)，您可以从本地部署大语言模型服务和向量化模型服务，也可接入在线的大语言模型服务。
 
-![model hub](./images/dmc-home.png)
+![model hub](./images/dmc-home.jpg)
 
-## 切换集群
+## 切换工作空间
 
-在导航栏左上角，可以切换集群/算力中心。
+在导航栏左上角，可以切换工作空间。
 
-![切换集群](./images/inner01.png)
+![切换集群](./images/inner01.jpg)
 
 [注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
