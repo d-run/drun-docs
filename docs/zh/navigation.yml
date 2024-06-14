@@ -190,6 +190,7 @@ nav:
       - 模型工具:
           - 模型微调:
               - 什么是模型微调: dtx/index.md
+              - 快速入门: dtx/fine-tuning-fast.md
               - 功能特性: dtx/features.md
               - 微调实验: dtx/fine-tuning-lab.md
               - 参数组: dtx/parameters.md
