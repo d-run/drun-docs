@@ -1,0 +1,38 @@
+name: Build Docs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'  # Replace with the desired Python version
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc
+        pip install python-docx docxcompose
+        
+    - name: Build docs
+      run: |
+        # 构建
+        if [ -d "docs/zh/docs" ]; then
+          python3 scripts/md2doc-v2.py docs/zh/docs
+        else
+          echo "Directory docs/zh/docs does not exist, skipping build step."
+        fi
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-output
+        path: docs/*.docx
