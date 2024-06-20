@@ -16,7 +16,7 @@ hide:
 
     !!! note
 
-        目前仅支持读写模式为 ReadWriteMany 的 StorageClass，支持使用 NFS 或者推荐使用 [JuiceFS](https://juicefs.com/zh-cn/)。
+        目前仅支持读写模式为 `ReadWriteMany` 的 `StorageClass`，请使用 NFS 或者推荐使用 [JuiceFS](https://juicefs.com/zh-cn/)。
 
     ![baize](images/baize-01.png)
 
@@ -36,10 +36,11 @@ hide:
 
     ![baize](images/baize-05.png)
 
-4. 点击导航栏的 **任务中心** -> **任务管理** ，创建一个 Pytorch 单机任务，任务配置参考下图，并在上一步中开启 **任务分析（Tersorflow）** 功能，点击 **创建** 后等待状态完成。
+4. 点击导航栏的 **任务中心** -> **任务管理** ，创建一个 `Tensorflow` 单机任务，任务配置参考下图，
+   并开启 **任务分析（Tersorboard）** 功能，点击 **创建** 后等待状态完成。
 
-    - 镜像地址填写：[`docker.m.daocloud.io/kubeflownotebookswg/jupyter-tensor`](http://docker.m.daocloud.io/kubeflownotebookswg/jupyter-tensor)
-    - Command：python
+    - 镜像地址填写：`release.daocloud.io/baize/jupyter-tensorflow-full:v1.8.0-baize`
+    - Command：`python`
     - Arguments：`/home/jovyan/code/tensorflow/tf-fashion-mnist-sample/train.py`
 
     !!! note
