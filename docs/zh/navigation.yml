@@ -166,7 +166,6 @@ nav:
               - 应用中心:
                   - 创建应用: dak/user-guide/app-center/create-app.md
                   - 应用对话: dak/user-guide/app-center/conversation.md
-                  - 召回策略: dak/user-guide/app-center/retrieval-strategy.md
               - 语料库:
                   - 创建语料库: dak/user-guide/corpus/create-corpus.md
                   - 语料管理: dak/user-guide/corpus/manage-corpus.md
