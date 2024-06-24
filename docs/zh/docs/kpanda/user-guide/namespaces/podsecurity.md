@@ -46,6 +46,6 @@ Pod 安全策略指在 kubernetes 集群中，通过为指定命名空间配置�
 
     ![创建成功](https://docs.daocloud.io/daocloud-docs-images/docs/zh/docs/kpanda/images/ps05.png)
 
-5. 点击 __⋮__ 还可以编辑或者删除您配置的安全策略。
+5. 点击 __┇__ 还可以编辑或者删除您配置的安全策略。
 
     ![操作](https://docs.daocloud.io/daocloud-docs-images/docs/zh/docs/kpanda/images/ps06.png)

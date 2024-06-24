@@ -56,13 +56,13 @@ Insight 基于 [Prometheus Blackbox Exporter](https://github.com/prometheus/blac
 
 ## 编辑拨测任务
 
-点击列表右侧的 __⋮__ -> __编辑__ ，完成编辑后点击 __确定__ 。
+点击列表右侧的 __┇__ -> __编辑__ ，完成编辑后点击 __确定__ 。
 
 ![probe](https://docs.daocloud.io/daocloud-docs-images/docs/zh/docs/insight/images/probe04.png)
 
 ## 查看监控面板
 
-点击列表右侧的 __⋮__ -> __查看监控面板__ ，跳转到 Grafana 拨测任务概览页面，以图表方式显示针对网络状况的探测结果。
+点击列表右侧的 __┇__ -> __查看监控面板__ ，跳转到 Grafana 拨测任务概览页面，以图表方式显示针对网络状况的探测结果。
 
 ![probe](https://docs.daocloud.io/daocloud-docs-images/docs/zh/docs/insight/images/probe03.png)
 
@@ -77,7 +77,7 @@ Insight 基于 [Prometheus Blackbox Exporter](https://github.com/prometheus/blac
 
 ## 删除拨测任务
 
-点击列表右侧的 __⋮__ -> __删除__ ，确认无误后点击 __确定__ 。
+点击列表右侧的 __┇__ -> __删除__ ，确认无误后点击 __确定__ 。
 
 ![probe](https://docs.daocloud.io/daocloud-docs-images/docs/zh/docs/insight/images/probe05.png)
 
