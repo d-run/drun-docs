@@ -13,6 +13,7 @@ d.run 是 DaoCloud 自研的 AIGC 综合性算力运维和运营平台，整合�
 集成丰富的模型套件工具，全面推动算力与应用的协同创新，为所有用户提供高效、可靠、易得的 AI 算力云服务，加速 AI 普惠。
 
 [点击注册 d.run](https://console.d.run/){ .md-button }
+[查阅和下载 PDF](https://harbor-test2.cn-sh2.ufileos.com/drun/d.run-0625.pdf){ .md-button }
 
 ## 产品全景图
 
