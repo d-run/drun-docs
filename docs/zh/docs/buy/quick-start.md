@@ -10,6 +10,7 @@ hide:
 ## 注册账号
 
 [点击注册 d.run](https://console.d.run/){ .md-button }
+[查阅和下载 PDF](https://harbor-test2.cn-sh2.ufileos.com/drun/d.run-0625.pdf){ .md-button }
 
 您通过邮箱注册账号之后，d.run 系统会发送一封邮件，请点击邮件中的链接激活账号。
 更多细节，请参阅以下演示视频。

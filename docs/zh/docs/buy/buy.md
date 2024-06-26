@@ -19,3 +19,4 @@ hide:
     ![一元体验](images/buy03.png)
 
 [注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
+[查阅和下载 PDF](https://harbor-test2.cn-sh2.ufileos.com/drun/d.run-0625.pdf){ .md-button .md-button--primary }
