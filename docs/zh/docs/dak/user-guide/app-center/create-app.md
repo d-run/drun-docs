@@ -7,6 +7,10 @@ hide:
 
 本页介绍如何在应用中心创建一个应用。
 
+<div class="video-container">
+<iframe width="560" height="315" src="https://harbor-test2.cn-sh2.ufileos.com/drun/deploy-qa.mp4" title="部署应用教学" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
 1. 在 **应用中心** 页面中，点击 **创建** 按钮
 
     ![应用中心](../../images/app-center.png)
