@@ -3,6 +3,10 @@
 顾名思义，此类模型部署在本地或内网，在限定地理范围内提供服务。
 在本地可提供大语言和向量化两种模型服务。
 
+<div class="video-container">
+<iframe width="560" height="315" src="https://harbor-test2.cn-sh2.ufileos.com/drun/deploy-model.mp4" title="部署模型教学" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
 ## 大语言模型服务
 
 大语言模型即 Large Language Model (LLM)，这是基于大量数据进行预训练的超大型深度学习模型。
