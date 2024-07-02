@@ -4,6 +4,10 @@
 
 [前置要求准备](#_2) -> [创建数据集](#_3) -> [创建参数组](#_4) -> [创建微调实验](#_5) -> [部署微调模型](#_6) -> [对话](#_7)
 
+<div class="video-container">
+<iframe width="560" height="315" src="https://harbor-test2.cn-sh2.ufileos.com/drun/fine-tuning.mp4" title="模型微调教学" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
 ## 前置要求
 
 1. 已购买算力集群，并且该算力集群被加入当前用户所在的 workspace 中
