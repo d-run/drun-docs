@@ -60,7 +60,7 @@ hide:
     | 预制 Prompt | 输入描述文本 | 你是一个精通德语的翻译官   |
     | <span style="background-color: lightgreen; color: white;">文本</span> 用户消息 | 配置一条由参数组成的、能让 gpt-4o 理解的指令 | 把 **<span style="background-color: lightgreen; color: white;">STR</span> 工作流输入 用户消息** 翻译成 **<span style="background-color: lightgreen; color: white;">STR</span> 工作流输入 语言** |
 
-    其中，**<span style="background-color: lightgreen; color: white;">文本</span> 工作流输入 用户消息** 指的是点击右侧的 🔗 图标后所选择的参数。
+    其中，**<span style="background-color: lightgreen; color: white;">STR</span> 工作流输入 用户消息** 指的是点击右侧的 🔗 图标后所选择的参数。
 
     ![配置参数](./images/flow07.png)
 
