@@ -186,6 +186,7 @@ nav:
           - 流程编排:
               - 什么是流程编排: monkey/index.md
               - 功能特性: monkey/features.md
+              - 通过工作流创建应用: monkey/create-flow.md
       - 模型工具:
           - 模型微调:
               - 什么是模型微调: dtx/index.md
