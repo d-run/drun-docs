@@ -58,7 +58,7 @@ hide:
     | --- | ---- | ----- |
     | 大语言模型  | 预设选项 | gpt-4o |
     | 预制 Prompt | 输入描述文本 | 你是一个精通德语的翻译官   |
-    | <span style="background-color: lightgreen; color: white;">文本</span> 用户消息 | 配置一条由参数组成的、能让 gpt-4o 理解的指令 | 把 **<span style="background-color: lightgreen; color: white;">文本</span> 工作流输入 用户消息** 翻译成 **<span style="background-color: lightgreen; color: white;">文本</span> 工作流输入 语言** |
+    | <span style="background-color: lightgreen; color: white;">文本</span> 用户消息 | 配置一条由参数组成的、能让 gpt-4o 理解的指令 | 把 **<span style="background-color: lightgreen; color: white;">STR</span> 工作流输入 用户消息** 翻译成 **<span style="background-color: lightgreen; color: white;">STR</span> 工作流输入 语言** |
 
     其中，**<span style="background-color: lightgreen; color: white;">文本</span> 工作流输入 用户消息** 指的是点击右侧的 🔗 图标后所选择的参数。
 
@@ -101,6 +101,7 @@ hide:
 
 ## 工作流
 
-你所创建的智能应用都在 **工作流** 页签，点击 **德语翻译官** 卡片，可以配置和添加更多参数，可以添加更复杂的流程。
+你所创建的智能应用都在 **工作流** 页签，点击 **德语翻译官** 卡片，
+可以配置和添加更多参数、数据、流程节点来完善你的智能应用，并向最终用户开放。
 
 ![尝试不同的消息](./images/flow011.png)
