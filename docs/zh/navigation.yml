@@ -207,7 +207,7 @@ nav:
                   # - 微调模型: dmc/model-hub/tuner.md
                   - 接入模型镜像: dmc/model-hub/get-model-image.md
               - 模型服务: 
-                  - 本地模型服务: dmc/model-service/local.md
+                  # - 本地模型服务: dmc/model-service/local.md
                   - 在线模型服务: dmc/model-service/online.md
       - 管理:
           - 全局管理:
