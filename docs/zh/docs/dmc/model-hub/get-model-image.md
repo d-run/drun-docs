@@ -2,7 +2,7 @@
 
 d.run 模型中心支持接入 [HuggingFace Transformers](https://huggingface.co/models) 上托管的各种生成式 Transformer 模型。
 
-以下是目前支持的模型架构列表。
+以下是目前支持的模型架构列表：
 
 | 架构 | 模型 | HuggingFace 模型示例 | `LoRA <lora>` |
 | --- | ----- | ------------------- | ------------- |
@@ -36,6 +36,30 @@ d.run 模型中心支持接入 [HuggingFace Transformers](https://huggingface.co
 | `Qwen2ForCausalLM` | Qwen2 | `Qwen/Qwen2-beta-7B`, `Qwen/Qwen2-beta-7B-Chat` 等 | ✅︎ |
 | `Qwen2MoeForCausalLM` | Qwen2MoE | `Qwen/Qwen1.5-MoE-A2.7B`, `Qwen/Qwen1.5-MoE-A2.7B-Chat` 等 | |
 | `StableLmForCausalLM` | StableLM | `stabilityai/stablelm-3b-4e1t/` , `stabilityai/stablelm-base-alpha-7b-v2` 等 | |
+
+多模态语言模型列表：
+
+| 模型类型 | 架构 | 模态 | 示例 HuggingFace 模型 | LoRA 支持 |
+|--------------------------------|-----------------------------------|----------------------------|----------------------------|---------------|
+| `Blip2ForConditionalGeneration` | BLIP-2 | 图像生成 (ImageE) | `Salesforce/blip2-opt-2.7b`, `Salesforce/blip2-opt-6.7b` 等 | ✅ |
+| `ChameleonForConditionalGeneration` | Chameleon | 图像生成 (Image) | `facebook/chameleon-7b` 等 | ✅ |
+| `FuyuForCausalLM` | Fuyu | 图像生成 (Image) | `adept/fuyu-8b` 等 | ✅ |
+| `ChatGLMModel` | GLM-4V | 图像生成 (Image) | `THUDM/glm-4v-9b` 等 | ✅ |
+| `InternVLChatModel` | InternVL2 | 图像增强 (ImageE+) | `OpenGVLab/InternVL2-4B`, `OpenGVLab/InternVL2-8B` 等 | ✅ |
+| `LlavaForConditionalGeneration` | LLaVA-1.5 | 图像增强 (ImageE+) | `llava-hf/llava-1.5-7b-hf`, `llava-hf/llava-1.5-13b-hf` 等 | ✅ |
+| `LlavaNextForConditionalGeneration` | LLaVA-NeXT | 图像增强 (ImageE+) | `llava-hf/llava-v1.6-mistral-7b-hf` 等 | ✅ |
+| `LlavaNextVideoForConditionalGeneration` | LLaVA-NeXT-Video | 视频生成 (Video) | `llava-hf/LLaVA-NeXT-Video-7B-hf` 等 | ✅ |
+| `LlavaOnevisionForConditionalGeneration` | LLaVA-Onevision | 图像 + 视频 (Image+ / Video) | `llava-hf/llava-onevision-qwen2-7b-ov-hf` 等 | ✅ |
+| `MiniCPMV` | MiniCPM-V | 图像增强 (ImageE+) | `openbmb/MiniCPM-V-2`, `openbmb/MiniCPM-Llama3-V-2_5` 等 | ✅ |
+| `MllamaForConditionalGeneration` | Llama 3.2 | 图像 (Image) | `meta-llama/Llama-3.2-90B-Vision-Instruct` 等 | |
+| `MolmoForCausalLM` | Molmo | 图像 (Image) | `allenai/Molmo-7B-D-0924` 等 | ✅ |
+| `NVLM_D_Model` | NVLM-D 1.0 | 图像增强 (ImageE+) | `nvidia/NVLM-D-72B` 等 | ✅ |
+| `PaliGemmaForConditionalGeneration` | PaliGemma | 图像增强 (ImageE) | `google/paligemma-3b-pt-224` 等 | ✅ |
+| `Phi3VForCausalLM` | Phi-3-Vision / Phi-3.5-Vision | 图像增强 (ImageE+) | `microsoft/Phi-3-vision-128k-instruct` 等 | ✅ |
+| `PixtralForConditionalGeneration` | Pixtral | 图像增强 (Image+) | `mistralai/Pixtral-12B-2409` | ✅ |
+| `QWenLMHeadModel` | Qwen-VL | 图像增强 (ImageE+) | `Qwen/Qwen-VL`, `Qwen/Qwen-VL-Chat` | ✅ |
+| `Qwen2VLForConditionalGeneration` | Qwen2-VL | 图像增强 + 视频生成 (ImageE+ / Video+) | `Qwen/Qwen2-VL-7B-Instruct` 等 | ✅ |
+| `UltravoxModel` | Ultravox | 音频增强 (AudioE+) | `fixie-ai/ultravox-v0_3` | ✅ |
 
 ## 如何为模型构建镜像
 
@@ -145,3 +169,74 @@ docker push myregistry.example.com/vllm-openai-tiktoken-chatglm3-6b-server
 #### 验证推送成功
 
 确认推送成功后，可以在 Docker 仓库的仪表盘上查看已推送的镜像。
+
+## 使用挂载模型文件的方式接入模型
+
+## 步骤 1：将模型文件上传到 MinIO
+
+1. **克隆模型文件到主机**
+   将模型文件复制或克隆到任意一台可访问 MinIO 的主机上。
+
+2. **下载 `mc` 客户端工具**  
+   运行以下命令下载 MinIO 客户端工具 `mc`：
+
+   ```bash
+   curl https://dl.min.io/client/mc/release/linux-amd64/mc \
+     --create-dirs \
+     -o $HOME/minio-binaries/mc
+
+   chmod +x $HOME/minio-binaries/mc
+   export PATH=$PATH:$HOME/minio-binaries/
+   mc --help
+   ```
+
+3. **登录 MinIO**
+   使用以下命令配置 MinIO 连接信息：
+
+   ```bash
+   mc alias set ALIAS HOSTNAME ACCESS_KEY SECRET_KEY
+   ```
+
+   - **ALIAS**：自定义 MinIO 名称，用于后续操作
+   - **HOSTNAME**：MinIO 服务地址（例如：http://10.33.2.23:31372）
+   - **ACCESS_KEY**：MinIO 用户名
+   - **SECRET_KEY**：MinIO 密码  
+     **示例**：
+
+   ```bash
+   mc alias set myminio http://10.33.2.23:31372 minio minio123456
+   ```
+
+4. **推送文件到 MinIO**
+
+   - **创建 Bucket**：
+
+     ```bash
+     mc mb myminio/llms
+     ```
+
+     > 如果 Bucket 已存在，可以通过 `mc ls myminio` 检查是否存在。
+
+   - **上传模型文件**：
+     以 `chatglm3-6b` 为例：
+
+     ```bash
+     mc cp chatglm3-6b myminio/llms --recursive
+     ```
+
+## 步骤 2：在模型中心加载模型
+
+1. **进入模型中心**  
+   在 DAK 的模型中心选择“接入模型”。
+
+2. **选择加载方式为“文件挂载”**
+
+3. **填写模型路径**  
+   按照模型在工作节点的挂载目录填写路径。例如，`chatglm3-6b` 模型挂载后的路径为：
+
+   ```text
+   /root/llms/chatglm3-6b
+   ```
+
+4. **提交模型路径配置**  
+   现在，模型已经成功加载，模型中心会从挂载目录中获取文件进行使用。
