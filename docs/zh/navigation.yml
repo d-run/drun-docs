@@ -192,8 +192,8 @@ nav:
               - 什么是模型微调: dtx/index.md
               - 快速入门: dtx/fine-tuning-fast.md
               - 功能特性: dtx/features.md
-              - 微调实验: dtx/fine-tuning-lab.md
-              - 参数组: dtx/parameters.md
+              - 分布式微调实验: dtx/fine-tuning-lab.md
+              - 数据集: dtx/dataset.md
           - 算法开发:
               - 什么是算法开发: baize/index.md
               - 快速入门: baize/quick-start.md

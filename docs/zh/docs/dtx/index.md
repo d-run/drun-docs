@@ -4,7 +4,6 @@ hide:
 ---
 
 # 什么是模型微调
-
 DaoCloud DataTunerX（DTX）是一站式自动化平台，专注于大型语言模型微调。
 涵盖了数据集、超参组、模型仓库、模型微调、模型评估和模型推理的全生命周期，实现了高度自动化。
 通过高效利用底层分布式算力资源，DTX 能够进行矩阵式的模型微调实验，从而推动大型模型的敏捷和自动化迭代。
@@ -15,8 +14,16 @@ DTX 模型微调是一个云原生解决方案，旨在与分布式计算框架�
 
 ![模型微调](./images/dtx.png)
 
-## 几个术语
+## 典型应用
+- 大规模数据集：在处理大规模数据集时，分布式微调能够有效利用集群资源，提升处理速度。
+- 跨设备协调：支持在多个物理设备或虚拟机上同时进行模型微调。
+- 资源优化：通过合理分配计算资源，达到高效利用硬件资源的目的。
+## 主要步骤
+- 任务分解：将微调任务划分成多个子任务。
+- 任务分配：将子任务分配给不同的计算节点。
+- 结果整合：在计算完成后，整合各节点的计算结果，形成最终的微调模型。
 
+## 几个术语
 **云原生（Cloud Native）：** 基于 Kubernetes 的 CRD 和 Operator 设计和开发的，一套围绕大语言模型、数据处理、
 大语言模型微调、评估、并行等能力的开源解决方案。让大模型的微调能力变成云原生应用的能力。
 
@@ -26,9 +33,6 @@ DTX 模型微调是一个云原生解决方案，旨在与分布式计算框架�
 **基础大语言模型（Base Large Language Model）：** 大语言模型（LLM）是指使用大量文本数据训练的深度学习模型，是一种用于自然语言处理的深度学习模型，
 它通过大规模的预训练来学习自然语言的表示和语言模式。这些模型可以用于各种任务，如文本生成、文本分类、机器翻译等，以生成或处理自然语言文本。
 基础大语言模型就是微调过程中，被微调的底座的大语言模型。
-
-**参数组（Hyperparameter Group）：** 代表一组超参的集合。在大语言模型的微调过程中，可以根据需要设置很多不同的超参，
-如 Scheduler、Optimizer、LearningRate、Epochs、BlockSize、BatchSize 等，这里的参数组就是各种超参的组合。
 
 **评估（Scoring / Evaluation）：** 用于对大语言模型进行评定好与不好的一种方式。还有一种专业点的说法叫 metrics。
 评估中支持很多种不同的 metric 类型，如 Bleu、Accuracy、Precision、Recall、Rouge、F1 等，不同类型的大模型任务需要使用不同的
@@ -58,84 +62,56 @@ metric 算法进行评估。评估的时候也需要特定格式的数据来进�
 
 ### 数据集处理
 
-- 根据训练的数据地址，验证的数据地址，测试的数据地址等信息定义数据集。目前支持对象存储 (S3) 和本地文件的方式。
+- 根据格式和数据集文件等信息定义数据集。目前支持对象存储 (S3) 和本地文件的方式。
 - 修改数据集的信息
 - 展示数据集的列表信息和详细信息
 - 删除已经存在的数据集
 - 支持使用数据集插件的方式创建数据集
 
-### 参数组
-
-- 提供了基于 lora 的机制所需要大模型的微调参数来创建参数组
-- 修改参数组的信息
-- 展示参数组的列表信息和详细信息
-- 删除已经存在的参数组
 
 ### 微调实验
+- 根据不同的模型参数、微调方法参数、数据集参数以及评估参数的组合并行的创建和运行微调实验
 
-- 根据不同的数据集、基础大模型、参数组的组合并行的创建和运行微调实验
 - 支持设置一个微调实验使用的评估方式，以相同的评估方式给这次实验的所有任务进行模型评估，得到本次实验的最佳微调模型
-- 支持查看每一个微调实验中的每一个微调任务的详情、日志、监控信息
-- 目前支持 lora 的方式进行大模型的微调能力
-- 目前支持 llama2 的模型微调能力
 
-### 模型评估
+- 支持查看每一个微调实验中微调任务的详情、日志、监控信息
 
-- 创建一个评估对象，内置支持设置相关的问题和期望的答案，基于此来评估微调出来的模型的评分
-- 查看、修改、删除评估对象
-- 支持使用评估插件的方式创建评估对象
+- 目前支持 lora、full 的方式进行大模型的微调能力
 
-### 大语言模型仓库
+- 目前模型如下：
 
-- 显示所有实验微调出来的模型
-- 利用微调出来的模型进行部署推理服务
-- 支持根据分类进行过滤
+    | 模型名                                                      | 模型大小                         | Template         |
+    | ----------------------------------------------------------- | -------------------------------- | ---------------- |
+    | [Baichuan 2](https://huggingface.co/baichuan-inc)           | 7B/13B                           | baichuan2        |
+    | [BLOOM/BLOOMZ](https://huggingface.co/bigscience)           | 560M/1.1B/1.7B/3B/7.1B/176B      | -                |
+    | [ChatGLM3](https://huggingface.co/THUDM)                    | 6B                               | chatglm3         |
+    | [Command R](https://huggingface.co/CohereForAI)             | 35B/104B                         | cohere           |
+    | [DeepSeek (Code/MoE)](https://huggingface.co/deepseek-ai)   | 7B/16B/67B/236B                  | deepseek         |
+    | [Falcon](https://huggingface.co/tiiuae)                     | 7B/11B/40B/180B                  | falcon           |
+    | [Gemma/Gemma 2/CodeGemma](https://huggingface.co/google)    | 2B/7B/9B/27B                     | gemma            |
+    | [GLM-4](https://huggingface.co/THUDM)                       | 9B                               | glm4             |
+    | [InternLM2/InternLM2.5](https://huggingface.co/internlm)    | 7B/20B                           | intern2          |
+    | [Llama](https://github.com/facebookresearch/llama)          | 7B/13B/33B/65B                   | -                |
+    | [Llama 2](https://huggingface.co/meta-llama)                | 7B/13B/70B                       | llama2           |
+    | [Llama 3-3.2](https://huggingface.co/meta-llama)            | 1B/3B/8B/70B                     | llama3           |
+    | [LLaVA-1.5](https://huggingface.co/llava-hf)                | 7B/13B                           | llava            |
+    | [LLaVA-NeXT](https://huggingface.co/llava-hf)               | 7B/8B/13B/34B/72B/110B           | llava_next       |
+    | [LLaVA-NeXT-Video](https://huggingface.co/llava-hf)         | 7B/34B                           | llava_next_video |
+    | [MiniCPM](https://huggingface.co/openbmb)                   | 1B/2B/4B                         | cpm/cpm3         |
+    | [Mistral/Mixtral](https://huggingface.co/mistralai)         | 7B/8x7B/8x22B                    | mistral          |
+    | [OLMo](https://huggingface.co/allenai)                      | 1B/7B                            | -                |
+    | [PaliGemma](https://huggingface.co/google)                  | 3B                               | paligemma        |
+    | [Phi-1.5/Phi-2](https://huggingface.co/microsoft)           | 1.3B/2.7B                        | -                |
+    | [Phi-3](https://huggingface.co/microsoft)                   | 4B/7B/14B                        | phi              |
+    | [Qwen (1-2.5) (Code/Math/MoE)](https://huggingface.co/Qwen) | 0.5B/1.5B/3B/7B/14B/32B/72B/110B | qwen             |
+    | [Qwen2-VL](https://huggingface.co/Qwen)                     | 2B/7B/72B                        | qwen2_vl         |
+    | [StarCoder 2](https://huggingface.co/bigcode)               | 3B/7B/15B                        | -                |
+    | [XVERSE](https://huggingface.co/xverse)                     | 7B/13B/65B                       | xverse           |
+    | [Yi/Yi-1.5 (Code)](https://huggingface.co/01-ai)            | 1.5B/6B/9B/34B                   | yi               |
+    | [Yi-VL](https://huggingface.co/01-ai)                       | 6B/34B                           | yi_vl            |
+    | [Yuan 2](https://huggingface.co/IEITYuan)                   | 2B/51B/102B                      | yuan             |
 
-### 推理服务
-
-- 显示从模型仓库创建出来的推理服务，包括列表的方式显示以及详情
-- 选择多个推理服务，使用相同的问题，让所有选择的推理服务同时回答这个问题，对比不同模型的推理服务的回答效果
-  支持在对比的过程中，展示计算性能数据，包括回复的 token 总数、每秒生成的 token 数、总的耗时是多少等性能数据
-
-### 数据插件
-
-- 创建一个数据集的插件
-- 查看、修改、删除数据集的插件
-- 支持开发自己的数据插件，同时在数据集创建的时候进行使用
-
-### 评估插件
-
-- 创建一个评估的插件
-- 查看、修改、删除评估的插件
-- 支持开发自己的评估插件，同时在微调实验创建的时候进行使用
-
-### 控制台/命令行
-
-- 数据集管理
-- 参数组管理
-- 微调实验管理
-- 模型仓库管理
-- 推理服务管理
-
-## 核心思路
-
-**Finetune:** 这里的微调专注于基于数据、大模型、参数组进行大模型微调的核心业务处理能力。
-只关注微调本身，最后的输出就是 checkpoint。是一个很典型的微调的流程。微调过程中的状态也会记录在资源对象的状态中。
-
-![Finetune](./images/core01.png)
-
-**FinetuneJob：** 这里的微调任务，不仅仅有上面的微调的能力，还会基于云原生的方式构建对应的镜像，以及启动对应微调出来的大模型的推理服务，
-并基于推理服务来完成本次的微调模型的模型评估能力，最后还会保存评估结果。FinetuneJob 中会包含 Finetune 的能力。
-FinetuneJob 在运行过程中的状态也会记录在资源对象的状态中，同时还会同步 Finetune 的状态到 FinetuneJob 中的状态中。
-
-![FinetuneJob](./images/core02.png)
-
-**FinetuneExperiment：** 因为大模型微调存在的不确定性，所以在资源充分的情况下，并行微调就变得很多必要。
-这里的微调实验就是利用数据、大模型、参数组这三个配置灵活组合，利用底层的多个 GPU 的卡，一次操作，并行完成多次微调，
-然后基于所有微调模型进行总体的评估，最后在这次实验中，使用相同的评估标准，找出最佳的微调模型作为本次微调实验的推荐的微调模型。
-FinetuneExperiment 中其实就是包含了多个 FinetuneJob。也是用户侧使用的入口。FinetuneExperiment 在运行过程中的状态也会记录在资源对象的状态中，
-同时还会同步 FinetuneJob 的状态到 FinetuneExperiment 中的状态中。
-
-![FinetuneExperiment](./images/core03.png)
-
+  
 [注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
+  
+
