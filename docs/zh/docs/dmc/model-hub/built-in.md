@@ -22,8 +22,10 @@ hide:
         其中算力类型支持 Nvidia GPU 和 Ascend 等国产 GPU。
 
 3. 创建成功后，可以通过部署的模型提供服务。
-   ![alt text](../images/image-2.png)
-   部署成功后，模型服务显示**健康**。
+    
+    ![alt text](../images/image-2.png)
+    
+    部署成功后，模型服务显示**健康**。
 
 4. 点击模型服务的名称，可以调试模型的对话能力。
     
