@@ -235,9 +235,9 @@ docker push myregistry.example.com/vllm-openai-tiktoken-chatglm3-6b-server
 3. **填写模型路径**  
    按照模型在工作节点的挂载目录填写路径。例如，`chatglm3-6b` 模型挂载后的路径为：
 
-   ```text
-   /root/llms/chatglm3-6b
-   ```
+    ```text
+    /root/llms/chatglm3-6b
+    ```
 
 4. **提交模型路径配置**  
    现在，模型已经成功加载，模型中心会从挂载目录中获取文件进行使用。
