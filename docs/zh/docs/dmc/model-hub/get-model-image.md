@@ -73,9 +73,9 @@ d.run 模型中心支持接入 [HuggingFace Transformers](https://huggingface.co
 2. 找到目标模型，例如 "chatglm3-6b"
 3. 复制模型的 Git URL 以用于克隆，例如：
 
-   ```bash
-   https://huggingface.co/THUDM/chatglm3-6b
-   ```
+    ```bash
+    https://huggingface.co/THUDM/chatglm3-6b
+    ```
 
 #### Clone 模型
 
@@ -131,7 +131,7 @@ ENTRYPOINT ["python3", "-m", "vllm.entrypoints.openai.api_server", "--model", "/
 docker build -t vllm-openai-tiktoken-chatglm3-6b-server:v2.0.1 -f /data/chatglm3-6b/Dockerfile /data/llms/chatglm3-6b
 ```
 
-为了减小镜像大小，确保 .dockerignore 文件在 /data/llms/chatglm3-6b 目录中，并且其中包含需要忽略的文件或目录，如：
+为了减小镜像大小，确保 `.dockerignore` 文件在 `/data/llms/chatglm3-6b` 目录中，并且其中包含需要忽略的文件或目录，如：
 
 ```plaintext
 .git
@@ -193,19 +193,20 @@ docker push myregistry.example.com/vllm-openai-tiktoken-chatglm3-6b-server
 3. **登录 MinIO**
    使用以下命令配置 MinIO 连接信息：
 
-   ```bash
-   mc alias set ALIAS HOSTNAME ACCESS_KEY SECRET_KEY
-   ```
+    ```bash
+    mc alias set ALIAS HOSTNAME ACCESS_KEY SECRET_KEY
+    ```
 
-   - **ALIAS**：自定义 MinIO 名称，用于后续操作
-   - **HOSTNAME**：MinIO 服务地址（例如：http://10.33.2.23:31372）
-   - **ACCESS_KEY**：MinIO 用户名
-   - **SECRET_KEY**：MinIO 密码  
-     **示例**：
+    - **ALIAS**：自定义 MinIO 名称，用于后续操作
+    - **HOSTNAME**：MinIO 服务地址（例如：http://10.33.2.23:31372）
+    - **ACCESS_KEY**：MinIO 用户名
+    - **SECRET_KEY**：MinIO 密码  
 
-   ```bash
-   mc alias set myminio http://10.33.2.23:31372 minio minio123456
-   ```
+    **示例**：
+
+    ```bash
+    mc alias set myminio http://10.33.2.23:31372 minio minio123456
+    ```
 
 4. **推送文件到 MinIO**
 
