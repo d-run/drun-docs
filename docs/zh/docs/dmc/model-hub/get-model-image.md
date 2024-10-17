@@ -180,15 +180,15 @@ docker push myregistry.example.com/vllm-openai-tiktoken-chatglm3-6b-server
 2. **下载 `mc` 客户端工具**  
    运行以下命令下载 MinIO 客户端工具 `mc`：
 
-   ```bash
-   curl https://dl.min.io/client/mc/release/linux-amd64/mc \
-     --create-dirs \
-     -o $HOME/minio-binaries/mc
+    ```bash
+    curl https://dl.min.io/client/mc/release/linux-amd64/mc \
+      --create-dirs \
+      -o $HOME/minio-binaries/mc
 
-   chmod +x $HOME/minio-binaries/mc
-   export PATH=$PATH:$HOME/minio-binaries/
-   mc --help
-   ```
+    chmod +x $HOME/minio-binaries/mc
+    export PATH=$PATH:$HOME/minio-binaries/
+    mc --help
+    ```
 
 3. **登录 MinIO**
    使用以下命令配置 MinIO 连接信息：
