@@ -26,6 +26,7 @@ hide:
    部署成功后，模型服务显示**健康**。
 
 4. 点击模型服务的名称，可以调试模型的对话能力。
-   ![alt text](../images/image-3.png)
+    
+    ![alt text](../images/image-3.png)
 
 下一步：[模型服务](../model-service/local.md#_3)
