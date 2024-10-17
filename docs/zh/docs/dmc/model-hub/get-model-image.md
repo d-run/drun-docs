@@ -209,20 +209,21 @@ docker push myregistry.example.com/vllm-openai-tiktoken-chatglm3-6b-server
 
 4. **推送文件到 MinIO**
 
-   - **创建 Bucket**：
+    - **创建 Bucket**：
 
-     ```bash
-     mc mb myminio/llms
-     ```
+        ```bash
+        mc mb myminio/llms
+        ```
 
-     > 如果 Bucket 已存在，可以通过 `mc ls myminio` 检查是否存在。
+        > 如果 Bucket 已存在，可以通过 `mc ls myminio` 检查是否存在。
 
-   - **上传模型文件**：
-     以 `chatglm3-6b` 为例：
+    - **上传模型文件**：
+        
+        以 `chatglm3-6b` 为例：
 
-     ```bash
-     mc cp chatglm3-6b myminio/llms --recursive
-     ```
+        ```bash
+        mc cp chatglm3-6b myminio/llms --recursive
+       ```
 
 ## 步骤 2：在模型中心加载模型
 
