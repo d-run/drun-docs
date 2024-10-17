@@ -40,7 +40,7 @@ d.run 模型中心支持接入 [HuggingFace Transformers](https://huggingface.co
 多模态语言模型列表：
 
 | 模型类型 | 架构 | 模态 | 示例 HuggingFace 模型 | LoRA 支持 |
-|--------------------------------|-----------------------------------|----------------------------|----------------------------|---------------|
+|----------|-----|------|------------------------|-----------|
 | `Blip2ForConditionalGeneration` | BLIP-2 | 图像生成 (ImageE) | `Salesforce/blip2-opt-2.7b`, `Salesforce/blip2-opt-6.7b` 等 | ✅ |
 | `ChameleonForConditionalGeneration` | Chameleon | 图像生成 (Image) | `facebook/chameleon-7b` 等 | ✅ |
 | `FuyuForCausalLM` | Fuyu | 图像生成 (Image) | `adept/fuyu-8b` 等 | ✅ |
