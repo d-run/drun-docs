@@ -5,6 +5,7 @@
 {% block styles %}
   {{ super() }}
   <link rel="stylesheet" href="{{ 'overrides/assets/stylesheets/main.e13ced4c.min.css' | url }}">
+  <link rel="stylesheet" href="overrides/assets/stylesheets/index-DsWjVGYV.css">
 {% endblock %}
 {% block announce %}
 <!--  <a href="/dce/license0/">-->
@@ -14,37 +15,77 @@
 {% endblock %}
 {% block content %}
   {% include "overrides/partials/content.html" %}
+<div
+  id="chatbot"
+  class="w-12 h-12 rounded-full fixed bottom-5 right-5 transition-all duration-300 overflow-hidden cursor-pointer"
+>
+  <img
+    id="logo"
+    src="https://console.d.run/minio/drun/userAvatar/2024-10-30/%E6%9C%BA%E5%99%A8%E4%BA%BA1%201.png"
+    alt=""
+  />
+  <div
+    id="chatContent"
+    class="hidden w-full h-full bg-white box-border relative"
+  >
+    <!-- 关闭按钮 -->
+    <button
+      id="closeBtn"
+      class="absolute top-2 right-2 text-gray-600 hover:text-gray-800 font-bold text-lg z-[1100]"
+    >
+      <svg
+        id="closeBtn"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-gray-600 hover:text-gray-800 z-[1100]"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
 
-<div class="dak-copilot">
-  <iframe src="https://console.d.run/ai-chat-app/ai-chat?mode=mobile&amp;ws=302&amp;token=N2ZlNjFkZDItNDkyMy00Y2I1LWJlM2QtZDJlMzQ2YWM5OTE5"></iframe>
+    <!-- 嵌入 iframe 的内容 -->
+    <div class="w-full h-full">
+      <iframe
+        class="w-full h-full border-none rounded-lg"
+        src="https://console.d.run/ai-chat-app/ai-chat?mode=mobile&amp;ws=302&amp;token=N2ZlNjFkZDItNDkyMy00Y2I1LWJlM2QtZDJlMzQ2YWM5OTE5"
+      ></iframe>
+    </div>
+  </div>
 </div>
 
-<style> 
-.dak-copilot {
-  position: fixed;
-  width: 460px;
-  height: calc(100vh - 40px);
-  min-height: 400px;
-  max-height: 1200px;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 6px 8px 0 rgba(29, 28, 35, 0.06),
-  0 0 2px 0 rgba(29, 28, 35, 0.18);
-}
+<script>
+  const chatbot = document.getElementById('chatbot');
+  const chatContent = document.getElementById('chatContent');
+  const closeBtn = document.getElementById('closeBtn');
+  const logo = document.getElementById('logo');
 
-.dak-copilot iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100%;
-  border: none;
-  border-radius: 8px;
-}
-</style>
+  // 点击聊天机器人图标展开
+  chatbot.addEventListener('click', () => {
+    chatbot.classList.toggle('w-[460px]');
+    chatbot.classList.toggle('rounded-lg');
+    chatbot.style.height = chatbot.classList.contains('rounded-lg')
+      ? 'calc(100vh - 40px)'
+      : '48px';
+    chatContent.classList.toggle('hidden');
+    logo.classList.toggle('hidden');
+  });
+
+  // 点击关闭按钮回到初始状态
+  closeBtn.addEventListener('click', event => {
+    event.stopPropagation(); // 阻止事件冒泡，防止触发聊天机器人点击事件
+    chatbot.style.height = '48px';
+    chatbot.classList.remove('w-[460px]', 'rounded-lg');
+    chatContent.classList.add('hidden');
+    logo.classList.remove('hidden');
+  });
+</script>
 {% endblock %}
 {% block scripts %}
   {{ super() }}
