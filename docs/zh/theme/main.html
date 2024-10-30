@@ -14,25 +14,7 @@
 {% endblock %}
 {% block content %}
   {% include "overrides/partials/content.html" %}
-{% endblock %}
-{% block scripts %}
-  {{ super() }}
-  <script src="{{ 'overrides/assets/javascripts/bundle.b97a6647.min.js' | url }}"></script>
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?6b117ea770a78bebf27e63b402da0c4e";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.2.0/+esm'
-    </script>
-{% endblock %}
 
-{% block content %}
 <div class="dak-copilot">
   <iframe src="https://console.d.run/ai-chat-app/ai-chat?mode=mobile&amp;ws=302&amp;token=N2ZlNjFkZDItNDkyMy00Y2I1LWJlM2QtZDJlMzQ2YWM5OTE5"></iframe>
 </div>
@@ -63,4 +45,20 @@
   border-radius: 8px;
 }
 </style>
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ 'overrides/assets/javascripts/bundle.b97a6647.min.js' | url }}"></script>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6b117ea770a78bebf27e63b402da0c4e";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.2.0/+esm'
+    </script>
 {% endblock %}
