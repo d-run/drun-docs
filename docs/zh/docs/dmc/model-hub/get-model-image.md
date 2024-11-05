@@ -1,4 +1,4 @@
-# 接入模型镜像
+# 接入模型
 
 d.run 模型中心支持接入 [HuggingFace Transformers](https://huggingface.co/models) 上托管的各种生成式 Transformer 模型。
 
@@ -231,14 +231,16 @@ docker push myregistry.example.com/vllm-openai-tiktoken-chatglm3-6b-server
 1. **进入模型中心**  
    在 DAK 的模型中心选择“接入模型”。
 
-2. **选择加载方式为“文件挂载”**
+2. **选择模型加载方式为“文件挂载”**
 
-3. **填写模型路径**  
-   按照模型在工作节点的挂载目录填写路径。例如，`chatglm3-6b` 模型挂载后的路径为：
+3. **选择基础镜像和填写模型路径**  
+   模型路径按照模型所在工作节点的挂载目录填写。例如，`chatglm3-6b` 模型挂载后的路径为：
 
     ```text
     /root/llms/chatglm3-6b
     ```
+
+    ![get-model](../images/get-model.jpg)
 
 4. **提交模型路径配置**  
    现在，模型已经成功加载，模型中心会从挂载目录中获取文件进行使用。
