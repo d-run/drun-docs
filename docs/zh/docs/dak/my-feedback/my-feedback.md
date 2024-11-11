@@ -11,7 +11,7 @@ d.run 记录了当前用户发出的反馈信息，以方便查看后续该反�
 
 1. 点击 **我的反馈** ，可通过搜索找到需要查看的反馈，点击范围内任意位置均可进入详情。
 
-    ![my feedback](images/my-feedback.png)
+    ![my feedback](images/my-feedback.jpg)
 
 2. 可以查看以下内容：
 

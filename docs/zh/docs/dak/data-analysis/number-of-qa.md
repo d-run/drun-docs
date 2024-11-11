@@ -15,6 +15,6 @@ d.run 支持记录在该工作空间创建的应用问答的次数。
 
 1. 在 **问答次数** 页点击右上角 **导出** 按键。
 
-    ![导出](images/export-number-of-qa.png)
+    ![导出](images/export-number-of-qa.jpg)
 
 2. 将该工作空间下所有用户的问答次数汇总成xlsx文件并下载。
