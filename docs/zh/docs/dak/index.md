@@ -10,6 +10,6 @@ d.run 智能问答产品运用了 RAG 技术，将用户语料向量化，再利
 
 您在这里可以创建应用和插件，为 AI 对话构建语料库，然后通过数据分析反馈来优化用户体验。
 
-![应用中心](./images/app-center.png)
+![应用中心](./images/app-center.jpg)
 
 [注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
