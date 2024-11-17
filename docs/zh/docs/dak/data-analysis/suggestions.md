@@ -8,7 +8,7 @@ d.run 提供了用户提交反馈的入口，管理员可在此处看到在这�
 
 2. 在弹出菜单中选择 **处理反馈**（在范围内点击工单信息可进入详情界面）。
 
-    ![点击处理反馈](images/processing-feedback.png)
+    ![点击处理反馈](images/processing-feedback.jpg)
 
 3. 可查看以下内容；
 
@@ -31,7 +31,7 @@ d.run 提供了用户提交反馈的入口，管理员可在此处看到在这�
 
 6. 当有新的改进意见提交，可点击右上角 **刷新** 按钮查看最新的改进意见。
 
-    ![刷新](images/refresh-improvement-suggestions.png)
+    ![刷新](images/refresh-improvement-suggestions.jpg)
 
 ## 导出反馈
 
