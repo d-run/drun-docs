@@ -1,10 +1,11 @@
 # 数据集
 
-[dataset_info.json](dataset_info.json) 包含了所有可用的数据集。如果您希望使用自定义数据集，请**务必**在 `dataset_info.json` 文件中添加*数据集描述*，并通过修改 `dataset: 数据集名称` 配置来使用数据集。
+[dataset_info.json](dataset_info.json) 包含了所有可用的数据集。
+如果您希望使用自定义数据集，请**务必**在 `dataset_info.json` 文件中添加 **数据集描述** ，并通过修改 `dataset: 数据集名称` 配置来使用数据集。
 
-目前我们支持 **alpaca** 格式和 **sharegpt** 格式的数据集。
+目前我们支持 **Alpaca** 格式和 **Sharegpt** 格式的数据集。
 
-```json
+```json title="dataset_info.json"
 "数据集名称": {
   "hf_hub_url": "Hugging Face 的数据集仓库地址（若指定，则忽略 script_url 和 file_name）",
   "ms_hub_url": "ModelScope 的数据集仓库地址（若指定，则忽略 script_url 和 file_name）",
@@ -46,15 +47,15 @@
 
 ### 指令监督微调数据集
 
-- [样例数据集](alpaca_zh_demo.json)
+查阅[样例数据集](alpaca_zh_demo.json)。
 
 在指令监督微调时，`instruction` 列对应的内容会与 `input` 列对应的内容拼接后作为人类指令，即人类指令为 `instruction\ninput`。而 `output` 列对应的内容为模型回答。
 
 如果指定，`system` 列对应的内容将被作为系统提示词。
 
-`history` 列是由多个字符串二元组构成的列表，分别代表历史消息中每轮对话的指令和回答。注意在指令监督微调时，历史消息中的回答内容**也会被用于模型学习**。
+`history` 列是由多个字符串二元组构成的列表，分别代表历史消息中每轮对话的指令和回答。注意在指令监督微调时，历史消息中的回答内容 **也会被用于模型学习** 。
 
-```json
+```json title="Alpaca 格式的数据集"
 [
   {
     "instruction": "人类指令（必填）",
@@ -69,9 +70,9 @@
 ]
 ```
 
-对于上述格式的数据，`dataset_info.json` 中的*数据集描述*应为：
+对于上述格式的数据，应增加以下数据集描述：
 
-```json
+```json title="dataset_info.json"
 "数据集名称": {
   "file_name": "data.json",
   "columns": {
@@ -86,20 +87,20 @@
 
 ### 预训练数据集
 
-- [样例数据集](c4_demo.json)
+查阅[样例数据集](c4_demo.json)。
 
 在预训练时，只有 `text` 列中的内容会用于模型学习。
 
-```json
+```json title="Alpaca 格式的预训练数据集"
 [
   {"text": "document"},
   {"text": "document"}
 ]
 ```
 
-对于上述格式的数据，`dataset_info.json` 中的*数据集描述*应为：
+对于上述格式的数据，应增加以下数据集描述：
 
-```json
+```json title="dataset_info.json"
 "数据集名称": {
   "file_name": "data.json",
   "columns": {
@@ -114,7 +115,7 @@
 
 它需要在 `chosen` 列中提供更优的回答，并在 `rejected` 列中提供更差的回答。
 
-```json
+```json title="Alpaca 格式的偏好数据集"
 [
   {
     "instruction": "人类指令（必填）",
@@ -125,9 +126,9 @@
 ]
 ```
 
-对于上述格式的数据，`dataset_info.json` 中的*数据集描述*应为：
+对于上述格式的数据，`dataset_info.json` 中的 *数据集描述* 应为：
 
-```json
+```json title="dataset_info.json"
 "数据集名称": {
   "file_name": "data.json",
   "ranking": true,
@@ -142,27 +143,28 @@
 
 ### KTO 数据集
 
-KTO 数据集需要提供额外的 `kto_tag` 列。详情请参阅 [sharegpt](#sharegpt-格式)。
+KTO 数据集需要提供额外的 `kto_tag` 列。详情请参阅 [sharegpt](#sharegpt)。
 
 ### 多模态图像数据集
 
-多模态图像数据集需要提供额外的 `images` 列。详情请参阅 [sharegpt](#sharegpt-格式)。
+多模态图像数据集需要提供额外的 `images` 列。详情请参阅 [sharegpt](#sharegpt)。
 
 ### 多模态视频数据集
 
-多模态视频数据集需要提供额外的 `videos` 列。详情请参阅 [sharegpt](#sharegpt-格式)。
+多模态视频数据集需要提供额外的 `videos` 列。详情请参阅 [sharegpt](#sharegpt)。
 
 ## Sharegpt 格式
 
 ### 指令监督微调数据集
 
-- [样例数据集](glaive_toolcall_zh_demo.json)
+参阅[样例数据集](glaive_toolcall_zh_demo.json)。
 
-相比 alpaca 格式的数据集，sharegpt 格式支持**更多的角色种类**，例如 human、gpt、observation、function 等等。它们构成一个对象列表呈现在 `conversations` 列中。
+相比 alpaca 格式的数据集，sharegpt 格式支持 **更多的角色种类** ，
+例如 human、gpt、observation、function 等等。它们构成一个对象列表呈现在 `conversations` 列中。
 
 注意其中 human 和 observation 必须出现在奇数位置，gpt 和 function 必须出现在偶数位置。
 
-```json
+```json title="Sharegpt 格式的数据集"
 [
   {
     "conversations": [
@@ -189,9 +191,9 @@ KTO 数据集需要提供额外的 `kto_tag` 列。详情请参阅 [sharegpt](#s
 ]
 ```
 
-对于上述格式的数据，`dataset_info.json` 中的*数据集描述*应为：
+对于上述格式的数据，应增加以下数据集描述：
 
-```json
+```json title="dataset_info.json"
 "数据集名称": {
   "file_name": "data.json",
   "formatting": "sharegpt",
@@ -209,11 +211,11 @@ KTO 数据集需要提供额外的 `kto_tag` 列。详情请参阅 [sharegpt](#s
 
 ### 偏好数据集
 
-- [样例数据集](dpo_zh_demo.json)
+参阅[样例数据集](dpo_zh_demo.json)。
 
 Sharegpt 格式的偏好数据集同样需要在 `chosen` 列中提供更优的消息，并在 `rejected` 列中提供更差的消息。
 
-```json
+```json title="Sharegpt 格式的偏好数据集"
 [
   {
     "conversations": [
@@ -242,9 +244,9 @@ Sharegpt 格式的偏好数据集同样需要在 `chosen` 列中提供更优的�
 ]
 ```
 
-对于上述格式的数据，`dataset_info.json` 中的*数据集描述*应为：
+对于上述格式的数据，应增加以下数据集描述：
 
-```json
+```json title="dataset_info.json"
 "数据集名称": {
   "file_name": "data.json",
   "formatting": "sharegpt",
@@ -259,11 +261,11 @@ Sharegpt 格式的偏好数据集同样需要在 `chosen` 列中提供更优的�
 
 ### KTO 数据集
 
-- [样例数据集](kto_en_demo.json)
+参阅[样例数据集](kto_en_demo.json)。
 
 KTO 数据集需要额外添加一个 `kto_tag` 列，包含 bool 类型的人类反馈。
 
-```json
+```json title="KTO 数据集"
 [
   {
     "conversations": [
@@ -281,9 +283,9 @@ KTO 数据集需要额外添加一个 `kto_tag` 列，包含 bool 类型的人�
 ]
 ```
 
-对于上述格式的数据，`dataset_info.json` 中的*数据集描述*应为：
+对于上述格式的数据，应增加以下数据集描述：
 
-```json
+```json title="dataset_info.json"
 "数据集名称": {
   "file_name": "data.json",
   "formatting": "sharegpt",
@@ -296,13 +298,13 @@ KTO 数据集需要额外添加一个 `kto_tag` 列，包含 bool 类型的人�
 
 ### 多模态图像数据集
 
-- [样例数据集](mllm_demo.json)
+参阅[样例数据集](mllm_demo.json)。
 
 多模态图像数据集需要额外添加一个 `images` 列，包含输入图像的路径。
 
 注意图片的数量必须与文本中所有 `<image>` 标记的数量严格一致。
 
-```json
+```json title="多模态图像数据集"
 [
   {
     "conversations": [
@@ -322,9 +324,9 @@ KTO 数据集需要额外添加一个 `kto_tag` 列，包含 bool 类型的人�
 ]
 ```
 
-对于上述格式的数据，`dataset_info.json` 中的*数据集描述*应为：
+对于上述格式的数据，应增加以下数据集描述：
 
-```json
+```json title="dataset_info.json"
 "数据集名称": {
   "file_name": "data.json",
   "formatting": "sharegpt",
@@ -339,7 +341,7 @@ KTO 数据集需要额外添加一个 `kto_tag` 列，包含 bool 类型的人�
 
 OpenAI 格式仅仅是 sharegpt 格式的一种特殊情况，其中第一条消息可能是系统提示词。
 
-```json
+```json title="OpenAI 格式的数据集"
 [
   {
     "messages": [
@@ -360,7 +362,7 @@ OpenAI 格式仅仅是 sharegpt 格式的一种特殊情况，其中第一条消
 ]
 ```
 
-对于上述格式的数据，`dataset_info.json` 中的*数据集描述*应为：
+对于上述格式的数据，应增加以下数据集描述：
 
 ```json
 "数据集名称": {
