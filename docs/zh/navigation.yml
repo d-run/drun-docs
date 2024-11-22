@@ -170,7 +170,7 @@ nav:
                   - 创建语料库: dak/user-guide/corpus/create-corpus.md
                   - 语料管理: dak/user-guide/corpus/manage-corpus.md
                   - 语料导入:
-                      - 上传数据: dak/user-guide/corpus/upload-date.md
+                      - 文件导入: dak/user-guide/corpus/upload-date.md
                       - 手动录入: dak/user-guide/corpus/manual.md
                       - 图文导入: dak/user-guide/corpus/image-upload.md
                       - 格式化导入: dak/user-guide/corpus/format-update.md
