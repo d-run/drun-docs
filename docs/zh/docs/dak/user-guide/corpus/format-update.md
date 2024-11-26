@@ -14,4 +14,4 @@ hide:
     **格式化导入** 目前只支持 csv、xlsx 文件，并且要求文件内容格式如下。
     如果是其他类型的文件，请正常使用上传数据的方式导入。
 
-![format-updte](./images/format-update.png)
+    ![format-updte](./images/format-update.png)

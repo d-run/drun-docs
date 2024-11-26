@@ -1,4 +1,4 @@
-# 导入图文
+# 图文导入
 
 在导入图文前，需要将导入的语料进行处理后再导入（目前仅支持 Word 和 Excel 的图文处理）。
 
@@ -24,40 +24,34 @@ Q：问题，A：答案。
 
 对于 xlsx 文档，请按照模板要求整理，插图请尽量放一个在单元格中，尽量不要横跨几个单元格放置。
 
-## 处理语料
+## 生成图文语料
 
-### 准备环境
+1. 登录环境: https://console.d.run/ai-tools/lab? 密码：aitools。
 
-我们提供了基础镜像来处理图文：`release.daocloud.io/aigc/aitools:1.0`
+    ![登录环境](./images/picture4.jpg)
 
-- `/home/aitools/input` 替换成实际输入文件的目录
-- `/home/aitools/output` 替换成实际输出处理后文件的目录
+2. 上传语料文件，进入目录 /app/corpus_processing/input 下，上传语料文件到此目录下。
 
-```shell
-# 主机上创建输入、输出目录
-mkdir -p /home/aitools/output /home/aitools/input
-chmod 777 -R /home/aitools/output /home/aitools/input
+    ![上传文件](./images/picture5.jpg)
 
-# 运行常驻服务到后台
-docker run -d -p 8888:8888 --name aitools \
-    -v /home/aitools/input:/app/corpus_processing/input \
-    -v /home/aitools/output:/app/corpus_processing/output \
-    -e JUPYTER_TOKEN=aitools \
-    --restart=always release.daocloud.io/aigc/aitools:1.0
-```
+3. 点击运行代码。
 
-### 处理数据
+    ![运行代码](./images/picture6.jpg)
 
-1. 文件上传到预设的输入目录 `/home/aitools/input`
+4. 下载生成图文语料文件。进行目录/app/corpus_processing/output 下载 zip 文件。
 
-2. 使用以下命令运行工具镜像中的脚本
+    ![下载文件](./images/picture7.jpg)
 
-    ```shell
-    docker exec aitools sh run.sh
-    ```
+5. 清理环境。清理输入和输出文件，以及清理运行日志文件。
 
-### 导入处理好的文件
+    ![清理环境](./images/picture8.jpg)
+
+    !!! note
+
+        该环境为公共的环境，私有的语料文件操作后，建议执行清理环境操作。
+
+### 导入下载的文件
 
 1. 点击 **语料导入** -> **图文导入**
 
-2. 将处理好的文件上传，并进行向量化，等待处理成功即可
+2. 将处理好的文件上传，并进行向量化，等待处理成功
