@@ -9,6 +9,6 @@ hide:
 
 2. 点击 **手工录入** 后，会弹出 **新增文件分片** 弹框
 
-  ![manual](./images/manual.jpg)
+    ![manual](./images/manual.jpg)
 
 在箭头位置录入信息，如对信息有备注可在附加信息中录入。
