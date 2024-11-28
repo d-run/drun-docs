@@ -3,33 +3,33 @@ hide:
   - toc
 ---
 
-# 微调实验
+# 模型微调
 
-本文简要说明如何使用微调实验。
+本文简要说明如何使用模型微调。
 
-## 创建微调实验
+## 创建微调任务
 
-1. 在 **模型微调** -> **分布式微调** 中，点击 **创建** 按钮
+1. 在 **模型微调** 下，点击 **创建** 按钮
 
-    ![创建微调实验](images/fine-tuning-experiment-create.png)
+    ![创建微调任务](images/fine-tuning-create.jpg)
 
 2. 按照向导填写表单参数。
 
     === "基本信息"
 
-        ![实验基本信息](images/fine-tuning-experiment-create01.png)
+        ![任务基本信息](images/fine-tuning-experiment-create01.jpg)
     
-        - 实验名称：由小写字母、数字字符或“-”组成，并且必须以字母或数字字符开头及结尾。
+        - 任务名称：由小写字母、数字字符或“-”组成，并且必须以字母或数字字符开头及结尾。
         - 选择部署位置。
         - 基础模型：选择微调实验支持的模型;
         - 提示词模版：与基础模型适配的模版，instruct、chat模型模版和模型一定要适配、base模型影响不大，但是微调过后如果再进行微调，就要选和第一次一样的模版;
         - 微调方法：根据需求选择合适的微调方法;
         - 训练阶段：根据需求选择合适的训练的阶段;
-        - 训练数据集：目前只支持aplaca格式。
+        - 训练数据集：选择对应训练格式的数据集。
     
     === "任务配置"
     
-        ![任务配置](images/fine-tuning-experiment-create02.png)
+        ![任务配置](images/fine-tuning-experiment-create02.jpg)
     
          - 任务名称：由小写字母、数字字符或“-”组成，并且必须以字母或数字字符开头及结尾。
          - 选择算力类型并填写物理卡个数。
@@ -76,41 +76,41 @@ hide:
         - NEFTune噪声参数: NEFTune噪声参数控制在NEFTune方法中引入的噪声水平，以增强模型的泛化能力。推荐取值:5，视具体任务和噪声敏感性而定。
         - 优化器: 优化器是指用于更新模型参数的算法。常见的优化器包括Adam、SGD、Adafactor等，选择合适的优化器对训练效率和效果至关重要。推荐取值: AdamW
         
-        ![alt text](images/add-task.png)
+        ![alt text](images/add-task.jpg)
 
-4. 点击右下角 **确定** 按钮创建微调实验。
+4. 点击右下角 **确定** 按钮创建微调任务。
 
-## 查看微调实验详情
+## 查看微调任务详情
 
-点击微调实验的名称，进入微调实验详情页。
+点击微调任务的名称，进入微调任务详情页。
 
-![微调实验详情](images/fine-tuning-experiment-info01.png)
+![微调任务详情](images/fine-tuning-experiment-info01.jpg)
 
-![微调实验详情](images/fine-tuning-experiment-info02.png)
+![微调任务详情](images/fine-tuning-experiment-info02.jpg)
 
-## 查看微调实验日志
+## 查看微调任务日志
 
-在详情页面，点击**查看日志** ，进入微调任务的详情页面，点击***日志** ，即可查看微调实验的日志。
+在详情页面，点击 **查看日志** ，即可查看微调任务的日志。
 
-![微调实验详情](images/fine-tuning-experiment-info02.png)
+![微调任务详情](images/fine-tuning-experiment-info02.jpg)
 
-![微调实验日志](images/fine-tuning-experiment-log01.png)
+![微调任务日志](images/fine-tuning-experiment-log01.png)
 
-![微调实验日志](images/fine-tuning-experiment-log02.png)
+![微调任务日志](images/fine-tuning-experiment-log02.png)
 
-## 查看微调实验监控
+## 查看微调任务监控
 
-在详情页面，点击**监控** ，进入微调任务的详情页面，点击***监控** ，即可查看微调实验的监控。
+在详情页面，点击 **查看监控** ，即可查看微调任务的监控。
 
-![微调实验详情](images/fine-tuning-experiment-info02.png)
+![微调任务详情](images/fine-tuning-experiment-info02.jpg)
 
-![微调实验监控](images/fine-tuning-experiment-monitor.png)
+![微调任务监控](images/fine-tuning-experiment-monitor.png)
 
-## 删除微调实验
+## 删除微调任务
 
-若想删除某个微调实验，可点击右侧 **┇** ，在弹出菜单中选择 **删除** 。
+若想删除某个微调任务，可点击右侧 **┇** ，在弹出菜单中选择 **删除** 。
 
-![删除微调实验](images/fine-tuning-experiment-delete.png)
+![删除微调任务](images/fine-tuning-experiment-delete.jpg)
 
 !!! note
 

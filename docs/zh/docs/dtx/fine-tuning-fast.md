@@ -1,8 +1,13 @@
+---
+hide:
+  - toc
+---
+
 # 模型微调快速入门手册
 
 大致流程为：
 
-[前置要求准备](#_2) -> [创建数据集](#_3) -> [创建分布式微调实验](#_4) -> [部署微调模型](#_5) -> [对话](#_6)
+[前置要求准备](#_2) -> [创建数据集](#_3) -> [创建微调任务](#_4) -> [导出微调模型](#_5) -> [模型服务对话](#_6)
 
 ## 前置要求
 
@@ -14,36 +19,36 @@
 
 1. 在 **模型微调** -> **数据集** 中，点击 **创建** 按钮。
 
-    ![创建数据集](images/dataset01.png)
+    ![创建数据集](images/dataset01.jpg)
 
 1. 参照以下说明填写表单后，点击 **确认**
 
-    ![数据集](images/dataset02.png)
+    ![数据集](images/dataset02.jpg)
 
     | 参数说明 | 详细描述 |
     | -------- | -------- |
-    | 数据集名称 | 不支持中文，长度限制 63 字符 |
-    | 格式 | 目前我们支持 [Alpaca](https://llamafactory.readthedocs.io/zh-cn/latest/getting_started/data_preparation.html#alpaca) 格式和 [ShareGPT](https://llamafactory.readthedocs.io/zh-cn/latest/getting_started/data_preparation.html#sharegpt) 格式的数据集。 |
-    | 适用于 | 针对不同格式，数据集格式不同，Alpaca支持指令监督微调、预训练、偏好训练、KTO、多模态数据集；ShareGPT支持指令监督微调、偏好训练和KTO数据集； |
+    | 名称 | 不支持中文，长度限制 63 字符 |
+    | 适用类型 | 针对不同格式，数据集格式不同，Alpaca支持指令监督微调、预训练、偏好训练、KTO、多模态数据集；ShareGPT支持指令监督微调、偏好训练和KTO数据集； |
+    | 数据格式 | 目前我们支持 [Alpaca](https://llamafactory.readthedocs.io/zh-cn/latest/getting_started/data_preparation.html#alpaca) 格式和 [ShareGPT](https://llamafactory.readthedocs.io/zh-cn/latest/getting_started/data_preparation.html#sharegpt) 格式的数据集。 |
     | 数据集文件 | 配置数据集的信息，可以上传本地数据集文件，仅支持 .json 和 .jsonl 文件类型，配置字段映射让插件拉取数据集 |
 
-## 创建分布式微调实验
+## 创建微调任务
 
-1. 进入分布式微调页面
+1. 进入模型微调页面
 
-    ![进入分布式微调页面](images/fine-tuning-experiment-enter.png)
+    ![进入模型微调页面](images/fine-tuning.jpg)
 
-1. 在 **模型微调** -> **分布式微调** 中，点击 **创建** 按钮
+1. 在 **模型微调** 下，点击 **创建** 按钮
 
-    ![创建微调实验](images/fine-tuning-experiment-create.png)
+    ![创建微调任务](images/fine-tuning-create.jpg)
 
 1. 按向导填写表单的参数
 
     === "基本信息"
 
-        ![实验基本信息](images/fine-tuning-experiment-create01.png)
+        ![实验基本信息](images/fine-tuning-experiment-create01.jpg)
         
-        - 实验名称：由小写字母、数字字符或“-”组成，并且必须以字母或数字字符开头及结尾。
+        - 任务名称：由小写字母、数字字符或“-”组成，并且必须以字母或数字字符开头及结尾。
         - 选择部署位置。
         - 基础模型：选择微调实验支持的模型;
         - 提示词模版：与基础模型适配的模版，instruct、chat模型模版和模型一定要适配、base模型影响不大，但是微调过后如果再进行微调，就要选和第一次一样的模版;
@@ -53,7 +58,7 @@
 
     === "任务配置"
 
-        ![任务配置](images/fine-tuning-experiment-create02.png)
+        ![任务配置](images/fine-tuning-experiment-create02.jpg)
     
         - 任务名称：由小写字母、数字字符或“-”组成，并且必须以字母或数字字符开头及结尾。
         - 选择算力类型并填写物理卡个数。
@@ -100,33 +105,20 @@
         - NEFTune噪声参数: NEFTune噪声参数控制在NEFTune方法中引入的噪声水平，以增强模型的泛化能力。推荐取值:5，视具体任务和噪声敏感性而定。
         - 优化器: 优化器是指用于更新模型参数的算法。常见的优化器包括Adam、SGD、Adafactor等，选择合适的优化器对训练效率和效果至关重要。推荐取值: AdamW
     
-        ![alt text](images/add-task.png)
+        ![alt text](images/add-task.jpg)
 
-1. 点击右下角 **确定** 按钮创建微调实验。
+1. 点击右下角 **确定** 按钮创建微调任务。
 
-## 部署微调模型
+## 导出微调模型
 
-1. 在 **模型仓库** -> **内置模型** 的微调模型中，接入模型；
-
-    ![微调模型部署](images/dtx-chat01.png)
-
-1. 模型接入成功后，点击右下方 ，在弹出的选项中选择部署，部署模型服务。!
-
-    ![微调模型部署](images/dtx-chat02.png)
-
-1. 填写模型服务名称、命名空间、算力配额、资源配置后点击 **确定**
-   （注：推荐 CPU 配额和内存配置请求值为 **16** Core， **32** Gi）。
-
-    ![微调模型部署](images/dtx-chat03.png)
-
-1. 创建成功，接下来可以通过部署的模型提供服务。
+具体操作请参考[模型导出](model-export.md)
 
 ## 模型服务对话
 
-1. 微调模型部署成功后，可以在 **模型服务** -> **本地模型服务** -> **我创建的** 查看模型服务，点击文件名即可即可与该模型对话。
+1. 微调模型部署成功后，可以在 **模型服务** -> **本地服务** 查看模型服务，点击文件名即可与该模型对话。
 
-    ![微调模型对话](images/dtx-chat04.png)
+    ![微调模型对话](images/dtx-chat04.jpg)
 
-1. 你可以输入训练集中的问题，发送给微调模型，以此验证模型微调的效果，微调模型会回答用户提出的问题。
+2. 你可以输入训练集中的问题，发送给微调模型，以此验证模型微调的效果，微调模型会回答用户提出的问题。
 
-    ![微调模型对话](images/dtx-chat05.png)
+    ![微调模型对话](images/dtx-chat05.jpg)
