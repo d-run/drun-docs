@@ -192,8 +192,10 @@ nav:
               - 什么是模型微调: dtx/index.md
               - 快速入门: dtx/fine-tuning-fast.md
               - 功能特性: dtx/features.md
-              - 分布式微调实验: dtx/fine-tuning-lab.md
+              - 模型微调: dtx/fine-tuning-lab.md
               - 数据集: dtx/dataset.md
+              - 模型评测: dtx/model-evaluate.md
+              - 模型导出: dtx/model-export.md
           - 算法开发:
               - 什么是算法开发: baize/index.md
               - 快速入门: baize/quick-start.md
@@ -202,13 +204,10 @@ nav:
           - 模型中心:
               - 什么是模型中心: dmc/index.md
               - 功能特性: dmc/features.md
-              - 模型仓库:
-                  - 内置模型: dmc/model-hub/built-in.md
-                  # - 微调模型: dmc/model-hub/tuner.md
-                  - 接入模型: dmc/model-hub/get-model-image.md
+              - 模型广场: dmc/model-square.md
               - 模型服务: 
-                  # - 本地模型服务: dmc/model-service/local.md
-                  - 在线模型服务: dmc/model-service/online.md
+                  - 本地服务: dmc/model-service/local.md
+                  - 在线服务: dmc/model-service/online.md
       - 管理:
           - 全局管理:
               - 介绍:
