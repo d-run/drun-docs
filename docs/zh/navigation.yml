@@ -287,6 +287,7 @@ nav:
       - vLLM: eco/vllm.md
   - AI 行业新闻:
       - 索引: blogs/index.md
+      - d.run 是支撑生成式 AI 的理想平台: blogs/d.run.md
       - K8s 与生成式 AI 珠联璧合: blogs/0702-k8s-for-genai.md
       - OpenAI GPT-4o 完全免费: blogs/0514-gpt4o.md
       - OpenAI 大型语言模型规范: blogs/0509-model-spec.md
