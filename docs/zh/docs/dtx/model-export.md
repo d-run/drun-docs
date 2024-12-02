@@ -29,14 +29,14 @@ hide:
 
     ![创建模型导出](images/model-export01.jpg)
 
-## 模型导出详情查看
+## 查看模型导出详情
 
-1. 点击模型导出任务的名称，进入模型导出详情页。
+点击模型导出任务的名称，进入模型导出详情页。
 
-    ![模型导出详情](images/model-export-detail.jpg)
+![模型导出详情](images/model-export-detail.jpg)
 
-## 导出模型查看
+## 查看导出的模型
 
-1. 去到模型中心下的模型广场下，查看导出的模型，并部署和对话
+在模型中心下的模型广场，查看导出的模型，并部署和对话：
 
-    ![导出模型查看](images/model-export02.jpg)
+![导出模型查看](images/model-export02.jpg)

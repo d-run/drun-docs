@@ -1,11 +1,6 @@
----
-hide:
-  - toc
----
-
 # 数据集
 
-[dataset_info.json](dataset_info.json) 包含了所有可用的数据集。
+[dataset_info.json](attach/dataset_info.json) 包含了所有可用的数据集。
 如果您希望使用自定义数据集，请 **务必** 在 `dataset_info.json` 文件中添加 **数据集描述** ，并通过修改 `dataset: 数据集名称` 配置来使用数据集。
 
 目前我们支持 **Alpaca** 和 **Sharegpt** 格式的数据集，以及 **人工评测** 类和 **自定义评测** 类型的数据集。
@@ -52,7 +47,7 @@ hide:
 
 ### 指令监督微调数据集
 
-查阅[样例数据集](alpaca_zh_demo.json)。
+查阅[样例数据集](attach/alpaca_zh_demo.json)。
 
 在指令监督微调时，`instruction` 列对应的内容会与 `input` 列对应的内容拼接后作为人类指令，即人类指令为 `instruction\ninput`。而 `output` 列对应的内容为模型回答。
 
@@ -92,7 +87,7 @@ hide:
 
 ### 预训练数据集
 
-查阅[样例数据集](c4_demo.json)。
+查阅[样例数据集](attach/c4_demo.json)。
 
 在预训练时，只有 `text` 列中的内容会用于模型学习。
 
@@ -162,7 +157,7 @@ KTO 数据集需要提供额外的 `kto_tag` 列。详情请参阅 [sharegpt](#s
 
 ### 指令监督微调数据集
 
-参阅[样例数据集](glaive_toolcall_zh_demo.json)。
+参阅[样例数据集](attach/glaive_toolcall_zh_demo.json)。
 
 相比 alpaca 格式的数据集，sharegpt 格式支持 **更多的角色种类** ，
 例如 human、gpt、observation、function 等等。它们构成一个对象列表呈现在 `conversations` 列中。
@@ -216,7 +211,7 @@ KTO 数据集需要提供额外的 `kto_tag` 列。详情请参阅 [sharegpt](#s
 
 ### 偏好数据集
 
-参阅[样例数据集](dpo_zh_demo.json)。
+参阅[样例数据集](attach/dpo_zh_demo.json)。
 
 Sharegpt 格式的偏好数据集同样需要在 `chosen` 列中提供更优的消息，并在 `rejected` 列中提供更差的消息。
 
@@ -266,7 +261,7 @@ Sharegpt 格式的偏好数据集同样需要在 `chosen` 列中提供更优的�
 
 ### KTO 数据集
 
-参阅[样例数据集](kto_en_demo.json)。
+参阅[样例数据集](attach/kto_en_demo.json)。
 
 KTO 数据集需要额外添加一个 `kto_tag` 列，包含 bool 类型的人类反馈。
 
@@ -303,7 +298,7 @@ KTO 数据集需要额外添加一个 `kto_tag` 列，包含 bool 类型的人�
 
 ### 多模态图像数据集
 
-参阅[样例数据集](mllm_demo.json)。
+参阅[样例数据集](attach/mllm_demo.json)。
 
 多模态图像数据集需要额外添加一个 `images` 列，包含输入图像的路径。
 
@@ -389,11 +384,11 @@ OpenAI 格式仅仅是 sharegpt 格式的一种特殊情况，其中第一条消
 
 该类型的数据集仅支持 .csv 和 .jsonl 文件格式。  
 参考文档：  
-https://evalscope.readthedocs.io/zh-cn/latest/advanced_guides/custom_dataset.html。
+https://evalscope.readthedocs.io/zh-cn/latest/advanced_guides/custom_dataset.html
 
 ### 选择题（MCQ）
 
-参阅 [mcq.csv](mcq.csv) 和 [mcq.jsonl](mcq.jsonl)。  
+参阅 [mcq.csv](attach/mcq.csv) 和 [mcq.jsonl](./attach/mcq.jsonl)。  
 其中csv文件需要为下面的格式：
 
 ```csv
@@ -420,7 +415,7 @@ id,question,A,B,C,answer
 
 ### 问答题（QA）
 
-参阅 [qa.csv](qa.csv) 和 [qa.jsonl](qa.jsonl)。  
+参阅 [qa.csv](attach/qa.csv) 和 [qa.jsonl](./attach/qa.jsonl)。  
 其中csv文件需要为下面的格式：
 
 ```csv
@@ -445,7 +440,7 @@ question,answer
 
 ##  人工评测类型
 
-参阅 [mcq.csv](mcq.csv) 和 [qa.jsonl](qa.jsonl)。  
+参阅 [mcq.csv](attach/mcq.csv) 和 [qa.jsonl](./attach/qa.jsonl)。  
 该类型的数据集仅支持 .jsonl 文件格式。
 
 ```jsonline
