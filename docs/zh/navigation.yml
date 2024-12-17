@@ -339,3 +339,299 @@ plugins:
               build: true
               nav_translations:
                 首页: Home
+                d.run 文档: d.run Documentation
+                d.run 简介: d.run Introduction
+                快速入门: Quick Start
+                智能算力: AI Lab
+                购买算力: Purchase Computing Power
+                算力集群: Computing Cluster
+                介绍: Introduction
+                什么是容器管理: What is Container Management?
+                功能总览: Features
+                基本概念: Concepts
+                常见问题: FAQs
+                集群管理: Clusters
+                访问集群: Accessing Cluster
+                卸载/解除接入集群: Remove/Detach Cluster
+                集群角色: Cluster Roles
+                集群状态: Cluster Status
+                集群版本支持范围: Supported Versions for Cluster
+                权限管理: Permission Management
+                权限体系介绍: Introduction to Permission System
+                集群和命名空间授权: Cluster and Namespace Authorization
+                节点管理: Node Management
+                节点可用性检查: Node Availability Check
+                节点认证: Node Authentication
+                节点扩容: Node Scaling Up
+                节点缩容: Node Scaling Down
+                污点管理: Taint Management
+                节点调度: Node Scheduling
+                节点详情: Node Details
+                标签与注解: Labels and Annotations
+                工作负载: Workloads
+                创建 Deployment: Create Deployment
+                创建 StatefulSet: Create StatefulSet
+                创建 DaemonSet: Create DaemonSet
+                创建 CronJob: Create CronJob
+                创建 Job: Create Job
+                工作负载参数配置: Workload Parameters
+                工作负载状态: Workload Status
+                Job 参数: Job Parameters
+                生命周期: Lifecycle
+                环境变量: Environment Variables
+                健康检查: Health Check
+                集群调度: Cluster Scheduling
+                弹性伸缩: Elastic Scaling
+                安装 metrics-server 插件: Install metrics-server
+                安装 kubernetes-cronhpa-controller 插件: Install kubernetes-cronhpa-controller
+                安装 VPA 插件: Install VPA Plugin
+                创建 HPA 策略: Create HPA Policy
+                创建 VPA 策略: Create VPA Policy
+                HPA 和 CronHPA 兼容规则: HPA and CronHPA Compatibility Rules
+                Helm 应用: Helm App
+                Helm 模板: Helm Chart
+                上传 Helm 模板: Upload Helm Chart
+                管理 Helm 应用: Manage Helm App
+                管理 Helm 仓库: Manage Helm Repository
+                多架构 Helm 应用: Multi-architecture Helm Apps
+                自定义Helm应用导入Addon: Custom Helm App Import Addon
+                容器网络: Container Network
+                创建 Service: Create Service
+                创建 Ingress: Create Ingress
+                网络策略: Network Policy
+                自定义资源: Custom Resource
+                容器存储: Container Storage
+                数据卷声明: Persistent Volume Claim
+                数据卷: Persistent Volume
+                存储池: StorageClass
+                共享存储池: Shared StorageClass
+                配置与密钥: ConfigMaps and Secrets
+                创建配置项: Create ConfigMap
+                使用配置项: Use ConfigMap
+                创建密钥: Create Secret
+                使用密钥: Use Secret
+                Configmap/Secret 热加载: ConfigMap/Secret Hot Reload
+                命名空间: Namespace
+                创建命名空间: Create Namespace
+                启用命名空间独享节点: Enable Namespace Exclusive Nodes
+                Pod 安全策略: Pod Security Policy
+                集群运维: Cluster Operations
+                最近操作: Recent Operations
+                集群升级: Cluster Upgrade
+                集群设置: Cluster Settings
+                GPU 管理: GPU Management
+                GPU 管理概述: Overview
+                GPU 支持矩阵: GPU Support Matrix
+                NVIDIA GPU 管理: NVIDIA GPU Management
+                NVIDIA GPU 模式说明: NVIDIA GPU Modes
+                GPU Operator 离线安装: Offline Installation of GPU Operator
+                构建 CentOS 7.9 离线 yum 源: Build Offline Yum Repository for CentOS 7.9
+                上传 Red Hat GPU Operator 离线镜像: Upload Offline Image for Red Hat GPU Operator
+                构建 Red Hat 8.4 离线 yum 源: Build Offline Yum Repository for Red Hat 8.4
+                构建 Red Hat 7.9 离线 yum 源: Build Offline Yum Repository for Red Hat 7.9
+                NVIDIA GPU 整卡模式: NVIDIA GPU Full Card Mode
+                NVIDIA vGPU 模式: NVIDIA vGPU Mode
+                安装 vGPU Addon: Install vGPU Addon
+                应用使用 NVIDIA vGPU: Apps Using NVIDIA vGPU
+                NVIDIA MIG 模式: NVIDIA MIG Mode
+                NVIDIA MIG 概述: Overview
+                开启 MIG 功能: Enable MIG Functionality
+                应用使用 NVIDIA MIG: Apps Using NVIDIA MIG
+                MIG 相关命令: MIG Related Commands
+                昇腾 GPU 管理: Ascend GPU Management
+                昇腾 NPU 组件安装: Install Ascend NPU Component
+                应用使用昇腾 GPU: Apps Using Ascend GPU
+                天数 GPU 管理: Day GPU Management
+                GPU 配额管理: GPU Quota Management
+                GPU 监控指标: GPU Monitoring Metrics
+                安装和使用 Volcano: Install and Use Volcano
+                可观测性: Observability
+                介绍: Introduction
+                可观测性: Insight
+                应用场景: Use Cases
+                功能列表: Feature List
+                权限说明: Permission Description
+                仪表盘: Dashboard
+                概览: Overview
+                仪表盘: Dashboard
+                以管理员登录 Grafana: Log in to Grafana as Admin
+                导入自定义仪表盘: Import Custom Dashboard
+                基础设施: Infrastructure
+                集群: Cluster
+                节点: Node
+                命名空间: Namespace
+                容器: Container
+                事件查询: Event Query
+                拨测: Probing
+                指标: Metrics
+                日志: Logs
+                链路追踪: Tracing
+                服务拓扑: Service Topology
+                服务拓扑元素说明: Service Topology Description
+                服务监控: Service Monitoring
+                链路查询: Trace Query
+                告警: Alerts
+                告警策略: Alert Rules
+                告警模板: Alert Template
+                通知配置: Notification Configuration
+                配置通知服务器: Configure Notification Server
+                消息模板: Message Template
+                告警静默: Alert Silencing
+                告警抑制: Alert Suppression
+                采集管理: Collection Management
+                采集管理: Collection Management
+                服务监控: Service Monitoring
+                采集组件 insight-agent 状态: Status of insight-agent
+                系统配置: System Settings
+                系统组件: System Components
+                系统配置: System Settings
+                修改配置: Modify Settings
+                参考文档: References
+                告警通知流程说明: Alert Notification Process
+                通知模板使用说明: Notification Templates
+                Lucene 语法使用方法: How to Use Lucene Syntax
+                通过 Sidecar 采集容器日志: Collect Container Logs via Sidecar
+                自定义探测方式: Custom Probing Methods
+                指标抓取说明: Metrics
+                链路数据的时钟偏移: Time Offset of Trace Data
+                模型应用: Model App
+                智能问答: Artificial Knowledge
+                什么是智能问答: What is Artificial Knowledge?
+                功能特性: Features
+                应用中心: App Center
+                创建应用: Create App
+                应用对话: App Dialogue
+                语料库: Corpus
+                创建语料库: Create Corpus
+                语料管理: Corpus Management
+                语料导入: Import Corpus
+                文件导入: File Import
+                手动录入: Manual Entry
+                图文导入: Image and Text Import
+                格式化导入: Formatted Import
+                插件管理: Plugin Management
+                数据分析: Data Analysis
+                问答质量: Q&A Quality
+                问答次数: Q&A Count
+                分片质量: Shard Quality
+                分片命中率: Shard Hit Rate
+                改进意见: Suggestions for Improvement
+                我的反馈: My Feedback
+                系统配置: System Settings
+                流程编排: Process Orchestration
+                什么是流程编排: What is Process Orchestration?
+                功能特性: Features
+                通过工作流创建应用: Create App via Workflow
+                模型工具: Model Tools
+                模型微调: Model Fine-tuning
+                什么是模型微调: What is Model Fine-tuning?
+                快速入门: Quick Start
+                功能特性: Features
+                模型微调: Model Fine-tuning
+                数据集: Dataset
+                模型评测: Model Evaluation
+                模型导出: Model Export
+                算法开发: AI Lab
+                什么是算法开发: What is AI Lab?
+                快速入门: Quick Start
+                算法开发功能特性: Features
+                模型中心: Model Center
+                什么是模型中心: What is Model Center?
+                功能特性: Features
+                模型广场: Model Plaza
+                模型服务: Model Service
+                本地服务: Local Service
+                在线服务: Online Service
+                管理: Management
+                全局管理: Global Management
+                介绍: Introduction
+                什么是全局管理: What is Global Management?
+                登录: Login
+                功能总览: Features
+                常见术语: Common Terms
+                用户与访问控制: Access Control
+                什么是用户与访问控制: What is Access Control?
+                用户: User
+                用户组: Group
+                角色: Role
+                系统角色: System Role
+                自定义角色: Custom Role
+                身份提供商: Identity Provider
+                LDAP: LDAP
+                OIDC: OIDC
+                接入管理: Docking Management
+                Webhook: Webhook
+                OAuth 2.0 之企业微信: OAuth 2.0 for WeCom
+                工作空间与层级: Workspaces and Folders
+                创建和删除工作空间: Create and Delete Workspaces
+                工作空间权限: Workspace Permissions
+                创建和删除文件夹: Create and Delete Folders
+                文件夹权限: Folder Permissions
+                资源配额: Resource Quotas
+                资源组与共享资源的区别: Resource Groups and Shared Resources
+                审计日志: Audit Logs
+                K8s审计日志采集开关: K8s Audit Log Collection Switch
+                K8s审计日志输出开关: K8s Audit Log Output Switch
+                下载和导出审计日志: Download and Export Audit Logs
+                获取审计日志源IP: Get Source IP of Audit Logs
+                审计项汇总: Audit Item Summary
+                容器管理审计项汇总: Container Management Audit Item Summary
+                可观测性审计项汇总: Insight Audit Item Summary
+                全局管理审计项汇总: Global Management Audit Item Summary
+                运营管理: Operations Management
+                报表管理: Report Management
+                计费计量: Billing Measurement
+                平台设置: Platform Settings
+                安全策略: Security Policy
+                邮箱服务器设置: Email Server Settings
+                外观定制: Appearance
+                关于平台: About Platform
+                密码重置: Reset Password
+                个人中心: Personal Center
+                安全设置: Security Settings
+                访问密钥: Access Keys
+                语言设置: Language Settings
+                产品生态: d.run Ecosystem
+                生态索引: Ecosystem Index
+                DRA 动态资源分配: DRA Dynamic Resource Allocation
+                GPU Operator: GPU Operator
+                GPUDirect RDMA: GPUDirect RDMA
+                Network Operator: Network Operator
+                AI 行业新闻: AI Industry News
+                索引: Index
+                d.run 是支撑生成式 AI 的理想平台: d.run is the Ideal Platform for Supporting Generative AI
+                K8s 与生成式 AI 珠联璧合: K8s and Generative AI are a Perfect Match
+                OpenAI GPT-4o 完全免费: OpenAI GPT-4o Completely Free
+                OpenAI 大型语言模型规范: OpenAI Large Language Model Specification
+                2024大规模AI基础设施形势调研: 2024 Large-scale AI Infrastructure Survey
+                云原生人工智能白皮书: Cloud-native Artificial Intelligence White Paper
+                Kimi火了后国内其他大模型: Other Domestic Large Models After Kimi Became Popular
+                DBRX 开源 LLM 介绍: DBRX Open-source LLM Introduction
+                “AI 流程编排”化算力为“算利”: Transforming Computing Power into “Computing Benefits”
+                谁将替代 Transformer: What Will Replace the Transformer?
+                金融行业迎来大模型时代: The Financial Sector Welcomes the Era of Large Models
+                智海拾贝: Collecting Wisdom from the Sea
+                索引: Index
+                大模型: Large Model
+                OpenAI: OpenAI
+                Hugging Face: Hugging Face
+                月之暗面: Moonshot
+                Claude 3: Claude 3
+                硬件厂商: Hardware Manufacturers
+                华为: Huawei
+                天数智芯: Iluvatar
+                国内 AI 先锋企业: Domestic AI Pioneer Companies
+                阿里巴巴: Alibaba
+                百川智能: Baichuan Intelligence
+                百度: Baidu
+                汉王科技: Hanvon Technology
+                科大讯飞: iFlytek
+                旷视科技: Megvii Technology
+                商汤科技: SenseTime
+                思必驰: iFlytek
+                腾讯: Tencent
+                图森未来: TuSimple
+                云从科技: CloudWalk Technology
+                云知声: VoiceCloud
+                字节跳动: ByteDance
+                联系我们: Contact Us
