@@ -50,7 +50,7 @@ hide:
 
     ---
 
-    [B 站 - 道客 DaoCloud](https://b23.tv/mtzEiV8)
+    [B 站 - 道客 DaoCloud](https://space.bilibili.com/549612570)
 
 -   :simple-tiktok:{ .lg .middle } __今日头条__
 
