@@ -87,17 +87,17 @@ theme:
 
 # Plugins
 plugins:
-  - search:
-      separator: '[\\s\\u200b\\-]'
-  - swagger-ui-tag
+  search:
+    separator: '[\\s\\u200b\\-]'
+  swagger-ui-tag:
   # - mermaid2
 
-  - minify:
-      minify_html: true
-      minify_js: true
-      minify_css: true
-      htmlmin_opts:
-        remove_comments: true
+  minify:
+    minify_html: true
+    minify_js: true
+    minify_css: true
+    htmlmin_opts:
+      remove_comments: true
 
   # - redirects:
   #     redirect_maps:
@@ -113,10 +113,10 @@ extra:
     type: Discussions
 
   # switch language
-  alternate:
-    - link: /
-      name: 简体中文
-      lang: zh
+  # alternate:
+  #   - link: /
+  #     name: 简体中文
+  #     lang: zh
     # - link: /en/
     #   name: English
     #   lang: en

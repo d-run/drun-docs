@@ -322,3 +322,20 @@ nav:
           - 云知声: open/pioneers/unisound.md
           - 字节跳动: open/pioneers/bytedance.md
   - 联系我们: contact/index.md
+
+# i18n
+plugins:
+    i18n:
+        docs_structure: folder
+        reconfigure_material: true
+        reconfigure_search: true
+        languages:
+            - locale: zh
+              name: 中文
+              default: true
+              build: true
+            - locale: en
+              name: English
+              build: true
+              nav_translations:
+                首页: Home

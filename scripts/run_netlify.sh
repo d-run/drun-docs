@@ -14,6 +14,7 @@ pip install mkdocs-material \
     mkdocs-redirects \
     mkdocs-print-site-plugin \
     mkdocs-swagger-ui-tag \
+    mkdocs-static-i18n \
     pyyaml
 
 # build the site
