@@ -6,6 +6,13 @@ hide:
 
 # d.run 让算力更自由
 
+!!! note
+
+    d.run 服务器将于近期升级和迁移，届时用户注册、支付链路将暂时下线。
+    `console.d.run` 域名将在一段时间内不可访问。
+    计划迁移时间为：太平洋时间 2024 年 12 月 21 日 22:00-24:00
+
+
 !!! tip
 
     d.run = DaoCloud Runs Intelligence
