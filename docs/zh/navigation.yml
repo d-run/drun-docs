@@ -2,266 +2,47 @@
 nav:
   - 首页: https://d.run
   - d.run 文档:
-      - d.run 简介:
-          - buy/index.md
-          - 快速入门: buy/quick-start.md
-      - 智能算力:
-          - 购买算力: buy/buy.md
-          - 算力集群:
-              - 介绍:
-                  - 什么是容器管理: kpanda/intro/index.md
-                  - 功能总览: kpanda/intro/features.md
-                  - 基本概念: kpanda/intro/concepts.md
-                  - 常见问题: kpanda/intro/faq.md
-              - 集群管理:
-                  - 访问集群: kpanda/user-guide/clusters/access-cluster.md
-                  - 卸载/解除接入集群: kpanda/user-guide/clusters/delete-cluster.md
-                  - 集群角色: kpanda/user-guide/clusters/cluster-role.md
-                  - 集群状态: kpanda/user-guide/clusters/cluster-status.md
-                  - 集群版本支持范围: kpanda/user-guide/clusters/cluster-version.md
-              - 权限管理:
-                  - 权限体系介绍: kpanda/user-guide/permissions/permission-brief.md
-                  - 集群和命名空间授权: kpanda/user-guide/permissions/cluster-ns-auth.md
-              - 节点管理:
-                  - 节点可用性检查: kpanda/user-guide/nodes/node-check.md
-                  - 节点认证: kpanda/user-guide/nodes/node-authentication.md
-                  - 节点扩容: kpanda/user-guide/nodes/add-node.md
-                  - 节点缩容: kpanda/user-guide/nodes/delete-node.md
-                  - 污点管理: kpanda/user-guide/nodes/taints.md
-                  - 节点调度: kpanda/user-guide/nodes/schedule.md
-                  - 节点详情: kpanda/user-guide/nodes/node-details.md
-                  - 标签与注解: kpanda/user-guide/nodes/labels-annotations.md
-              - 工作负载:
-                  - 创建 Deployment: kpanda/user-guide/workloads/create-deployment.md
-                  - 创建 StatefulSet: kpanda/user-guide/workloads/create-statefulset.md
-                  - 创建 DaemonSet: kpanda/user-guide/workloads/create-daemonset.md
-                  - 创建 CronJob: kpanda/user-guide/workloads/create-cronjob.md
-                  - 创建 Job: kpanda/user-guide/workloads/create-job.md
-                  - 工作负载参数配置:
-                      - 工作负载状态: kpanda/user-guide/workloads/pod-config/workload-status.md
-                      - Job 参数: kpanda/user-guide/workloads/pod-config/job-parameters.md
-                      - 生命周期: kpanda/user-guide/workloads/pod-config/lifecycle.md
-                      - 环境变量: kpanda/user-guide/workloads/pod-config/env-variables.md
-                      - 健康检查: kpanda/user-guide/workloads/pod-config/health-check.md
-                      - 集群调度: kpanda/user-guide/workloads/pod-config/scheduling-policy.md
-              - 弹性伸缩:
-                  - 安装 metrics-server 插件: kpanda/user-guide/scale/install-metrics-server.md
-                  - 安装 kubernetes-cronhpa-controller 插件: kpanda/user-guide/scale/install-cronhpa.md
-                  - 安装 VPA 插件: kpanda/user-guide/scale/install-vpa.md
-                  - 创建 HPA 策略: kpanda/user-guide/scale/create-hpa.md
-                  - 创建 VPA 策略: kpanda/user-guide/scale/create-vpa.md
-                  - HPA 和 CronHPA 兼容规则: kpanda/user-guide/scale/hpa-cronhpa-compatibility-rules.md
-              - Helm 应用:
-                  - Helm 模板: kpanda/user-guide/helm/README.md
-                  - 上传 Helm 模板: kpanda/user-guide/helm/upload-helm.md
-                  - 管理 Helm 应用: kpanda/user-guide/helm/helm-app.md
-                  - 管理 Helm 仓库: kpanda/user-guide/helm/helm-repo.md
-                  - 多架构 Helm 应用: kpanda/user-guide/helm/multi-archi-helm.md
-                  - 自定义Helm应用导入Addon: kpanda/user-guide/helm/Import-addon.md
-              - 容器网络:
-                  - 创建 Service: kpanda/user-guide/network/create-services.md
-                  - 创建 Ingress: kpanda/user-guide/network/create-ingress.md
-                  - 网络策略: kpanda/user-guide/network/network-policy.md
-              - 自定义资源: kpanda/user-guide/custom-resources/create.md
-              - 容器存储:
-                  - 数据卷声明: kpanda/user-guide/storage/pvc.md
-                  - 数据卷: kpanda/user-guide/storage/pv.md
-                  - 存储池: kpanda/user-guide/storage/sc.md
-                  - 共享存储池: kpanda/user-guide/storage/sc-share.md
-              - 配置与密钥:
-                  - 创建配置项: kpanda/user-guide/configmaps-secrets/create-configmap.md
-                  - 使用配置项: kpanda/user-guide/configmaps-secrets/use-configmap.md
-                  - 创建密钥: kpanda/user-guide/configmaps-secrets/create-secret.md
-                  - 使用密钥: kpanda/user-guide/configmaps-secrets/use-secret.md
-                  - Configmap/Secret 热加载: kpanda/user-guide/configmaps-secrets/configmap-hot-loading.md
-              - 命名空间:
-                  - 创建命名空间: kpanda/user-guide/namespaces/createns.md
-                  - 启用命名空间独享节点: kpanda/user-guide/namespaces/exclusive.md
-                  - Pod 安全策略: kpanda/user-guide/namespaces/podsecurity.md
-              - 集群运维:
-                  - 最近操作: kpanda/user-guide/clusterops/latest-operations.md
-                  - 集群升级: kpanda/user-guide/clusters/upgrade-cluster.md
-                  - 集群设置: kpanda/user-guide/clusterops/cluster-settings.md
-              - GPU 管理:
-                  - GPU 管理概述: kpanda/user-guide/gpu/index.md
-                  - GPU 支持矩阵: kpanda/user-guide/gpu/gpu_matrix.md
-                  - NVIDIA GPU 管理:
-                      - NVIDIA GPU 模式说明: kpanda/user-guide/gpu/nvidia/index.md
-                      - GPU Operator 离线安装:
-                          - GPU Operator 离线安装: kpanda/user-guide/gpu/nvidia/install_nvidia_driver_of_operator.md
-                          - 构建 CentOS 7.9 离线 yum 源: kpanda/user-guide/gpu/nvidia/upgrade_yum_source_centos7_9.md
-                          - 上传 Red Hat GPU Operator 离线镜像: kpanda/user-guide/gpu/nvidia/push_image_to_repo.md
-                          - 构建 Red Hat 8.4 离线 yum 源: kpanda/user-guide/gpu/nvidia/upgrade_yum_source_redhat8_4.md
-                          - 构建 Red Hat 7.9 离线 yum 源: kpanda/user-guide/gpu/nvidia/yum_source_redhat7_9.md
-                      - NVIDIA GPU 整卡模式: kpanda/user-guide/gpu/nvidia/full_gpu_userguide.md
-                      - NVIDIA vGPU 模式:
-                          - 安装 vGPU Addon: kpanda/user-guide/gpu/nvidia/vgpu/vgpu_addon.md
-                          - 应用使用 NVIDIA vGPU: kpanda/user-guide/gpu/nvidia/vgpu/vgpu_user.md
-                      - NVIDIA MIG 模式:
-                          - NVIDIA MIG 概述: kpanda/user-guide/gpu/nvidia/mig/index.md
-                          - 开启 MIG 功能: kpanda/user-guide/gpu/nvidia/mig/create_mig.md
-                          - 应用使用 NVIDIA MIG: kpanda/user-guide/gpu/nvidia/mig/mig_usage.md
-                          - MIG 相关命令: kpanda/user-guide/gpu/nvidia/mig/mig_command.md
-                  - 昇腾 GPU 管理:
-                      - 昇腾 NPU 组件安装: kpanda/user-guide/gpu/ascend_driver_install.md
-                      - 应用使用昇腾 GPU: kpanda/user-guide/gpu/Ascend_usage.md
-                  - 天数 GPU 管理: kpanda/user-guide/gpu/Iluvatar_usage.md
-                  - GPU 配额管理: kpanda/user-guide/gpu/vgpu_quota.md
-                  - GPU 监控指标: kpanda/user-guide/gpu/gpu-metrics.md
-                  - 安装和使用 Volcano: kpanda/user-guide/gpu/volcano_user_guide.md
-          - 可观测性:
-              - 介绍:
-                  - 可观测性: insight/intro/index.md
-                  - 应用场景: insight/intro/scenarios.md
-                  - 功能列表: insight/intro/features.md
-                  - 权限说明: insight/intro/permission.md
-              - 仪表盘:
-                  - 概览: insight/user-guide/dashboard/overview.md
-                  - 仪表盘: insight/user-guide/dashboard/dashboard.md
-                  - 以管理员登录 Grafana: insight/user-guide/dashboard/login-grafana.md
-                  - 导入自定义仪表盘: insight/user-guide/dashboard/import-dashboard.md
-              - 基础设施:
-                  - 集群: insight/user-guide/infra/cluster.md
-                  - 节点: insight/user-guide/infra/node.md
-                  - 命名空间: insight/user-guide/infra/namespace.md
-                  - 容器: insight/user-guide/infra/container.md
-                  - 事件查询: insight/user-guide/infra/event.md
-                  - 拨测: insight/user-guide/infra/probe.md
-              - 指标: insight/user-guide/data-query/metric.md
-              - 日志: insight/user-guide/data-query/log.md
-              - 链路追踪:
-                  - 服务拓扑: insight/user-guide/trace/topology.md
-                  - 服务拓扑元素说明: insight/user-guide/trace/topology-helper.md
-                  - 服务监控: insight/user-guide/trace/service.md
-                  - 链路查询: insight/user-guide/trace/trace.md
-              - 告警:
-                  - insight/user-guide/alert-center/index.md
-                  - 告警策略: insight/user-guide/alert-center/alert-policy.md
-                  - 告警模板: insight/user-guide/alert-center/alert-template.md
-                  - 通知配置: insight/user-guide/alert-center/message.md
-                  - 配置通知服务器: insight/user-guide/alert-center/sms-provider.md
-                  - 消息模板: insight/user-guide/alert-center/msg-template.md
-                  - 告警静默: insight/user-guide/alert-center/silent.md
-                  - 告警抑制: insight/user-guide/alert-center/inhibition.md
-              - 采集管理:
-                  - 采集管理: insight/user-guide/collection-manag/collection-manag.md
-                  - 服务监控: insight/user-guide/collection-manag/service-monitor.md
-                  - 采集组件 insight-agent 状态: insight/user-guide/collection-manag/agent-status.md
-              - 系统配置:
-                  - 系统组件: insight/user-guide/system-config/system-component.md
-                  - 系统配置: insight/user-guide/system-config/system-config.md
-                  - 修改配置: insight/user-guide/system-config/modify-config.md                  
-              - 参考文档:
-                  - 告警通知流程说明: insight/reference/alertnotification.md
-                  - 通知模板使用说明: insight/reference/notify-helper.md
-                  - Lucene 语法使用方法: insight/reference/lucene.md
-                  - 通过 Sidecar 采集容器日志: insight/reference/tailing-sidecar.md
-                  - 自定义探测方式: insight/user-guide/collection-manag/probe-module.md
-                  - 指标抓取说明: insight/user-guide/collection-manag/metric-collect.md
-                  - 链路数据的时钟偏移: insight/reference/traceclockskew.md
-      - 模型应用:
-          - 智能问答:
-              - 什么是智能问答: dak/index.md
-              - 功能特性: dak/features.md
-              - 应用中心:
-                  - 创建应用: dak/user-guide/app-center/create-app.md
-                  - 应用对话: dak/user-guide/app-center/conversation.md
-              - 语料库:
-                  - 创建语料库: dak/user-guide/corpus/create-corpus.md
-                  - 语料管理: dak/user-guide/corpus/manage-corpus.md
-                  - 语料导入:
-                      - 文件导入: dak/user-guide/corpus/upload-date.md
-                      - 手动录入: dak/user-guide/corpus/manual.md
-                      - 图文导入: dak/user-guide/corpus/image-upload.md
-                      - 格式化导入: dak/user-guide/corpus/format-update.md
-              - 插件管理: dak/user-guide/plugins/create-plugin.md
-              - 数据分析:
-                  - 问答质量: dak/data-analysis/qa-quality.md
-                  - 问答次数: dak/data-analysis/number-of-qa.md
-                  - 分片质量: dak/data-analysis/shard-quality.md
-                  - 分片命中率: dak/data-analysis/shard-hit-ratio.md
-                  - 改进意见: dak/data-analysis/suggestions.md
-              - 我的反馈: dak/my-feedback/my-feedback.md
-              - 系统配置: dak/user-guide/system-config.md
-          - 流程编排:
-              - 什么是流程编排: monkey/index.md
-              - 功能特性: monkey/features.md
-              - 通过工作流创建应用: monkey/create-flow.md
-      - 模型工具:
-          - 模型微调:
-              - 什么是模型微调: dtx/index.md
-              - 快速入门: dtx/fine-tuning-fast.md
-              - 功能特性: dtx/features.md
-              - 模型微调: dtx/fine-tuning-lab.md
-              - 数据集: dtx/dataset.md
-              - 模型评测: dtx/model-evaluate.md
-              - 模型导出: dtx/model-export.md
-          - 算法开发:
-              - 什么是算法开发: baize/index.md
-              - 快速入门: baize/quick-start.md
-              - 算法开发功能特性: baize/features.md
-              
-          - 模型中心:
-              - 什么是模型中心: dmc/index.md
-              - 功能特性: dmc/features.md
-              - 模型广场: dmc/model-square.md
-              - 模型服务: 
-                  - 本地服务: dmc/model-service/local.md
-                  - 在线服务: dmc/model-service/online.md
-      - 管理:
-          - 全局管理:
-              - 介绍:
-                  - 什么是全局管理: ghippo/intro/index.md
-                  - 登录: ghippo/intro/login.md
-                  - 功能总览: ghippo/intro/features.md
-                  - 常见术语: ghippo/intro/glossary.md
-              - 用户与访问控制:
-                  - 什么是用户与访问控制: ghippo/user-guide/access-control/iam.md
-                  - 用户: ghippo/user-guide/access-control/user.md
-                  - 用户组: ghippo/user-guide/access-control/group.md
-                  - 角色:
-                      - ghippo/user-guide/access-control/role.md
-                      - 系统角色: ghippo/user-guide/access-control/global.md
-                      - 自定义角色: ghippo/user-guide/access-control/custom-role.md
-                  - 身份提供商:
-                      - ghippo/user-guide/access-control/idprovider.md
-                      - LDAP: ghippo/user-guide/access-control/ldap.md
-                      - OIDC: ghippo/user-guide/access-control/oidc.md
-                  - 接入管理:
-                      - ghippo/user-guide/access-control/docking.md
-                      - Webhook: ghippo/user-guide/access-control/webhook.md
-                      - OAuth 2.0 之企业微信: ghippo/user-guide/access-control/oauth2.0.md
-              - 工作空间与层级:
-                  - ghippo/user-guide/workspace/ws-folder.md
-                  - 创建和删除工作空间: ghippo/user-guide/workspace/workspace.md
-                  - 工作空间权限: ghippo/user-guide/workspace/ws-permission.md
-                  - 创建和删除文件夹: ghippo/user-guide/workspace/folders.md
-                  - 文件夹权限: ghippo/user-guide/workspace/folder-permission.md
-                  - 资源配额: ghippo/user-guide/workspace/quota.md
-                  - 资源组与共享资源的区别: ghippo/user-guide/workspace/res-gp-and-shared-res.md
-              - 审计日志:
-                  - K8s审计日志采集开关: ghippo/user-guide/audit/open-audit.md
-                  - K8s审计日志输出开关: ghippo/user-guide/audit/open-k8s-audit.md
-                  - 下载和导出审计日志: ghippo/user-guide/audit/audit-log.md
-                  - 获取审计日志源IP: ghippo/user-guide/audit/source-ip.md
-                  - 审计项汇总:
-                      - 容器管理审计项汇总: ghippo/user-guide/audit/gproduct-audit/kpanda.md
-                      - 可观测性审计项汇总: ghippo/user-guide/audit/gproduct-audit/insight.md
-                      - 全局管理审计项汇总: ghippo/user-guide/audit/gproduct-audit/ghippo.md
-              - 运营管理:
-                  - ghippo/user-guide/report-billing/index.md
-                  - 报表管理: ghippo/user-guide/report-billing/report.md
-                  - 计费计量: ghippo/user-guide/report-billing/billing.md
-              - 平台设置:
-                  - 安全策略: ghippo/user-guide/platform-setting/security.md
-                  - 邮箱服务器设置: ghippo/user-guide/platform-setting/mail-server.md
-                  - 外观定制: ghippo/user-guide/platform-setting/appearance.md
-                  - 关于平台: ghippo/user-guide/platform-setting/about.md
-                  - 密码重置: ghippo/user-guide/password.md
-              - 个人中心:
-                  - 安全设置: ghippo/user-guide/personal-center/security-setting.md
-                  - 访问密钥: ghippo/user-guide/personal-center/accesstoken.md
-                  - 语言设置: ghippo/user-guide/personal-center/language.md
+      - 简介: index.md
+      - 算力云:
+          - 算力市场: zestu/market.md
+          - 容器实例: zestu/instance.md
+          - 文件存储: zestu/storage.md
+      - 大模型平台:
+          - 功能列表: dmc/features.md
+          - 模型广场: dmc/model-square.md
+          - 模型服务: 
+              - 本地服务: dmc/model-service/local.md
+              - 在线服务: dmc/model-service/online.md
+          - 统计与管理: dmc/stat.md
+      - AI 应用:
+          - 功能列表: dak/features.md
+          - 应用中心:
+              - 创建应用: dak/user-guide/app-center/create-app.md
+              - 应用对话: dak/user-guide/app-center/conversation.md
+          - 语料库:
+              - 创建语料库: dak/user-guide/corpus/create-corpus.md
+              - 语料管理: dak/user-guide/corpus/manage-corpus.md
+              - 语料导入:
+                  - 文件导入: dak/user-guide/corpus/upload-date.md
+                  - 手动录入: dak/user-guide/corpus/manual.md
+                  - 图文导入: dak/user-guide/corpus/image-upload.md
+                  - 格式化导入: dak/user-guide/corpus/format-update.md
+          - 数据分析:
+              - 问答质量: dak/data-analysis/qa-quality.md
+              - 问答次数: dak/data-analysis/number-of-qa.md
+              - 分片质量: dak/data-analysis/shard-quality.md
+              - 分片命中率: dak/data-analysis/shard-hit-ratio.md
+              - 改进意见: dak/data-analysis/suggestions.md
+          - 我的反馈: dak/my-feedback/my-feedback.md
+      - 费用中心:
+          - 钱包: leopard/wallet.md
+          - 收支明细: leopard/transactions.md
+          - 订单管理: leopard/orders.md
+          - 账单管理: leopard/bills.md
+      - 个人中心:
+          - 安全设置: ghippo/user-guide/personal-center/security-setting.md
+          - 访问密钥: ghippo/user-guide/personal-center/accesstoken.md
+          - 语言设置: ghippo/user-guide/personal-center/language.md
   - 产品生态:
       - 生态索引: eco/index.md
       - Colossal-AI: eco/colossal-ai.md
