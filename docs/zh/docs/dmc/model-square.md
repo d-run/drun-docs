@@ -293,4 +293,3 @@ d.run 模型中心支持接入 [HuggingFace Transformers](https://huggingface.co
     部署成功后，模型服务显示 **健康** 。
 
 下一步：[模型服务](model-service/local.md)
-
