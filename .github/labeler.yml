@@ -4,17 +4,28 @@ baize:
 buy:
   - "docs/zh/docs/buy/**/*"
 
+contact:
+  - "docs/zh/docs/contact/*"
+  - "docs/zh/docs/en/contact/*"
+
 dak:
   - "docs/zh/docs/dak/**/*"
+  - "docs/zh/docs/en/dak/**/*"
+
+dev:
+  - "scripts/**/*"
+  - ".github/**/*"
 
 dmc:
   - "docs/zh/docs/dmc/**/*"
+  - "docs/zh/docs/en/dmc/**/*"
 
 dtx:
   - "docs/zh/docs/dtx/**/*"
 
 ghippo:
   - "docs/zh/docs/ghippo/**/*"
+  - "docs/zh/docs/en/ghippo/**/*"
 
 insight:
   - "docs/zh/docs/insight/**/*"
@@ -22,12 +33,15 @@ insight:
 kpanda:
   - "docs/zh/docs/kpanda/**/*"
 
+leopard:
+  - "docs/zh/docs/leopard/**/*"
+
 monkey:
   - "docs/zh/docs/monkey/**/*"
 
 news:
   - "docs/zh/docs/news/**/*"
 
-dev:
-  - "scripts/**/*"
-  - ".github/**/*"
+zestu:
+  - "docs/zh/docs/zestu/**/*"
+  - "docs/zh/docs/en/zestu/**/*"
