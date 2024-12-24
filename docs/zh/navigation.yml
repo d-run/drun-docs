@@ -36,6 +36,7 @@ nav:
               - 改进意见: dak/data-analysis/suggestions.md
           - 我的反馈: dak/my-feedback/my-feedback.md
       - 费用中心:
+          - 简介: leopard/index.md
           - 钱包: leopard/wallet.md
           - 收支明细: leopard/transactions.md
           - 订单管理: leopard/orders.md
