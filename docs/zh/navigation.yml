@@ -44,28 +44,28 @@ nav:
           - 安全设置: ghippo/user-guide/personal-center/security-setting.md
           - 访问密钥: ghippo/user-guide/personal-center/accesstoken.md
           - 语言设置: ghippo/user-guide/personal-center/language.md
-  - 产品生态:
-      - 生态索引: eco/index.md
-      - Colossal-AI: eco/colossal-ai.md
-      - DRA 动态资源分配: eco/dra.md
-      - Fluid: eco/fluid.md
-      - GPU Operator: eco/gpu-operator.md
-      - GPUDirect RDMA: eco/gpu-rdma.md
-      - HwameiStor: eco/hwameistor.md
-      - InfiniBand: eco/infiniband.md
-      - JuiceFS: eco/juicefs.md
-      - Kueue: eco/kueue.md
-      - MIG: eco/mig.md
-      - NCCL: eco/nccl.md
-      - Network Operator: eco/net-operator.md
-      - Ray: eco/ray.md
-      - RDMA: eco/rdma.md
-      - RoCE: eco/roce.md
-      - Spiderpool: eco/spiderpool.md
-      - SR-IOV: eco/sriov.md
-      - Triton: eco/triton.md
-      - vGPU: eco/vgpu.md
-      - vLLM: eco/vllm.md
+#   - 产品生态:
+#       - 生态索引: eco/index.md
+#       - Colossal-AI: eco/colossal-ai.md
+#       - DRA 动态资源分配: eco/dra.md
+#       - Fluid: eco/fluid.md
+#       - GPU Operator: eco/gpu-operator.md
+#       - GPUDirect RDMA: eco/gpu-rdma.md
+#       - HwameiStor: eco/hwameistor.md
+#       - InfiniBand: eco/infiniband.md
+#       - JuiceFS: eco/juicefs.md
+#       - Kueue: eco/kueue.md
+#       - MIG: eco/mig.md
+#       - NCCL: eco/nccl.md
+#       - Network Operator: eco/net-operator.md
+#       - Ray: eco/ray.md
+#       - RDMA: eco/rdma.md
+#       - RoCE: eco/roce.md
+#       - Spiderpool: eco/spiderpool.md
+#       - SR-IOV: eco/sriov.md
+#       - Triton: eco/triton.md
+#       - vGPU: eco/vgpu.md
+#       - vLLM: eco/vllm.md
   - AI 行业新闻:
       - 索引: blogs/index.md
       - d.run 是支撑生成式 AI 的理想平台: blogs/d.run.md
