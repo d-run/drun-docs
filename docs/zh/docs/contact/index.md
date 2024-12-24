@@ -8,21 +8,29 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :simple-wechat:{ .lg .middle } __微信服务号__
+-   :simple-wechat:{ .lg .middle } __d.run 微信群 1__
 
     ---
 
-    与技术大咖对话。
+    扫码加入微信群 1 ，就 d.run 技术问题答疑解惑
 
-    ![微信服务号](./images/wechat-group.jpg)
+    ![d.run group1](./images/group1.png)
 
--   :new:{ .lg .middle } __微信订阅号__
+-   :simple-wechat:{ .lg .middle } __d.run 微信群 2__
 
     ---
 
-    了解 DaoCloud 新闻时事。
+    扫码加入微信群 2，就 d.run 技术问题答疑解惑
 
-    ![道客船长](./images/capitain.jpg)
+    ![d.run group1](./images/group2.png)
+
+-   :material-sail-boat:{ .lg .middle } __道客船长__
+
+    ---
+
+    了解云原生、AI 和开源技术，洞察新闻时事
+
+    ![道客船长](./images/capitain.png)
 
 </div>
 
@@ -40,7 +48,9 @@ hide:
 
     [400 002 6898](tel:+400 002 6898)
 
--   :simple-zhihu:{ .lg .middle } __知乎__
+</div>
+
+<!-- -   :simple-zhihu:{ .lg .middle } __知乎__
 
     ---
 
@@ -80,9 +90,7 @@ hide:
 
     ---
 
-    [YouTube - DaoCloud](https://www.youtube.com/results?search_query=daocloud)
-
-</div>
+    [YouTube - DaoCloud](https://www.youtube.com/results?search_query=daocloud) -->
 
 <!-- ## 各地分公司
 
