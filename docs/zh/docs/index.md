@@ -3,14 +3,7 @@ hide:
   - toc
 ---
 
-# d.run 让算力更自由
-
-!!! caution
-
-    d.run 服务器将于近期升级和迁移，届时用户注册、支付链路将暂时下线。
-    `console.d.run` 域名将在一段时间内不可访问。
-    计划迁移时间为：太平洋时间 2024 年 12 月 24 日 22:00-24:00。
-    另外新版文档站的内容正在制作中，如有缺失，敬请谅解。
+# 注册账号
 
 !!! tip
 
@@ -21,73 +14,18 @@ hide:
     d.run 是 DaoCloud 自研的 AIGC 综合性算力运维和运营平台，
     整合云原生能力，构建智能问答体系，化算力为“算利”。
 
-<div style="text-align: center;">
-  <p style="font-size: 28px; font-weight: bold;">d.run 产品全景图</p>
-</div>
+d.run 支持以手机、邮箱注册账号。
 
-![全景图](./images/home05.png)
+1. 在登录窗口点击 **注册**
+1. 填写用户名、邮箱、手机号，收到并填写验证码后，点击 **注册**
 
-<div style="text-align: center;">
-  <p style="font-size: 28px; font-weight: bold;">算力云</p>
-  <p>d.run 在上海、合肥、天津、香港等地建设算力枢纽中心，实现算力资源跨行业、跨地区、跨层级自由流动，通过构建 AI 开放生态平台，集成丰富的模型套件，全面推动智能算力与应用的协同创新。</p>
-</div>
+    每个邮箱只能注册一次。
+    如果提示邮箱已注册，可以返回登录界面，点击 **忘记密码** ，输入你已注册的邮箱来重置密码。
 
-![算力云服务](./images/home01.png)
+1. 注册成功后，将返回登录界面，输入用户名或邮箱，登录账号。
 
-<div style="text-align: center;">
-  <p style="font-size: 28px; font-weight: bold;">多地域<font color="green">算力中心</font>，按需选择</p>
-</div>
+您现在可以开始购买算力了。
 
-[![多地域算力中心](./images/home02.png)](https://console.d.run/)
+![market](./images/regis01.png)
 
-<div class="grid cards" markdown>
-
--   :fontawesome-brands-battle-net:{ .lg .middle } __<font color="green">强大的</font>算力网络__
-
-    ---
-
-    支持千卡、万卡级别的高速互联，打造超大规模 GPU 集群的最优网络利用，保障算力供应的稳定、高速、可靠。
-
--   :material-arrange-send-to-back:{ .lg .middle } __<font color="green">灵活的</font>资源调度__
-
-    ---
-
-    提供灵活的计算、网络、存储资源调度方案，有效提高资源利用率，按需使用算力资源，显著降低算力成本。
-
--   :simple-themodelsresource:{ .lg .middle } __<font color="green">功能丰富的</font>模型套件__
-
-    ---
-
-    通过 AI 生态开放平台提供各类便捷实用、性能高效的模型套件，为模型开发与训练提供支持，加速 AI 应用落地及创新。
-
-</div>
-
-<div style="text-align: center;">
-  <p style="font-size: 28px; font-weight: bold;"><font color="green">AI 开放生态平台</font>，加速 AI 创新应用</p>
-</div>
-
-<div class="grid cards" markdown>
-
--   :fontawesome-brands-dev:{ .lg .middle } __面向 AI <font color="green">开发者</font>__
-
-    ---
-
-    算法开发全流程一站式服务
-
--   :fontawesome-solid-users:{ .lg .middle } __面向 AI <font color="green">使用者</font>__
-
-    ---
-
-    轻量化、灵活交互，易上手，用户友好
-
-</div>
-
-![AI 开放生态平台](./images/home03.png)
-
-<div style="text-align: center;">
-  <p style="font-size: 28px; font-weight: bold;">全方位算力<font color="green">运维和运营</font></p>
-</div>
-
-![全方位算力运维和运营](./images/home04.png)
-
-[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
+下一步：[算力市场](./zestu/index.md)
