@@ -22,7 +22,7 @@ RBAC 模型的三要素为：用户、角色、权限。使用 RBAC 机制授权
 用户以用户名登录 d.run，按照被授予的权限操作平台资源和服务。
 所以用户是资源归属的主体，对其拥有的资源具有相应权限。
 
-用户可以在[个人中心](../user-guide/personal-center/security-setting.md)修改用户信息，设置密码、访问密钥和 UI 语言。
+用户可以在[个人中心](../../personal-center/security-setting.md)修改用户信息，设置密码、访问密钥和 UI 语言。
 
 ### 用户组
 

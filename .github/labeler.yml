@@ -1,47 +1,47 @@
 baize:
-  - "docs/zh/docs/baize/**/*"
+  - "docs/baize/**/*"
 
 buy:
-  - "docs/zh/docs/buy/**/*"
+  - "docs/buy/**/*"
 
 contact:
-  - "docs/zh/docs/contact/*"
-  - "docs/zh/docs/en/contact/*"
+  - "docs/contact/*"
+  - "docs/en/contact/*"
 
 dak:
-  - "docs/zh/docs/dak/**/*"
-  - "docs/zh/docs/en/dak/**/*"
+  - "docs/dak/**/*"
+  - "docs/en/dak/**/*"
 
 dev:
   - "scripts/**/*"
   - ".github/**/*"
 
 dmc:
-  - "docs/zh/docs/dmc/**/*"
-  - "docs/zh/docs/en/dmc/**/*"
+  - "docs/dmc/**/*"
+  - "docs/en/dmc/**/*"
 
 dtx:
-  - "docs/zh/docs/dtx/**/*"
+  - "docs/dtx/**/*"
 
 ghippo:
-  - "docs/zh/docs/ghippo/**/*"
-  - "docs/zh/docs/en/ghippo/**/*"
+  - "docs/ghippo/**/*"
+  - "docs/en/ghippo/**/*"
 
 insight:
-  - "docs/zh/docs/insight/**/*"
+  - "docs/insight/**/*"
 
 kpanda:
-  - "docs/zh/docs/kpanda/**/*"
+  - "docs/kpanda/**/*"
 
 leopard:
-  - "docs/zh/docs/leopard/**/*"
+  - "docs/leopard/**/*"
 
 monkey:
-  - "docs/zh/docs/monkey/**/*"
+  - "docs/monkey/**/*"
 
 news:
-  - "docs/zh/docs/news/**/*"
+  - "docs/news/**/*"
 
 zestu:
-  - "docs/zh/docs/zestu/**/*"
-  - "docs/zh/docs/en/zestu/**/*"
+  - "docs/zestu/**/*"
+  - "docs/en/zestu/**/*"

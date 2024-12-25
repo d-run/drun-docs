@@ -16,7 +16,7 @@ copyright: Copyright &copy; 2016 - 2024 d.run
 repo_name: d-run/drun-docs
 
 repo_url: https://github.com/d-run/drun-docs
-edit_uri: edit/main/docs/zh/docs/
+edit_uri: edit/main/docs/
 
 use_directory_urls: false # disbale https://www.mkdocs.org/user-guide/configuration/#use_directory_urls
 strict: false # enable strict mode, https://www.mkdocs.org/user-guide/configuration/#strict

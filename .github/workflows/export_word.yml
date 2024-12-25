@@ -25,10 +25,10 @@ jobs:
     - name: Build docs
       run: |
         # 构建
-        if [ -d "docs/zh/docs" ]; then
-          python3 scripts/md2doc-v2.py docs/zh/docs
+        if [ -d "docs/" ]; then
+          python3 scripts/md2doc-v2.py docs/
         else
-          echo "Directory docs/zh/docs does not exist, skipping build step."
+          echo "Directory docs/ does not exist, skipping build step."
         fi
 
     - name: Upload artifact
