@@ -2,8 +2,7 @@
 nav:
   - 首页: https://d.run
   - d.run 文档:
-      - 简介: index.md
-      - 注册账号: buy/index.md
+      - 注册账号: index.md
       - 算力云:
           - 算力市场: zestu/index.md
           - 容器实例: zestu/instance.md
