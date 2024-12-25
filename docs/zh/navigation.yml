@@ -2,8 +2,7 @@
 nav:
   - 首页: https://d.run
   - d.run 文档:
-      - 简介: index.md
-      - 注册账号: buy/register.md
+      - 注册账号: index.md
       - 算力云:
           - 算力市场: zestu/index.md
           - 容器实例: zestu/instance.md
@@ -34,15 +33,14 @@ nav:
               - 改进意见: dak/data-analysis/suggestions.md
           - 我的反馈: dak/my-feedback/my-feedback.md
       - 费用中心:
-          - 简介: leopard/index.md
-          - 钱包: leopard/wallet.md
+          - 钱包: leopard/index.md
           - 收支明细: leopard/transactions.md
           - 订单管理: leopard/orders.md
           - 账单管理: leopard/bills.md
       - 个人中心:
-          - 安全设置: ghippo/user-guide/personal-center/security-setting.md
-          - 访问密钥: ghippo/user-guide/personal-center/accesstoken.md
-          - 语言设置: ghippo/user-guide/personal-center/language.md
+          - 安全设置: personal/index.md
+          - 访问密钥: personal/accesstoken.md
+          - 语言设置: personal/language.md
       - 帮助与支持:
           - 索引: service/index.md
           - 平台服务协议: service/sla.md
