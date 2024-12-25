@@ -8,13 +8,11 @@ nav:
           - 算力市场: zestu/market.md
           - 容器实例: zestu/instance.md
           - 文件存储: zestu/storage.md
-      - 大模型平台:
-          - 功能列表: dmc/features.md
-          - 模型广场: dmc/model-square.md
-          - 模型服务: 
-              - 本地服务: dmc/model-service/local.md
-              - 在线服务: dmc/model-service/online.md
-          - 统计与管理: dmc/stat.md
+      - 大模型服务平台:
+          - 模型广场: models/index.md
+          - 模型部署: models/deploy.md
+          - 模型服务: models/service.md
+          - API Key 管理: models/apikey.md
       - AI 应用:
           - 功能列表: dak/features.md
           - 应用中心:
