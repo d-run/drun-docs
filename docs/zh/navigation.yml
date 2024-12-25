@@ -45,6 +45,11 @@ nav:
           - 安全设置: ghippo/user-guide/personal-center/security-setting.md
           - 访问密钥: ghippo/user-guide/personal-center/accesstoken.md
           - 语言设置: ghippo/user-guide/personal-center/language.md
+      - 帮助与支持:
+          - 索引: service/index.md
+          - 平台服务协议: service/sla.md
+          - 实名认证服务说明: service/name.md
+          - 反挖矿协议: service/miner.md
 #   - 产品生态:
 #       - 生态索引: eco/index.md
 #       - Colossal-AI: eco/colossal-ai.md
