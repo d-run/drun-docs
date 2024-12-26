@@ -1,4 +1,4 @@
-# The Rise of Moonshot from the Perspective of China's Large Models
+# The Rise of Moonshot from the Perspective of China's LLMs
 
 ![Image 1](../images/moon01.png)
 
@@ -10,21 +10,21 @@ The first was "Kimi concept stocks." Following the official announcement of the 
 
 The second was about "Kimi's customer acquisition cost." Reports indicated that based on the advertising costs for Kimi, the computational costs arising from user Q&A interactions after attracting new users, and estimated download volumes on third-party platforms, Kimi's customer acquisition cost has reached at least 200,000 yuan per day over the past month.
 
-This has made Moonshot AI the first large model unicorn company to break into the public eye since the GPT craze swept through in 2023, gaining significant visibility with its product. Due to a surge in users and high traffic, Kimi's servers even experienced downtime.
+This has made Moonshot AI the first LLM unicorn company to break into the public eye since the GPT craze swept through in 2023, gaining significant visibility with its product. Due to a surge in users and high traffic, Kimi's servers even experienced downtime.
 
 Kimi is indeed on fire.
 
 ![Monthly Active Visits](../images/kimi.png)
 
-However, if we closely examine the rise of Moonshot, aside from the capital frenzy and high market attention, its path among the many Chinese large model companies valued over 2 billion dollars is quite unique. The two major factors supporting Moonshot's high visibility—technological advancements and commercial pace—are not particularly prominent among its competitors.
+However, if we closely examine the rise of Moonshot, aside from the capital frenzy and high market attention, its path among the many Chinese LLM companies valued over 2 billion dollars is quite unique. The two major factors supporting Moonshot's high visibility—technological advancements and commercial pace—are not particularly prominent among its competitors.
 
-Firstly, compared to other large model companies, including Zhipu AI, MiniMax, Shenyin Technology, Mianbi Intelligence, Baichuan Intelligence, and even Lightyear (later acquired by Meituan), Moonshot was established much later, and its team collaboration and technological progress are naturally relatively lagging. Although Yang Zhilin's technical prowess is widely recognized, according to SuperCLUE's evaluation, Moonshot's overall capabilities currently only surpass GPT-3.5 and are still catching up to GPT-4.
+Firstly, compared to other LLM companies, including Zhipu AI, MiniMax, Shenyin Technology, Mianbi Intelligence, Baichuan Intelligence, and even Lightyear (later acquired by Meituan), Moonshot was established much later, and its team collaboration and technological progress are naturally relatively lagging. Although Yang Zhilin's technical prowess is widely recognized, according to SuperCLUE's evaluation, Moonshot's overall capabilities currently only surpass GPT-3.5 and are still catching up to GPT-4.
 
-Secondly, Moonshot's large model product and commercialization pace are not particularly fast. For instance, Zhipu began forming a commercialization team last year to explore commercial services for its foundational large model, while Moonshot primarily focuses on B2C with the launch of the Kimi intelligent assistant, but its commercial aspect is not very pronounced.
+Secondly, Moonshot's LLM product and commercialization pace are not particularly fast. For instance, Zhipu began forming a commercialization team last year to explore commercial services for its foundational LLM, while Moonshot primarily focuses on B2C with the launch of the Kimi intelligent assistant, but its commercial aspect is not very pronounced.
 
-Yet, Moonshot has managed to attract multiple rounds of investment in a short period, rising to the first tier of Chinese large model startups. Some reports even suggest that Moonshot's valuation has surpassed that of Zhipu AI. As 2023 comes to a close, while most large model companies are grappling with the existential question of "if they don't commercialize soon, the funding of 2023 may only last until the end of 2024," Moonshot, also focusing on foundational large models, stands out even more.
+Yet, Moonshot has managed to attract multiple rounds of investment in a short period, rising to the first tier of Chinese LLM startups. Some reports even suggest that Moonshot's valuation has surpassed that of Zhipu AI. As 2023 comes to a close, while most LLM companies are grappling with the existential question of "if they don't commercialize soon, the funding of 2023 may only last until the end of 2024," Moonshot, also focusing on foundational LLMs, stands out even more.
 
-Regarding this difference, AI Technology Review inquired about Moonshot's investors and received starkly different perceptions. One representative viewpoint is: "We are not currently asking Moonshot to pursue commercialization; rather, we hope they focus on perfecting the large model technology first. We want the large model we invest in to not only be the strongest in China but also one of the strongest globally in the future AGI era."
+Regarding this difference, AI Technology Review inquired about Moonshot's investors and received starkly different perceptions. One representative viewpoint is: "We are not currently asking Moonshot to pursue commercialization; rather, we hope they focus on perfecting the LLM technology first. We want the LLM we invest in to not only be the strongest in China but also one of the strongest globally in the future AGI era."
 
 Yang Zhilin and Moonshot have given them this confidence.
 
@@ -32,9 +32,9 @@ Yang Zhilin and Moonshot have given them this confidence.
 
 Upon careful consideration, the frequently active Moonshot in the rankings has been established for less than a year.
 
-Moonshot was officially founded in April 2023, and in October of the same year, it launched its first large model product, the Kimi intelligent assistant, which can support input of up to 200,000 Chinese characters, the longest contextual input length among AI large model products globally at that time.
+Moonshot was officially founded in April 2023, and in October of the same year, it launched its first LLM product, the Kimi intelligent assistant, which can support input of up to 200,000 Chinese characters, the longest contextual input length among AI LLM products globally at that time.
 
-According to reports, based on OpenAI's calculation standards, typically, one Chinese character is approximately equal to two tokens, meaning Moonshot's 200,000 Chinese characters equate to about 400,000 tokens, while the maximum long text supported by Anthropic's Claude large model at the same time was 100,000 tokens.
+According to reports, based on OpenAI's calculation standards, typically, one Chinese character is approximately equal to two tokens, meaning Moonshot's 200,000 Chinese characters equate to about 400,000 tokens, while the maximum long text supported by Anthropic's Claude LLM at the same time was 100,000 tokens.
 
 In February 2024, Kimi underwent iterative upgrades for website and multi-question search capabilities, with usability performance continuously improving.
 
@@ -48,7 +48,7 @@ Although it has been less than a year since its establishment, AI Technology Rev
 
 The first round of financing for Moonshot occurred in April 2023, just after it was spun off from Recurrent AI.
 
-Recurrent AI is a company focused on sales technology, co-founded by Yang Zhilin in 2016. Its main business involves using AI technologies like NLP, voice, multimodal, and large models to create "sales technology" solutions. Records show that Recurrent AI has received multiple rounds of investment from Sequoia Capital China, ZhenFund, and other investors.
+Recurrent AI is a company focused on sales technology, co-founded by Yang Zhilin in 2016. Its main business involves using AI technologies like NLP, voice, multimodal, and LLMs to create "sales technology" solutions. Records show that Recurrent AI has received multiple rounds of investment from Sequoia Capital China, ZhenFund, and other investors.
 
 After completing its first round of financing, Moonshot reached a valuation of 300 million dollars, with investors including Sequoia Capital China, ZhenFund, and Lisi Capital.
 
@@ -64,9 +64,9 @@ Additionally, Lisi Capital invested 10 million dollars, while other existing sha
 
 Following this round of investment, Moonshot's valuation reached 2.5 billion dollars.
 
-As an AI large model startup, what enables Moonshot to attract so many investors' attention?
+As an AI LLM startup, what enables Moonshot to attract so many investors' attention?
 
-Many investors have told AI Technology Review that Moonshot has two distinct characteristics—long context and B2C—which differentiate it from other AI large model startups from the outset.
+Many investors have told AI Technology Review that Moonshot has two distinct characteristics—long context and B2C—which differentiate it from other AI LLM startups from the outset.
 
 Long context is a fundamental capability of large language models (LLMs). However, if the context is too long, the model tends to focus too much attention on the beginning and end of the text, neglecting the information in the middle, making it difficult for the model to find and utilize relevant information located in the middle of a long text.
 
@@ -78,13 +78,13 @@ Yang Zhilin has publicly stated multiple times, "The path to General Artificial 
 
 This has been the original focus of Moonshot since its inception.
 
-Regarding the B2C route, this is the direction in which AI large models are most likely to yield super applications during their landing process, and it is also something Yang Zhilin has been firmly committed to from the beginning.
+Regarding the B2C route, this is the direction in which AI LLMs are most likely to yield super applications during their landing process, and it is also something Yang Zhilin has been firmly committed to from the beginning.
 
 Of course, beyond technology and route, even more crucial is Yang Zhilin's personal capabilities.
 
-An investor who participated in Moonshot's investment told AI Technology Review that in the early stages, he considered various AI large model startups, including Zhipu AI, Baichuan Intelligence, MiniMax, and others, and ultimately chose Moonshot.
+An investor who participated in Moonshot's investment told AI Technology Review that in the early stages, he considered various AI LLM startups, including Zhipu AI, Baichuan Intelligence, MiniMax, and others, and ultimately chose Moonshot.
 
-"This wave of AI is technology-driven; if investing, the primary consideration is to find the strongest and most relevant person technically." The current mainstream architecture of AI large models, Transformer, was previously Yang Zhilin's research area. He has published two significant papers as the first author, Transformer-XL and XLNet, which have been cited over 20,000 times since 2019, demonstrating his undeniable technical strength.
+"This wave of AI is technology-driven; if investing, the primary consideration is to find the strongest and most relevant person technically." The current mainstream architecture of AI LLMs, Transformer, was previously Yang Zhilin's research area. He has published two significant papers as the first author, Transformer-XL and XLNet, which have been cited over 20,000 times since 2019, demonstrating his undeniable technical strength.
 
 Moreover, as an entrepreneur, Yang Zhilin has a strong talent attraction ability, able to draw many young, outstanding industry talents, such as co-founders of Moonshot and employees who chose to join after gaining experience in various AI companies.
 
@@ -102,21 +102,21 @@ All of the above are reasons why Moonshot, despite lacking first-mover advantage
 
 Recently, news emerged of a Microsoft engineer building a training cluster of 100,000 H100s for GPT-6, which led to a power grid collapse, reiterating the confusion that the path to AGI still needs to address power challenges, while also sending a signal: although the GPT-4.5 leak has stirred controversy and GPT-5 has yet to be released, GPT-6 is already on the way.
 
-The development of deep learning has spanned a decade, and compared to the last AI wave, this wave of large model investors understands technology much better. They clearly recognize that large models are a fluid technology that continues to grow, and GPT-4 is not the endpoint. "Even OpenAI's path is not necessarily the final route to AGI."
+The development of deep learning has spanned a decade, and compared to the last AI wave, this wave of LLM investors understands technology much better. They clearly recognize that LLMs are a fluid technology that continues to grow, and GPT-4 is not the endpoint. "Even OpenAI's path is not necessarily the final route to AGI."
 
-Especially for well-known investment institutions, they are not just looking to invest in the "strongest large model" within China but in large model teams qualified and capable of competing for the "strongest AGI globally." In one interview, Yang Zhilin also openly stated, "AI is not about finding PMF in the next one or two years, but about how to change the world in the next ten to twenty years."
+Especially for well-known investment institutions, they are not just looking to invest in the "strongest LLM" within China but in LLM teams qualified and capable of competing for the "strongest AGI globally." In one interview, Yang Zhilin also openly stated, "AI is not about finding PMF in the next one or two years, but about how to change the world in the next ten to twenty years."
 
-If we step outside the domestic large model battle and view it from a global perspective, as a representative of typical tech believers, Moonshot's advantages in seizing global AGI may include the following points:
+If we step outside the domestic LLM battle and view it from a global perspective, as a representative of typical tech believers, Moonshot's advantages in seizing global AGI may include the following points:
 
 Firstly, Moonshot is a product of globalized education, with a broader vision. Founder Yang Zhilin graduated from Tsinghua University with a degree in Computer Science and Technology, then pursued a PhD at Carnegie Mellon University's Language Technologies Institute (LTI), studying under Ruslan Salakhutdinov, head of AI research at Apple, and William Cohen, chief scientist at Google, giving him keen awareness and high attention to developments in foreign technology.
 
-In terms of practical experience, Yang Zhilin has worked at Google Brain and FAIR, participating in the development of several large models, including Google Gemini, Google Bard, "Pangu," and "Wudao," gaining a deeper understanding of the technological gaps and rhythms between domestic and international large model developments, as well as how to grow an AI large model company with an international perspective in China.
+In terms of practical experience, Yang Zhilin has worked at Google Brain and FAIR, participating in the development of several LLMs, including Google Gemini, Google Bard, "Pangu," and "Wudao," gaining a deeper understanding of the technological gaps and rhythms between domestic and international LLM developments, as well as how to grow an AI LLM company with an international perspective in China.
 
 Not only Yang Zhilin, but the other two co-founders, Zhou Xinyu and Wu Yuxin, also graduated from Tsinghua University and have work experience at renowned AI companies like Meta and Megvii.
 
 Additionally, according to an employee of Moonshot, Yang Zhilin has a strong admiration for companies with a "Silicon Valley style," and Moonshot aims to develop in that direction.
 
-Secondly, Moonshot is firmly committed to the B2C route. On one hand, in the application process of AI large models, B2C seems more likely to yield super applications compared to B2B. There is a deeper consideration that, in the journey towards AGI, the data flywheel is crucial, which makes the B2C route an inevitable choice.
+Secondly, Moonshot is firmly committed to the B2C route. On one hand, in the application process of AI LLMs, B2C seems more likely to yield super applications compared to B2B. There is a deeper consideration that, in the journey towards AGI, the data flywheel is crucial, which makes the B2C route an inevitable choice.
 
 Yang Zhilin has mentioned that for Moonshot, both AGI and products are pursued objectives, and throughout history, nearly all internet products that "emerged" ultimately relied on the scale of user data.
 
@@ -124,7 +124,7 @@ Perhaps due to the stage of development, the early stages will rely on scaling l
 
 From a comprehensive perspective, the B2C path is currently recognized as the most suitable one, with greater potential ceilings.
 
-Moreover, even though GPT-4's performance has amazed humanity, the imaginative space for large models remains vast.
+Moreover, even though GPT-4's performance has amazed humanity, the imaginative space for LLMs remains vast.
 
 Based on this consensus, it becomes particularly critical to firmly hold on to a unique understanding of AGI, maintain a long-term directional plan, and have clear logic.
 
@@ -134,19 +134,19 @@ An investor told AI Technology Review that Yang Zhilin does not care when GPT-5 
 
 Thus, looking beyond the domestic landscape and focusing globally, the possibility of Moonshot competing for global AGI gains additional weight, and the selection of Moonshot by globally renowned capitals like Sequoia Capital China may also reflect such considerations—there is plenty of time left for Moonshot.
 
-Focusing back on the domestic scene, among the current AI large model startups, Moonshot's advantages are also very clear.
+Focusing back on the domestic scene, among the current AI LLM startups, Moonshot's advantages are also very clear.
 
-In terms of technology, Moonshot's technical team has participated in the research and development of multiple large models, both domestically and internationally, and compared to companies like MiniMax and Baichuan Intelligence with similar valuations, their experience is more robust.
+In terms of technology, Moonshot's technical team has participated in the research and development of multiple LLMs, both domestically and internationally, and compared to companies like MiniMax and Baichuan Intelligence with similar valuations, their experience is more robust.
 
-As for another large model company with a comparable valuation to Moonshot, Zhipu AI, its first-mover advantage and maturity may not be something that a company less than a year old can compete with, but the differences in their routes also determine that they are unlikely to meet on the same competitive track. Investors view Zhipu AI's positioning as "replicating OpenAI," firmly pursuing B2B and B2G routes along a trusted innovation path.
+As for another LLM company with a comparable valuation to Moonshot, Zhipu AI, its first-mover advantage and maturity may not be something that a company less than a year old can compete with, but the differences in their routes also determine that they are unlikely to meet on the same competitive track. Investors view Zhipu AI's positioning as "replicating OpenAI," firmly pursuing B2B and B2G routes along a trusted innovation path.
 
-In terms of capital, early entrants like the ZhiYuan team, which entered the large model sphere around the same time as Yang Zhilin, include two companies spun off from Tsinghua THUNLP—Shenyin Technology and Mianbi Intelligence. Although they also have technical strength, their financing pace is far behind that of Moonshot. Currently, Shenyin Technology is in the A+ financing round, while Mianbi Intelligence is at the Pre-A stage.
+In terms of capital, early entrants like the ZhiYuan team, which entered the LLM sphere around the same time as Yang Zhilin, include two companies spun off from Tsinghua THUNLP—Shenyin Technology and Mianbi Intelligence. Although they also have technical strength, their financing pace is far behind that of Moonshot. Currently, Shenyin Technology is in the A+ financing round, while Mianbi Intelligence is at the Pre-A stage.
 
-Regarding talent reserves, Moonshot has a high talent density. Yang Zhilin's personal technical appeal is strong, and the company is still in a rapid development and expansion phase. Although the total number of employees is still under one hundred, the talent density in large model startups may only be second to Zhipu AI.
+Regarding talent reserves, Moonshot has a high talent density. Yang Zhilin's personal technical appeal is strong, and the company is still in a rapid development and expansion phase. Although the total number of employees is still under one hundred, the talent density in LLM startups may only be second to Zhipu AI.
 
-In summary, Moonshot's focus is on technology rather than commercialization. Therefore, whether it is Moonshot spending heavily to recruit talent, incurring nearly 200,000 yuan a day in customer acquisition costs, firmly pursuing B2C and long text routes, or building a super-strong foundational large model... all of these make sense, as investors "are not in a hurry" and do not require Moonshot to start thinking about commercialization at this moment.
+In summary, Moonshot's focus is on technology rather than commercialization. Therefore, whether it is Moonshot spending heavily to recruit talent, incurring nearly 200,000 yuan a day in customer acquisition costs, firmly pursuing B2C and long text routes, or building a super-strong foundational LLM... all of these make sense, as investors "are not in a hurry" and do not require Moonshot to start thinking about commercialization at this moment.
 
-Perhaps, in 2024, commercialization will be the main theme and task for most domestic AI large model companies, but it is not for Moonshot.
+Perhaps, in 2024, commercialization will be the main theme and task for most domestic AI LLM companies, but it is not for Moonshot.
 
 ## Conclusion
 

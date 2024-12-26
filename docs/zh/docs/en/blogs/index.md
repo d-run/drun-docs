@@ -49,8 +49,8 @@ This channel will closely follow technology trends and collect news from the AI 
     but why has it been popularized by OpenAI and dominated the field?
     What common challenges do non-Transformer models face?
 
-- [The Financial Industry Enters the Era of Large Models, Computing Power Infrastructure Becomes the Key to Victory](./0326-compute-power.md)
+- [The Financial Industry Enters the Era of LLMs, Computing Power Infrastructure Becomes the Key to Victory](./0326-compute-power.md)
 
-    DaoCloud is leading a seminar on computing power and large model industries organized by the local financial industry in Shanghai.
+    DaoCloud is leading a seminar on computing power and LLM industries organized by the local financial industry in Shanghai.
 
 > Contributions and reprints in various forms are welcome.
