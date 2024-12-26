@@ -103,7 +103,7 @@ plugins:
                 首页: Home
                 d.run 文档: d.run Documentation
                 注册账号: Register Account
-                算力云: Compute Clou
+                算力云: Compute Cloud
                 算力市场: Compute Market
                 容器实例: Container Instances
                 文件存储: File Storage
@@ -150,16 +150,15 @@ plugins:
                 d.run 是支撑生成式 AI 的理想平台: d.run is the Ideal Platform for Generative AI
                 K8s 与生成式 AI 珠联璧合: K8s and Generative AI Make a Perfect Match
                 OpenAI GPT-4o 完全免费: OpenAI GPT-4o is Completely Free
-                OpenAI 大型语言模型规范: OpenAI Large Language Model Specifications
+                OpenAI 大型语言模型规范: OpenAI LLM Specifications
                 2024大规模AI基础设施形势调研: 2024 Large-scale AI Infrastructure Survey
                 云原生人工智能白皮书: Cloud-native Artificial Intelligence White Paper
-                Kimi火了后国内其他大模型: Kimi Success and Other Domestic Large Models
+                Kimi火了后国内其他大模型: Kimi Success and Other Domestic LLM
                 DBRX 开源 LLM 介绍: Introduction to DBRX Open Source LLM
                 AI 流程编排化算力为算利: Transforms Compute into Profit
                 谁将替代 Transformer: Who Will Replace the Transformer
-                金融行业迎来大模型时代: Financial Industry Welcomes the Era of Large Models
-                智海拾贝: Wisdom from AI Industry
-                索引: Index
+                金融行业迎来大模型时代: Financial Industry Welcomes the LLM Era
+                智海拾贝: Knowledge from AI Industry
                 大模型: LLM
                 OpenAI: OpenAI
                 Hugging Face: Hugging Face

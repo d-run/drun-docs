@@ -25,7 +25,7 @@ aiding in efficient algorithm research and inference tasks.
 
 2. Fill in the basic information according to the requirements below and click **OK**
 
-    ![Create Container Instance 2](../zestu/images/createpod2.png)
+    ![Create Container Instance 2](images/createpod2.png)
 
     | Name | Description |
     |------|------------- |
