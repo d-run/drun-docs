@@ -56,7 +56,7 @@ nav:
       - 云原生人工智能白皮书: blogs/0410-cnai-wp.md
       - Kimi火了后国内其他大模型: blogs/0408-after-kimi.md
       - DBRX 开源 LLM 介绍: blogs/0407-dbrx.md
-      - “AI 流程编排”化算力为“算利”: blogs/0403-cp-to-profit.md
+      - AI 流程编排化算力为算利: blogs/0403-cp-to-profit.md
       - 谁将替代 Transformer: blogs/0327-transformer.md
       - 金融行业迎来大模型时代: blogs/0326-compute-power.md
   - 智海拾贝:
@@ -67,6 +67,7 @@ nav:
           - 月之暗面: open/models/moonshot.md
           - Claude 3: open/models/claude.md
       - 硬件厂商:
+          - Nvidia: open/hardware/nvidia.md
           - 华为: open/hardware/huawei.md
           - 天数智芯: open/hardware/illuvatar.md
       - 国内 AI 先锋企业:

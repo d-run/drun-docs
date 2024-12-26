@@ -3,54 +3,54 @@ hide:
   - toc
 ---
 
-# AI 行业新闻
+# AI Industry News
 
-本频道将紧跟技术趋势，收集 AI 行业新闻。
+This channel will closely follow technology trends and collect news from the AI industry.
 
-- [为什么 K8s 与生成式 AI 珠联璧合](./0702-k8s-for-genai.md)
+- [Why K8s and Generative AI Are a Perfect Match](./0702-k8s-for-genai.md)
 
-    Kubernetes（K8s）不再只是一个运行工作负载（如 Web 应用和微服务）的工具；
-    对于大语言模型（LLM）等大型人工智能（AI）和大型机器学习（ML）工作负载，K8s 是端到端全生命周期管理的理想平台。
+    Kubernetes (K8s) is no longer just a tool for running workloads (like web applications and microservices);
+    for large artificial intelligence (AI) and large machine learning (ML) workloads such as large language models (LLM), K8s is the ideal platform for end-to-end lifecycle management.
 
-- [OpenAI GPT-4o 完全免费](./0514-gpt4o.md)
+- [OpenAI GPT-4o Now Completely Free](./0514-gpt4o.md)
 
-    OpenAI 正在颠覆世界：GPT-4o 现在完全免费，实时语音视频交互震撼全场，直接进入科幻时代！
+    OpenAI is revolutionizing the world: GPT-4o is now completely free, with real-time voice and video interaction stunning everyone, directly entering the sci-fi era!
 
-- [OpenAI 大语言模型规范](./0509-model-spec.md)
+- [OpenAI Large Language Model Specifications](./0509-model-spec.md)
 
-    这是 OpenAI 最新发布的模型规范，它是一个指定 OpenAI API 和 ChatGPT 中模型期望行为的文件，
-    包括一套核心目标，以及如何处理冲突目标或指令的指导。
+    This is the latest model specification released by OpenAI, which is a document specifying the expected behavior of models in the OpenAI API and ChatGPT,
+    including a set of core objectives and guidance on how to handle conflicting objectives or instructions.
 
-- [2024 年大规模 AI 基础设施形势调研](./0429-ai-survey.md)
+- [2024 Large-Scale AI Infrastructure Survey](./0429-ai-survey.md)
 
-    ClearML 发布了与 FuriosaAI 和人工智能基础设施联盟（AIIA）进行的一项全球 AI 调研结果。
+    ClearML has released the results of a global AI survey conducted with FuriosaAI and the Artificial Intelligence Infrastructure Alliance (AIIA).
 
-- [云原生人工智能白皮书](./0410-cnai-wp.md)
+- [Cloud-Native Artificial Intelligence White Paper](./0410-cnai-wp.md)
 
-    这本云原生人工智能白皮书首先概述了当前 AI/ML 技术的发展现状，接着介绍了云原生技术所提供的支持，分析了目前面临的挑战和不足，并探讨了正在不断发展中的解决方案。
+    This cloud-native artificial intelligence white paper first outlines the current state of AI/ML technology development, then introduces the support provided by cloud-native technologies, analyzes the challenges and shortcomings currently faced, and explores the continuously evolving solutions.
 
-- [Kimi 火了以后，国内其他大模型危机感重重](./0408-after-kimi.md)
+- [After Kimi's Success, Other Major Models in China Feel the Pressure](./0408-after-kimi.md)
 
-    受 Kimi 影响，百度的文心一言和阿里的通义千问，
-    用户访问量大幅下滑，降幅分别达到 33.42%与 45.05%。
+    Influenced by Kimi, Baidu's Wenxin Yiyan and Alibaba's Tongyi Qianwen,
+    have seen a significant drop in user access, with declines of 33.42% and 45.05% respectively.
 
-- [DBRX 介绍：一款全新的、强大的开源 LLM 模型](./0407-dbrx.md)
+- [Introducing DBRX: A New, Powerful Open Source LLM Model](./0407-dbrx.md)
 
-    介绍 DBRX，这是由 Databricks 创建的一种开放的通用 LLM。
-    在一系列标准基准测试中，DBRX 在已建立的开放 LLM 中树立了新的技术水平。
+    Introducing DBRX, an open general LLM created by Databricks.
+    In a series of standard benchmark tests, DBRX has set new technical standards among established open LLMs.
 
-- [“AI 流程编排”化算力为“算利”](./0403-cp-to-profit.md)
+- [“AI Process Orchestration” Turns Computing Power into “Profit”](./0403-cp-to-profit.md)
 
-    国家级专精特新“小巨人”企业 DaoCloud 发布算力生态平台 d.run
+    The national-level specialized and innovative "little giant" enterprise DaoCloud has launched the computing power ecosystem platform d.run.
 
-- [谁将替代 Transformer？](./0327-transformer.md)
+- [Who Will Replace the Transformer?](./0327-transformer.md)
 
-    Transformer 始于 2017 年谷歌发表的论文《Attention Is All You Need》，
-    但缘何被 OpenAI 发扬光大，制霸江湖？
-    非 Transformer 面临的共同考验是什么？
+    The Transformer started with Google's 2017 paper "Attention Is All You Need,"
+    but why has it been popularized by OpenAI and dominated the field?
+    What common challenges do non-Transformer models face?
 
-- [金融行业迎来大模型时代，算力基建成决胜关键](./0326-compute-power.md)
+- [The Financial Industry Enters the Era of Large Models, Computing Power Infrastructure Becomes the Key to Victory](./0326-compute-power.md)
 
-    DaoCloud 牵头上海本地金融行业组织的算力与大模型产业研讨会。
+    DaoCloud is leading a seminar on computing power and large model industries organized by the local financial industry in Shanghai.
 
-> 欢迎各种形式的供稿和转载。
+> Contributions and reprints in various forms are welcome.
