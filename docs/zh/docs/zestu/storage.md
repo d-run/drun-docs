@@ -14,23 +14,21 @@ hide:
 ## 前提条件
 
 - 登录平台账号
- 
+
 ## 操作步骤
 
 1. 登录 d.run，进入 **算力云** -> **文件存储** ， 选择相近的区域，点击 **初始化文件存储** 开始初始化
   
-    ![初始化文件存储1](../zestu/images/startstorge.PNG)
+    ![初始化文件存储1](./images/startstorge.PNG)
     
-    ![初始化文件存储2](../zestu/images/startstorage2.PNG)
+    ![初始化文件存储2](./images/startstorage2.PNG)
 
 2. 上传文件：点击 **上传文件** 选择本地文件进行上传。
   
-    ![上传文件](../zestu/images/uploadfile.PNG)
+    ![上传文件](./images/uploadfile.PNG)
 
-3. 下载文件：选择需要下载的文件，点击列表右侧的 **...** ，在下拉列表中选择 **下载 **
+3. 下载文件：选择需要下载的文件，点击列表右侧的 **...** ，在下拉列表中选择 **下载**
   
-    ![下载文件](../zestu/images/downloadfile.png)
+    ![下载文件](./images/downloadfile.png)
 
 4. 删除文件：选择需要删除的文件，点击列表右侧的 **...** ，在下拉列表中选择 **删除** 。删除后不可恢复，请谨慎操作！
-  
-    ![下载文件](../zestu/images/deletefilde.png)

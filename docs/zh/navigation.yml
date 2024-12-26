@@ -46,28 +46,6 @@ nav:
           - 平台服务协议: service/sla.md
           - 实名认证服务说明: service/name.md
           - 反挖矿协议: service/miner.md
-#   - 产品生态:
-#       - 生态索引: eco/index.md
-#       - Colossal-AI: eco/colossal-ai.md
-#       - DRA 动态资源分配: eco/dra.md
-#       - Fluid: eco/fluid.md
-#       - GPU Operator: eco/gpu-operator.md
-#       - GPUDirect RDMA: eco/gpu-rdma.md
-#       - HwameiStor: eco/hwameistor.md
-#       - InfiniBand: eco/infiniband.md
-#       - JuiceFS: eco/juicefs.md
-#       - Kueue: eco/kueue.md
-#       - MIG: eco/mig.md
-#       - NCCL: eco/nccl.md
-#       - Network Operator: eco/net-operator.md
-#       - Ray: eco/ray.md
-#       - RDMA: eco/rdma.md
-#       - RoCE: eco/roce.md
-#       - Spiderpool: eco/spiderpool.md
-#       - SR-IOV: eco/sriov.md
-#       - Triton: eco/triton.md
-#       - vGPU: eco/vgpu.md
-#       - vLLM: eco/vllm.md
   - AI 行业新闻:
       - 索引: blogs/index.md
       - d.run 是支撑生成式 AI 的理想平台: blogs/d.run.md
@@ -124,65 +102,65 @@ plugins:
               nav_translations:
                 首页: Home
                 d.run 文档: d.run Documentation
-                d.run 简介: d.run Introduction
-                快速入门: Quick Start
-                智能算力: AI Lab
-                模型应用: Model App
-                智能问答: Artificial Knowledge
-                什么是智能问答: What is Artificial Knowledge?
-                功能特性: Features
+                注册账号: Register Account
+                算力云: Compute Clou
+                算力市场: Compute Market
+                容器实例: Container Instances
+                文件存储: File Storage
+                大模型服务平台: LLM Studio
+                模型广场: Model Plaza
+                模型部署: Model Deployment
+                模型服务: Model Services
+                API Key 管理: API Key Management
+                AI 应用: AI Apps
+                功能列表: Feature List
                 应用中心: App Center
                 创建应用: Create App
                 应用对话: App Dialogue
-                语料库: Corpus
+                语料库: Corpus Library
                 创建语料库: Create Corpus
-                语料管理: Corpus Management
-                语料导入: Import Corpus
+                语料管理: Manage Corpus
+                语料导入: Corpus Import
                 文件导入: File Import
                 手动录入: Manual Entry
                 图文导入: Image and Text Import
                 格式化导入: Formatted Import
-                插件管理: Plugin Management
                 数据分析: Data Analysis
-                问答质量: Q&A Quality
-                问答次数: Q&A Count
+                问答质量: QA Quality
+                问答次数: Number of QAs
                 分片质量: Shard Quality
-                分片命中率: Shard Hit Rate
+                分片命中率: Shard Hit Ratio
                 改进意见: Suggestions for Improvement
                 我的反馈: My Feedback
-                模型中心: Model Center
-                什么是模型中心: What is Model Center?
-                功能列表: Features
-                模型广场: Model Plaza
-                模型服务: Model Service
-                本地服务: Local Service
-                在线服务: Online Service
+                费用中心: Cost Center
+                钱包: Wallet
+                收支明细: Transactions
+                订单管理: Orders
+                账单管理: Bills
                 个人中心: Personal Center
                 安全设置: Security Settings
                 访问密钥: Access Keys
                 语言设置: Language Settings
-                产品生态: d.run Ecosystem
-                生态索引: Ecosystem Index
-                DRA 动态资源分配: DRA Dynamic Resource Allocation
-                GPU Operator: GPU Operator
-                GPUDirect RDMA: GPUDirect RDMA
-                Network Operator: Network Operator
-                AI 行业新闻: AI Industry News
+                帮助与支持: Help and Support
                 索引: Index
-                d.run 是支撑生成式 AI 的理想平台: d.run is the Ideal Platform for Supporting Generative AI
-                K8s 与生成式 AI 珠联璧合: K8s and Generative AI are a Perfect Match
-                OpenAI GPT-4o 完全免费: OpenAI GPT-4o Completely Free
-                OpenAI 大型语言模型规范: OpenAI Large Language Model Specification
+                平台服务协议: Service Level Agreement
+                实名认证服务说明: Real-name Authentication Service
+                反挖矿协议: Anti-mining Agreement
+                AI 行业新闻: Blogs
+                d.run 是支撑生成式 AI 的理想平台: d.run is the Ideal Platform for Generative AI
+                K8s 与生成式 AI 珠联璧合: K8s and Generative AI Make a Perfect Match
+                OpenAI GPT-4o 完全免费: OpenAI GPT-4o is Completely Free
+                OpenAI 大型语言模型规范: OpenAI Large Language Model Specifications
                 2024大规模AI基础设施形势调研: 2024 Large-scale AI Infrastructure Survey
                 云原生人工智能白皮书: Cloud-native Artificial Intelligence White Paper
-                Kimi火了后国内其他大模型: Other Domestic Large Models After Kimi Became Popular
-                DBRX 开源 LLM 介绍: DBRX Open-source LLM Introduction
-                “AI 流程编排”化算力为“算利”: Transforming Computing Power into “Computing Benefits”
-                谁将替代 Transformer: What Will Replace the Transformer?
-                金融行业迎来大模型时代: The Financial Sector Welcomes the Era of Large Models
-                智海拾贝: Collecting Wisdom from the Sea
+                Kimi火了后国内其他大模型: Kimi Success and Other Domestic Large Models
+                DBRX 开源 LLM 介绍: Introduction to DBRX Open Source LLM
+                AI 流程编排化算力为算利: Transforms Compute into Profit
+                谁将替代 Transformer: Who Will Replace the Transformer
+                金融行业迎来大模型时代: Financial Industry Welcomes the Era of Large Models
+                智海拾贝: Wisdom from AI Industry
                 索引: Index
-                大模型: Large Model
+                大模型: LLM
                 OpenAI: OpenAI
                 Hugging Face: Hugging Face
                 月之暗面: Moonshot
