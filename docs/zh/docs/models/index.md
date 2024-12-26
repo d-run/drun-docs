@@ -17,3 +17,5 @@ hide:
     - 提供商：如百川智能、GLM、Meta 等
     - 模型类型：如文本生成、视觉理解、视频生成等
 - 也可以输入关键词快速定位某一种模型
+
+![model plaza](./images/models01.png)
