@@ -20,7 +20,7 @@ While the Transformer has thrived, some dissenting voices have emerged, such as:
 
 This is because the power of the Transformer is also its weakness: the inherent self-attention mechanism in the Transformer presents challenges, primarily due to its quadratic complexity. This complexity makes the architecture **computationally expensive and memory-intensive** when dealing with long input sequences or in resource-constrained situations.
 
-In simple terms, this means that as the sequence length (for example, the number of words in a paragraph or the size of an image) processed by the Transformer increases, the required computational power grows quadratically, quickly becoming enormous. Hence, there is a saying that "the Transformer is not efficient." This is also a major reason for the global shortage of computing power triggered by the current AI boom.
+In simple terms, this means that as the sequence length (for example, the number of words in a paragraph or the size of an image) processed by the Transformer increases, the required computational power grows quadratically, quickly becoming enormous. Hence, there is a saying that "the Transformer is not efficient." This is also a major reason for the global shortage of computing resource triggered by the current AI boom.
 
 Based on the limitations of the Transformer, many non-Transformer architectures have emerged, including China's RWKV, Meta's Mega, Microsoft's RetNet, Mamba, and DeepMind's Hawk and Griffin. These models have been proposed following the dominance of the Transformer in the LLM development landscape.
 
@@ -94,7 +94,7 @@ RWKV, the most representative non-Transformer research, has made significant pro
 
 However, several investors have told AI Technology Review that they have struggled with whether to invest in RWKV, betting on non-Transformers. Due to significant internal disagreements—fearing that non-Transformers may not perform well—they ultimately gave up.
 
-Currently, based on the existing hardware computing power foundation, it is very challenging to create LLMs on the edge with Transformers; calculations and inferences still need to be done in the cloud, and the response speed is unsatisfactory, making it difficult for end-users to accept.
+Currently, based on the existing hardware computing resource foundation, it is very challenging to create LLMs on the edge with Transformers; calculations and inferences still need to be done in the cloud, and the response speed is unsatisfactory, making it difficult for end-users to accept.
 
 An industry insider told AI Technology Review, "On the edge, RWKV may not necessarily be the optimal solution, because with advancements in semiconductors, AI chips are evolving. In the future, the costs of hardware, computing, and energy will eventually be leveled out, and LLMs could easily run directly on the edge without needing significant changes to the underlying architecture. One day, we will reach such a critical point."
 

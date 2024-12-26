@@ -24,7 +24,7 @@ d.run supports account registration via mobile phone and email.
 
 1. After successful registration, you will return to the login page, enter your username or email, and log in to your account.
 
-You can now start purchasing computing power.
+You can now start purchasing computing resource.
 
 ![market](./images/regis01.png)
 
