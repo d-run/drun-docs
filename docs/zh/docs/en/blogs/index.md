@@ -39,9 +39,9 @@ This channel will closely follow technology trends and collect news from the AI 
     Introducing DBRX, an open general LLM created by Databricks.
     In a series of standard benchmark tests, DBRX has set new technical standards among established open LLMs.
 
-- [“AI Process Orchestration” Turns Computing Power into “Profit”](./0403-cp-to-profit.md)
+- [“AI Process Orchestration” Turns computing resource into “Profit”](./0403-cp-to-profit.md)
 
-    The national-level specialized and innovative "little giant" enterprise DaoCloud has launched the computing power ecosystem platform d.run.
+    The national-level specialized and innovative "little giant" enterprise DaoCloud has launched the computing resource ecosystem platform d.run.
 
 - [Who Will Replace the Transformer?](./0327-transformer.md)
 
@@ -49,8 +49,8 @@ This channel will closely follow technology trends and collect news from the AI 
     but why has it been popularized by OpenAI and dominated the field?
     What common challenges do non-Transformer models face?
 
-- [The Financial Industry Enters the Era of LLMs, Computing Power Infrastructure Becomes the Key to Victory](./0326-compute-power.md)
+- [The Financial Industry Enters the Era of LLMs, Computing Infrastructure Becomes the Key to Victory](./0326-compute-power.md)
 
-    DaoCloud is leading a seminar on computing power and LLM industries organized by the local financial industry in Shanghai.
+    DaoCloud is leading a seminar on computing resource and LLM industries organized by the local financial industry in Shanghai.
 
 > Contributions and reprints in various forms are welcome.

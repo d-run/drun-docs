@@ -30,7 +30,7 @@ Wenxin Yiyan also announced an upgrade scheduled for April, which will include l
 
 However, many industry insiders are skeptical about the major companies' attempts to "follow suit." They believe that Kimi's leading position in the long text domain will not be easily surpassed.
 
-Perhaps for this reason, in February of this year, during Moonlight Dark Side's latest round of financing, Alibaba, as the lead investor, converted 70-80% of its investment into computing power services.
+Perhaps for this reason, in February of this year, during Moonlight Dark Side's latest round of financing, Alibaba, as the lead investor, converted 70-80% of its investment into computing services.
 
 ## The Soul of Kimi
 
@@ -44,7 +44,7 @@ During his doctoral studies, Yang Zhilin published two significant works, Transf
 
 Transformer-XL became the first attention-based language model to fully surpass RNNs, while XLNet received best paper nominations at 20 top conferences.
 
-Yang Zhilin and his team created Kimi's outstanding lossless compression technology. This technology reduces the storage needs of parameters, inference computing power, and bandwidth usage for data transmission, enabling efficient lossless processing of millions of long tokens.
+Yang Zhilin and his team created Kimi's outstanding lossless compression technology. This technology reduces the storage needs of parameters, inference computing resource, and bandwidth usage for data transmission, enabling efficient lossless processing of millions of long tokens.
 
 In contrast, to quickly catch up with the long text trend, other major companies have had to settle for using retrieval-augmented generation (RAG) technology.
 
@@ -92,11 +92,11 @@ For example, for product growth positions, candidates are required to have exper
 
 "When you can't beat them, join them." Despite having its own Tongyi Qianwen, Alibaba has also provided support for Kimi.
 
-Currently, Kimi has borrowed Alibaba's Nvidia (NVDA.O) A800 and A100 GPU processors for expansion, and future support for Kimi's computing power will mainly come from Alibaba.
+Currently, Kimi has borrowed Alibaba's Nvidia (NVDA.O) A800 and A100 GPU processors for expansion, and future support for Kimi's computing resource will mainly come from Alibaba.
 
-In February of this year, during Moonlight Dark Side's latest round of investment exceeding $1 billion, Alibaba, as the lead investor, converted 70-80% of its investment into computing power servers.
+In February of this year, during Moonlight Dark Side's latest round of investment exceeding $1 billion, Alibaba, as the lead investor, converted 70-80% of its investment into computing resource servers.
 
-With Alibaba's support, Kimi no longer needs to worry about downtime due to insufficient computing power. An insider has also indicated that the expansion will not be done all at once. Rapid expansion can lead to idle and wasted computing power, so a certain strategy is needed. For example, Kimi will also predict user usage patterns.
+With Alibaba's support, Kimi no longer needs to worry about downtime due to insufficient computing resource. An insider has also indicated that the expansion will not be done all at once. Rapid expansion can lead to idle and wasted computing resource, so a certain strategy is needed. For example, Kimi will also predict user usage patterns.
 
 Since the release of ChatGPT in November 2022, there have been over 200 AI models in China, and the number continues to increase. The emergence of Kimi has awakened a sense of crisis among industry giants.
 

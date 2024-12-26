@@ -6,7 +6,7 @@ In March of this year, ClearML released the results of a global AI survey conduc
 
 The survey focuses on gaining more insights into global AI infrastructure plans, including respondents':
 
-1. Computing power infrastructure growth plans;
+1. Computing Infrastructure growth plans;
 2. Current experiences with scheduling and computing solutions;
 3. Usage and plans for models and AI frameworks in 2024.
 
