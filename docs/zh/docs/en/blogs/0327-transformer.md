@@ -22,7 +22,7 @@ This is because the power of the Transformer is also its weakness: the inherent 
 
 In simple terms, this means that as the sequence length (for example, the number of words in a paragraph or the size of an image) processed by the Transformer increases, the required computational power grows quadratically, quickly becoming enormous. Hence, there is a saying that "the Transformer is not efficient." This is also a major reason for the global shortage of computing power triggered by the current AI boom.
 
-Based on the limitations of the Transformer, many non-Transformer architectures have emerged, including China's RWKV, Meta's Mega, Microsoft's RetNet, Mamba, and DeepMind's Hawk and Griffin. These models have been proposed following the dominance of the Transformer in the large model development landscape.
+Based on the limitations of the Transformer, many non-Transformer architectures have emerged, including China's RWKV, Meta's Mega, Microsoft's RetNet, Mamba, and DeepMind's Hawk and Griffin. These models have been proposed following the dominance of the Transformer in the LLM development landscape.
 
 Most of them build on the original RNN foundation, aiming to improve upon the flaws and limitations of the Transformer, attempting to develop what is known as "efficient Transformers," which are architectures that resemble human thinking.
 
@@ -82,7 +82,7 @@ Mega has been trained on the same data as LLaMA and, in a fair comparison with L
 
 DeepMind's Hawk and Griffin teams also believe that attention is essential, representing gated linear RNNs, and like Mega, they belong to a hybrid model category.
 
-Apart from RWKV, domestic company Rockchip Intelligence has also released a general natural language large model with a non-attention mechanism called the Yan model. Rockchip Intelligence's CTO Liu Fanping stated that Yan has no relation to linear attention or RNNs; the large model architecture of Yan removes the high-cost attention mechanism from the Transformer, replacing it with lower-complexity linear computations, improving modeling efficiency and training speed, thus enhancing efficiency and reducing costs.
+Apart from RWKV, domestic company Rockchip Intelligence has also released a general natural language LLM with a non-attention mechanism called the Yan model. Rockchip Intelligence's CTO Liu Fanping stated that Yan has no relation to linear attention or RNNs; the LLM architecture of Yan removes the high-cost attention mechanism from the Transformer, replacing it with lower-complexity linear computations, improving modeling efficiency and training speed, thus enhancing efficiency and reducing costs.
 
 ## Can the Transformer Be Overturned?
 
@@ -94,9 +94,9 @@ RWKV, the most representative non-Transformer research, has made significant pro
 
 However, several investors have told AI Technology Review that they have struggled with whether to invest in RWKV, betting on non-Transformers. Due to significant internal disagreements—fearing that non-Transformers may not perform well—they ultimately gave up.
 
-Currently, based on the existing hardware computing power foundation, it is very challenging to create large models on the edge with Transformers; calculations and inferences still need to be done in the cloud, and the response speed is unsatisfactory, making it difficult for end-users to accept.
+Currently, based on the existing hardware computing power foundation, it is very challenging to create LLMs on the edge with Transformers; calculations and inferences still need to be done in the cloud, and the response speed is unsatisfactory, making it difficult for end-users to accept.
 
-An industry insider told AI Technology Review, "On the edge, RWKV may not necessarily be the optimal solution, because with advancements in semiconductors, AI chips are evolving. In the future, the costs of hardware, computing, and energy will eventually be leveled out, and large models could easily run directly on the edge without needing significant changes to the underlying architecture. One day, we will reach such a critical point."
+An industry insider told AI Technology Review, "On the edge, RWKV may not necessarily be the optimal solution, because with advancements in semiconductors, AI chips are evolving. In the future, the costs of hardware, computing, and energy will eventually be leveled out, and LLMs could easily run directly on the edge without needing significant changes to the underlying architecture. One day, we will reach such a critical point."
 
 RWKV's approach operates from the framework layer, allowing the model to compute locally after lightweighting the framework. However, one investor expressed the view that the ideal state for non-Transformers is to reach OpenAI's level before discussing lightweighting, "not for the sake of being small or localized."
 
@@ -106,11 +106,11 @@ Someone close to OpenAI told AI Technology Review that OpenAI had actually teste
 
 Proving how high their ceiling is has become a common challenge for all non-Transformer architectures.
 
-Some model researchers claim that the Transformer has not yet reached its ceiling for text large models; after all, the scaling law has not failed. The bottleneck of the Transformer may still lie in generating longer sequences, such as in the multimodal domain of video generation, which is essential for achieving AGI in the future. Thus, the context window remains a bottleneck for the Transformer.
+Some model researchers claim that the Transformer has not yet reached its ceiling for text LLMs; after all, the scaling law has not failed. The bottleneck of the Transformer may still lie in generating longer sequences, such as in the multimodal domain of video generation, which is essential for achieving AGI in the future. Thus, the context window remains a bottleneck for the Transformer.
 
 If, like OpenAI, one is not afraid of spending money, they could continue to push the scaling law of the Transformer. However, the issue is that for every doubling of the sequence length, the cost quadruples, and the time spent also quadruples. The quadratic growth makes the Transformer inefficient in handling long sequence problems, and resources have limits.
 
-It is understood that leading large model companies in China primarily utilize Transformers. However, there are speculations about whether GPT-5 will still use the Transformer architecture, as there has been no further open-sourcing since GPT-2. But most prefer to believe that the ceiling of the Transformer is still far away. Therefore, pursuing the Transformer path to catch up with GPT-4 and GPT-5 may not be wrong. In the era of large models, everyone is betting.
+It is understood that leading LLM companies in China primarily utilize Transformers. However, there are speculations about whether GPT-5 will still use the Transformer architecture, as there has been no further open-sourcing since GPT-2. But most prefer to believe that the ceiling of the Transformer is still far away. Therefore, pursuing the Transformer path to catch up with GPT-4 and GPT-5 may not be wrong. In the era of LLMs, everyone is betting.
 
 But whether the Transformer is the only path to achieving AGI remains uncertain. What can be confirmed is that the monopoly formed by the Transformer is hard to break, whether in terms of resources or ecosystem; current non-Transformer research cannot compete.
 

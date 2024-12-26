@@ -22,7 +22,7 @@ As Kimi continues to break records, its every move is being closely watched and 
 
 Kimi is a conversational AI product launched by the company Moonlight Dark Side. On March 18, Moonlight Dark Side announced that Kimi now supports lossless context input of up to 2 million characters. Just six months earlier, when it was released in October of last year, Kimi could only support lossless context input of 200,000 characters.
 
-Therefore, the "long text capability" of large models has gained the attention of major companies, even being considered an important performance metric in the competition among large models.
+Therefore, the "long text capability" of LLMs has gained the attention of major companies, even being considered an important performance metric in the competition among LLMs.
 
 On March 22, Tongyi Qianwen upgraded its features, offering free access to a long document processing function of up to 10 million characters for all users; 360's Zhinao officially began internal testing for a long text processing function of 5 million characters, which will soon be integrated into the 360AI browser.
 

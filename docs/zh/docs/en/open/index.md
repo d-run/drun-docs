@@ -13,7 +13,7 @@ This channel will serve as an entry point to various hot AI projects and compani
     AI technology is rapidly iterating; who will seize the opportunity and who will stand tall in the industry?
 
 <div style="text-align: center;">
-  <p style="font-size: 28px; font-weight: bold;">Rising Giants of Large Models</p>
+  <p style="font-size: 28px; font-weight: bold;">Rising Giants of LLMs</p>
 </div>
 
 <div class="grid cards" markdown>
@@ -30,7 +30,7 @@ This channel will serve as an entry point to various hot AI projects and compani
 
     ---
 
-    Originating from Transformer, it has gradually become the hottest open-source community in the field of machine learning, currently aggregating 580,000 LLM large models.
+    Originating from Transformer, it has gradually become the hottest open-source community in the field of machine learning, currently aggregating 580,000 LLM LLMs.
 
     [:octicons-arrow-right-24: Learn more](models/huggingface.md)
 
@@ -46,7 +46,7 @@ This channel will serve as an entry point to various hot AI projects and compani
 
     ---
 
-    This is the largest open-source large model in terms of parameters, reaching 46.4k stars in less than a month after its release.
+    This is the largest open-source LLM in terms of parameters, reaching 46.4k stars in less than a month after its release.
 
     [:octicons-arrow-right-24: Learn more](https://github.com/xai-org/grok-1)
 
@@ -106,11 +106,11 @@ This channel will serve as an entry point to various hot AI projects and compani
 
     [:octicons-arrow-right-24: Learn more](./pioneers/alibaba.md)
 
--   :fontawesome-solid-list:{ .lg .middle } __Chinese Large Model List__
+-   :fontawesome-solid-list:{ .lg .middle } __Chinese LLM List__
 
     ---
 
-    A comprehensive collection of large models from China with clear sources, including institutions, source information, and classifications.
+    A comprehensive collection of LLMs from China with clear sources, including institutions, source information, and classifications.
 
     [:octicons-arrow-right-24: Learn more](https://github.com/wgwang/awesome-LLMs-In-China)
 
@@ -182,7 +182,7 @@ This channel will serve as an entry point to various hot AI projects and compani
 
     ---
 
-    Making large models run faster, simpler, and cheaper.
+    Making LLMs run faster, simpler, and cheaper.
 
     [:octicons-arrow-right-24: Learn more](https://colossalai.org/)
 
@@ -246,7 +246,7 @@ This channel will serve as an entry point to various hot AI projects and compani
 
     ---
 
-    Baidu Wenxin Yiyan is the first domestic large model product charged for C-end users.
+    Baidu Wenxin Yiyan is the first domestic LLM product charged for C-end users.
 
     [:octicons-arrow-right-24: Learn more](./pioneers/baidu.md)
 
@@ -262,7 +262,7 @@ This channel will serve as an entry point to various hot AI projects and compani
 
     ---
 
-    The Spark large model, benchmarking against ChatGPT, is based on deep learning with a focus on Chinese.
+    The Spark LLM, benchmarking against ChatGPT, is based on deep learning with a focus on Chinese.
 
     [:octicons-arrow-right-24: Learn more](./pioneers/iflytek.md)
 
@@ -318,7 +318,7 @@ This channel will serve as an entry point to various hot AI projects and compani
 
     ---
 
-    ByteDance is secretly developing multiple products in the AI large model field, including multimodal digital human products and AI-generated images and videos.
+    ByteDance is secretly developing multiple products in the AI LLM field, including multimodal digital human products and AI-generated images and videos.
 
     [:octicons-arrow-right-24: Learn more](./pioneers/bytedance.md)
 

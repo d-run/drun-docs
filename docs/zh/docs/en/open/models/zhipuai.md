@@ -5,9 +5,9 @@ hide:
 
 # Zhipu AI
 
-[Zhipu AI](https://www.zhipuai.cn/) is dedicated to creating a new generation of cognitive intelligent large models, focusing on innovation in large models in China, and linking hundreds of millions of users in the physical world through cognitive large models. 
+[Zhipu AI](https://www.zhipuai.cn/) is dedicated to creating a new generation of cognitive intelligent LLMs, focusing on innovation in LLMs in China, and linking hundreds of millions of users in the physical world through cognitive LLMs. 
 
-Based on a complete model ecosystem and full-process technical support, Zhipu AI emphasizes the research and development of ultra-large-scale training models, launching the dialogue model ChatGLM. At the same time, it practices the market concept of Model as a Service (MaaS) by launching an open platform for large model MaaS.
+Based on a complete model ecosystem and full-process technical support, Zhipu AI emphasizes the research and development of ultra-large-scale training models, launching the dialogue model ChatGLM. At the same time, it practices the market concept of Model as a Service (MaaS) by launching an open platform for LLM MaaS.
 
 On March 14, 2023, ChatGLM 1.0 started an invitation-only beta test. ChatGLM references the design concept of ChatGPT, injecting code pre-training into the hundred billion parameter base model GLM-130B, and achieving human intention alignment through techniques such as supervised fine-tuning. It boasts advantages such as bilingual support, high precision, fast inference, reproducibility, and cross-platform compatibility. 
 
