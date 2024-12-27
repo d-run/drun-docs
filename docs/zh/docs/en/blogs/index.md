@@ -53,4 +53,4 @@ This channel will closely follow technology trends and collect news from the AI 
 
     DaoCloud is leading a seminar on computing resource and LLM industries organized by the local financial industry in Shanghai.
 
-> Contributions and reprints in various forms are welcome.
+[Register and Try d.run](https://console.d.run/){ .md-button }

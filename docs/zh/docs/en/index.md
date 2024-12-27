@@ -8,7 +8,7 @@ hide:
 !!! tip
 
     d.run = DaoCloud Runs Intelligence
-    [Register and Experience d.run](https://console.d.run/){ .md-button }
+    [Register and Try d.run](https://console.d.run/){ .md-button }
     
     d.run is a comprehensive AIGC computing operation and management platform developed by DaoCloud,
     integrating cloud native capabilities and building an intelligent Q&A system,
