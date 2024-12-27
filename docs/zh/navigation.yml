@@ -5,7 +5,9 @@ nav:
       - 注册账号: index.md
       - 算力云:
           - 算力市场: zestu/index.md
-          - 容器实例: zestu/instance.md
+          - 容器实例: 
+              - 创建容器实例: zestu/createinstance.md
+              - 容器实例开关机: zestu/power_on_or_off.md
           - 文件存储: zestu/storage.md
       - 大模型服务平台:
           - 模型广场: models/index.md
