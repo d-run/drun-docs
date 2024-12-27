@@ -11,7 +11,7 @@ hide:
 
 1. In the **Orders**, you can view detailed records of the user's purchases or resource operations.
 
-    Filtering: Click on the search box to select filtering criteria, supporting search or filtering by order ID, resource ID, type, product name, and status.
+    Filtering: Click the search box to select filtering criteria, supporting search or filtering by order ID, resource ID, type, product name, and status.
 
     ![orderlist](../leopard/images/orderlist.png){width=900px}
 
