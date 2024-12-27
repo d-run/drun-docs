@@ -113,7 +113,7 @@ hide:
 
     中国大模型大全，全面收集有明确来源的大模型情况，包括机构、来源信息和分类等
 
-    [:octicons-arrow-right-24: 了解更多](https://github.com/wgwang/awesome-LLMs-In-China)
+    [:octicons-arrow-right-24: 了解更多](./models/china.md)
 
 </div>
 
