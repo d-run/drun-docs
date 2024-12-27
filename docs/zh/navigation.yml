@@ -110,13 +110,13 @@ plugins:
                 算力市场: Compute Market
                 容器实例: Container Instances
                 创建容器实例: Create Instance
-                容器实例开关机: Power on/off Instance
+                容器实例开关机: Power on/off
                 文件存储: File Storage
                 大模型服务平台: LLM Studio
                 模型广场: Model Plaza
                 模型部署: Model Deployment
                 模型服务: Model Services
-                API Key 管理: API Key Management
+                API Key 管理: API Keys
                 AI 应用: AI Apps
                 功能列表: Feature List
                 应用中心: App Center
@@ -125,17 +125,17 @@ plugins:
                 语料库: Corpus Library
                 创建语料库: Create Corpus
                 语料管理: Manage Corpus
-                语料导入: Corpus Import
-                文件导入: File Import
+                语料导入: Import Corpus
+                文件导入: Import File
                 手动录入: Manual Entry
-                图文导入: Image and Text Import
+                图文导入: Import Image and Text
                 格式化导入: Formatted Import
                 数据分析: Data Analysis
                 问答质量: QA Quality
                 问答次数: Number of QAs
                 分片质量: Shard Quality
                 分片命中率: Shard Hit Ratio
-                改进意见: Suggestions for Improvement
+                改进意见: Suggestions
                 我的反馈: My Feedback
                 费用中心: Cost Center
                 钱包: Wallet
@@ -149,7 +149,7 @@ plugins:
                 帮助与支持: Help and Support
                 索引: Index
                 平台服务协议: Service Level Agreement
-                实名认证服务说明: Real-name Authentication Service
+                实名认证服务说明: Real-name Authentication
                 反挖矿协议: Anti-mining Agreement
                 AI 行业新闻: Blogs
                 d.run 是支撑生成式 AI 的理想平台: d.run is the Ideal Platform for Generative AI
@@ -172,7 +172,7 @@ plugins:
                 硬件厂商: Hardware Manufacturers
                 华为: Huawei
                 天数智芯: Iluvatar
-                国内 AI 先锋企业: Domestic AI Pioneer Companies
+                国内 AI 先锋企业: Domestic AI Pioneers
                 阿里巴巴: Alibaba
                 百川智能: Baichuan Intelligence
                 百度: Baidu
@@ -184,6 +184,6 @@ plugins:
                 腾讯: Tencent
                 图森未来: TuSimple
                 云从科技: CloudWalk Technology
-                云知声: VoiceCloud
+                云知声: UniSound
                 字节跳动: ByteDance
                 联系我们: Contact Us

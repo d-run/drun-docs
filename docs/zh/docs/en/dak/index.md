@@ -12,4 +12,4 @@ Here, you can create applications and plugins to build a corpus for AI conversat
 
 ![Application Center](./images/app-center.jpg)
 
-[Register and experience d.run](https://console.d.run/){ .md-button .md-button--primary }
+[Register and Try d.run](https://console.d.run/){ .md-button .md-button--primary }

@@ -86,4 +86,4 @@ Feiyu: As a company focused on software development and code security, our persp
 
 Finally, through this conference, "DaoCloud" hopes to build a more diverse and open platform for cross-border communication with peers in the computational ecosystem and to engage in in-depth discussions with experts across various fields on technologies, business models, and investment opportunities related to computational power and LLMs. We believe that everyone's thoughts on AI computational LLMs extend far beyond this. If you have more ideas you would like to discuss with us, we welcome you to register for the DaoCloud Computational Power Brand Launch Conference on March 28, 2024.
 
-[Register and experience d.run](https://console.d.run/){ .md-button .md-button--primary }
+[Register and Try d.run](https://console.d.run/){ .md-button .md-button--primary }
