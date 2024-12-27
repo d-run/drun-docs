@@ -35,7 +35,7 @@ API Key is the core credential for calling model services, used to verify user i
 ## Deleting an API Key
 
 1. Find the API Key you wish to delete in the list.
-2. Click on the row to perform the delete operation.
+2. Click the row to perform the delete operation.
 3. Confirm the delete operation in the pop-up window.
 4. After deletion, the API Key will immediately become invalid, and all service calls relying on this Key will be rejected.
 
