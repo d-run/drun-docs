@@ -18,7 +18,7 @@ API Key is the core credential for calling model services, used to verify user i
 
 1. On the **API Key Management** page, click the **Create** button at the top right corner.
 2. In the pop-up window, fill in the name of the API Key (e.g., test-key) to identify its purpose or associated project.
-3. Click **Confirm**, and the system will generate a new API Key.
+3. Click **OK**, and the system will generate a new API Key.
 
 !!! note
 
