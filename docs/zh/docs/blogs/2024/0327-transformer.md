@@ -2,7 +2,7 @@
 
 > 文章转载自 [AI 科技评论](https://mp.weixin.qq.com/s/Q8PIn0FOuXkOT1TiIOuDaA)
 
-![图片](./images/transformer01.png)
+![图片](../images/transformer01.png)
 
 非 Transformer 面临的共同考验依然是证明自己的天花板有多高。
 
