@@ -13,7 +13,7 @@ hide:
 
 The rise of large AI models has made GPU (Graphics Processing Unit) computing resource an extremely important resource. In this field, GPU computing resource cloud services play a crucial role, enabling the free flow of computing resources across regions and industries. Recently, the national-level specialized and innovative "Little Giant" enterprise, Shanghai DaoCloud, in collaboration with industry partners, launched the "d.run Integrated Computing Solution." This solution includes computing center services in Shanghai, Hefei, and other locations, algorithm development, model fine-tuning tools, and application development tools such as intelligent Q&A and process orchestration, providing users with an AI computing resource ecological platform.
 
-[![Jiefang Daily Front Page](./images/profit01.png)](https://www.shobserver.com/staticsg/res/html/journal/detail.html?date=2024-04-02&id=370048&page=07)
+[![Jiefang Daily Front Page](../images/profit01.png)](https://www.shobserver.com/staticsg/res/html/journal/detail.html?date=2024-04-02&id=370048&page=07)
 
 ## AI Infrastructure
 

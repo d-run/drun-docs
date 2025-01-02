@@ -8,7 +8,7 @@ Influenced by Kimi, the user traffic for Baidu's Wenxin Yiyan and Alibaba's Tong
 
 Since its launch, Kimi has been consistently outperforming various AI models from major domestic companies.
 
-![Image](./images/after01.png)
+![Image](../images/after01.png)
 
 According to brokerage monitoring data, as of March 25, Kimi's DAU (Daily Active User) on both web and app platforms has reached historic highs, hitting 790,000 and 540,000 respectively. When including mini-program users, the total DAU across all platforms significantly exceeds 2.25 million, potentially surpassing Baidu's Wenxin Yiyan, which reported 2.33 million.
 
@@ -16,7 +16,7 @@ Just two weeks prior, on March 10, Kimi's total DAU had only just crossed 1.2 mi
 
 Meanwhile, the two major players, Baidu's Wenxin Yiyan and Alibaba's Tongyi Qianwen, have experienced substantial declines in user traffic, with decreases of 33.42% and 45.05% respectively.
 
-![Image](./images/after02.png)
+![Image](../images/after02.png)
 
 As Kimi continues to break records, its every move is being closely watched and emulated by major companies.
 
@@ -76,13 +76,13 @@ This is because OpenAI currently has restrictions on C-end users uploading files
 
 As Musk recently stated, the way to upgrade technological routes is not to simply compare with competitors, as that is too simplistic. It should involve constantly challenging physical limits.
 
-![Image](./images/after03.png)
+![Image](../images/after03.png)
 
 Surpassing Baidu and other major companies may not be Kimi's ultimate goal. The next step for expansion, according to Moonlight Dark Side, is focused on overseas markets.
 
 Currently, Moonlight Dark Side is recruiting effect advertisers both domestically and internationally. Besides designing ads for domestic platforms, this position also requires the design of the company's products for major overseas platforms such as Google, Meta, and TikTok.
 
-![Image](./images/after04.png)
+![Image](../images/after04.png)
 
 At the same time, Moonlight Dark Side is also addressing its operational shortcomings.
 

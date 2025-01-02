@@ -1,6 +1,6 @@
 # The Financial Industry Enters the Era of LLMs, Computational Infrastructure Becomes the Key to Victory
 
-![Image](./images/cp01.png)
+![Image](../images/cp01.png)
 
 To build an autonomous, secure, stable, and powerful computational infrastructure in the financial industry, "DaoCloud" has organized this seminar on computational power and the LLM industry as a member of the Shanghai Pudong Development Bank Technology Cooperation Community. Experts from the financial industry, members of the Pudong Innovation Community, and LLM industry specialists were invited to exchange ideas and explore new models of computational service.
 
@@ -20,7 +20,7 @@ However, implementing AI applications isn't just about a few GPU cards; **it req
 
 In addressing the computational bottleneck in the banking sector, on one hand, we can use cloud-native technology to absorb the impact of AI while satisfying the requirements of domestic innovation. On the other hand, it is also suggested that financial enterprises consider **combining finance with computational infrastructure** to jointly expand the computational track, which is a promising future direction.
 
-![Image](./images/cp02.png)
+![Image](../images/cp02.png)
 
 ## Pudong Development Bank's "Tropical Rainforest"
 
@@ -34,7 +34,7 @@ The LLM team from the Information Technology Department of Nanyang Commercial Ba
 
 In the practical process, we face many challenges, including data privacy and security, knowledge slicing methods, computational scheduling capabilities, algorithm optimization effects, and the hallucination of LLMs, all of which can affect the final results. However, the path to intelligent development is clear. **When facing new phenomena, we often overestimate their short-term impact while underestimating their long-term development.** In the wave of AI development, we feel honored to collaborate with partners, continuously exploring innovations in the field of LLMs.
 
-![Image](./images/cp03.png)
+![Image](../images/cp03.png)
 
 ## The Vitality of LLMs
 
@@ -46,7 +46,7 @@ To achieve this, we need to use deep learning algorithms on distributed clusters
 
 Xu emphasized that human cognition actually limits development. There are many paths to Rome, and solutions are not unique; there is no such thing as the strongest LLM. How to make this model adapt to different users, allowing everyone to reach Rome, is the deeper meaning that LLMs bring to society. **The vitality of LLMs comes from adapting to open-ended questions, helping enterprises explore more unknowns within known parameters.**
 
-![Image](./images/cp04.png)
+![Image](../images/cp04.png)
 
 ## Industry and Verticalization as Future Directions for LLMs
 
@@ -54,7 +54,7 @@ Shen, head of the Technology Research and Development Department at Sichuan Tian
 
 Currently, the intuitive advantage of the CodeShell LLM lies in its proficiency in financial knowledge and familiarity with all regulations and product management of Tianfu Bank, as well as its understanding of existing bank customers. This specialization significantly enhances the efficiency of daily work for enterprises. Tianfu Bank also hopes to continuously explore and make progress in the practice of LLMs, striving to remain at the forefront in the era of AI.
 
-![Image](./images/cp05.png)
+![Image](../images/cp05.png)
 
 ## Autonomous Control in Banking Innovation
 
@@ -70,7 +70,7 @@ Ensuring these four constants minimizes the impact of business migration. Howeve
 The head of the Yuxin Technology Innovation Business Department, Xinjun Han, stated:
 **In overall architecture design, application, data, and technology architectures need to have corresponding relationships. By breaking down complex issues into smaller components and simplifying them, we can better support the business scenarios of tech finance.**
 
-![Image](./images/cp06.png)
+![Image](../images/cp06.png)
 
 ## Roundtable Discussion
 
@@ -82,7 +82,7 @@ Fudan: The problems faced by academia in reality are quite similar to those of e
 
 Feiyu: As a company focused on software development and code security, our perspective is more on the application of LLMs in code. They can perform basic repairs and writing, but currently, the input window is very limited, while actual project code can number in the tens of thousands or even millions of lines, making it difficult to directly output or summarize through LLMs. Moreover, there is some panic about LLMs replacing human jobs, but when you learn to master LLMs, it aligns with a popular saying today: **Question it, understand it, become it. Our relationship with AI will also be mutually beneficial.**
 
-![Image](./images/cp07.png)
+![Image](../images/cp07.png)
 
 Finally, through this conference, "DaoCloud" hopes to build a more diverse and open platform for cross-border communication with peers in the computational ecosystem and to engage in in-depth discussions with experts across various fields on technologies, business models, and investment opportunities related to computational power and LLMs. We believe that everyone's thoughts on AI computational LLMs extend far beyond this. If you have more ideas you would like to discuss with us, we welcome you to register for the DaoCloud Computational Power Brand Launch Conference on March 28, 2024.
 

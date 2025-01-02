@@ -2,7 +2,7 @@
 
 > This article is reprinted from [AI Technology Review](https://mp.weixin.qq.com/s/Q8PIn0FOuXkOT1TiIOuDaA)
 
-![Image](./images/transformer01.png)
+![Image](../images/transformer01.png)
 
 The common challenge faced by non-Transformer models is still to prove how high their ceiling is.
 

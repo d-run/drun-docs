@@ -1,6 +1,6 @@
 # d.run: The Ideal Platform Supporting Generative AI
 
-[Download PDF](images/d.run.pdf){ .md-button }
+[Download PDF](../images/d.run.pdf){ .md-button }
 
 d.run is an integrated intelligent computing platform launched by DaoCloud, specifically designed for model development, model training, inference services, and intelligent applications based on K8s and AI frameworks. 
 d.run is not just a tool for running workloads like web applications and microservices. 
@@ -30,7 +30,7 @@ d.run can be utilized at every stage of the LLM lifecycle.
 
 ### Model Pre-training
 
-![Model Pre-training](images/gen01.png)
+![Model Pre-training](../images/gen01.png)
 
 During the model pre-training phase, d.run provides a solid foundation for model training with its unparalleled scalability and resilience. 
 One of d.run's biggest advantages is its ability to automatically scale resources based on demand, which is a critical feature for AI/ML workloads facing enormous computational needs. 
@@ -45,7 +45,7 @@ Additionally, port forwarding and configuration management occur automatically, 
 
 ### Model Fine-tuning
 
-![Model Fine-tuning](images/gen02.png)
+![Model Fine-tuning](../images/gen02.png)
 
 Although d.run has all the tools needed for developing LLMs, many companies today do not start from scratch to build large language models, often opting for existing models and then customizing and fine-tuning them based on their specific environments. 
 This scenario of fine-tuning existing models is also very suitable for platforms like d.run due to its dynamic adaptability. 
@@ -53,7 +53,7 @@ Unlike Slurm, d.run can handle multiple workloads in parallel, making the traini
 
 ### Model Deployment
 
-![Model Deployment](images/gen03.png)
+![Model Deployment](../images/gen03.png)
 
 When it comes to LLM model deployment or model inference services, d.run provides a simplified process: you simply present an endpoint to data scientists. 
 The network stack simplifies the process of releasing models to the outside world, easily pushing the models to the consumer side. 
@@ -66,7 +66,7 @@ This greatly simplifies the management and monitoring of production environments
 
 ### Prompt Engineering
 
-![Prompt Engineering](images/gen04.png)
+![Prompt Engineering](../images/gen04.png)
 
 The advantages do not stop there. After deploying LLM models, d.run can enhance user experience when developing applications or engaging users in model experiments. 
 For example, hosting applications on platforms like Gradio or Streamlit using d.run is almost effortless, as the d.run community has a complete toolkit specifically for cross-platform application hosting. 
