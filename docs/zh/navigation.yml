@@ -50,17 +50,18 @@ nav:
           - 反挖矿协议: service/miner.md
   - AI 行业新闻:
       - 索引: blogs/index.md
-      - d.run 是支撑生成式 AI 的理想平台: blogs/d.run.md
-      - K8s 与生成式 AI 珠联璧合: blogs/0702-k8s-for-genai.md
-      - OpenAI GPT-4o 完全免费: blogs/0514-gpt4o.md
-      - OpenAI 大型语言模型规范: blogs/0509-model-spec.md
-      - 2024大规模AI基础设施形势调研: blogs/0429-ai-survey.md
-      - 云原生人工智能白皮书: blogs/0410-cnai-wp.md
-      - Kimi火了后国内其他大模型: blogs/0408-after-kimi.md
-      - DBRX 开源 LLM 介绍: blogs/0407-dbrx.md
-      - AI 流程编排化算力为算利: blogs/0403-cp-to-profit.md
-      - 谁将替代 Transformer: blogs/0327-transformer.md
-      - 金融行业迎来大模型时代: blogs/0326-compute-power.md
+      - 2025 年人工智能趋势展望: blogs/2025/0102-ai-trend.md
+      - d.run 是支撑生成式 AI 的理想平台: blogs/2024/d.run.md
+      - K8s 与生成式 AI 珠联璧合: blogs/2024/0702-k8s-for-genai.md
+      - OpenAI GPT-4o 完全免费: blogs/2024/0514-gpt4o.md
+      - OpenAI 大型语言模型规范: blogs/2024/0509-model-spec.md
+      - 2024大规模AI基础设施形势调研: blogs/2024/0429-ai-survey.md
+      - 云原生人工智能白皮书: blogs/2024/0410-cnai-wp.md
+      - Kimi火了后国内其他大模型: blogs/2024/0408-after-kimi.md
+      - DBRX 开源 LLM 介绍: blogs/2024/0407-dbrx.md
+      - AI 流程编排化算力为算利: blogs/2024/0403-cp-to-profit.md
+      - 谁将替代 Transformer: blogs/2024/0327-transformer.md
+      - 金融行业迎来大模型时代: blogs/2024/0326-compute-power.md
   - 智海拾贝:
       - 索引: open/index.md
       - 大模型:
@@ -188,3 +189,4 @@ plugins:
                 云知声: UniSound
                 字节跳动: ByteDance
                 联系我们: Contact Us
+                2025 年人工智能趋势展望: AI Trend in 2025

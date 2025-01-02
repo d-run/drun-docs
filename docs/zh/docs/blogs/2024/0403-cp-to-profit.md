@@ -15,7 +15,7 @@ hide:
 最近，国家级专精特新“小巨人”企业——上海道客，联合行业伙伴发布了“d.run 算力一体化方案”。这个方案包括上海、合肥等地的算力中心服务，
 算法开发、模型微调等模型开发工具以及智能问答、流程编排等应用开发工具，为用户提供一个 AI 算力生态平台。
 
-[![解放日报头版](./images/profit01.png)](https://www.shobserver.com/staticsg/res/html/journal/detail.html?date=2024-04-02&id=370048&page=07)
+[![解放日报头版](../images/profit01.png)](https://www.shobserver.com/staticsg/res/html/journal/detail.html?date=2024-04-02&id=370048&page=07)
 
 ## AI 基础设施
 

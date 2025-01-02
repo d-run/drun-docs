@@ -1,6 +1,6 @@
 # d.run：支撑生成式 AI 的理想平台
 
-[下载 PDF](images/d.run.pdf){ .md-button }
+[下载 PDF](../images/d.run.pdf){ .md-button }
 
 d.run 是 DaoCloud 基于 K8s 和 AI 框架专为模型开发、模型训练、推理服务和智能应用而推出的智算一体化平台。
 d.run 不只是一个运行 Web 应用和微服务这类负载的工具。
@@ -36,7 +36,7 @@ d.run 可以用在 LLM 全生命周期的每个阶段。
 
 ### 模型预训练
 
-![模型预训练](images/gen01.png)
+![模型预训练](../images/gen01.png)
 
 在模型预训练阶段，d.run 凭借其无与伦比的可扩展性和韧性，为模型训练提供了坚实的基础。
 d.run 可以根据资源需求自动扩缩的能力是其最大的优势之一，这正是 AI/ML 负载在面对海量算力需求时所急需的特性。
@@ -52,7 +52,7 @@ Jupyter Notebooks 和 VSCode 等工具对于 LLM 实验和提示工程来说是�
 
 ### 模型微调
 
-![模型微调](images/gen02.png)
+![模型微调](../images/gen02.png)
 
 虽然 d.run 拥有开发 LLM 所需的所有工具，但如今许多企业并非都要从头开始构建大语言模型，而往往是选用现有的一些模型，
 然后根据企业各自特定的环境对模型进行定制和微调。这种对现有模型进行微调的场景，也非常适合 d.run 这样的平台，因为其动态适配能力超强。
@@ -62,7 +62,7 @@ Jupyter Notebooks 和 VSCode 等工具对于 LLM 实验和提示工程来说是�
 
 ### 模型部署
 
-![模型部署](images/gen03.png)
+![模型部署](../images/gen03.png)
 
 谈到 LLM 模型部署本身或模型推理服务，d.run 提供了一个简化的流程：您只需向数据科学家呈现一个端点。
 网络栈简化了向外界发布模型的流程，轻松将模型推向消费侧。d.run 为模型部署提供了全面的工具集和丰富的生态，
@@ -74,7 +74,7 @@ Jupyter Notebooks 和 VSCode 等工具对于 LLM 实验和提示工程来说是�
 
 ### 提示工程
 
-![提示工程](images/gen04.png)
+![提示工程](../images/gen04.png)
 
 优势不止于此。部署 LLM 模型后，d.run 在开发应用或让用户参与模型实验时能够提供增强的用户体验。
 例如，使用 d.run 在 [Gradio](https://www.gradio.app/) 或 [Streamlit](https://streamlit.io/)
