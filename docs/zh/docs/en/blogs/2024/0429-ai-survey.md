@@ -26,7 +26,7 @@ Noam Harel, Chief Marketing Officer and General Manager of ClearML North America
 
     The biggest concern for deploying generative AI was moving too fast and missing important considerations (e.g. prioritizing the wrong business use cases). The second-ranked concern was moving too slowly due to a lack of ability to execute.
 
-    ![figure 1](./images/survey01.png)
+    ![figure 1](../images/survey01.png)
 
     Figure 1: 96% of companies plan to expand their AI compute capacity.
 
@@ -36,7 +36,7 @@ Noam Harel, Chief Marketing Officer and General Manager of ClearML North America
 
     74% of respondents see value in having compute and scheduling functionality as part of a single, unified AI/ML platform (instead of cobbling together an AI infrastructure tech stack of stand-alone point solutions), but only 19% of respondents actually have a scheduling tool that supports the ability to view and manage jobs within queues and effectively optimize GPU utilization.
 
-    ![figure 2](./images/survey02.webp)
+    ![figure 2](../images/survey02.webp)
 
     Figure 2: 74% of respondents see value in having compute and scheduling functionality as part of a single, unified AI/ML platform.
 
@@ -50,7 +50,7 @@ Noam Harel, Chief Marketing Officer and General Manager of ClearML North America
 
     To address GPU scarcity, approximately 52% of respondents reported actively looking for cost-effective alternatives to GPUs for inference in 2024 as compared to 27% for training, signaling a shift in AI hardware usage. Yet, one-fifth of respondents (20%) reported that they were interested in cost-effective alternatives to GPU but were not aware of existing alternatives.
 
-    ![figure 3](./images/survey03.webp)
+    ![figure 3](../images/survey03.webp)
 
     Figure 3: 52% of respondents reported actively looking for cost-effective alternatives to GPUs for inference in 2024.
 
@@ -60,7 +60,7 @@ Noam Harel, Chief Marketing Officer and General Manager of ClearML North America
 
     Latency, access to compute, and power consumption were consistently ranked as the top compute concerns across all company sizes and regions. More than half of respondents plan to use LLMs (LLama and LLama-like models) in 2024, followed by embedding models (BERT and family) (26%) in their commercial deployments in 2024. Mitigating compute challenges will be essential in realizing their aspirations.
 
-    ![figure 4](./images/survey04.webp)
+    ![figure 4](../images/survey04.webp)
 
     Figure 4: More than half of respondents plan to use LLMs (LLama and LLama-like models) in 2024.
 
@@ -70,7 +70,7 @@ Noam Harel, Chief Marketing Officer and General Manager of ClearML North America
 
     When asked about peak periods for GPU usage, 15% of respondents report that less than 50% of their available and purchased GPUs are in use. 53% believe 51-70% of GPU resources are utilized, and just 25% believe their GPU utilization reaches 85%. Only 7% of companies believe their GPU infrastructure achieves more than 85% utilization during peak periods.
 
-    ![figure 5](./images/survey05.webp)
+    ![figure 5](../images/survey05.webp)
 
     Figure 5: 15% of respondents report that less than 50% of their available and purchased GPUs are in use.
 
@@ -80,7 +80,7 @@ Noam Harel, Chief Marketing Officer and General Manager of ClearML North America
 
     Almost all executives (95%) reported that having and using external Open Source technology solutions is important for their organization.
 
-    ![figure 6](./images/survey06.webp)
+    ![figure 6](../images/survey06.webp)
 
     Figure 6: 96% of companies surveyed are currently or planning to customize Open Source models in 2024.
 
