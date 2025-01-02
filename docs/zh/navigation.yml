@@ -114,16 +114,16 @@ plugins:
                 容器实例开关机: Power on/off
                 文件存储: File Storage
                 大模型服务平台: LLM Studio
-                模型广场: Model Plaza
-                模型部署: Model Deployment
-                模型服务: Model Services
+                模型广场: Model Store
+                模型部署: Deploy Model
+                模型服务: Model Service
                 API Key 管理: API Keys
                 AI 应用: AI Apps
-                功能列表: Feature List
+                功能列表: Features
                 应用中心: App Center
                 创建应用: Create App
                 应用对话: App Dialogue
-                语料库: Corpus Library
+                语料库: Corpus
                 创建语料库: Create Corpus
                 语料管理: Manage Corpus
                 语料导入: Import Corpus
