@@ -18,7 +18,7 @@ This page explains how to create an app in the App Center.
     - **Upload App Icon**: Choose an image in jpg, jpeg, or png format, ensuring the file size does not exceed 10MB.
     - **Enter App Name**: Limit to 20 characters.
     - **Fill in App Description**: Briefly describe the app, not exceeding 100 characters.
-    - **App Debugging**: Choose to enable debugging, which will show the processing of the dialogue in the dialogue interface.
+    - **App Debugging**: Choose to enable debugging, which will show the processing of the conversation in the chat window.
 
 3. AI Configuration
 
@@ -55,12 +55,12 @@ This page explains how to create an app in the App Center.
     - **Reordering**: Enable or disable the reordering model to improve result ranking.
     - **Only Corpus Responses**: When enabled, the model will only respond according to the matched corpus content.
     - **Image and Text Mode**: Control whether and how to output image and text content.
-    - **Maximum Number of Image and Text Pieces**: Determine how many images can be output in one dialogue.
+    - **Maximum Number of Image and Text Pieces**: Determine how many images can be output in one chat.
     - **Image and Text Similarity**: Set the strictness of image matching.
 
 6. Set Memory Strategy
 
-    - **Recent Chat Memory Rounds**: Set the number of rounds or turns of dialogue history.
+    - **Recent Chat Memory Rounds**: Set the number of rounds or turns of chat history.
 
 7. Save and Publish App
 
@@ -115,7 +115,7 @@ This page explains how to create an app in the App Center.
     - **Upload App Icon**: Choose an image in jpg, jpeg, or png format, ensuring the file size does not exceed 10MB.
     - **Enter App Name**: Limit to 20 characters.
     - **Fill in App Description**: Briefly describe the app, not exceeding 100 characters.
-    - **App Debugging**: Choose to enable debugging, which will show the processing of the dialogue in the dialogue interface.
+    - **App Debugging**: Choose to enable debugging, which will show the processing of the conversation in the chat window.
 
 3. AI Configuration
 
@@ -128,8 +128,8 @@ This page explains how to create an app in the App Center.
 
 4. App Configuration  
 
-    - **Select App**: Choose an app from the App Center that can engage in dialogue normally.
-    - **Copy ID**: Used to fill in the prompts for selecting different apps during model dialogue.
+    - **Select App**: Choose an app from the App Center that can engage in chat normally.
+    - **Copy ID**: Used to fill in the prompts for selecting different apps during model chat.
 
 5. Save and Publish App
 

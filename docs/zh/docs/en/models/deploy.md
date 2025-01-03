@@ -5,7 +5,7 @@ hide:
 
 # Model Deployment
 
-You can deploy models from the **Model Square** or **Model Services**. The parameters are explained as follows:
+You can deploy models from the **Model Store** or **Model Services**. The parameters are explained as follows:
 
 - Select the model to deploy (e.g., Qwen2-0.5B-Instruct), ensuring the chosen model meets your business needs and task scenarios.
 - Model service name must meet the following requirements:
