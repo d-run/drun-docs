@@ -5,11 +5,11 @@ hide:
 
 # iFlytek
 
-With the rapid rise of large language models, [iFlytek](https://www.iflytek.com/) has independently developed the Xinghuo LLM to compete with ChatGPT. The Xinghuo LLM is a natural language model based on deep learning, with a focus on Chinese. It possesses human-like understanding and generation capabilities across various domains and tasks, enabling it to understand user needs and execute tasks based on natural dialogue.
+With the rapid rise of large language models, [iFlytek](https://www.iflytek.com/) has independently developed the Xinghuo LLM to compete with ChatGPT. The Xinghuo LLM is a natural language model based on deep learning, with a focus on Chinese. It possesses human-like understanding and generation capabilities across various domains and tasks, enabling it to understand user needs and execute tasks based on natural chat.
 
 The company's LLM continues to iterate and improve, achieving comprehensive enhancements in its capabilities.
 
-On December 15, 2022, iFlytek launched the "1+N Cognitive Intelligence LLM Special Project." On May 6, 2023, iFlytek released version 1.0 of the Xinghuo cognitive model, introducing seven core capabilities and a LLM evaluation system. On June 9, the Xinghuo model was upgraded to version 1.5, breaking through in open-ended question answering, multi-turn dialogue capabilities, and mathematical abilities. In August, version 2.0 was released, achieving multimodal capabilities with significant improvements in coding abilities.
+On December 15, 2022, iFlytek launched the "1+N Cognitive Intelligence LLM Special Project." On May 6, 2023, iFlytek released version 1.0 of the Xinghuo cognitive model, introducing seven core capabilities and a LLM evaluation system. On June 9, the Xinghuo model was upgraded to version 1.5, breaking through in open-ended question answering, multi-turn chat capabilities, and mathematical abilities. In August, version 2.0 was released, achieving multimodal capabilities with significant improvements in coding abilities.
 
 Xinghuo 3.0 fully benchmarks against ChatGPT. On October 24, 2023, Xinghuo launched version 3.0, with significant enhancements in semantic understanding, timely grasping, and code generation capabilities. It also demonstrates outstanding spatiotemporal awareness. The model exhibits minimal real-time errors in specialized capabilities, particularly in the medical field, providing timely diagnostic reminders. 
 

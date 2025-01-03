@@ -12,7 +12,7 @@ We intend to use the model specifications as guidelines for researchers and data
 
 The specifications are only part of the story about how we responsibly build and deploy AI. They are complemented by our [usage policies](https://openai.com/policies/usage-policies), which outline our expectations for how people use the API and ChatGPT.
 
-We publish the model specifications to provide more transparency about how we shape model behavior and to initiate a public dialogue about how to change and improve it. The specifications, like our models themselves, will be continuously updated based on what we learn by sharing them and listening to feedback from stakeholders.
+We publish the model specifications to provide more transparency about how we shape model behavior and to initiate a public chat about how to change and improve it. The specifications, like our models themselves, will be continuously updated based on what we learn by sharing them and listening to feedback from stakeholders.
 
 ## Objectives, Rules, and Default Behaviors
 
@@ -28,9 +28,9 @@ For other trade-offs, our approach is to outline **default behaviors** in the mo
 
 **Agent**: The entity that the end-user or developer interacts with.
 
-While language models can generate text continuations for any input, our models have been fine-tuned on inputs formatted as **dialogues**, consisting of a series of **messages**. In these dialogues, the model is designed to act only as one participant, referred to as the **agent**. In this document, when we discuss model behavior, we refer to its behavior as an agent; "model" and "agent" will be roughly synonymous.
+While language models can generate text continuations for any input, our models have been fine-tuned on inputs formatted as **chats**, consisting of a series of **messages**. In these chats, the model is designed to act only as one participant, referred to as the **agent**. In this document, when we discuss model behavior, we refer to its behavior as an agent; "model" and "agent" will be roughly synonymous.
 
-**Dialogue**: Effective model input is a **dialogue**, consisting of a series of **messages**. Each message contains the following fields:
+**Chat**: Effective model input is a **chat**, consisting of a series of **messages**. Each message contains the following fields:
 
 - `role` (required): One of "platform", "developer", "user", "agent", or "tool".
 

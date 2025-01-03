@@ -2,7 +2,7 @@
 
 Model services are a solution for quickly deploying open-source or fine-tuned large language models as callable services. With one-click deployment, the complex management of models is simplified into a standardized service format, compatible with mainstream model service API call capabilities, meeting the demand for immediate use.
 
-- Model services allow users to call selected models to perform tasks such as text generation, dialogue processing, image generation, etc.
+- Model services allow users to call selected models to perform tasks such as text generation, chat processing, image generation, etc.
 - Supports online experience of models.
 
 The details of the model service include basic information about the service, authorization methods, and call examples.
@@ -45,7 +45,7 @@ curl 'https://sh-02.d.run/v1/chat/completions' \
 Parameter Explanation:
 
 - model: The access path name of the model service (e.g., u-8105f7322477/test).
-- messages: A list of dialogue history containing user input, for example:
+- messages: A list of chat history containing user input, for example:
 
     ```json
     [{"role": "user", "content": "Say this is a test!"}]

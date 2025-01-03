@@ -21,7 +21,7 @@ In the foundational LLM field, last August, the company launched its first large
 
 A few days ago, ByteDance also released the image generation model SDXL-Lightning, which can generate extremely high-quality and high-resolution images in 2 to 4 steps, accelerating the generation speed by ten times.
 
-At the AI application layer, ByteDance established a new AI department called Flow in November last year, which has already launched three AI dialogue products: Doubao, Kouzi, and Cici. At the foundational LLM layer, ByteDance has made arrangements in both language and image modalities, with both teams reporting to Zhu Wenjia, the technical head of TikTok.
+At the AI application layer, ByteDance established a new AI department called Flow in November last year, which has already launched three AI chat products: Doubao, Kouzi, and Cici. At the foundational LLM layer, ByteDance has made arrangements in both language and image modalities, with both teams reporting to Zhu Wenjia, the technical head of TikTok.
 
 Another person close to ByteDance revealed that the company is currently facing considerable pressure in its LLM layout due to strategic oscillation between self-research and investment over the past year.
 
