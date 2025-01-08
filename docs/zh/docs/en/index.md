@@ -17,12 +17,18 @@ hide:
 d.run supports account registration via mobile phone and email.
 
 1. Click **Register** on the login window.
-1. Fill in the username, email, mobile number, receive and fill in the verification code, then click **Register**.
+1. Fill in the username, email, mobile number, receive and fill in the verification code,
+   then check the box:
+   
+    ☑️ **I have read and agree to the d.run Service Agreement.**
 
-    Each email can only register once.
-    If you are prompted that the email is already registered, you can return to the login page, click **Forgot Password**, and enter your registered email to reset the password.
+    !!! tip
+    
+        Each email can only register once.
+        If you are prompted that the email is already registered, you can return to the login page,
+        click **Forgot Password** , and enter your registered email to reset the password.
 
-1. After successful registration, you will return to the login page, enter your username or email, and log in to your account.
+1. click **Register**. After successful registration, you will return to the login page, enter your username or email, and log in to your account.
 
 You can now start purchasing computing resource.
 
