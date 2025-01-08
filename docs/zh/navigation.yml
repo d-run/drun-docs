@@ -129,9 +129,9 @@ plugins:
                 语料管理: Manage Corpus
                 语料导入: Import Corpus
                 文件导入: Import File
-                手动录入: Manual Entry
-                图文导入: Import Image and Text
-                格式化导入: Formatted Import
+                手动录入: Manual Import
+                图文导入: Import Image
+                格式化导入: Formatter Import
                 数据分析: Data Analysis
                 问答质量: QA Quality
                 问答次数: Number of QAs
