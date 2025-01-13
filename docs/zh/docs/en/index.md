@@ -14,6 +14,8 @@ hide:
     integrating cloud native capabilities and building an intelligent Q&A system,
     transforming your computing resources into benefits.
 
+    It is recommended to visit d.run from a PC using the Chrome browser.
+
 d.run supports account registration via mobile phone and email.
 
 1. Click **Register** on the login window.
