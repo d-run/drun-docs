@@ -3,7 +3,7 @@ hide:
   - toc
 ---
 
-# Bill Management
+# Bills
 
 The **Detailed Bill** records the user's consumption of purchased products in detail, including the usage of each resource and the specific costs.
 
@@ -16,7 +16,7 @@ Enter the **Bills** page to view the **Bill Details** currently on d.run.
 
 ![bills](../leopard/images/bills.png){width=900px}
 
-## Explanation of Fields in the Bill List
+## Fields in the Bill List
 
 | Display Field | Description |
 | --- | --- |
