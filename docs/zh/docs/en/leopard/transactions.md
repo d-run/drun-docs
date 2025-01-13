@@ -7,7 +7,7 @@ hide:
 
 **Transactions** records the spending and income situation of the cash balance in the wallet in detail.
 
-## Operation Steps
+## Steps
 
 On the Transactions page, you can view the detailed changes in the cash balance.
 
