@@ -3,7 +3,7 @@ hide:
   - toc
 ---
 
-# "AI Process Orchestration" Transforms computing resource into "Computational Benefits"
+# "AI workflow orchestration" Transforms computing resource into "Computational Benefits"
 
 !!! info
 
@@ -11,7 +11,7 @@ hide:
 
     Source: [Jiefang Daily](https://www.shobserver.com/staticsg/res/html/journal/detail.html?date=2024-04-02&id=370048&page=07); Reporter: Yu Taoran
 
-The rise of large AI models has made GPU (Graphics Processing Unit) computing resource an extremely important resource. In this field, GPU computing resource cloud services play a crucial role, enabling the free flow of computing resources across regions and industries. Recently, the national-level specialized and innovative "Little Giant" enterprise, Shanghai DaoCloud, in collaboration with industry partners, launched the "d.run Integrated Computing Solution." This solution includes computing center services in Shanghai, Hefei, and other locations, algorithm development, model fine-tuning tools, and application development tools such as intelligent Q&A and process orchestration, providing users with an AI computing resource ecological platform.
+The rise of large AI models has made GPU (Graphics Processing Unit) computing resource an extremely important resource. In this field, GPU computing resource cloud services play a crucial role, enabling the free flow of computing resources across regions and industries. Recently, the national-level specialized and innovative "Little Giant" enterprise, Shanghai DaoCloud, in collaboration with industry partners, launched the "d.run Integrated Computing Solution." This solution includes computing center services in Shanghai, Hefei, and other locations, algorithm development, model fine-tuning tools, and application development tools such as intelligent Q&A and workflow orchestration, providing users with an AI computing resource ecological platform.
 
 [![Jiefang Daily Front Page](../images/profit01.png)](https://www.shobserver.com/staticsg/res/html/journal/detail.html?date=2024-04-02&id=370048&page=07)
 
@@ -25,7 +25,7 @@ In 2014, Chen Qiyan's team from the EMC China Research Institute of Yihuanxin em
 
 The newly launched d.run Integrated Computing Solution aims to provide a comprehensive suite of services that cater to the growing demands of AI applications. The platform integrates various resources, including computing centers located in strategic areas like Shanghai and Hefei, to ensure high availability and scalability. It also offers tools for algorithm development and model fine-tuning, making it easier for businesses to harness AI technology without needing extensive in-house expertise.
 
-The platform's intelligent Q&A system and process orchestration capabilities allow users to streamline operations and enhance productivity. By automating processes and facilitating better resource management, the d.run platform transforms raw computing resource into tangible computational benefits, enabling organizations to focus on innovation rather than infrastructure.
+The platform's intelligent Q&A system and workflow orchestration capabilities allow users to streamline operations and enhance productivity. By automating processes and facilitating better resource management, the d.run platform transforms raw computing resource into tangible computational benefits, enabling organizations to focus on innovation rather than infrastructure.
 
 ## Industry Collaboration
 
