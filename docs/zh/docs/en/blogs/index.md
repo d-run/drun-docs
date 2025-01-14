@@ -46,7 +46,7 @@ This channel will closely follow technology trends and collect news from the AI 
     Introducing DBRX, an open general LLM created by Databricks.
     In a series of standard benchmark tests, DBRX has set new technical standards among established open LLMs.
 
-- [“AI Process Orchestration” Turns computing resource into “Profit”](2024/0403-cp-to-profit.md)
+- [“AI workflow orchestration” Turns computing resource into “Profit”](2024/0403-cp-to-profit.md)
 
     The national-level specialized and innovative "little giant" enterprise DaoCloud has launched the computing resource ecosystem platform d.run.
 

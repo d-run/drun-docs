@@ -9,7 +9,7 @@ Prerequisites: A container instance has been created and is currently running.
 The steps are as follows:
 
 1. Log in to d.run, go to **Compute Cloud** -> **Container Instances** ,
-   select a running instance, click the **...** on the right side of the list,
+   select a running instance, click the **┇** on the right side of the list,
    and choose **Power Off** from the dropdown list.
 
     <!-- ![Power Off 1](./images/poweroff1.png) -->
@@ -32,7 +32,7 @@ Prerequisites: A container instance has been created and is currently powered of
 The steps are as follows:
 
 1. Log in to d.run, go to **Compute Cloud** -> **Container Instances** ,
-   select a powered-off instance, click the **...** on the right side of the list,
+   select a powered-off instance, click the **┇** on the right side of the list,
    and choose **Start Instance** from the dropdown list.
 
     <!-- ![Power On 1](./images/poweron1.png) -->
