@@ -14,7 +14,7 @@ hide:
 
     Join WeChat Group 1 for answers and discussions on d.run issues.
 
-    ![d.run group1](../../contact/images/group1.png)
+    ![d.run group1](../../contact/images/group1.jpg)
 
 -   :simple-wechat:{ .lg .middle } __d.run WeChat Group 2__
 
@@ -22,7 +22,7 @@ hide:
 
     Join WeChat Group 2 for answers and discussions on d.run issues.
 
-    ![d.run group2](../../contact/images/group2.png)
+    ![d.run group2](../../contact/images/group2.jpg)
 
 -   :material-sail-boat:{ .lg .middle } __DaoCloud News__
 
