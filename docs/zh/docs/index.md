@@ -31,4 +31,6 @@ d.run 支持以手机、邮箱注册账号。
 
 ![market](./images/regis01.png)
 
+[DeepSeek 大模型限时免费 2 周，速来薅羊毛！](https://console.d.run/){ .md-button .md-button--primary }
+
 下一步：[算力市场](./zestu/index.md)

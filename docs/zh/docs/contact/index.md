@@ -49,3 +49,5 @@ hide:
     [400 002 6898](tel:+400 002 6898)
 
 </div>
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }

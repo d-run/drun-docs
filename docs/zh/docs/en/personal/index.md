@@ -19,3 +19,5 @@ The specific operation steps are as follows:
 1. Click the __Security Settings__ tab. Modify your phone, email, and password.
 
     ![Security Settings](./images/sec01.png)
+
+[Register and Try d.run](https://console.d.run/){ .md-button .md-button--primary }
