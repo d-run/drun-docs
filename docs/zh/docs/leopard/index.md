@@ -25,3 +25,5 @@ hide:
     ![charge](images/charge.png){width=900px}
 
 3. 充值完成后，在 **现金余额** 查看当前账户的总余额，并可在 **收支明细** 中可查看充值的记录。
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }

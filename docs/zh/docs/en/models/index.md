@@ -32,3 +32,5 @@ In the upper right corner of the chat window, click **Change Model** to choose d
 
 You can easily deploy models from the **Model Store** or **Model Service** pages.
 Refer to [Deployment Parameters](./deploy.md).
+
+[Register and Try d.run](https://console.d.run/){ .md-button .md-button--primary }

@@ -33,3 +33,5 @@ hide:
 ## 部署模型
 
 可以从 **模型广场** 或者 **模型服务** 页面轻松模型部署。参见[各项参数说明](./deploy.md)。
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }

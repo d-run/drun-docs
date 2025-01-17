@@ -19,3 +19,5 @@ hide:
 1. 点击 __安全设置__ 页签，可以修改您的电话号码、邮箱和密码。
 
     ![安全设置](./images/sec01.png)
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }

@@ -19,10 +19,10 @@ hide:
 d.run supports account registration via mobile phone and email.
 
 1. Click **Register** on the login window.
-1. Fill in the username, email, mobile number, receive and fill in the verification code,
+1. Fill in the username, email, phone number, receive and fill in the verification code,
    then check the box:
    
-    ☑️ **I have read and agree to the d.run Service Agreement.**
+    ☑️ **I agree to the terms and conditions of Platform Service Agreement**
 
     !!! tip
     
