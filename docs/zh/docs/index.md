@@ -9,6 +9,7 @@ hide:
 
     d.run = DaoCloud Runs Intelligence
     [注册并体验 d.run](https://console.d.run/){ .md-button }
+    [下载 d.run 用户手册 PDF](./images/d.run-docs.pdf){ .md-button }
     
     d.run 是 DaoCloud 自研的 AIGC 综合性算力运维和运营平台，
     整合云原生能力，为用户提供模型服务，构建智能问答体系，化算力为“算利”。
