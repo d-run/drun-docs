@@ -21,8 +21,6 @@ hide:
   
     ![文件存储1](./images/startstorge1.png)
 
-    ![文件存储2](./images/startstorage2.png)
-
 2. 上传文件：点击 **上传文件** 选择本地文件进行上传。
   
     ![上传文件](images/uploadfile1.png)
