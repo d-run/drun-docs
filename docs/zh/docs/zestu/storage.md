@@ -19,9 +19,9 @@ hide:
 
 1. 登录 d.run，进入 **算力云** -> **文件存储** ， 选择相近的区域，点击 **初始化文件存储** 开始初始化
   
-    ![初始化文件存储1](images/startstorge1.png)
+    ![文件存储1](./images/startstorge1.png)
 
-    ![初始化文件存储2](images/startstorage2.png)
+    ![文件存储2](./images/startstorage2.png)
 
 2. 上传文件：点击 **上传文件** 选择本地文件进行上传。
   
