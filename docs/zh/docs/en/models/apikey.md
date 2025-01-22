@@ -1,47 +1,48 @@
-# API Key Management
+# Manage Your API Keys
 
-API Key is the core credential for calling model services, used to verify user identity and protect data security.
+API keys are essential credentials for accessing model services. They are used to authenticate your identity and ensure the security of your data.
 
-## Description
+## Overview
 
-- Purpose of API Key:
+- **What is an API Key?**
 
-    - API Key is a necessary credential for calling model services, used for identity verification.
-    - With the API Key, you can securely call deployed model services.
+    - An API key is a required credential for calling model services. It verifies your identity and allows secure access to deployed services.
+    - With your API key, you can make secure requests to the model services.
 
-- Security Tips:
+- **Security Tips:**
 
-    - Please keep the API Key safe and avoid exposing it in client code or public environments.
-    - If the API Key is leaked, please delete it promptly and regenerate a new Key.
+    - Keep your API key safe and avoid exposing it in client-side code or public environments.
+    - If your API key is compromised, delete it immediately and generate a new one.
 
 ## Creating an API Key
 
-1. On the **API Key Management** page, click the **Create** button at the top right corner.
-2. In the pop-up window, fill in the name of the API Key (e.g., test-key) to identify its purpose or associated project.
-3. Click **OK**, and the system will generate a new API Key.
+1. Navigate to the **API Keys** page and click the **Create** button in the top-right corner.
+2. In the pop-up window, enter a name for your API key (e.g., "test-key") to indicate its purpose or associated project.
+3. Click **OK** . The system will generate a new API key for you.
 
 !!! note
 
-    After creation, please save the API Key when it is first displayed, as the complete key will not be shown again.
+    Be sure to save your API key when it's first shown, as it will not be displayed again.
 
 ## Viewing API Keys
 
-- The API Key list will display all created API Keys:
-    - Name: The identifying name for the API Key, helping users differentiate between Keys for different purposes.
-    - API Key: Partially displays the key content, for reference only.
-    - Creation Time: The time the API Key was generated.
-- Click the refresh button at the top right corner to update the Key list.
+- The API key list shows all your created keys:
+
+    - **Name:** The name you assigned to the API key, helping you identify its purpose.
+    - **API Key:** A partial view of the key for reference.
+    - **Creation Time:** The date and time when the API key was created.
+- To refresh the list, click the refresh button in the top-right corner.
 
 ## Deleting an API Key
 
-1. Find the API Key you wish to delete in the list.
-2. Click the row to perform the delete operation.
-3. Confirm the delete operation in the pop-up window.
-4. After deletion, the API Key will immediately become invalid, and all service calls relying on this Key will be rejected.
+1. Find the API key you want to delete from the list.
+2. Click the row to initiate the delete action.
+3. Confirm the deletion in the pop-up window.
+4. Once deleted, the API key becomes invalid, and all requests using that key will be rejected.
 
-## Using API Key to Call Services
+## Using an API Key to Call Services
 
-When calling model services, you need to add the following field in the HTTP request header:
+When making requests to model services, include the following field in your HTTP request header:
 
 ```http
 Authorization: Bearer {API_KEY}
@@ -60,9 +61,9 @@ curl 'https://sh-02.d.run/v1/chat/completions' \
   }'
 ```
 
-## Notes
+## Important Notes
 
-- API Key Quantity Limit: Each account is allowed to create a limited number of API Keys, please allocate them reasonably as needed.
-- Key Leak Handling: If you discover a key leak, please immediately delete the old key and recreate a new key.
-- Key Permission Management: Different API Keys can be used for different projects or services, facilitating permission isolation.
-- Regularly Update Keys: For security reasons, it is recommended to periodically delete old Keys and generate new Keys.
+- **API Key Limit:** Each account can create a limited number of API keys. Please manage them wisely.
+- **Handling Key Leaks:** If your key is compromised, immediately delete the old key and generate a new one.
+- **Key Permissions:** Different API keys can be used for separate projects or services, making it easy to manage permissions.
+- **Regularly Update Keys:** For security, it's recommended to periodically delete old keys and generate new ones.
