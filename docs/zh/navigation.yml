@@ -48,6 +48,7 @@ nav:
           - 平台服务协议: service/sla.md
           - 实名认证服务说明: service/name.md
           - 反挖矿协议: service/miner.md
+      - Release Notes: rel-notes.md
   - AI 行业新闻:
       - 索引: blogs/index.md
       - 2025 年人工智能趋势展望: blogs/2025/0102-ai-trend.md
