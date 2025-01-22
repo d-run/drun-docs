@@ -13,6 +13,7 @@ nav:
           - 模型广场: models/index.md
           - 模型部署: models/deploy.md
           - 模型服务: models/service.md
+          - 模型体验: models/exp.md
           - API Key 管理: models/apikey.md
       - AI 应用:
           - 功能列表: dak/features.md
@@ -119,6 +120,7 @@ plugins:
                 模型广场: Model Store
                 模型部署: Deploy Model
                 模型服务: Model Service
+                模型体验: Try a Model
                 API Key 管理: API Keys
                 AI 应用: AI Apps
                 功能列表: Features
