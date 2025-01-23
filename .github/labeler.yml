@@ -14,7 +14,7 @@ dev:
   - "scripts/**/*"
   - ".github/**/*"
 
-dmc:
+models:
   - "docs/zh/docs/models/**/*"
   - "docs/zh/docs/en/models/**/*"
 
