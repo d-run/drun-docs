@@ -5,7 +5,7 @@ nav:
       - 注册账号: index.md
       - 算力云:
           - 算力市场: zestu/index.md
-          - 容器实例: 
+          - 容器实例:
               - 创建容器实例: zestu/instance.md
               - 容器实例开关机: zestu/instance-on-off.md
           - 文件存储: zestu/storage.md
@@ -14,6 +14,7 @@ nav:
           - 模型部署: models/deploy.md
           - 模型服务: models/service.md
           - 模型体验: models/exp.md
+          - 模型调用: models/api-call.md
           - API Key 管理: models/apikey.md
       - AI 应用:
           - 功能列表: dak/features.md
