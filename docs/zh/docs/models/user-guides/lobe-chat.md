@@ -1,4 +1,4 @@
-# Lobe Chat
+# 在 Lobe Chat 翻译中使用
 
 ## Lobe Chat 介绍
 

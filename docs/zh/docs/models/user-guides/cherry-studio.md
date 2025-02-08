@@ -1,4 +1,4 @@
-# Cherry Studio
+# 在 Cherry Studio 中使用
 
 ## Cherry Studio 介绍
 

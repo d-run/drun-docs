@@ -1,4 +1,4 @@
-# Bob Translate
+# 在 Bob 翻译中使用
 
 ## Bob Translate 介绍
 

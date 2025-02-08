@@ -1,4 +1,4 @@
-# Cline on VSCode
+# 在 VSCode 和 Cline 中使用
 
 ## Cline 介绍
 
@@ -33,3 +33,7 @@ Cline 是一个 VSCode 插件，它可以帮助您在 VSCode 中使用 D.run 的
   - 独立部署的模型服务，可以从模型服务列表获取
 
 ![Cline](../images/cline-in-vscode-3.png)
+
+## 使用 Cline
+
+![Cline](../images/cline-in-vscode-4.png)
