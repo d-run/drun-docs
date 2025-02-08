@@ -8,6 +8,7 @@ nav:
           - 容器实例:
               - 创建容器实例: zestu/instance.md
               - 容器实例开关机: zestu/instance-on-off.md
+              - 通过容器实例使用 DeepSeek: zestu/deepseek.md
           - 文件存储: zestu/storage.md
       - 大模型服务平台:
           - 模型广场: models/index.md
