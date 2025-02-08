@@ -18,4 +18,6 @@ hide:
   
 点击 **立即购买** 即可前往[创建容器实例](instance.md)。
 
-![算力市场](../zestu/images/gpumarket.PNG)
+![算力市场](images/gpumarket.png)
+
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }

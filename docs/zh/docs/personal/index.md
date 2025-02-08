@@ -12,14 +12,12 @@ hide:
 
 具体操作步骤如下：
 
-1. 使用您的用户名/密码登录 d.run。点击左侧导航栏底部的 __全局管理__ 。
+1. 使用您的用户名/密码登录 d.run，在右上角的下拉菜单进入 __个人中心__
 
-    ![全局管理](https://docs.daocloud.io/daocloud-docs-images/docs/ghippo/images/ws01.png)
+    ![全局管理](./images/lang01.png)
 
-2. 点击右上角的用户名位置，选择 __个人中心__ 。
+1. 点击 __安全设置__ 页签，可以修改您的电话号码、邮箱和密码。
 
-    ![个人中心](https://docs.daocloud.io/daocloud-docs-images/docs/ghippo/images/lang01.png)
+    ![安全设置](./images/sec01.png)
 
-3. 点击 __安全设置__ 页签。填写您的邮箱地址或修改登录密码。
-
-    ![安全设置](https://docs.daocloud.io/daocloud-docs-images/docs/ghippo/images/security01.png)
+[注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }

@@ -9,7 +9,7 @@ d.run records the feedback information submitted by the current user for easy tr
 
 ## View Feedback Details
 
-1. Click on **My Feedback** to search for the feedback you want to view. You can click anywhere within the search results to enter the details.
+1. Click **My Feedback** to search for the feedback you want to view. You can click anywhere within the search results to enter the details.
 
     <!-- ![my feedback](images/my-feedback.jpg) -->
 

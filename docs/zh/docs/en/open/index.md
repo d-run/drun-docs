@@ -4,13 +4,13 @@ hide:
   - navigation
 ---
 
-# Treasure in the Sea of Intelligence
+# Knowledge from AI Industry
 
 This channel will serve as an entry point to various hot AI projects and companies, allowing you to grasp the pulse of the times and understand industry dynamics, showcasing the talents emerging under the AI wave.
 
 !!! tip ":thinking:"
 
-    AI technology is rapidly iterating; who will seize the opportunity and who will stand tall in the industry?
+    AI technology is rapidly iterating; who will seize the opportunity and who will stand tall in the industry? [Register and Try d.run](https://console.d.run/){ .md-button }
 
 <div style="text-align: center;">
   <p style="font-size: 28px; font-weight: bold;">Rising Giants of LLMs</p>
@@ -326,4 +326,4 @@ This channel will serve as an entry point to various hot AI projects and compani
 
 ![AI image](./images/open.png)
 
-[Register and experience d.run](https://console.d.run/){ .md-button .md-button--primary }
+[Register and Try d.run](https://console.d.run/){ .md-button .md-button--primary }

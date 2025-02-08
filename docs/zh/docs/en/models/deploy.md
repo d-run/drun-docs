@@ -3,34 +3,45 @@ hide:
   - toc
 ---
 
-# Model Deployment
+# Deploy a Model
 
-You can deploy models from the **Model Square** or **Model Services**. The parameters are explained as follows:
+You can deploy models from the **Model Store** or **Model Services**. Below are the details for configuring the deployment:
 
-- Select the model to deploy (e.g., Qwen2-0.5B-Instruct), ensuring the chosen model meets your business needs and task scenarios.
-- Model service name must meet the following requirements:
-    - Length limit: 2-64 characters
-    - Character limit: Only lowercase letters, numbers, and hyphens (-) are supported, and it must start and end with a lowercase letter or number.
-    - Example: text-gen-service or model-01
-- Region
-    - Select the region for service deployment (e.g., "Shanghai Area 2").
-    - The region selection should be based on business coverage and latency requirements.
-- Number of instances
-    - Configure the number of instances to deploy. Default value: 1
-    - Instance explanation: The more instances, the stronger the service's concurrency capability, but costs will increase accordingly.
-- Billing method. d.run offers two billing modes:
+- **Select the Model**  
+  Choose the model to deploy (e.g., Qwen2-0.5B-Instruct), ensuring it aligns with your business needs and task requirements.
+  
+- **Model Service Name Requirements**  
+    The name of the model service must meet the following criteria:
 
-    1. Pay-as-you-go:
-        - Real-time billing based on usage, suitable for short-term use or dynamic demand users.
-        - Cost formula: Number of instances × hourly cost.
+    - Length: 2–64 characters
+    - Allowed characters: Lowercase letters, numbers, and hyphens (-). The name must start and end with a lowercase letter or number.
+    - Example: `text-gen-service` or `model-01`
+  
+- **Region**
+  Select the region for service deployment (e.g., "Shanghai Area 2"). Choose a region based on your business coverage and latency needs.
+
+- **Number of Instances**
+  Configure the number of instances to deploy. Default value: 1.  
+    
+    - More instances enhance service concurrency, but they will also increase costs.
+
+- **Billing Method**
+  d.run offers two billing options:
+
+    1. **Pay-as-you-go:**
+        
+        - Real-time billing based on usage, ideal for short-term or variable-demand users.
+        - Cost formula: Number of instances × hourly rate.
         - Example: 1 instance × 3 Yuan/hour = 3 Yuan/hour.
 
-    2. Annual or monthly subscription (not currently supported):
-        - Purchase service instances in advance at a relatively discounted price, suitable for long-term users.
-        - After choosing this mode, the system will prompt the corresponding annual or monthly fee.
+    2. **Annual or Monthly Subscription** (currently not supported):
+        
+        - Prepay for service instances at a discounted rate, suitable for long-term users.
+        - Upon selecting this option, the system will display the corresponding annual or monthly fee.
 
-- View configuration costs:
-    - The bottom of the page will automatically display the calculation formula for configuration costs and the estimated costs.
-    - Example:
-        - Configuration cost: 3 Yuan/hour
-        - Calculation formula: 1 (number of instances) × 3 Yuan/hour.
+- **View Configuration Costs**
+
+    At the bottom of the page, the cost calculation formula and estimated costs will be displayed automatically.
+
+    - Configuration cost: 3 Yuan/hour
+    - Calculation formula: 1 instance × 3 Yuan/hour = 3 Yuan/hour
