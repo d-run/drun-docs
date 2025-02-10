@@ -97,7 +97,7 @@ d.run 目前为 DeepSeek 模型提供了免费一周的体验时间，
         ```bash
         curl 'https://sh-02.d.run/v1/chat/completions' \
          -H "Content-Type: application/json" \
-         -H "Authorization: Bearer <Your API Key here>" \
+         -H "Authorization: Bearer <替换成你的 API Key>" \
          -d '{
             "model": "u-3d7a8e49da2a/test14b",
             "messages": [{"role": "user", "content": "Say this is a test!"}],
