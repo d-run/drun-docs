@@ -60,6 +60,7 @@ nav:
       - Release Notes: rel-notes.md
   - AI 行业新闻:
       - 索引: blogs/index.md
+      - 部署、调用和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
       - 2025 年人工智能趋势展望: blogs/2025/0102-ai-trend.md
       - d.run 是支撑生成式 AI 的理想平台: blogs/2024/d.run.md
       - K8s 与生成式 AI 珠联璧合: blogs/2024/0702-k8s-for-genai.md
