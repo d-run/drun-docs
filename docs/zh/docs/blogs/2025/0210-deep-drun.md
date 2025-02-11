@@ -80,7 +80,7 @@ d.run 目前为 DeepSeek 模型提供了免费一周的体验时间，
 
 1. 选择 DeepSeek
 
-    ![选择 OpenAI](./images/deep11.png)
+    ![选择 OpenAI](images/translate01.png)
 
 1. 填写以下参数，只启用 d.run 的模型服务，点击 **保存**
 
@@ -93,7 +93,7 @@ d.run 目前为 DeepSeek 模型提供了免费一周的体验时间，
     | **模型** | 自定义模型 |
     | **自定义模型** | DeepSeek-R1-Distill-Qwen-14B |
 
-    ![填写参数](./images/deep12.png)
+    ![填写参数](images/translate02.png)
 
     !!! note
 
