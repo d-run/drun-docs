@@ -89,7 +89,7 @@ d.run 目前为 DeepSeek 模型提供了免费一周的体验时间，
     | **服务名称** | d.run.deepseek |
     | **API Key** | 输入刚生成的 Key |
     | **自定义 API Base URL** | `https://sh-02.d.run` |
-    | **自定义 API Path** | `/v1/chat/completions` |
+    | **自定义 API Path** | 默认不填或 `/v1/chat/completions` |
     | **模型** | 自定义模型 |
     | **自定义模型** | DeepSeek-R1-Distill-Qwen-14B |
 
@@ -110,7 +110,7 @@ d.run 目前为 DeepSeek 模型提供了免费一周的体验时间，
          }'
         ```
 
-1. 现在让 Bob Translate 翻译一句话
+1. 现在试着让 Bob Translate 翻译一句话
 
     ![填写参数](./images/deep13.jpeg)
 
