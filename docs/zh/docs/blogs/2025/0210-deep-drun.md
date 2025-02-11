@@ -6,15 +6,20 @@ hide:
 # 快速入门：部署、调用和体验 d.run DeepSeek
 
 d.run 目前为 DeepSeek 模型提供了免费一周的体验时间，
-打开 <https://console.d.run/> 即可免费体验一周以下几个 DeepSeek 模型的服务：
+打开 <https://console.d.run/> 即可一键免费体验以下几个 DeepSeek 模型的服务：
 
-- DeepSeek-R1
-- DeepSeek-V3
-- DeepSeek-R1-Distill-Qwen-32B
-- DeepSeek-R1-Distill-Qwen-14B
+- DeepSeek-R1：这是满血版，拥有完整的 2360 亿参数。采用稠密 Transformer 架构，在每次推理过程中全面激活所有模块。
+  在复杂推理任务领域展现出强大的实力。尤其在数学推理、代码生成和逻辑推理等高难度任务中，R1 的计算精度和推理速度均超越了许多同类模型。
+  在这些高端应用领域，R1 被认为能够与 OpenAI 的 GPT-4 等顶尖模型相媲美，其强大的推理能力远超一般的通用模型。
+- DeepSeek-V3：采用混合专家（MoE）架构，拥有 6710 亿参数，每次激活 370 亿参数。
+  在通用自然语言处理任务中表现出色，尤其在响应速度方面具有优势。
+- DeepSeek-R1-Distill-Qwen-32B：蒸馏模型
+- DeepSeek-R1-Distill-Qwen-14B：蒸馏模型
 
-不过，为了提高你的使用体验，建议部署一个自己专属的大模型。
-我们以 DeepSeek-R1-Distill-Qwen-14B 为例。
+![满血版体验](./images/deepr1.png)
+
+不过通常免费体验期只有一周，建议您部署一个自己专属的大模型。
+下文以 DeepSeek-R1-Distill-Qwen-14B 为例。
 
 ## 部署模型
 
@@ -30,9 +35,9 @@ d.run 目前为 DeepSeek 模型提供了免费一周的体验时间，
 
     ![部署成功](./images/deep03.png)
 
-## 在 d.run 中体验模型对话
+## 在 drun 中体验已部署模型对话
 
-点击操作列中的 **体验** ，即可使用 DeepSeek-R1-Distill-Qwen-14B 蒸馏模型开始对话聊天。
+在上图中，点击操作列中的 **体验** ，即可使用 DeepSeek-R1-Distill-Qwen-14B 蒸馏模型开始对话聊天。
 
 ![开始对话](./images/deep04.png)
 
@@ -73,7 +78,7 @@ d.run 目前为 DeepSeek 模型提供了免费一周的体验时间，
 
     ![增加服务](./images/deep10.png)
 
-1. 选择 OpenAI（后续应该会增加 DeepSeek 的选项）
+1. 选择 DeepSeek
 
     ![选择 OpenAI](./images/deep11.png)
 
