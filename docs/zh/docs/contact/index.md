@@ -14,7 +14,7 @@ hide:
 
     扫码加入微信群 1 ，就 d.run 技术问题答疑解惑
 
-    ![d.run group1](./images/group1.jpg)
+    ![d.run group1](images/group01.jpg)
 
 -   :simple-wechat:{ .lg .middle } __d.run 微信群 2__
 
@@ -22,7 +22,7 @@ hide:
 
     扫码加入微信群 2，就 d.run 技术问题答疑解惑
 
-    ![d.run group1](./images/group2.jpg)
+    ![d.run group1](images/group02.jpg)
 
 -   :material-sail-boat:{ .lg .middle } __道客船长__
 
