@@ -75,5 +75,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ../../public/ --project-name=drun-website
-          environment: production
+          command: pages deploy ../../public/ --project-name=drun-website --branch=production
