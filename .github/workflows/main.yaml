@@ -69,10 +69,14 @@ jobs:
       - run: python scripts/refresh_cdn_cache.py \
           publickey=$UCLOUD_PUBLICKEY \
           privatekey=$UCLOUD_PRIVATEKEY
+      
+      # show where am I
+      - run: pwd
+      - run: ls -la
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ../../public/ --project-name=drun-website --branch=production
+          command: pages deploy ../public --project-name=drun-website --branch=production
