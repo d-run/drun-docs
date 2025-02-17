@@ -18,15 +18,17 @@ You can deploy models from the **Model Store** or **Model Services**. Below are 
     - Example: `text-gen-service` or `model-01`
   
 - **Region**
+
   Select the region for service deployment (e.g., "Shanghai Area 2"). Choose a region based on your business coverage and latency needs.
 
 - **Number of Instances**
-  Configure the number of instances to deploy. Default value: 1.  
-    
+
+    - Configure the number of instances to deploy. Default value: 1.  
     - More instances enhance service concurrency, but they will also increase costs.
 
 - **Billing Method**
-  d.run offers two billing options:
+  
+    d.run offers two billing options:
 
     1. **Pay-as-you-go:**
         

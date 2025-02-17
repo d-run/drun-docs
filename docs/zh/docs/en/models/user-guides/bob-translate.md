@@ -24,8 +24,8 @@ Add your API Key and API Host obtained from d.run:
 
 - **API Key**: Enter your API Key
 - **API Host**:
-  - For MaaS: Use `https://chat.d.run`
-  - For independently deployed model services, refer to the model instance details, typically `https://<region>.d.run`
+    - For MaaS: Use `https://chat.d.run`
+    - For independently deployed model services, refer to the model instance details, typically `https://<region>.d.run`
 - **Custom Model**: Specify as `public/deepseek-r1`
 
 ![Bob Translate](../images/bobtranslate-3.png)
