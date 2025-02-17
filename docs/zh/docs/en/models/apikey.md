@@ -31,7 +31,8 @@ API keys are essential credentials for accessing model services. They are used t
     - **Name:** The name you assigned to the API key, helping you identify its purpose.
     - **API Key:** A partial view of the key for reference.
     - **Creation Time:** The date and time when the API key was created.
-- To refresh the list, click the refresh button in the top-right corner.
+
+- To refresh the list, click the refresh :material-refresh: button in the top-right corner.
 
 ## Deleting an API Key
 
