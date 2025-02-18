@@ -34,7 +34,7 @@ A model endpoint is a URL or API address that allows users to access and send re
 | Invocation Method | Endpoint            |
 | ----------------- | ------------------- |
 | MaaS by Token     | `chat.d.run`        |
-| Model Service     | `<region>-02.d.run` |
+| Model Service     | `<region>.d.run` |
 
 ## API Invocation Examples
 
@@ -67,7 +67,7 @@ print(response.choices[0].text)
 To invoke models using the Model Service method, follow these steps:
 
 1. **Obtain API Key**: Log in to your user console and create a new API Key
-2. **Set Endpoint**: Replace the SDK endpoint with `<region>-02.d.run`
+2. **Set Endpoint**: Replace the SDK endpoint with `<region>.d.run`
 3. **Invoke Model**: Use the official model name along with the new API Key for invocation
 
 **Example Code (Python)**:
@@ -76,7 +76,7 @@ To invoke models using the Model Service method, follow these steps:
 import openai
 
 openai.api_key = "your-api-key"  # Replace with your API Key
-openai.api_base = "<region>-02.d.run"
+openai.api_base = "<region>.d.run"
 
 response = openai.Completion.create(
   model="u-1100a15812cc/qwen2",
