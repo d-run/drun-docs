@@ -1,18 +1,29 @@
 # Page tree
 nav:
-  - 首页: https://d.run
+  - 首页: https://www.daocloud.io/
   - d.run 文档:
       - 注册账号: index.md
       - 算力云:
           - 算力市场: zestu/index.md
-          - 容器实例: zestu/instance.md
-             - JupyterLab: zestu/instance/jupyter.md
+          - 容器实例:
+              - 创建容器实例: zestu/instance.md
+              - 容器实例开关机: zestu/instance-on-off.md
+              - 通过容器实例使用 DeepSeek: zestu/deepseek.md
+              - JupyterLab: zestu/instance/jupyter.md
           - 文件存储: zestu/storage.md
       - 大模型服务平台:
           - 模型广场: models/index.md
           - 模型部署: models/deploy.md
           - 模型服务: models/service.md
+          - 模型体验: models/exp.md
+          - 模型调用: models/api-call.md
           - API Key 管理: models/apikey.md
+          - 使用示例场景:
+              - 示例场景介绍: models/user-guides/index.md
+              - 在 VSCode 和 Cline 中使用: models/user-guides/cline-in-vscode.md
+              - 在 Cherry Studio 中使用: models/user-guides/cherry-studio.md
+              - 在 Bob 翻译中使用: models/user-guides/bob-translate.md
+              - 在 LobeChat 中使用: models/user-guides/lobe-chat.md
       - AI 应用:
           - 功能列表: dak/features.md
           - 应用中心:
@@ -47,26 +58,30 @@ nav:
           - 平台服务协议: service/sla.md
           - 实名认证服务说明: service/name.md
           - 反挖矿协议: service/miner.md
+      - Release Notes: rel-notes.md
   - AI 行业新闻:
       - 索引: blogs/index.md
-      - d.run 是支撑生成式 AI 的理想平台: blogs/d.run.md
-      - K8s 与生成式 AI 珠联璧合: blogs/0702-k8s-for-genai.md
-      - OpenAI GPT-4o 完全免费: blogs/0514-gpt4o.md
-      - OpenAI 大型语言模型规范: blogs/0509-model-spec.md
-      - 2024大规模AI基础设施形势调研: blogs/0429-ai-survey.md
-      - 云原生人工智能白皮书: blogs/0410-cnai-wp.md
-      - Kimi火了后国内其他大模型: blogs/0408-after-kimi.md
-      - DBRX 开源 LLM 介绍: blogs/0407-dbrx.md
-      - AI 流程编排化算力为算利: blogs/0403-cp-to-profit.md
-      - 谁将替代 Transformer: blogs/0327-transformer.md
-      - 金融行业迎来大模型时代: blogs/0326-compute-power.md
+      - 部署、调用和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
+      - 2025 年人工智能趋势展望: blogs/2025/0102-ai-trend.md
+      - d.run 是支撑生成式 AI 的理想平台: blogs/2024/d.run.md
+      - K8s 与生成式 AI 珠联璧合: blogs/2024/0702-k8s-for-genai.md
+      - OpenAI GPT-4o 完全免费: blogs/2024/0514-gpt4o.md
+      - OpenAI 大型语言模型规范: blogs/2024/0509-model-spec.md
+      - 2024大规模AI基础设施形势调研: blogs/2024/0429-ai-survey.md
+      - 云原生人工智能白皮书: blogs/2024/0410-cnai-wp.md
+      - Kimi火了后国内其他大模型: blogs/2024/0408-after-kimi.md
+      - DBRX 开源 LLM 介绍: blogs/2024/0407-dbrx.md
+      - AI 流程编排化算力为算利: blogs/2024/0403-cp-to-profit.md
+      - 谁将替代 Transformer: blogs/2024/0327-transformer.md
+      - 金融行业迎来大模型时代: blogs/2024/0326-compute-power.md
   - 智海拾贝:
       - 索引: open/index.md
       - 大模型:
-          - OpenAI: open/models/openai.md
+          - ChatGPT: open/models/openai.md
           - Hugging Face: open/models/huggingface.md
           - 月之暗面: open/models/moonshot.md
           - Claude 3: open/models/claude.md
+          - 国内大模型汇总: open/models/china.md
       - 硬件厂商:
           - Nvidia: open/hardware/nvidia.md
           - 华为: open/hardware/huawei.md
@@ -108,33 +123,36 @@ plugins:
                 算力云: Compute Cloud
                 算力市场: Compute Market
                 容器实例: Container Instances
+                创建容器实例: Create Instance
+                容器实例开关机: Power on/off
                 文件存储: File Storage
                 大模型服务平台: LLM Studio
-                模型广场: Model Plaza
-                模型部署: Model Deployment
-                模型服务: Model Services
-                API Key 管理: API Key Management
+                模型广场: Model Store
+                模型部署: Deploy Model
+                模型服务: Model Service
+                模型体验: Try a Model
+                API Key 管理: API Keys
                 AI 应用: AI Apps
-                功能列表: Feature List
+                功能列表: Features
                 应用中心: App Center
                 创建应用: Create App
                 应用对话: App Dialogue
-                语料库: Corpus Library
+                语料库: Corpus
                 创建语料库: Create Corpus
                 语料管理: Manage Corpus
-                语料导入: Corpus Import
-                文件导入: File Import
-                手动录入: Manual Entry
-                图文导入: Image and Text Import
-                格式化导入: Formatted Import
+                语料导入: Import Corpus
+                文件导入: Import File
+                手动录入: Manual Import
+                图文导入: Import Image
+                格式化导入: Formatter Import
                 数据分析: Data Analysis
                 问答质量: QA Quality
                 问答次数: Number of QAs
                 分片质量: Shard Quality
                 分片命中率: Shard Hit Ratio
-                改进意见: Suggestions for Improvement
+                改进意见: Suggestions
                 我的反馈: My Feedback
-                费用中心: Cost Center
+                费用中心: Billing Center
                 钱包: Wallet
                 收支明细: Transactions
                 订单管理: Orders
@@ -146,7 +164,7 @@ plugins:
                 帮助与支持: Help and Support
                 索引: Index
                 平台服务协议: Service Level Agreement
-                实名认证服务说明: Real-name Authentication Service
+                实名认证服务说明: Real-name Authentication
                 反挖矿协议: Anti-mining Agreement
                 AI 行业新闻: Blogs
                 d.run 是支撑生成式 AI 的理想平台: d.run is the Ideal Platform for Generative AI
@@ -169,7 +187,7 @@ plugins:
                 硬件厂商: Hardware Manufacturers
                 华为: Huawei
                 天数智芯: Iluvatar
-                国内 AI 先锋企业: Domestic AI Pioneer Companies
+                国内 AI 先锋企业: Domestic AI Pioneers
                 阿里巴巴: Alibaba
                 百川智能: Baichuan Intelligence
                 百度: Baidu
@@ -181,6 +199,14 @@ plugins:
                 腾讯: Tencent
                 图森未来: TuSimple
                 云从科技: CloudWalk Technology
-                云知声: VoiceCloud
+                云知声: UniSound
                 字节跳动: ByteDance
                 联系我们: Contact Us
+                2025 年人工智能趋势展望: AI Trend in 2025
+                模型调用: Model Invocation
+                在 Bob 翻译中使用: Using in Bob Translate
+                在 LobeChat 中使用: Using in LobeChat
+                在 Cherry Studio 中使用: Using in Cherry Studio
+                在 VSCode 和 Cline 中使用: Using in VSCode
+                使用示例场景: Use Cases
+                示例场景介绍: Example Scenarios

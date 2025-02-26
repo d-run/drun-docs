@@ -14,7 +14,7 @@ hide:
 
     Join WeChat Group 1 for answers and discussions on d.run issues.
 
-    ![d.run group1](../../contact/images/group1.png)
+    ![d.run group1](../../contact/images/group01.jpg)
 
 -   :simple-wechat:{ .lg .middle } __d.run WeChat Group 2__
 
@@ -22,7 +22,7 @@ hide:
 
     Join WeChat Group 2 for answers and discussions on d.run issues.
 
-    ![d.run group2](../../contact/images/group2.png)
+    ![d.run group2](../../contact/images/group02.jpg)
 
 -   :material-sail-boat:{ .lg .middle } __DaoCloud News__
 
@@ -49,3 +49,5 @@ hide:
     [400 002 6898](tel:+4000026898)
 
 </div>
+
+[Register and Try d.run](https://console.d.run/){ .md-button .md-button--primary }

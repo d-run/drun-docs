@@ -9,11 +9,11 @@ File storage is primarily used to store data, source code, and other files. Impo
 
 !!! note
 
-    d.run provides each user with 20GB of free space, and elastic scaling will soon be supported. Stay tuned.
+    d.run provides each user with 20GB of free space, and scaling will soon be supported. Stay tuned.
 
 ## Prerequisites
 
-- Log in to your platform account
+- Log in to your d.run account
 
 ## Steps to Operate
 
@@ -28,11 +28,12 @@ File storage is primarily used to store data, source code, and other files. Impo
   
     ![Upload File](./images/storage03.png)
 
-3. Download Files: Select the file you want to download, click the **...**
-   on the right side of the list, and choose **Download** from the dropdown menu.
-  
+3. Perform other actions.
+
     ![Download File](./images/storage04.png)
 
-4. Delete Files: Select the file you want to delete, click the **...** on the right side of the list,
-   and choose **Delete** from the dropdown menu. Deleted files cannot be recovered,
-   so please proceed with caution!
+    - Download Files: Select the file you want to download, click the **┇**
+    on the right side of the list, and choose **Download** from the dropdown menu.
+    - Delete Files: Select the file you want to delete, click the **┇** on the right side of the list,
+    and choose **Delete** from the dropdown menu. Deleted files cannot be recovered,
+    so please proceed with caution!

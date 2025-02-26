@@ -5,6 +5,7 @@ hide:
 
 # OpenAI
 
+ChatGPT 源自 OpenAI。
 [OpenAI](https://openai.com/) 是一家人工智能研究公司，成立于 2015 年，总部位于美国旧金山。
 目前，OpenAI 由创始人 Sam Altman、首席技术官 Ilya Sutskever、首席执行官 Ilya Sutskever（同时担任首席研究科学家）等人领导。
 
