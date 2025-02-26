@@ -6,6 +6,7 @@ nav:
       - 算力云:
           - 算力市场: zestu/index.md
           - 容器实例: zestu/instance.md
+             - JupyterLab: zestu/instance/jupyter.md
           - 文件存储: zestu/storage.md
       - 大模型服务平台:
           - 模型广场: models/index.md
