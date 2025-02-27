@@ -156,7 +156,7 @@ One investor told AI Technology Review that currently, Moonshot has a heavy pres
 
 Regarding the first point, Yang Zhilin's personal capability and appeal may be able to change the situation, but the future remains uncertain; concerning the second point, Moonshot is still actively seeking financing to reduce Alibaba's internal influence, which is also favorable for other capital forces.
 
-An investor who had contact with Moonshot but ultimately did not invest told AI Technology Review that after Sequoia's initial investment, they also wanted to invite him to invest in another round. However, after careful consideration, he felt that while Yang Zhilin's technical capabilities are indeed strong, his investment perspective considers comprehensive capabilities. Technology is important, but he also looks at infrastructure, computing power, data, and other aspects, and in these areas, Yang Zhilin's appeal is still lacking.
+An investor who had contact with Moonshot but ultimately did not invest told AI Technology Review that after Sequoia's initial investment, they also wanted to invite him to invest in another round. However, after careful consideration, he felt that while Yang Zhilin's technical capabilities are indeed strong, his investment perspective considers comprehensive capabilities. Technology is important, but he also looks at infrastructure, computing resource, data, and other aspects, and in these areas, Yang Zhilin's appeal is still lacking.
 
 "He can attract top smart young people, but whether he can draw more senior talent remains uncertain, especially since he is young, and those in the AI infrastructure field are seasoned veterans; whether they are willing to follow him remains to be seen."
 

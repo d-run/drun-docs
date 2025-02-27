@@ -6,16 +6,16 @@ name: deploy-for-main
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 env:
-  UCLOUD_PUBLICKEY : ${{ secrets.UCLOUD_PUBLICKEY }}
-  UCLOUD_PRIVATEKEY : ${{ secrets.UCLOUD_PRIVATEKEY }}
-  UCLOUD_REGION : ${{ secrets.UCLOUD_REGION }}
-  UCLOUD_BUCKET : ${{ secrets.UCLOUD_BUCKET }}
+  UCLOUD_PUBLICKEY: ${{ secrets.UCLOUD_PUBLICKEY }}
+  UCLOUD_PRIVATEKEY: ${{ secrets.UCLOUD_PRIVATEKEY }}
+  UCLOUD_REGION: ${{ secrets.UCLOUD_REGION }}
+  UCLOUD_BUCKET: ${{ secrets.UCLOUD_BUCKET }}
   CI: 1
 
 concurrency:
@@ -54,21 +54,29 @@ jobs:
       - run: git clone git@github.com:DaoCloud/mkdocs-material-insiders.git mkdocs-material
       - run: pip install -e mkdocs-material
 
-      # add custom plugin with pdf support
-      # - run: pip install git+https://github.com/SAMZONG/mkdocs-with-pdf-support-material-v8
-
       # build docs
       - run: pwd
       - run: mkdocs build -f docs/zh/mkdocs.yml -d ../../public/
 
-      # upload to ucloud bucket
-      - run: cd public && pwd && python ../scripts/upload-ucloud.py \
-                public_key=$UCLOUD_PUBLICKEY \
-                private_key=$UCLOUD_PRIVATEKEY \
-                region=$UCLOUD_REGION \
-                bucket=$UCLOUD_BUCKET
+      # # upload to ucloud bucket
+      # - run: cd public && pwd && python ../scripts/upload-ucloud.py \
+      #     public_key=$UCLOUD_PUBLICKEY \
+      #     private_key=$UCLOUD_PRIVATEKEY \
+      #     region=$UCLOUD_REGION \
+      #     bucket=$UCLOUD_BUCKET
 
-      # refresh docs site cdn cache
-      - run: python scripts/refresh_cdn_cache.py \
-            publickey=$UCLOUD_PUBLICKEY \
-            privatekey=$UCLOUD_PRIVATEKEY
+      # # refresh docs site cdn cache
+      # - run: python scripts/refresh_cdn_cache.py \
+      #     publickey=$UCLOUD_PUBLICKEY \
+      #     privatekey=$UCLOUD_PRIVATEKEY
+      
+      # show where am I
+      - run: pwd
+      - run: ls -la
+
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy public --project-name=drun-website --branch=production

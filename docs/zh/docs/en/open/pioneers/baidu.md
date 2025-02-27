@@ -5,18 +5,18 @@ hide:
 
 # Baidu
 
-Since the launch of Baidu Search in 2010, [Baidu](https://www.baidu.com/) established its Natural Language Processing department to initially research internet machine translation technology. In 2013, it released Baidu Voice Assistant, followed by the launch of the smart search robot "Xiaodu" in 2014, and smart customer service in 2017. Through long-term planning and development, Baidu has built a comprehensive language and knowledge technology framework, including knowledge graphs, language understanding and generation technologies, as well as application systems supported by these technologies, such as intelligent search, machine translation, dialogue systems, intelligent writing, and deep question answering.
+Since the launch of Baidu Search in 2010, [Baidu](https://www.baidu.com/) established its Natural Language Processing department to initially research internet machine translation technology. In 2013, it released Baidu Voice Assistant, followed by the launch of the smart search robot "Xiaodu" in 2014, and smart customer service in 2017. Through long-term planning and development, Baidu has built a comprehensive language and knowledge technology framework, including knowledge graphs, language understanding and generation technologies, as well as application systems supported by these technologies, such as intelligent search, machine translation, chat systems, intelligent writing, and deep question answering.
 
-On March 16, 2023, Baidu released the generative artificial intelligence LLM "Wenxin Yiyan." As a new member of the Wenxin LLM family, Wenxin Yiyan was developed based on the Wenxin knowledge-enhanced LLM ERNIE and the dialogue LLM PLATO. Wenxin Yiyan includes six core technology modules:
+On March 16, 2023, Baidu released the generative artificial intelligence LLM "Wenxin Yiyan." As a new member of the Wenxin LLM family, Wenxin Yiyan was developed based on the Wenxin knowledge-enhanced LLM ERNIE and the conversation LLM PLATO. Wenxin Yiyan includes six core technology modules:
 
 1. Supervised fine-tuning;
 2. Reinforcement learning based on human feedback;
 3. Prompts;
 4. Knowledge enhancement;
 5. Retrieval enhancement;
-6. Dialogue enhancement.
+6. Chat enhancement.
 
-The first three types of technologies are applied in currently popular dialogue LLMs like ChatGPT, while the last three types represent Baidu's innovative reinvention based on its technological accumulation, collectively forming the technical foundation of the model.
+The first three types of technologies are applied in currently popular chat LLMs like ChatGPT, while the last three types represent Baidu's innovative reinvention based on its technological accumulation, collectively forming the technical foundation of the model.
 
 In May 2023, Baidu's Wenxin LLM version 3.5 became available for internal testing, achieving breakthroughs in foundational model upgrades, fine-tuning technology innovations, knowledge enhancement, logical reasoning enhancement, and plugin mechanisms, resulting in improved effectiveness and efficiency. On August 31, 2023, Wenxin Yiyan was fully opened to the public. On September 13, Baidu launched the Wenxin Yiyan plugin ecosystem platform "Lingjing Matrix." During the period leading up to the Baidu World 2023 conference, Wenxin Yiyan's user base reached 45 million, with 54,000 developers, 4,300 scenarios, 825 applications, and over 500 plugins within just over 40 days.
 
