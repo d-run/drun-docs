@@ -4,12 +4,13 @@ nav:
   - d.run 文档:
       - 注册账号: index.md
       - 算力云:
-          - 算力市场: zestu/index.md
+          - 算力市场: zestu/index.md             
           - 容器实例:
               - 创建容器实例: zestu/instance.md
               - 容器实例开关机: zestu/instance-on-off.md
               - 通过容器实例使用 DeepSeek: zestu/deepseek.md
               - JupyterLab: zestu/instance/jupyter.md
+              - VS Code: zestu/instance/vscode.md
           - 文件存储: zestu/storage.md
       - 大模型服务平台:
           - 模型广场: models/index.md
