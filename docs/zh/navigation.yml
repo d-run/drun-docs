@@ -22,7 +22,7 @@ nav:
               - 示例场景介绍: models/user-guides/index.md
               - 在 VSCode 和 Cline 中使用: models/user-guides/cline-in-vscode.md
               - 在 Cherry Studio 中使用: models/user-guides/cherry-studio.md
-              - 在 Bob 翻译中使用: models/user-guides/bob-translate.md
+              - 在 Bob Translate 中使用: models/user-guides/bob-translate.md
               - 在 LobeChat 中使用: models/user-guides/lobe-chat.md
       - AI 应用:
           - 功能列表: dak/features.md
@@ -204,7 +204,7 @@ plugins:
                 联系我们: Contact Us
                 2025 年人工智能趋势展望: AI Trend in 2025
                 模型调用: Model Invocation
-                在 Bob 翻译中使用: Using in Bob Translate
+                在 Bob Translate 中使用: Using in Bob Translate
                 在 LobeChat 中使用: Using in LobeChat
                 在 Cherry Studio 中使用: Using in Cherry Studio
                 在 VSCode 和 Cline 中使用: Using in VSCode
