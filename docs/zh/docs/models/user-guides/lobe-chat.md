@@ -1,4 +1,4 @@
-# 在 Lobe Chat 翻译中使用
+# 在 LobeChat 中使用 d.run
 
 [Lobe Chat](https://lobehub.com/zh) 是一个开源的现代设计 AI 聊天框架。
 支持多 AI 提供商（OpenAI/Claude 3/Gemini/Ollama/Qwen/DeepSeek）、知识库（文件上传/知识管理/RAG）、多模态（视觉/TTS/插件/艺术品）。一键免费部署您的私有 ChatGPT/Claude 应用。
