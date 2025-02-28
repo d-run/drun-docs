@@ -7,41 +7,44 @@ SSH（Secure Shell）是一种网络协议，用于在不安全的网络中安�
 
 1. 在打开的 Terminal 终端中，安装 openssh-server 服务。
 
-若已安装可跳过此步骤，直接进入步骤二。
+    若已安装可跳过此步骤，直接进入步骤二。
 
-① 执行如下命令，安装 openssh-server 服务。
-```
-apt-get update && apt install openssh-server
-```
-② 检查安装是否成功。
+    1. 执行如下命令，安装 openssh-server 服务。
+   
+        ```shell
+        apt-get update && apt install openssh-server
+        ```
 
-* 检查 ssh 进程。
+    1. 检查安装是否成功。
 
-```
-ps -e | grep ssh
-```
+        * 检查 ssh 进程。
 
-* 检查安装包。
+            ```shell
+            ps -e | grep ssh
+            ```
 
-```
-dpkg -l | grep ssh
-```
+        * 检查安装包。
+
+            ```
+            dpkg -l | grep ssh
+            ```
 
 2. 容器启动后，在容器实例列表中点击 SSH 登录按钮，打开弹窗复制 SSH 的登录信息。
 
-![ssh1](../images/ssh1.png)
+    ![ssh1](../images/ssh1.png)
 
-3.  在本地的 Terminal 终端中输入用户名/密码，返回如下信息表示登录成功。
+3. 在本地的 Terminal 终端中输入用户名/密码，返回如下信息表示登录成功。
 
-![ssh2](../images/ssh2.png)
+    ![ssh2](../images/ssh2.png)
 
 ## 使用 SSH 免密登录容器实例
 
-在个人中心 >SSH 公钥 导入公钥后，重启或新创建的实例都能免密码登录容器实例。
+在 **个人中心** -> **SSH 公钥** 导入公钥后，重启或新创建的实例都能免密码登录容器实例。
 
 ### 步骤一：配置 SSH 公钥
 
-在生成新的 SSH 密钥前，请先确认是否需要使用本地已生成的 SSH 密钥，SSH 密钥对一般存放在本地用户的根目录下。 Linux、Mac 请直接使用以下命令查看已存在的公钥，Windows 用户在 WSL（需要 Windows 10 或以上）或 Git Bash 下使用以下命令查看已生成的公钥。
+在生成新的 SSH 密钥前，请先确认是否需要使用本地已生成的 SSH 密钥，SSH 密钥对一般存放在本地用户的根目录下。
+Linux、Mac 请直接使用以下命令查看已存在的公钥，Windows 用户在 WSL（需要 Windows 10 或以上）或 Git Bash 下使用以下命令查看已生成的公钥。
 
 - **ED25519 算法：**
 
