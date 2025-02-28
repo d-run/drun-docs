@@ -10,6 +10,7 @@ nav:
               - 容器实例开关机: zestu/instance-on-off.md
               - 通过容器实例使用 DeepSeek: zestu/deepseek.md
               - JupyterLab: zestu/instance/jupyter.md
+              - SSH: zestu/instance/ssh.md
               - VS Code: zestu/instance/vscode.md
           - 文件存储: zestu/storage.md
       - 大模型服务平台:
