@@ -51,6 +51,7 @@ nav:
           - 收支明细: leopard/transactions.md
           - 订单管理: leopard/orders.md
           - 账单管理: leopard/bills.md
+          - 代金券: leopard/Voucher.md
       - 个人中心:
           - 安全设置: personal/index.md
           - 访问密钥: personal/accesstoken.md
