@@ -32,7 +32,7 @@
 
     打开您本地的VSCode开发插件菜单，在扩展程序中搜素`Remote-SSH`并安装
 
-    ![terminal8](../images/teminal8.png)
+    ![terminal8](../images/terminal8.png)
 
 2. SSH 连接并登录您平台上租用的实例
 
@@ -40,30 +40,30 @@
 
     ![terminal9](../images/teminal9.png)
 
-    ![terminal10](../images/teminal10.png)
+    ![terminal10](../images/terminal10.png)
 
 3. 复制并获取您实例的登录信息
 
-    ![terminal11](../images/teminal11.png)
+    ![terminal11](../images/terminal11.png)
 
 4. 图示以`ssh root@sh-01.d.run -p 30817`为例。回车键继续操作。
 
-    ![terminal14](../images/teminal14.png)
+    ![terminal14](../images/terminal14.png)
 
     远程主机信息会保存在本地配置文件中，选择第 1 个配置文件完成添加。
 
-    ![terminal12](../images/teminal12.png)
+    ![terminal12](../images/terminal12.png)
 
 5. 连接远程主机
 
     添加完成后在 **远程资源管理器** 中显示刚添加的远程主机。点击在新窗口中打开连接的按钮。
 
-    ![terminal15](../images/teminal15.png)
+    ![terminal15](../images/terminal15.png)
 
 6. 复制并获取实例的登录密码，参考 [步骤3]，将复制的登陆密码粘贴，输入 Enter。
 
-    ![terminal16](../images/teminal16.png)
+    ![terminal16](../images/terminal16.png)
 
 7. 成功连接后点击 **资源管理器** 标签会显示已连接到远程。同时左下角提示已连接的远程主机名称。
 
-    ![terminal17](../images/teminal17.png)
+    ![terminal17](../images/terminal17.png)
