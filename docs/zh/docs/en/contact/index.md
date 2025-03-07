@@ -8,21 +8,13 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :simple-wechat:{ .lg .middle } __d.run WeChat Group 1__
+-   :simple-wechat:{ .lg .middle } __d.run WeChat Group__
 
     ---
 
-    Join WeChat Group 1 for answers and discussions on d.run issues.
+    Scan the QR code to contact the DaoCloud Assistant and enter **d.run** to join the WeChat group.
 
-    ![d.run group1](../../contact/images/group01.jpg)
-
--   :simple-wechat:{ .lg .middle } __d.run WeChat Group 2__
-
-    ---
-
-    Join WeChat Group 2 for answers and discussions on d.run issues.
-
-    ![d.run group2](../../contact/images/group02.jpg)
+    ![d.run group1](../../contact/images/assist.jpg)
 
 -   :material-sail-boat:{ .lg .middle } __DaoCloud News__
 

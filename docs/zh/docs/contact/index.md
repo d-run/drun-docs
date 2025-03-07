@@ -8,21 +8,13 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :simple-wechat:{ .lg .middle } __d.run 微信群 1__
+-   :simple-wechat:{ .lg .middle } __d.run 微信群__
 
     ---
 
-    扫码加入微信群 1 ，就 d.run 技术问题答疑解惑
+    扫码联系道客船长小助手，输入 d.run 加入微信群
 
-    ![d.run group1](images/group01.jpg)
-
--   :simple-wechat:{ .lg .middle } __d.run 微信群 2__
-
-    ---
-
-    扫码加入微信群 2，就 d.run 技术问题答疑解惑
-
-    ![d.run group1](images/group02.jpg)
+    ![d.run group1](images/assist.jpg)
 
 -   :material-sail-boat:{ .lg .middle } __道客船长__
 
