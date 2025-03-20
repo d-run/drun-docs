@@ -56,7 +56,6 @@ nav:
           - 代金券: leopard/voucher.md
       - 个人中心:
           - 安全设置: personal/index.md
-          - 访问密钥: personal/accesstoken.md
           - 语言设置: personal/language.md
       - 帮助与支持:
           - 索引: service/index.md
@@ -164,7 +163,6 @@ plugins:
                 账单管理: Bills
                 个人中心: Personal Center
                 安全设置: Security Settings
-                访问密钥: Access Keys
                 语言设置: Language Settings
                 帮助与支持: Help and Support
                 索引: Index
