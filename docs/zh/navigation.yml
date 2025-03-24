@@ -63,6 +63,7 @@ nav:
           - 实名认证服务说明: service/name.md
           - 反挖矿协议: service/miner.md
       - Release Notes: rel-notes.md
+  - 视频教程: videos/index.md
   - AI 行业新闻:
       - 索引: blogs/index.md
       - 部署、调用和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
