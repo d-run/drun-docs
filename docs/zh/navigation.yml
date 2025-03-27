@@ -62,6 +62,7 @@ nav:
           - 平台服务协议: service/sla.md
           - 实名认证服务说明: service/name.md
           - 反挖矿协议: service/miner.md
+          - 安全白皮书: service/security.md
       - Release Notes: rel-notes.md
   - 视频教程: videos/index.md
   - AI 行业新闻:
