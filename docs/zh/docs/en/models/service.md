@@ -9,8 +9,12 @@ enabling immediate use.
   chat processing, image generation, and more.
 - These services support the online experience of models.
 
+![service](./images/service01.png)
+
 The details of the model service include basic information about the service, available
 authorization methods, and example API calls.
+
+![service](./images/service02.png)
 
 ## Basic Information
 

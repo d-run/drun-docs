@@ -2,6 +2,8 @@
 
 d.run offers most models not only with the ability to view documentation but also with an interactive inference experience. For example, you can engage in daily chats with large language models to intuitively explore their capabilities.
 
+![experience](./images/exp01.png)
+
 ## Entry Points
 
 The platform provides two entry points, allowing you to choose based on your needs.
