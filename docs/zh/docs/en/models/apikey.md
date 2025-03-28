@@ -2,6 +2,8 @@
 
 API keys are essential credentials for accessing model services. They are used to authenticate your identity and ensure the security of your data.
 
+![api keys](./images/apikey01.png)
+
 ## Overview
 
 - **What is an API Key?**
