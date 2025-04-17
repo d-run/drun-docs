@@ -12,7 +12,9 @@ nav:
               - JupyterLab: zestu/instance/jupyter.md
               - SSH: zestu/instance/ssh.md
               - VS Code: zestu/instance/vscode.md
-          - 文件存储: zestu/storage.md
+          - 文件存储: 
+              - 初始化文件存储: zestu/storage.md
+              - 文件存储扩缩容: zestu/filescale.md
       - 大模型服务平台:
           - 模型广场: models/index.md
           - 模型部署: models/deploy.md
