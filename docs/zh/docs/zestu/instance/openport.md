@@ -7,7 +7,7 @@
 ## 前提条件
 
 - 登录 d.run 账号
-- 已通过算力云[创建容器实例](https://docs.d.run/zestu/instance)，且容器实例状态为运行中。
+- 已通过算力云[创建容器实例](https://docs.d.run/zestu/instance)，且容器实例状态为 **运行中**
 
 ## 操作步骤
 
@@ -47,8 +47,8 @@
 
     ![开放端口2](../images/openport2.png)
     
-    [开放端口3](../images/openport3.png)
+    ![开放端口3](../images/openport3.png)
 
 1. 点击生成的外部访问链接，即可访问 nginx 服务。
 
-    [nginx1](../images/NGINX1.png)
+    ![nginx1](../images/NGINX1.png)
