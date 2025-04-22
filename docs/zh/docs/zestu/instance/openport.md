@@ -12,13 +12,13 @@
 
 1. 登录 d.run 账号，在顶部导航栏点击 __算力云__ ，然后点击左侧导航栏的 __容器实例__ ，在容器列表中选择您要操作的容器实例。
 
-    [容器实例列表](../images/ins1.png)
+    ![容器实例列表](../images/ins1.png)
 
 1. 在容器实例列表页面，点击 __SSH 登录__ ，通过 SSH 命令登录容器实例。
 
-    [SSH 登录1](../images/sshsecret.png)
+    ![SSH 登录1](../images/sshsecret.png)
     
-    [SSH 登录2](../images/terminal1.jpeg)
+    ![SSH 登录2](../images/terminal1.jpeg)
 
 1. 安装并启动 nginx 服务。
 
@@ -44,7 +44,7 @@
 
 1. 将 nginx 的端口添加到访问管理，并等待外部端口的分配（约 1 分钟）。
 
-    [开放端口2](../images/openport2.png)
+    ![开放端口2](../images/openport2.png)
     
     [开放端口3](../images/openport3.png)
 
