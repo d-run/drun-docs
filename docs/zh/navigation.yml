@@ -12,6 +12,7 @@ nav:
               - JupyterLab: zestu/instance/jupyter.md
               - SSH: zestu/instance/ssh.md
               - VS Code: zestu/instance/vscode.md
+              - 访问管理: zestu/instance/openport.md
           - 文件存储:
               - 初始化文件存储: zestu/filestorage/storage.md
               - 文件存储扩缩容: zestu/filestorage/filescale.md
