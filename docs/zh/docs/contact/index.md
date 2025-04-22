@@ -12,7 +12,7 @@ hide:
 
     ---
 
-    扫码联系道客船长小助手，输入 d.run 加入微信群
+    扫码联系道客船长小助手后，聊天窗口输入 **d.run** 加入微信群
 
     ![d.run group1](images/assist.jpg)
 

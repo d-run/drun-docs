@@ -12,9 +12,10 @@ nav:
               - JupyterLab: zestu/instance/jupyter.md
               - SSH: zestu/instance/ssh.md
               - VS Code: zestu/instance/vscode.md
-          - 文件存储: 
-              - 初始化文件存储: zestu/storage.md
-              - 文件存储扩缩容: zestu/filescale.md
+              - 访问管理: zestu/instance/openport.md
+          - 文件存储:
+              - 初始化文件存储: zestu/filestorage/storage.md
+              - 文件存储扩缩容: zestu/filestorage/filescale.md
       - 大模型服务平台:
           - 模型广场: models/index.md
           - 模型部署: models/deploy.md
@@ -56,14 +57,16 @@ nav:
           - 代金券: leopard/voucher.md
       - 个人中心:
           - 安全设置: personal/index.md
-          - 访问密钥: personal/accesstoken.md
           - 语言设置: personal/language.md
       - 帮助与支持:
           - 索引: service/index.md
           - 平台服务协议: service/sla.md
           - 实名认证服务说明: service/name.md
           - 反挖矿协议: service/miner.md
+          - 人脸信息处理规则: service/face-id.md
+          - 安全白皮书: service/security.md
       - Release Notes: rel-notes.md
+  - 视频教程: videos/index.md
   - AI 行业新闻:
       - 索引: blogs/index.md
       - 部署、调用和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
@@ -164,7 +167,6 @@ plugins:
                 账单管理: Bills
                 个人中心: Personal Center
                 安全设置: Security Settings
-                访问密钥: Access Keys
                 语言设置: Language Settings
                 帮助与支持: Help and Support
                 索引: Index

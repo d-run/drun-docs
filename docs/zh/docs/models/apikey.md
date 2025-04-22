@@ -2,6 +2,8 @@
 
 API Key 是调用模型服务的核心凭证，用于验证用户身份并保护数据安全。
 
+![api keys](./images/apikey01.png)
+
 ## 功能说明
 
 - API Key 作用：

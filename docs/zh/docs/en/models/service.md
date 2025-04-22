@@ -9,8 +9,12 @@ enabling immediate use.
   chat processing, image generation, and more.
 - These services support the online experience of models.
 
+![service](./images/service01.png)
+
 The details of the model service include basic information about the service, available
 authorization methods, and example API calls.
+
+![service](./images/service02.png)
 
 ## Basic Information
 
@@ -164,3 +168,26 @@ async function getData() {
 
 getData();
 ```
+
+## Scaling Up and Down  
+
+If you experience resource shortages or lag while using the model, you can scale up the model.  
+
+In the model service list, click **┇** on the right side, then select **Scale Up/Down** from the dropdown menu.  
+
+![Scaling Up/Down](./images/service03.png)  
+
+Enter the number of instances you want to add, such as 2, and click **OK** .  
+
+![Scaling Up/Down](./images/service05.png)  
+
+## Deletion  
+
+1. In the model service list, click **┇** on the right side, then select **Delete** from the dropdown menu.  
+2. Enter the name of the model to be deleted, verify the details, and click **Delete**.  
+
+   ![Delete Service](./images/service04.png)  
+
+!!! caution  
+
+    Once deleted, the model will stop running, and billing will cease.
