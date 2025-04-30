@@ -66,6 +66,8 @@ nav:
           - 反挖矿协议: service/miner.md
           - 人脸信息处理规则: service/face-id.md
           - 安全白皮书: service/security.md
+          - 企业/高校认证服务说明: service/org-cert.md
+          - 收集个人信息清单: service/collect-info.md
       - Release Notes: rel-notes.md
   - 视频教程: videos/index.md
   - AI 行业新闻:
