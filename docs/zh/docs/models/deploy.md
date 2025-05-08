@@ -10,7 +10,8 @@ hide:
 ![deploy](./images/deploy01.png)
 
 - 选择需要部署的模型（如 DeepSeek-R1），可通过 下拉菜单 快速选择符合您业务需求和任务场景的模型。
-![deploy](./images/deploy02.png)
+
+    ![deploy](./images/deploy02.png)
 
 - 模型服务名称，需满足以下要求
 
