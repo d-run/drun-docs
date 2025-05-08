@@ -30,7 +30,7 @@ hide:
 
 ![详情](./images/details02.png)
 
-点击 **API 调用** 页签，可以查看完整 API 调用信息。
+点击 **API 调用** 页签，可以查看完整API调用信息。
 
 ![详情](./images/details03.png)
 
