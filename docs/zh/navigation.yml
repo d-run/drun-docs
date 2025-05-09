@@ -69,7 +69,13 @@ nav:
           - 企业/高校认证服务说明: service/org-cert.md
           - 收集个人信息清单: service/collect-info.md
       - Release Notes: rel-notes.md
-  - 视频教程: videos/index.md
+  - 视频教程:
+      - 索引: videos/index.md
+      - 注册与登录: videos/login.md
+      - 算力云: videos/zestu.md
+      - 大模型服务平台: videos/models.md
+      - AI 应用: videos/ai-app.md
+      - 费用中心: videos/bills.md
   - AI 行业新闻:
       - 索引: blogs/index.md
       - 部署、调用和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
