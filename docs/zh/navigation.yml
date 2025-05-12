@@ -66,7 +66,7 @@ nav:
           - 反挖矿协议: service/miner.md
           - 人脸信息处理规则: service/face-id.md
           - 安全白皮书: service/security.md
-          - 企业/高校认证服务说明: service/org-cert.md
+          - 企业/高校认证服务说明: service/enterprise-certification.md
           - 收集个人信息清单: service/collect-info.md
       - Release Notes: rel-notes.md
   - 视频教程:
@@ -182,6 +182,7 @@ plugins:
                 平台服务协议: Service Level Agreement
                 实名认证服务说明: Real-name Authentication
                 反挖矿协议: Anti-mining Agreement
+                企业/高校认证服务说明: Enterprise Authentication
                 AI 行业新闻: Blogs
                 d.run 是支撑生成式 AI 的理想平台: d.run is the Ideal Platform for Generative AI
                 K8s 与生成式 AI 珠联璧合: K8s and Generative AI Make a Perfect Match
