@@ -62,12 +62,14 @@ nav:
       - 帮助与支持:
           - 索引: service/index.md
           - 平台服务协议: service/sla.md
+          - 平台隐私政策: service/privacy.md
+          - 平台安全白皮书: service/security.md
+          - 收集个人信息清单: service/collect-info.md
+          - 个人信息共享、SDK清单: service/share.md
+          - 企业/高校认证服务说明: service/enterprise-certification.md
           - 实名认证服务说明: service/name.md
           - 反挖矿协议: service/miner.md
           - 人脸信息处理规则: service/face-id.md
-          - 安全白皮书: service/security.md
-          - 企业/高校认证服务说明: service/enterprise-certification.md
-          - 收集个人信息清单: service/collect-info.md
       - Release Notes: rel-notes.md
   - 视频教程:
       - 索引: videos/index.md
@@ -180,9 +182,14 @@ plugins:
                 帮助与支持: Help and Support
                 索引: Index
                 平台服务协议: Service Level Agreement
+                平台隐私政策: service/privacy.md
+                平台安全白皮书: Security Whitepaper
+                收集个人信息清单: Collected Personal Info
+                个人信息共享、SDK清单: Personal Info and SDK List
+                企业/高校认证服务说明: Enterprise Authentication
                 实名认证服务说明: Real-name Authentication
                 反挖矿协议: Anti-mining Agreement
-                企业/高校认证服务说明: Enterprise Authentication
+                人脸信息处理规则: Facial Info Processing Rules
                 AI 行业新闻: Blogs
                 d.run 是支撑生成式 AI 的理想平台: d.run is the Ideal Platform for Generative AI
                 K8s 与生成式 AI 珠联璧合: K8s and Generative AI Make a Perfect Match
