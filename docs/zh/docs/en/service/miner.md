@@ -79,7 +79,7 @@ Activities related to virtual currencies are considered illegal financial activi
 
 ### 6.1 Legal Effect
 
-This "Anti-Mining Agreement" is part of the "d.run Platform Service Agreement" and has the same legal effect as the "d.run Platform Service Agreement."
+This "Anti-Mining Agreement" is part of the "d.run Service Agreement" and has the same legal effect as the "d.run Service Agreement."
 
 ### 6.2 Effective Date
 
