@@ -54,7 +54,7 @@ Users must not use the real-name authentication service for any illegal activiti
 
 ### 4.1 Commitment to Security Measures
 
-We commit to taking industry-standard security measures to protect users' identity information, and we will collect, store, use, delete, and share your personal information in accordance with the provisions of the "d.run Platform Service Agreement."
+We commit to taking industry-standard security measures to protect users' identity information, and we will collect, store, use, delete, and share your personal information in accordance with the provisions of the "d.run Service Agreement."
 
 ### 4.2 Principle of Legal Use
 
@@ -82,7 +82,7 @@ We reserve the right to take appropriate measures when users violate the terms o
 
 ### 6.1 Legal Effect
 
-This "Real-name Authentication Service Description" is part of the "d.run Platform Service Agreement" and has the same legal effect as the "d.run Platform Service Agreement."
+This "Real-name Authentication Service Description" is part of the "d.run Service Agreement" and has the same legal effect as the "d.run Service Agreement."
 
 ### 6.2 Update Notice
 
