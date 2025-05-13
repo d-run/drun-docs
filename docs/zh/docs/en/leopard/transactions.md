@@ -18,7 +18,7 @@ On the Transactions page, you can view the detailed changes in the cash balance.
 
 ## Detailed Fields in Transactions
 
-| **Display Field Name** | **Description** |
+| **Fields** | **Description** |
 | --- | --- |
 | Serial Number | A unique identifier for a single transaction in the Transactions. |
 | Transaction Time | The specific time of the transaction. |

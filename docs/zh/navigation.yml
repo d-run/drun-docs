@@ -176,6 +176,7 @@ plugins:
                 收支明细: Transactions
                 订单管理: Orders
                 账单管理: Bills
+                代金券: Vouchers
                 个人中心: Personal Center
                 安全设置: Security Settings
                 语言设置: Language Settings
