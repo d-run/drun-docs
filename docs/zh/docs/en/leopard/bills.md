@@ -18,7 +18,7 @@ Enter the **Bills** page to view the **Bill Details** currently on d.run.
 
 ## Fields in the Bill List
 
-| Display Field | Description |
+| Fields | Description |
 | --- | --- |
 | Bill ID | A unique identifier for each bill record. |
 | Billing Cycle | Indicates the time range for this bill's settlement. |

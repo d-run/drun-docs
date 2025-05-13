@@ -26,7 +26,7 @@ hide:
 
 ## Explanation of Fields
 
-| **Display Field Name** | **Description** |
+| **Fields** | **Description** |
 | --- | --- |
 | Order ID | A unique identifier for each order, used to query or manage order records. |
 | Create Time | The time point when the order was generated, indicating the specific time of purchase or operation. |

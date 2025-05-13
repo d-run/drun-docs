@@ -11,17 +11,17 @@ hide:
 
 1. 在 **代金券列表** 中可以查看当前登陆账号的所有代金券信息，包括代金券的使用限制、面额以及生效时间等信息。
 
-    ![voucher](../leopard/images/voucher.png)
+    ![voucher](./images/voucher.png)
 
 2. 点击 **失效代金券** 可看到当前账户中已超过生效时间或已花费完成的代金券记录。
 
-    ![voucher](.。/leopard/images/voucher-1.png)
+    ![voucher](./images/voucher-1.png)
 
 ### 通过兑换码兑换代金券
 
 登录账户后，在 **代金券** 页面点击 **兑换代金券** 按钮后，弹出窗口中输入兑换码并提交。系统将验证有效性，成功后自动发放至账户。
 
-![voucher](../leopard/images/voucher-2.png)
+![voucher](./images/voucher-2.png)
 
 ## 使用规则
 
