@@ -290,7 +290,7 @@ This channel will serve as an entry point to various hot AI projects and compani
 
     [:octicons-arrow-right-24: Learn more](./pioneers/aispeech.md)
 
--   :simple-tencentqq:{ .lg .middle } __Tencent__
+-   :simple-qq:{ .lg .middle } __Tencent__
 
     ---
 
