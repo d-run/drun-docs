@@ -291,7 +291,7 @@ hide:
 
     [:octicons-arrow-right-24: 了解更多](./pioneers/aispeech.md)
 
--   :simple-tencentqq:{ .lg .middle } __腾讯__
+-   :simple-qq:{ .lg .middle } __腾讯__
 
     ---
 
