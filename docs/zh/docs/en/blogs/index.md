@@ -7,6 +7,11 @@ hide:
 
 This channel will closely follow technology trends and collect news from the AI industry.
 
+- [Announcing the llm-d community!](./2025/llmd.md)
+
+    llm-d is a Kubernetes-native high-performance distributed LLM inference framework,
+    a well-lit path for anyone to serve at scale, with the fastest time-to-value and competitive performance per dollar for most models across most hardware accelerators.
+
 - [AI Trends for 2025](./2025/0102-ai-trend.md)
 
     As technology races forward, artificial intelligence (AI) is becoming an essential part of our everyday lives.
