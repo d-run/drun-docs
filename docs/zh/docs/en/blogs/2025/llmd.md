@@ -40,7 +40,7 @@ Let’s take a look at each one step-by-step:
         * RAG has long inputs - prompt and retrieved docs - and short generated outputs  
         * Reasoning has a short or medium inputs and long generated outputs
 
-    ![Figure 3: Comparing the RAG pattern and Thinking/Reasoning pattern with prefill and decode stages](./images/image2_4.jpg)
+        ![Figure 3: Comparing the RAG pattern and Thinking/Reasoning pattern with prefill and decode stages](./images/image2_4.jpg)
 
     * These differences in request times can lead to significant imbalances across instances, which are compounded as loaded instances get overwhelmed. Overloads lead to longer ITL (Inter-Token Latency), which leads to more load, which leads to more ITL.
 
