@@ -12,6 +12,11 @@ This channel will closely follow technology trends and collect news from the AI 
     llm-d is a Kubernetes-native high-performance distributed LLM inference framework,
     a well-lit path for anyone to serve at scale, with the fastest time-to-value and competitive performance per dollar for most models across most hardware accelerators.
 
+* [Deploy, Invoke, and Try DeepSeek on d.run](./2025/0210-deep-drun.md)
+
+    This is a quick start guide that teaches you how to deploy DeepSeek models in d.run and use the DeepSeek model service within d.run or any third-party application.
+
+
 - [AI Trends for 2025](./2025/0102-ai-trend.md)
 
     As technology races forward, artificial intelligence (AI) is becoming an essential part of our everyday lives.
