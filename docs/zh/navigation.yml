@@ -59,17 +59,8 @@ nav:
       - 个人中心:
           - 安全设置: personal/index.md
           - 语言设置: personal/language.md
-      - 帮助与支持:
-          - 索引: service/index.md
-          - 平台服务协议: service/sla.md
-          - 平台隐私政策: service/privacy.md
-          - 平台安全白皮书: service/security.md
-          - 收集个人信息清单: service/collect-info.md
-          - 个人信息共享、SDK清单: service/share.md
-          - 企业/高校认证服务说明: service/enterprise-certification.md
-          - 实名认证服务说明: service/name.md
-          - 反挖矿协议: service/miner.md
-          - 人脸信息处理规则: service/face-id.md
+      - 服务协议:
+          - 协议清单: service/index.md
       - Release Notes: rel-notes.md
   - 视频教程:
       - 索引: videos/index.md
@@ -240,3 +231,5 @@ plugins:
                 示例场景介绍: Example Scenarios
                 llm-d 它来了: Announcing the llm-d community
                 部署、调用和体验 d.run DeepSeek: Deploy, Invoke, and Try DeepSeek on d.run
+                服务协议: Service Agreements
+                协议清单: Agreement List
