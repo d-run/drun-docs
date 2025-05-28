@@ -169,3 +169,4 @@ graph TD
 - 技术实现细节详见[《平台安全白皮书》](../security.md)
 
 [注册并体验企业认证服务](https://console.d.run/enterprise-auth){ .md-button .md-button--primary }
+[返回协议清单页](./index.md){ .md-button .md-button--primary }
