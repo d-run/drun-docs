@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # d.run 平台隐私政策
 
 [点击下载 d.run 平台隐私政策 PDF](./attach/privacy.pdf){ .md-button }
