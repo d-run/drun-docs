@@ -71,6 +71,7 @@ nav:
       - 费用中心: videos/bills.md
   - AI 行业新闻:
       - 索引: blogs/index.md
+      - d.run 上新 DeepSeek-R1-0528: blogs/2025/0603-deepseek-0528.md
       - llm-d 它来了: blogs/2025/llmd.md
       - 部署、调用和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
       - 2025 年人工智能趋势展望: blogs/2025/0102-ai-trend.md
