@@ -7,6 +7,10 @@ hide:
 
 本频道将紧跟技术趋势，收集 AI 行业新闻。
 
+* [d.run 上新 DeepSeek-R1-0528，强化 CoT 推理链，代码实力再进化](./2025/0603-deepseek-0528.md)
+
+    端午节期间，d.run 大模型服务平台紧跟 DeepSeek 步伐，上线了全新的 **DeepSeek-R1-0528** 模型。
+
 * [llm-d 社区宣布成立！](./2025/llmd.md)
 
     llm-d 是一个原生支持 Kubernetes 的高性能分布式大语言模型（LLM）推理框架，
