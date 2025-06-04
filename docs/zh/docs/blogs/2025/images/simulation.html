@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Polygon Ball Physics Simulation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #canvas-container {
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        #controls {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            width: 800px;
+        }
+        button {
+            padding: 8px 16px;
+            background: #00a8ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0088cc;
+        }
+        .slider-container {
+            margin: 10px 0;
+        }
+        .slider-container label {
+            display: inline-block;
+            width: 120px;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Polygon Ball Physics Simulation</h1>
+    <div id="canvas-container"></div>
+    <div id="controls">
+        <button id="random-btn">Random Speed</button>
+        <div class="slider-container">
+            <label for="gravity-slider">Gravity:</label>
+            <input type="range" id="gravity-slider" min="0.1" max="2.0" step="0.1" value="0.5">
+            <span id="gravity-value">0.5</span>
+        </div>
+        <div class="slider-container">
+            <label for="rotation-slider">Rotation Speed:</label>
+            <input type="range" id="rotation-slider" min="0.1" max="2.0" step="0.1" value="0.5">
+            <span id="rotation-value">0.5</span>
+        </div>
+    </div>
+
+    <script>
+        // Physics parameters
+        let gravity_strength = 0.5;
+        let rotation_speed = 0.5;
+        const ball_radius = 15;
+        let ball_pos;
+        let ball_vel;
+        const friction = 0.99;
+        const elasticity = 0.85;
+        const min_speed_threshold = 0.1;
+        
+        // Polygon variables
+        let polygon = [];
+        let rotated_polygon = [];
+        let rotation_angle = 0;
+        const polygon_sides = 12;
+        const polygon_radius = 200;
+        
+        // Particles
+        let particles = [];
+        
+        // Colors
+        const colors = {
+            background: [20, 20, 35],
+            polygon: [100, 200, 255, 150],
+            ball: [255, 100, 100],
+            ballHighlight: [255, 180, 180],
+            sliderTrack: [70, 70, 90],
+            sliderHandle: [180, 220, 255],
+            text: [230, 230, 255],
+            highlight: [255, 215, 100],
+            particle: [255, 215, 100]
+        };
+        
+        function setup() {
+            const canvas = createCanvas(800, 720);
+            canvas.parent('canvas-container');
+            
+            // Initialize ball position and velocity
+            ball_pos = createVector(width / 2, height / 3);
+            ball_vel = createVector(2.0, 0.0);
+            
+            // Create polygon
+            createPolygon();
+            
+            // Setup UI events
+            document.getElementById('random-btn').addEventListener('click', randomVelocity);
+            document.getElementById('gravity-slider').addEventListener('input', function(e) {
+                gravity_strength = parseFloat(e.target.value);
+                document.getElementById('gravity-value').textContent = gravity_strength.toFixed(1);
+            });
+            document.getElementById('rotation-slider').addEventListener('input', function(e) {
+                rotation_speed = parseFloat(e.target.value);
+                document.getElementById('rotation-value').textContent = rotation_speed.toFixed(1);
+            });
+        }
+        
+        function createPolygon() {
+            polygon = [];
+            for (let i = 0; i < polygon_sides; i++) {
+                const angle = TWO_PI * i / polygon_sides;
+                const x = width / 2 + polygon_radius * cos(angle);
+                const y = height / 2 + polygon_radius * sin(angle);
+                polygon.push(createVector(x, y));
+            }
+            rotated_polygon = [...polygon];
+        }
+        
+        function rotatePolygon() {
+            rotation_angle += rotation_speed;
+            if (rotation_angle >= 360) {
+                rotation_angle -= 360;
+            }
+            
+            const angle_rad = radians(rotation_angle);
+            const cx = width / 2;
+            const cy = height / 2;
+            
+            rotated_polygon = polygon.map(p => {
+                // Translate to center
+                const tx = p.x - cx;
+                const ty = p.y - cy;
+                
+                // Rotate
+                const rx = tx * cos(angle_rad) - ty * sin(angle_rad);
+                const ry = tx * sin(angle_rad) + ty * cos(angle_rad);
+                
+                // Translate back
+                return createVector(rx + cx, ry + cy);
+            });
+        }
+        
+        function pointInPolygon(point, polygon) {
+            let inside = false;
+            for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+                const xi = polygon[i].x, yi = polygon[i].y;
+                const xj = polygon[j].x, yj = polygon[j].y;
+                
+                const intersect = ((yi > point.y) !== (yj > point.y))
+                    && (point.x < (xj - xi) * (point.y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+            return inside;
+        }
+        
+        function checkCollision(ballPos, radius, lineStart, lineEnd) {
+            // Line vector
+            const lineVec = p5.Vector.sub(lineEnd, lineStart);
+            const lineLen = lineVec.mag();
+            
+            if (lineLen === 0) return { collision: false, normal: null };
+            
+            // Line unit vector
+            const lineUnit = lineVec.copy().normalize();
+            
+            // Ball center to line start vector
+            const ballToStart = p5.Vector.sub(ballPos, lineStart);
+            
+            // Projection length
+            let projection = p5.Vector.dot(ballToStart, lineUnit);
+            projection = max(0, min(lineLen, projection));
+            
+            // Closest point
+            const closestPoint = p5.Vector.add(
+                lineStart, 
+                p5.Vector.mult(lineUnit, projection)
+            );
+            
+            // Distance from ball to closest point
+            const distance = p5.Vector.dist(ballPos, closestPoint);
+            
+            if (distance < radius) {
+                // Normal vector (from collision point to ball center)
+                const normal = p5.Vector.sub(ballPos, closestPoint).normalize();
+                return { collision: true, normal: normal };
+            }
+            return { collision: false, normal: null };
+        }
+        
+        function randomVelocity() {
+            ball_vel = p5.Vector.random2D().mult(random(5, 10));
+        }
+        
+        function updateParticles() {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                if (particles[i].isDead()) {
+                    particles.splice(i, 1);
+                }
+            }
+        }
+        
+        function draw() {
+            // Update physics
+            updatePhysics();
+            
+            // Draw background
+            drawGradientBackground();
+            
+            // Draw UI background
+            drawUIBackground();
+            
+            // Rotate and draw polygon
+            rotatePolygon();
+            drawPolygon();
+            
+            // Update and draw particles
+            updateParticles();
+            drawParticles();
+            
+            // Draw ball
+            drawBall();
+            
+            // Draw UI
+            drawUI();
+        }
+        
+        function updatePhysics() {
+            // Apply gravity
+            ball_vel.y += gravity_strength * 0.1;
+            
+            // Apply friction
+            ball_vel.mult(friction);
+            
+            // Temporary position update
+            const temp_pos = p5.Vector.add(ball_pos, ball_vel);
+            
+            // Check if ball is inside polygon
+            if (!pointInPolygon(temp_pos, rotated_polygon)) {
+                // If ball is going out, keep it inside
+                ball_vel.mult(-0.5);
+                return;
+            }
+            
+            // Check collisions with polygon edges
+            let collision_occurred = false;
+            let collision_normal = null;
+            
+            for (let i = 0; i < rotated_polygon.length; i++) {
+                const start = rotated_polygon[i];
+                const end = rotated_polygon[(i + 1) % rotated_polygon.length];
+                const { collision, normal } = checkCollision(temp_pos, ball_radius, start, end);
+                
+                if (collision) {
+                    collision_occurred = true;
+                    collision_normal = normal;
+                    break;
+                }
+            }
+            
+            // Handle collision
+            if (collision_occurred && collision_normal) {
+                // Reflect velocity vector
+                const dot_product = p5.Vector.dot(ball_vel, collision_normal);
+                ball_vel.sub(p5.Vector.mult(collision_normal, 2 * dot_product));
+                ball_vel.mult(elasticity);
+                
+                // Add particle effect
+                createParticles(temp_pos, collision_normal);
+            } else {
+                // Update position if no collision
+                ball_pos = temp_pos;
+            }
+        }
+        
+        function drawGradientBackground() {
+            // Simple gradient background
+            for (let y = 0; y < height; y++) {
+                const r = 20 + 10 * sin(y * 0.02);
+                const g = 20 + 10 * cos(y * 0.015);
+                const b = 35 + 20 * sin(y * 0.01);
+                stroke(r, g, b);
+                line(0, y, width, y);
+            }
+        }
+        
+        function drawUIBackground() {
+            noStroke();
+            fill(30, 30, 45, 200);
+            rect(0, height - 120, width, 120);
+            
+            stroke(70, 80, 120);
+            noFill();
+            rect(0, height - 120, width, 120);
+        }
+        
+        function drawPolygon() {
+            // Draw polygon fill
+            fill(colors.polygon);
+            noStroke();
+            beginShape();
+            for (const point of rotated_polygon) {
+                vertex(point.x, point.y);
+            }
+            endShape(CLOSE);
+            
+            // Draw polygon edges
+            stroke(200, 230, 255);
+            strokeWeight(3);
+            noFill();
+            beginShape();
+            for (const point of rotated_polygon) {
+                vertex(point.x, point.y);
+            }
+            endShape(CLOSE);
+            
+            // Draw vertices
+            for (const point of rotated_polygon) {
+                fill(230, 250, 255);
+                stroke(100, 150, 255);
+                strokeWeight(2);
+                ellipse(point.x, point.y, 10, 10);
+            }
+        }
+        
+        function drawBall() {
+            // Draw ball
+            fill(colors.ball);
+            stroke(colors.ballHighlight);
+            strokeWeight(2);
+            ellipse(ball_pos.x, ball_pos.y, ball_radius * 2, ball_radius * 2);
+            
+            // Draw ball highlight
+            fill(255, 200, 200);
+            noStroke();
+            ellipse(
+                ball_pos.x - ball_radius / 3, 
+                ball_pos.y - ball_radius / 3, 
+                ball_radius * 2 / 3, 
+                ball_radius * 2 / 3
+            );
+        }
+        
+        function createParticles(pos, normal) {
+            for (let i = 0; i < 15; i++) {
+                const angle = random(TWO_PI);
+                const speed = random(1, 3);
+                particles.push(new Particle(
+                    pos.x + normal.x * ball_radius,
+                    pos.y + normal.y * ball_radius,
+                    colors.particle,
+                    angle,
+                    speed
+                ));
+            }
+        }
+        
+        function drawParticles() {
+            for (const particle of particles) {
+                particle.draw();
+            }
+        }
+        
+        function drawUI() {
+            // Draw title
+            fill(colors.text);
+            noStroke();
+            textSize(36);
+            textAlign(CENTER);
+            text("Polygon Ball Physics Simulation", width / 2, 50);
+            
+            // Draw instructions
+            textSize(18);
+            fill(180, 200, 255);
+            text("Adjust sliders to change gravity and rotation speed", width / 2, 90);
+            
+            // Draw FPS counter
+            textSize(16);
+            fill(150, 200, 150);
+            textAlign(LEFT);
+            text(`FPS: ${frameRate().toFixed(1)}`, 20, 30);
+        }
+        
+        class Particle {
+            constructor(x, y, color, angle, speed) {
+                this.pos = createVector(x, y);
+                this.vel = p5.Vector.fromAngle(angle || random(TWO_PI)).mult(speed || random(1, 3));
+                this.color = color;
+                this.size = random(1, 3);
+                this.lifetime = random(20, 40);
+            }
+            
+            update() {
+                this.pos.add(this.vel);
+                this.size *= 0.95;
+                this.lifetime--;
+            }
+            
+            isDead() {
+                return this.lifetime <= 0;
+            }
+            
+            draw() {
+                noStroke();
+                fill(
+                    this.color[0], 
+                    this.color[1], 
+                    this.color[2], 
+                    map(this.lifetime, 0, 40, 0, 255)
+                );
+                ellipse(this.pos.x, this.pos.y, this.size, this.size);
+            }
+        }
+    </script>
+</body>
+</html>
