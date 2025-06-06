@@ -57,7 +57,11 @@ nav:
           - 账单管理: leopard/bills.md
           - 代金券: leopard/voucher.md
       - 个人中心:
-          - 安全设置: personal/index.md
+          - 索引: personal/index.md
+          - 安全设置: personal/security.md
+          - 认证信息: personal/authn.md
+          - 访问密钥: personal/accesstoken.md
+          - SSH 公钥: personal/ssh-key.md
           - 语言设置: personal/language.md
       - 服务协议:
           - 协议清单: service/index.md
