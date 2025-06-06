@@ -1,0 +1,91 @@
+name: Scheduled Update of Release Notes
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"  # 每天UTC时间1点运行一次，即北京时间10点
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: pip install requests pandas pyyaml jq
+
+      - name: Switch to main branch
+        run: git checkout mian
+
+      - name: Run auto-release-notes.py script
+        run: |
+          APP_ID=$(jq -r '.APP_ID' config.json)
+          APP_SECRET=$(jq -r '.APP_SECRET' config.json)
+          URL=$(jq -r '.URL' config.json)
+          APP_ID=$APP_ID APP_SECRET=$APP_SECRET URL=$URL python scripts/auto-release-notes.py
+
+      - name: Commit and push changes if any
+        if: steps.compare.outputs.files_are_same == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b update-rel-notes || git checkout update-rel-notes
+          git add docs/zh/docs/rel-notes.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Update rel-notes.md via automation"
+            git push -u origin update-rel-notes --force
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Create Pull Request
+        if: steps.compare.outputs.files_are_same == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_TITLE="Automated update of rel-notes.md"
+          PR_BODY="This PR updates rel-notes.md automatically."
+          PR_BRANCH="update-rel-notes"
+          REPO="${{ github.repository }}"
+          OWNER="${{ github.repository_owner }}"
+
+          existing_pr=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/$REPO/pulls?head=$OWNER:$PR_BRANCH&state=open" | jq '. | length')
+
+          if [ "$existing_pr" -gt 0 ]; then
+            echo "Pull request already exists. Skipping creation."
+            exit 0
+          fi
+
+          response=$(curl -s -X POST -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/pulls" \
+            -d @- <<EOF
+          {
+            "title": "$PR_TITLE",
+            "head": "$PR_BRANCH",
+            "base": "main",
+            "body": "$PR_BODY"
+          }
+          EOF
+          )
+
+          pr_url=$(echo "$response" | jq -r '.html_url')
+          if [ "$pr_url" = "null" ]; then
+            echo "Failed to create pull request:"
+            echo "$response"
+            exit 1
+          else
+            echo "Pull request created: $pr_url"
+          fi
