@@ -6,7 +6,7 @@ status: new
 
 d.run 提供了两种大模型的托管方式，您可以根据自己的需求任选其一：
 
-- MaaS by Token：使用 token 计费，共享资源，用户无需部署模型实例即可调用模型
+- MaaS by Token：使用 Token 计费，共享资源，用户无需部署模型实例即可调用模型
 - 模型服务：用户独享实例，按实例计费，API 调用次数不受限制
 
 ## 目前支持的模型与托管方式
@@ -95,7 +95,7 @@ print(response.choices[0].text)
 
 ### Q2 如何查看我的 API Key？
 
-登录用户控制台，进入 API Key 管理页面即可查看和管理您的 API Key，参考[API Key 管理](apikey.md)。
+登录用户控制台，进入 API Key 管理页面即可查看和管理您的 API Key，参考 [API Key 管理](apikey.md)。
 
 ### Q3 如何获取模型名称？
 
