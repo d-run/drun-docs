@@ -24,14 +24,23 @@ jobs:
         run: pip install requests pandas pyyaml jq
 
       - name: Switch to main branch
-        run: git checkout mian
+        run: git checkout main
 
       - name: Run auto-release-notes.py script
         run: |
-          APP_ID=$(jq -r '.APP_ID' config.json)
-          APP_SECRET=$(jq -r '.APP_SECRET' config.json)
-          URL=$(jq -r '.URL' config.json)
-          APP_ID=$APP_ID APP_SECRET=$APP_SECRET URL=$URL python scripts/auto-release-notes.py
+          IFS=',' read -r APP_ID APP_SECRET URL <<< "${{ secrets.FEISHU_SECRET }}"
+          export APP_ID APP_SECRET URL  # 导出为环境变量
+          python scripts/auto-release-notes.py
+
+      - name: Compare rel-notes.md changes
+        id: compare
+        run: |
+          git fetch origin main
+          if git diff --quiet origin/main -- docs/zh/docs/rel-notes.md; then
+            echo "files_are_same=true" >> $GITHUB_OUTPUT
+          else
+            echo "files_are_same=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Commit and push changes if any
         if: steps.compare.outputs.files_are_same == 'false'

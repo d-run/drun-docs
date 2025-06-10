@@ -212,6 +212,8 @@ def parse_feishu_url(url):
     return node_token, table_id, view_id
 
 if __name__ == "__main__":
+    file_out_name = 'docs/zh/docs/rel-notes.md'
+
     app_id = os.environ.get("APP_ID")
     app_secret = os.environ.get("APP_SECRET")
     url = os.environ.get("URL")
@@ -238,4 +240,4 @@ if __name__ == "__main__":
     if not ori_data:
         logging.error("获取表格内容失败，程序退出")
         exit(1)
-    get_release_info(ori_data, filename='docs/zh/docs/rel-notes.md')
+    get_release_info(ori_data, filename=file_out_name)
