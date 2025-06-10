@@ -20,7 +20,7 @@ Recently, K8s has been confirmed to be very useful for some emerging use cases: 
 
 ### Model Pre-training
 
-![Model Pre-training](./images/genai01.jpeg)
+![Model Pre-training](../images/gen01.png)
 
 During the model pre-training phase, K8s provides a solid foundation for model training with its unparalleled scalability and resilience. One of K8s's biggest advantages is its ability to automatically scale resources based on demand, which is a critical feature for AI/ML workloads facing enormous computational needs. K8s achieves this by automating the lifecycle management of Pods; if a Pod encounters an error, it will be automatically terminated and restarted. In other words, Pods have self-healing capabilities.
 
@@ -30,13 +30,13 @@ Tools like Jupyter Notebooks and VS Code are essential for LLM experiments and p
 
 ### Model Fine-tuning
 
-![Model Fine-tuning](./images/genai02.jpeg)
+![Model Fine-tuning](../images/gen02.png)
 
 Although K8s has all the tools needed for developing LLMs, many companies today do not start from scratch to build large language models; they often choose existing models and then customize and fine-tune them based on their specific environments. This scenario of fine-tuning existing models is also very suitable for K8s due to its dynamic adaptability. Unlike Slurm, K8s can handle multiple workloads in parallel, making the training process more efficient. Another advantage lies in the rich tool ecosystem that K8s builds for model training, which includes Kubeflow (Operators designed for Pytorch, Tensorflow, and MPI), KubeRay Operator, and MLflow.
 
 ### Model Deployment
 
-![Model Deployment](./images/genai03.jpeg)
+![Model Deployment](../images/gen03.png)
 
 When it comes to LLM model deployment or model inference services, K8s provides a simplified process: you simply present an endpoint to data scientists. The network stack simplifies the process of releasing models to the outside world, easily pushing the models to the consumer side. K8s offers a comprehensive toolkit and a rich ecosystem for model deployment, including load balancing, Ingress controllers, and network policies. This aids in the seamless deployment of LLM endpoints and their integration with services and applications.
 
@@ -44,7 +44,7 @@ Infrastructure abstraction further simplifies the deployment process, ensuring s
 
 ### Prompt Engineering
 
-![Prompt Engineering](./images/genai04.jpeg)
+![Prompt Engineering](../images/gen04.png)
 
 The advantages do not stop there. After deploying LLM models, K8s can enhance user experience when developing applications or engaging users in model experiments. For example, hosting applications on platforms like Gradio or Streamlit using K8s is almost effortless, as the K8s community has a complete toolkit specifically for cross-platform application hosting. This simplifies the deployment process, while service endpoints and automatic scaling capabilities ensure smooth and scalable experiments.
 
