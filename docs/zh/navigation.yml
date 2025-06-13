@@ -17,6 +17,7 @@ nav:
           - 文件存储:
               - 初始化文件存储: zestu/filestorage/storage.md
               - 文件存储扩缩容: zestu/filestorage/filescale.md
+          - 常见问题: zestu/faq.md
       - 大模型服务平台:
           - 模型广场: models/index.md
           - 模型体验: models/exp.md
