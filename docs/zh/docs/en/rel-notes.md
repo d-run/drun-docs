@@ -7,6 +7,32 @@ hide:
 
 This page outlines key feature updates for **d.run** .
 
+## 2025-05-30
+
+### Compute Cloud v0.6.0
+
+#### 🚀 New Features
+
+* **[Container Instances]** Added monitoring support for domestic GPUs (Metax, Enflame, Biren).
+* **[Container Instances]** Enabled container instances to use custom images.
+* **[Container Instances]** Added a prompt for VRAM requirements of the image version when creating container instances.
+* **[Container Registry]** Introduced a container registry module to support image lifecycle management.
+* **[Container Registry]** Enabled manual saving of container instance images.
+* **[Container Registry]** Added support for changing the container registry password.
+* **[File Storage]** After 15 days of overdue payment, file storage will be automatically downsized to the free 20GB tier and users will be notified via SMS.
+* **[Compute Cloud Admin View]** Added support for linking the `gateway protocol`, `networkSupported`, and `SERVICE_PROTOCOL` parameters—only one of these needs to be configured.
+
+#### ⚡ Enhancements & Optimizations
+
+* **[Container Instances]** Improved delay in container instance status display after shutdown and system disk saving.
+* **[File Storage]** Reduced display delay after successful file storage scaling operations.
+
+#### 🐛 Bug Fixes
+
+* **[Container Instances]** Fixed an issue where data was lost when restarting a container instance after enabling scheduled shutdown and saving the system disk.
+* **[Container Instances]** Fixed display issues on the welcome page.
+* **[File Storage]** Fixed an issue where expansion orders were still generated after a failed expansion of Suoyuan (Enflame) file storage.
+
 ## 2025-05-06
 
 ### LLM Studio v0.5.0
