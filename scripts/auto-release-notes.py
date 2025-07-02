@@ -34,11 +34,11 @@ def get_tenant_access_token(app_id, app_secret):
         data = resp.json()
         token = data.get("tenant_access_token")
         if not token:
-            logging.error("获取tenant_access_token失败，响应内容: %s", data)
+            # logging.error("获取tenant_access_token失败，响应内容: %s", data)
             return None
         return token
     except requests.RequestException as e:
-        logging.error("请求tenant_access_token失败: %s", e)
+        # logging.error("请求tenant_access_token失败: %s", e)
         return None
 
 def get_node_info(node_token, tenant_access_token):
@@ -50,7 +50,7 @@ def get_node_info(node_token, tenant_access_token):
         resp.raise_for_status()
         return resp.json()
     except requests.RequestException as e:
-        logging.error("请求node_info失败: %s", e)
+        # logging.error("请求node_info失败: %s", e)
         return None
 
 def get_sheet_content(app_token, table_id, view_id, tenant_access_token, page_size=100, page_token=None):
@@ -70,7 +70,7 @@ def get_sheet_content(app_token, table_id, view_id, tenant_access_token, page_si
         resp.raise_for_status()
         return resp.json()
     except requests.RequestException as e:
-        logging.error("请求sheet_content失败: %s", e)
+        # logging.error("请求sheet_content失败: %s", e)
         return None
 
 def get_items(data):
