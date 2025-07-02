@@ -1,0 +1,100 @@
+name: Scheduled Update of Release Notes
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"  # 每天UTC时间1点运行一次，即北京时间10点
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: pip install requests pandas pyyaml jq
+
+      - name: Prepare branch
+        id: prepare_branch
+        run: |
+          DATE=$(date +%Y%m%d)
+          BRANCH="update-rel-notes-$DATE"
+          git fetch origin "$BRANCH" || true
+
+          if git show-ref --verify --quiet "refs/remotes/origin/$BRANCH"; then
+            git checkout -b "$BRANCH" "origin/$BRANCH"
+          else
+            git checkout -b "$BRANCH"
+          fi
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Run auto-release-notes.py script
+        env:
+          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
+          RELEASE_NOTES_FILE: ${{ secrets.RELEASE_NOTES_FILE }}
+        run: |
+          IFS=',' read -r APP_ID APP_SECRET URL <<< "$FEISHU_SECRET"
+          export APP_ID APP_SECRET URL
+          export FILENAME="${RELEASE_NOTES_FILE}"
+          python scripts/auto-release-notes.py
+          
+      - name: Check if release notes file changed and commit
+        id: check_changes
+        env:
+          RELEASE_NOTES_FILE: ${{ secrets.RELEASE_NOTES_FILE }}
+        run: |
+          if git diff --quiet origin/main -- "$RELEASE_NOTES_FILE"; then
+            echo "files_are_same=true" >> $GITHUB_OUTPUT
+          else
+            echo "files_are_same=false" >> $GITHUB_OUTPUT
+          fi
+          # cat $RELEASE_NOTES_FILE
+      
+      - name: Commit and push release notes update
+        if: steps.check_changes.outputs.files_are_same == 'false'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update rel-notes.md via automation
+          file_pattern: ${{ secrets.RELEASE_NOTES_FILE }}
+          push_options: --set-upstream
+          branch: ${{ steps.prepare_branch.outputs.branch }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 使用这个有问题，会覆盖分支且不提交pr
+      # - name: Create Pull Request
+      #   if: steps.check_changes.outputs.files_are_same == 'false'
+      #   uses: peter-evans/create-pull-request@v7
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     title: "Automated update of rel-notes.md"
+      #     body: "This PR updates rel-notes.md automatically."
+      #     base: main
+      #     branch: ${{ steps.prepare_branch.outputs.branch }}  # 你新建的分支名
+      #     draft: true  # 以草稿状态创建，避免自动合并
+      
+      - name: Create Pull Request via API
+        if: steps.check_changes.outputs.files_are_same == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/pulls \
+            -d @- << EOF
+          {
+            "title": "Automated update of rel-notes.md",
+            "head": "${{ steps.prepare_branch.outputs.branch }}",
+            "base": "main",
+            "body": "This PR updates rel-notes.md automatically."
+          }
+          EOF
