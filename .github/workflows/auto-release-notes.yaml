@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: "0 2 * * *"  # 每天UTC时间1点运行一次，即北京时间10点
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   run-script:
     runs-on: ubuntu-latest
