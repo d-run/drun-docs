@@ -168,7 +168,7 @@ def get_release_info(data, filename='rel-notes.md'):
     # 定义模板
     header_template = Template('''---
 hide:
-- toc
+-  toc
 ---
 
 # Release Notes
