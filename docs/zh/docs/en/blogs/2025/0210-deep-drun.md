@@ -30,7 +30,7 @@ The following uses DeepSeek-R1-Distill-Qwen-14B as an example.
 
     ![Deploy button](./images/deep01.png)
 
-1. Enter the basic information and resource details, select a billing method, then click **Confirm**.
+1. Enter the basic information and resource details, select a billing method, then click **OK**.
 
     ![Deployment form](./images/deep02.png)
 
@@ -58,7 +58,7 @@ To call d.run's model services in a third-party app, you’ll need an API Key.
 
     ![Start dialog](./images/deep05.png)
 
-1. Enter an easily recognizable name, then click **Confirm**.
+1. Enter an easily recognizable name, then click **OK**.
 
     ![Name](./images/deep06.png)
 
