@@ -6,7 +6,7 @@
 ## 前提条件
   
 - 登录 d.run 账号
-- 已通过算力云[创建容器实例](https://docs.d.run/zestu/instance)，且容器实例状态为 **运行中**
+- 已通过算力云[创建容器实例](../instance.md)，且容器实例状态为 **运行中**
 
 ## 注册自定义服务
 
@@ -41,4 +41,3 @@ echo "Starting python http..."
 exec python /root/data/http.py
 EOF
 ```
-
