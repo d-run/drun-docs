@@ -2,8 +2,8 @@ name: Scheduled Update of Release Notes
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: "0 2 * * *"  # 每天UTC时间1点运行一次，即北京时间10点
+  schedule:
+    - cron: "0 2 * * 3"  # 每周三UTC时间2点运行一次，即北京时间10点
 
 permissions:
   contents: write
