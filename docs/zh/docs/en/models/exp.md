@@ -42,7 +42,17 @@ Additionally, the token usage for this round of responses is displayed at the bo
 
 ## More Chat Features
 
-You can click **Clear Context** to end the current chat and reset the context, ensuring that the following chat is not influenced by previous interactions.
+Two icon buttons are available in the chat window to help you manage the current conversation:
+
+* **Clear Context**
+  
+    Ends the current round of conversation and removes context linkage. Subsequent inputs will no longer be influenced by the current discussion.
+
+* **Clear Conversation**
+  
+    Instantly removes all visible messages from the chat window, returning the interface to a blank state.
+    This action only clears what’s currently shown and does not affect the model’s understanding of earlier history, making it easier to start a new conversation scenario.
+
 
 ## Model Comparison
 
