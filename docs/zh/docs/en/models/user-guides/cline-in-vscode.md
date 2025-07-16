@@ -28,7 +28,7 @@ Open the Cline configuration page:
 ![Cline](../images/cline-in-vscode-2.png)
 
 - **API Provider**: Select "OpenAI Compatible"
-- **Base URL**: Enter `https://chat.d.run`
+- **Base URL**: Enter `https://chat.d.run/v1`
 - **API Key**: Input your API key
 - **Model ID**: Enter your model ID
     - Obtainable from d.run's Model Square, with MaaS models prefixed as public/deeepseek-r1
