@@ -1,7 +1,3 @@
----
-status: new
----
-
 # 模型调用
 
 d.run 提供了两种大模型的托管方式，您可以根据自己的需求任选其一：
@@ -32,7 +28,7 @@ d.run 提供了两种大模型的托管方式，您可以根据自己的需求�
 
 | 调用方式      | Endpoint            |
 | ------------- | ------------------- |
-| MaaS by Token | `chat.d.run`        |
+| MaaS by Token | `https://chat.d.run`        |
 | 模型服务      | `<region>.d.run` |
 
 ## API 调用示例
@@ -42,7 +38,7 @@ d.run 提供了两种大模型的托管方式，您可以根据自己的需求�
 要使用 MaaS by Token 调用模型，请按照以下步骤操作：
 
 1. **获取 API Key**：登录用户控制台，[创建一个新的 API Key](./apikey.md)
-2. **设置 Endpoint**：将 SDK 的 endpoint 替换为 `chat.d.run`
+2. **设置 Endpoint**：将 SDK 的 endpoint 替换为 `https://chat.d.run`
 3. **调用模型**：使用官方的模型名称和新的 API Key 进行调用
 
 **示例代码 (Python)**：
