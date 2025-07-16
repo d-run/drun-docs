@@ -26,7 +26,7 @@
 ![Cline](../images/cline-in-vscode-2.png)
 
 - API Provider：选择 OpenAI Compatible
-- Base URL：输入 `https://chat.d.run`
+- Base URL：输入 `https://chat.d.run/v1`
 - API Key：输入您的 API Key
 - Model ID：输入您的 Model ID
     - 可以从 d.run 的模型广场获取，MaaS 模型开头为 public/deeepseek-r1
