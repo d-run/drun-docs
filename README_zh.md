@@ -4,7 +4,8 @@
 
 d.run = DaoCloud Runs Intelligence
 
-d.run 让算力更自由
+- [试用 d.run](https://console.d.run/)，让算力更自由
+- [阅读文档](https://docs.d.run/)了解更多细节
 
 d.run 是一个全方位的人工智能生成和增强平台，可以帮助您优化您的大语言模型，并利用您的知识库。
 通过整合 AI 生成引擎和各种插件，比如云原生 AI 引擎 baize、DataTunerX、DaoCloud AIGC 知识库和 infmonkeys 等插件，
@@ -21,7 +22,7 @@ d.run 可以用来创建、训练和推断各种人工智能产品。这个 repo
 5. 在这个仓库中打开一个 PR
 6. 在审查后成功合并，谢谢。
 
-## 本地预览
+## 本地预览文档站
 
 这部分描述了您如何在提交之前预览您的更改。
 
@@ -70,6 +71,8 @@ d.run 可以用来创建、训练和推断各种人工智能产品。这个 repo
 - 在标题结尾不添加任何标点符号
 - 注意链接，避免任何空链接或失效链接
 - 提供一致的体验，探索本页面中的所有页面
+
+参阅 [MkDocs 参考文档](https://squidfunk.github.io/mkdocs-material/reference/)。
 
 ## 感谢所有贡献者 ❤
 
