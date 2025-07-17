@@ -37,10 +37,10 @@ This page outlines key feature updates for **d.run** .
 
 ### LLM Studio v0.5.0
 
-- [Model Store] Added support for "Deep Thinking" in text models  
-- [Model Store] Enabled message copying and regeneration for text models  
-- [Model Store] Image-to-text models can now generate multiple images simultaneously  
-- [Model Store] Image-to-text models now support custom positive/negative prompts and image sizes  
+- [Model Gallery] Added support for "Deep Thinking" in text models  
+- [Model Gallery] Enabled message copying and regeneration for text models  
+- [Model Gallery] Image-to-text models can now generate multiple images simultaneously  
+- [Model Gallery] Image-to-text models now support custom positive/negative prompts and image sizes  
 - [Model Service] Fully compatible with the standard OpenAI SDK  
 - [API Keys] Usage statistics can now be filtered by API key, model type, and invocation time  
 - [API Keys] Quickly view total calls, total input tokens, and total output tokens  
@@ -66,12 +66,12 @@ This page outlines key feature updates for **d.run** .
 
 ### LLM Studio v0.1.0
 
-- [Model Store] Card view for model list for better visualization  
-- [Model Store] Detailed model descriptions and API call examples  
-- [Model Store] Quick deployment and testing of text models  
-- [Model Store] Search models by name, provider, and type  
-- [Model Store] Try multimodal models  
-- [Model Store] Try image-to-text models  
+- [Model Gallery] Card view for model list for better visualization  
+- [Model Gallery] Detailed model descriptions and API call examples  
+- [Model Gallery] Quick deployment and testing of text models  
+- [Model Gallery] Search models by name, provider, and type  
+- [Model Gallery] Try multimodal models  
+- [Model Gallery] Try image-to-text models  
 - [Model Service] View list of deployed model services  
 - [Model Service] Variety of models available for deployment  
 - [Model Service] Instance scaling support  
@@ -80,9 +80,9 @@ This page outlines key feature updates for **d.run** .
 - [Model Service] Configure number of instances for horizontal scaling  
 - [Model Service] In-browser experience of deployed models  
 - [Model Service] API examples in multiple languages (curl, Python, Node.js)  
-- [Use Model] One-click testing to quickly verify service availability  
-- [Use Model] Text generation models support parameters like `system prompt`, `temperature`, and `top_p`  
-- [Use Model] Compare different models of the same type  
+- [Playground] One-click testing to quickly verify service availability  
+- [Playground] Text generation models support parameters like `system prompt`, `temperature`, and `top_p`  
+- [Playground] Compare different models of the same type  
 - [API Keys] View API key list  
 - [API Keys] One-click copy of full API key  
 - [API Keys] Delete specific keys (irreversible)  

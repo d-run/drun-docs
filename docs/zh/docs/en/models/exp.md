@@ -1,4 +1,4 @@
-# Try a Model
+# Playground
 
 d.run offers most models not only with the ability to view documentation but also with an interactive inference experience. For example, you can engage in daily chats with large language models to intuitively explore their capabilities.
 
@@ -8,12 +8,12 @@ d.run offers most models not only with the ability to view documentation but als
 
 The platform provides two entry points, allowing you to choose based on your needs.
 
-- **Entry 1** : On the [Model Store](./index.md) page, select your preferred model and click **Use Model** to enter the chat page.
-- **Entry 2** : From the left-side menu, click **Use Model** to directly start the model experience process.
+- **Entry 1** : On the [Model Gallery](./index.md) page, select your preferred model and click **Playground** to enter the chat page.
+- **Entry 2** : From the left-side menu, click **Playground** to directly start the model experience process.
 
 ## Instructions
 
-Upon your first visit to the **Use Model** , the system will recommend some popular and high-quality models for you to try. You can:
+Upon your first visit to the **Playground** , the system will recommend some popular and high-quality models for you to try. You can:
 
 - Click on a recommended model to directly use the chat functionality of the large language model.
 - Or choose from the list of other models you’re interested in.

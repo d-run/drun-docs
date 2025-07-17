@@ -150,10 +150,10 @@ plugins:
                 容器实例开关机: Power on/off
                 文件存储: File Storage
                 大模型服务平台: LLM Studio
-                模型广场: Model Store
-                模型部署: Deploy Model
+                模型广场: Model Gallery
+                模型部署: Served Models
                 模型服务: Model Service
-                模型体验: Try a Model
+                模型体验: Playground
                 API Key 管理: API Keys
                 AI 应用: AI Apps
                 功能列表: Features
