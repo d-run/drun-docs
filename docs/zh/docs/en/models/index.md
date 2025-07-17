@@ -3,13 +3,13 @@ hide:
   - toc
 ---
 
-# Model Store
+# Model Gallery
 
-The Model Store offers a diverse selection of models covering areas such as text generation, image understanding, and speech synthesis. It integrates hundreds of models from providers like Tongyi Qianwen, Mistral, Meta, Cohere, and more. Users can flexibly deploy models according to their business needs to achieve efficient real-time inference.
+The Model Gallery offers a diverse selection of models covering areas such as text generation, image understanding, and speech synthesis. It integrates hundreds of models from providers like Tongyi Qianwen, Mistral, Meta, Cohere, and more. Users can flexibly serve models according to their business needs to achieve efficient real-time inference.
 
 ## Find a model
 
-Using the tags in the Model Store, you can quickly search the model list, supporting multiple tag selections, and you can clear the filter conditions at any time.
+Using the tags in the Model Gallery, you can quickly search the model list, supporting multiple tag selections, and you can clear the filter conditions at any time.
 
 ![find](./images/exper00.png)
 
@@ -28,9 +28,9 @@ In the upper right corner of the chat window, click **Change Model** to choose d
 
 ![Experience](./images/exper02.png)
 
-## Deploy a Model
+## Serve a Model
 
-You can easily deploy models from the **Model Store** or **Model Service** pages.
-Refer to [Deployment Parameters](./deploy.md).
+You can easily serve models from the **Model Gallery** or **Model Service** pages.
+Refer to [Serving Parameters](./deploy.md).
 
 [Register and Try d.run](https://console.d.run/){ .md-button .md-button--primary }

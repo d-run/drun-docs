@@ -3,15 +3,15 @@ hide:
   - toc
 ---
 
-# Deploy a Model
+# Serve a Model
 
-You can deploy models from the **Model Store** or **Model Services**. Below are the details for configuring the deployment:
+You can serve models from the **Model Gallery** or **Served Models**. Below are the details for serving a model:
 
-![deploy](./images/deploy01.png)
+![Serving](./images/deploy01.png)
 
 - **Select the Model**  
 
-    Choose the model to deploy (e.g., Qwen2-0.5B-Instruct), ensuring it aligns with your business needs and task requirements.
+    Choose the model to serve (e.g., Qwen2-0.5B-Instruct), ensuring it aligns with your business needs and task requirements.
   
 - **Model Service Name Requirements**  
     The name of the model service must meet the following criteria:
@@ -22,11 +22,11 @@ You can deploy models from the **Model Store** or **Model Services**. Below are 
   
 - **Region**
 
-    Select the region for service deployment (e.g., "Shanghai Area 2"). Choose a region based on your business coverage and latency needs.
+    Select the region for serving (e.g., "Shanghai Area 2"). Choose a region based on your business coverage and latency needs.
 
 - **Number of Instances**
 
-    - Configure the number of instances to deploy. Default value: 1.  
+    - Configure the number of instances to serve. Default value: 1.  
     - More instances enhance service concurrency, but they will also increase costs.
 
 - **Billing Method**
