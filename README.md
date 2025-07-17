@@ -4,7 +4,8 @@ English | [中文](./README_zh.md)
 
 d.run = DaoCloud Runs Intelligence
 
-d.run unleashes your compute power
+- [Try d.run](https://console.d.run/) to unlease your AI power
+- [Read document](https://docs.d.run/) to learn details
 
 d.run is a comprehensive AIGC platform that allows you to enhance your LLM models and
 leverage your organization's knowledge base. By integrating AI generation engines and plugins
@@ -23,7 +24,7 @@ This website uses Pull Request (PR) to modify, translate, and manage all pages.
 5. Open a PR in this repo
 6. Successfully merge after reviewing, thanks.
 
-## Preview locally
+## Preview website locally
 
 This section describes how you can preview your changes before commit.
 
@@ -72,6 +73,8 @@ This section lists some conventions about a file or folder name for your referen
 - Do not add any punctuation by the end of a heading
 - Care about links to avoid any null or dead link
 - Give a consistent experience to explore all pages herein
+
+For details refer to [MkDocs documentation](https://squidfunk.github.io/mkdocs-material/reference/).
 
 ## Thanks to all contributors ❤
 
