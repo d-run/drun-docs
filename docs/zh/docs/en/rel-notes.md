@@ -41,7 +41,7 @@ This page outlines key feature updates for **d.run** .
 - [Model Gallery] Enabled message copying and regeneration for text models  
 - [Model Gallery] Image-to-text models can now generate multiple images simultaneously  
 - [Model Gallery] Image-to-text models now support custom positive/negative prompts and image sizes  
-- [Model Service] Fully compatible with the standard OpenAI SDK  
+- [Served Models] Fully compatible with the standard OpenAI SDK  
 - [API Keys] Usage statistics can now be filtered by API key, model type, and invocation time  
 - [API Keys] Quickly view total calls, total input tokens, and total output tokens  
 - [API Keys] Compare usage across different models  
@@ -72,14 +72,14 @@ This page outlines key feature updates for **d.run** .
 - [Model Gallery] Search models by name, provider, and type  
 - [Model Gallery] Try multimodal models  
 - [Model Gallery] Try image-to-text models  
-- [Model Service] View list of deployed model services  
-- [Model Service] Variety of models available for deployment  
-- [Model Service] Instance scaling support  
-- [Model Service] Postpaid billing (pay-as-you-go) with cost transparency  
-- [Model Service] Region selection supported for deployment  
-- [Model Service] Configure number of instances for horizontal scaling  
-- [Model Service] In-browser experience of deployed models  
-- [Model Service] API examples in multiple languages (curl, Python, Node.js)  
+- [Served Models] View list of deployed model services  
+- [Served Models] Variety of models available for deployment  
+- [Served Models] Instance scaling support  
+- [Served Models] Postpaid billing (pay-as-you-go) with cost transparency  
+- [Served Models] Region selection supported for deployment  
+- [Served Models] Configure number of instances for horizontal scaling  
+- [Served Models] In-browser experience of deployed models  
+- [Served Models] API examples in multiple languages (curl, Python, Node.js)  
 - [Playground] One-click testing to quickly verify service availability  
 - [Playground] Text generation models support parameters like `system prompt`, `temperature`, and `top_p`  
 - [Playground] Compare different models of the same type  
