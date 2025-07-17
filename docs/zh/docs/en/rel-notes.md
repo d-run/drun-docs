@@ -5,7 +5,33 @@ hide:
 
 # Release Notes
 
-This page outlines key feature updates for **d.run** .
+This page outlines key feature updates for d.run.
+
+## 2025-06-29
+
+### Compute Cloud v0.7.0
+
+#### 🚀 New Features
+
+* [Container Instance] Support remounting file mount paths when changing configurations
+* [Compute Cloud] Integrated with audit logging
+* [Compute Cloud] Support retrieving operational metrics such as GPU utilization and memory usage for all GPUs under a container
+* [Container Registry] Added duplicate username check for container registry accounts
+
+#### ⚡ Enhancements & Optimizations
+
+* [Container Instance] Improved delay in status display after shutting down and saving the system disk
+* [Container Instance] Optimized disk limits for container instances
+* [Container Instance] Improved image save prompts for scheduled or manual shutdowns
+* [File Storage] Enhanced status display during file storage initialization
+
+#### 🐛 Bug Fixes
+
+* [Container Instance] Fixed issues when accessing Muxi container instances via JupyterLab, including terminal errors and missing GPU model info
+* [Container Instance] Fixed failure to start container instances created with custom image files
+* [File Storage] Fixed partial failures when uploading multiple files
+* [Container Registry] Fixed issue of two image versions appearing when manually shutting down and saving a system disk for the first time
+* [Container Registry] Fixed failure to save images when a container instance is shut down due to overdue payments
 
 ## 2025-05-30
 
@@ -13,25 +39,25 @@ This page outlines key feature updates for **d.run** .
 
 #### 🚀 New Features
 
-* **[Container Instances]** Added monitoring support for domestic GPUs (Metax, Enflame, Biren).
-* **[Container Instances]** Enabled container instances to use custom images.
-* **[Container Instances]** Added a prompt for VRAM requirements of the image version when creating container instances.
-* **[Container Registry]** Introduced a container registry module to support image lifecycle management.
-* **[Container Registry]** Enabled manual saving of container instance images.
-* **[Container Registry]** Added support for changing the container registry password.
-* **[File Storage]** After 15 days of overdue payment, file storage will be automatically downsized to the free 20GB tier and users will be notified via SMS.
-* **[Compute Cloud Admin View]** Added support for linking the `gateway protocol`, `networkSupported`, and `SERVICE_PROTOCOL` parameters—only one of these needs to be configured.
+* [Container Instances] Added monitoring support for domestic GPUs (Metax, Enflame, Biren).
+* [Container Instances] Enabled container instances to use custom images.
+* [Container Instances] Added a prompt for VRAM requirements of the image version when creating container instances.
+* [Container Registry] Introduced a container registry module to support image lifecycle management.
+* [Container Registry] Enabled manual saving of container instance images.
+* [Container Registry] Added support for changing the container registry password.
+* [File Storage] After 15 days of overdue payment, file storage will be automatically downsized to the free 20GB tier and users will be notified via SMS.
+* [Compute Cloud Admin View] Added support for linking the `gateway protocol`, `networkSupported`, and `SERVICE_PROTOCOL` parameters—only one of these needs to be configured.
 
 #### ⚡ Enhancements & Optimizations
 
-* **[Container Instances]** Improved delay in container instance status display after shutdown and system disk saving.
-* **[File Storage]** Reduced display delay after successful file storage scaling operations.
+* [Container Instances] Improved delay in container instance status display after shutdown and system disk saving.
+* [File Storage] Reduced display delay after successful file storage scaling operations.
 
 #### 🐛 Bug Fixes
 
-* **[Container Instances]** Fixed an issue where data was lost when restarting a container instance after enabling scheduled shutdown and saving the system disk.
-* **[Container Instances]** Fixed display issues on the welcome page.
-* **[File Storage]** Fixed an issue where expansion orders were still generated after a failed expansion of Suoyuan (Enflame) file storage.
+* [Container Instances] Fixed an issue where data was lost when restarting a container instance after enabling scheduled shutdown and saving the system disk.
+* [Container Instances] Fixed display issues on the welcome page.
+* [File Storage] Fixed an issue where expansion orders were still generated after a failed expansion of Suoyuan (Enflame) file storage.
 
 ## 2025-05-06
 
