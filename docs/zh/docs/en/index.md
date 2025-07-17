@@ -7,22 +7,23 @@ hide:
 
 !!! tip
 
-    d.run = DaoCloud Runs Intelligence
+    <abbr title="DaoCloud Runs Intelligence">d.run</abbr> unlease your AI power.
     [Register and Try d.run](https://console.d.run/){ .md-button }
     
-    d.run is a comprehensive AIGC computing operation and management platform developed by DaoCloud,
+    <abbr title="DaoCloud Runs Intelligence">d.run</abbr> is a comprehensive
+    <abbr title="Artificial Intelligence Generated Content">AIGC</abbr> platform developed by DaoCloud,
     integrating cloud native capabilities and building an intelligent Q&A system,
     transforming your computing resources into benefits.
 
     It is recommended to visit d.run from a PC using the Chrome browser.
 
-d.run supports account registration via mobile phone and email.
+<abbr title="DaoCloud Runs Intelligence">d.run</abbr> supports account registration via mobile phone and email.
 
 1. Click **Register** on the login window.
 1. Fill in the username, email, phone number, receive and fill in the verification code,
    then check the box:
    
-    ☑️ **I agree to the terms and conditions of Platform Service Agreement**
+    ☑️ **I agree to the terms and conditions of [Platform Service Agreement](./service/index.md)**
 
     !!! tip
     
@@ -36,4 +37,4 @@ You can now start purchasing computing resource.
 
 ![market](./images/regis01.png)
 
-Next step: [Compute Market](./zestu/index.md)
+[DeepSeek LLM free for 2 weeks — grab the deal now!](https://console.d.run/){ .md-button .md-button--primary }
