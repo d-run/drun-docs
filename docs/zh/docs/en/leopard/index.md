@@ -5,7 +5,7 @@ hide:
 
 # Wallet
 
-The expense center serves as a one-stop financial platform, providing functions such as top-up, expense viewing, and bill details. Users can monitor the consumption of various resources in real-time, clearly understand bill details, usage, and payment status, helping enterprises optimize resource allocation, control costs, and improve financial transparency.
+The expense center serves as a one-stop financial platform, providing functions such as top-up, expense viewing, bill and voucher details. Users can monitor the consumption of various resources in real-time, clearly understand bill details, usage, and payment status, helping enterprises optimize resource allocation, control costs, and improve financial transparency.
 
 You can top-up your account online in the **Wallet** , and the top-up amount can be used to purchase various products on the platform.
 
