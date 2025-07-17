@@ -5,7 +5,7 @@ hide:
 
 # 模型部署
 
-可以从[模型广场](./index.md)或者[模型服务](./service.md)中进行模型部署。各个参数说明如下：
+可以从[模型广场](./index.md)或者[模型部署](./service.md)中进行部署模型。各个参数说明如下：
 
 ![deploy](./images/deploy01.png)
 
