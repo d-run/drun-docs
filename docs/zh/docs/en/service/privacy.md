@@ -1,8 +1,13 @@
+---
+hide:
+  - navigation
+---
+
 # d.run Privacy Policy
 
 Shanghai DaoCloud Network Technology Co., Ltd. ("we") fully understand the importance of personal information to you and will make every effort to protect the security and reliability of your personal information. We are committed to maintaining your trust, adhering to legal principles to protect your personal information. At the same time, we promise to adopt appropriate security protection measures in accordance with mature industry security standards to protect your personal information.
 
-Please read and understand this “Privacy Policy” (the “Policy”) carefully before using our products or services to understand the details of how we handle your personal information. For important contents related to your personal information rights and interests in this Policy, we have used bold or 【】notations to highlight them—please pay special attention. By clicking agree to this Policy or starting to use our products or services, you indicate that you are aware of and agree to all contents of this Policy.
+Please read and understand this “Privacy Policy” (the “Policy”) carefully before using our products or services to understand the details of how we handle your personal information. For important contents related to your personal information rights and interests in this Policy, we have used bold or [ ] notations to highlight them—please pay special attention. By clicking agree to this Policy or starting to use our products or services, you indicate that you are aware of and agree to all contents of this Policy.
 
 If you have any questions, comments, or suggestions regarding the contents of this Policy, you may contact us via the methods listed in Article 12 of this Policy.
 
@@ -16,7 +21,7 @@ If you use our products or services as a developer to develop downstream systems
 
 ## 2. Definitions and Interpretations
 
-1. d.run: Refers to the AI compute scheduling and open ecosystem platform operated by Shanghai DaoCloud Network Technology Co., Ltd., with the domain name www.d.run. Referred to in this Policy as “products and/or services.”
+1. d.run: Refers to the AI compute scheduling and open ecosystem platform operated by Shanghai DaoCloud Network Technology Co., Ltd., with the domain name `www.d.run`. Referred to in this Policy as “products and/or services.”
 2. User: Refers to the subject who accesses, registers, logs in to, or uses the d.run. Referred to in this Policy as “you.”
 3. Personal information: Refers to various types of information recorded by electronic or other means that relate to an identified or identifiable natural person, excluding anonymized information.
 4. Sensitive personal information: Refers to personal information that, once leaked or illegally used, is likely to harm the personal dignity or personal/property safety of a natural person, including information such as biometric data, religious beliefs, specific identities, medical and health information, financial accounts, location tracking, and personal information of minors under the age of 14.
@@ -34,19 +39,19 @@ We collect your information through both information you actively provide and in
 
 1. To enable the basic functions of the d.run, you only need to provide or allow us to collect the following necessary personal information. If you refuse to provide it, we will not be able to provide you with d.run products or services.
     - **Account Registration**:
-        - If you wish to use the d.run products or services, you need to register for a d.run account so we can provide you with products or services. When registering, you need to provide 【username, email address, mobile phone number, login password】.
-        - As required by applicable law, you need to undergo real-name verification to use our products or services. You will need to provide 【real name, ID card】. We may also verify this information through third-party institutions (e.g., third-party payment platforms) to ensure its accuracy and completeness.
-        - You may register more than one d.run account through various methods. To identify and manage associated accounts, such as other accounts registered by you or your company/organization, we may collect 【associated username, email, phone number, login password, company name】.
-    - **Account Login and Usage**: When logging in or using the platform, based on your chosen method, you will need to provide 【username, email, login password, or mobile number, SMS verification code】 for user identity verification and account security.
+        - If you wish to use the d.run products or services, you need to register for a d.run account so we can provide you with products or services. When registering, you need to provide [username, email address, mobile phone number, login password].
+        - As required by applicable law, you need to undergo real-name verification to use our products or services. You will need to provide [real name, ID card]. We may also verify this information through third-party institutions (e.g., third-party payment platforms) to ensure its accuracy and completeness.
+        - You may register more than one d.run account through various methods. To identify and manage associated accounts, such as other accounts registered by you or your company/organization, we may collect [associated username, email, phone number, login password, company name].
+    - **Account Login and Usage**: When logging in or using the platform, based on your chosen method, you will need to provide [username, email, login password, or mobile number, SMS verification code] for user identity verification and account security.
     - **Operations and Security Assurance**: During your use of our products or services, we may collect the following information:
-        - Device information such as 【IP address, device identifier, operating system version, web browser type】 to ensure login functionality, platform stability, resource billing, and identity verification.
-        - System logs such as 【your service usage records, page URLs, web history, access dates and times, network status, language used】 to ensure service stability and security, as well as data statistics for optimization.
+        - Device information such as [IP address, device identifier, operating system version, web browser type] to ensure login functionality, platform stability, resource billing, and identity verification.
+        - System logs such as [your service usage records, page URLs, web history, access dates and times, network status, language used] to ensure service stability and security, as well as data statistics for optimization.
 
 2. To provide you with richer products or services, we may need to collect the following information. Refusal to provide this information will not affect your ability to use basic features but may affect your experience of extended features.
 
     - **Purchasing Products or Services**:
-        - When purchasing, we collect order and consumption records such as 【third-party payment account info (e.g., Alipay), order number, transaction time, transaction type, channel, amount, billing ID, account balance, billing period, product name, billing method, usage, price, voucher deductions】 for transactions, billing, order inquiries, and support.
-        - To issue invoices, you need to provide 【invoice title, tax ID, mailing address】; for electronic invoices, 【email address】.
+        - When purchasing, we collect order and consumption records such as [third-party payment account info (e.g., Alipay), order number, transaction time, transaction type, channel, amount, billing ID, account balance, billing period, product name, billing method, usage, price, voucher deductions] for transactions, billing, order inquiries, and support.
+        - To issue invoices, you need to provide [invoice title, tax ID, mailing address]; for electronic invoices, [email address].
     - **Using Products or Services**: When using services such as compute rental, AI model invocation/deployment, AI app creation, we collect:
         - Usage logs: API call records, compute consumption metrics, error reports;
         - Technical monitoring data: GPU usage, network latency, resource status, model metrics;
@@ -55,10 +60,10 @@ We collect your information through both information you actively provide and in
 
         Please note, although your inputs/outputs may contain personal information, we do not identify individuals based on model interaction data; we analyze it as strings for functional purposes. We do not recommend uploading personal information that may affect your rights and you should not upload others' information without authorization.
 
-    - **Requesting Customer Support**: When contacting support, we collect consultation and troubleshooting records such as 【phone number, WeChat ID, communication history, user UID, billing details, transaction time/type/amount, fault description】 to analyze and resolve issues.
+    - **Requesting Customer Support**: When contacting support, we collect consultation and troubleshooting records such as [phone number, WeChat ID, communication history, user UID, billing details, transaction time/type/amount, fault description] to analyze and resolve issues.
     - **Participating in Research or Marketing Activities**:
         - We may contact you using the contact info you provided during registration, survey, or service interactions.
-        - During participation, we collect voluntarily submitted info like 【name, address, contact, profile picture】 to give feedback, conduct analysis, improve products/services, or provide personalized experiences.
+        - During participation, we collect voluntarily submitted info like [name, address, contact, profile picture] to give feedback, conduct analysis, improve products/services, or provide personalized experiences.
         - If you do not wish to participate, you may decline calls, unsubscribe via email/SMS, or decline to fill in surveys. To opt out of marketing messages, follow the opt-out instructions provided in messages.
 
 3. **Other Uses of Personal Information**:
@@ -104,9 +109,10 @@ In order to ensure the security of your information, we will continuously update
 
 1. **Sharing**:
    We do not share your personal information with any third parties, except for the following situations:
-   - **With your consent**: We will share your personal information with third parties if we obtain your explicit consent to do so.
-   - **For business purposes**: We may share your personal information with affiliated entities within the d.run ecosystem to improve our services. In such cases, we will ensure that these entities comply with the same privacy standards.
-   - **For legal reasons**: We may share your personal information if required by law, government regulations, or to protect our legal rights.
+   
+    - **With your consent**: We will share your personal information with third parties if we obtain your explicit consent to do so.
+    - **For business purposes**: We may share your personal information with affiliated entities within the d.run ecosystem to improve our services. In such cases, we will ensure that these entities comply with the same privacy standards.
+    - **For legal reasons**: We may share your personal information if required by law, government regulations, or to protect our legal rights.
 
 2. **Transfer**:
    If we need to transfer your personal information to a third party (for example, during mergers, acquisitions, or business reorganizations), we will notify you in advance and, if necessary, seek your consent.
@@ -120,6 +126,7 @@ In order to ensure the security of your information, we will continuously update
 ## 6. How We Use Cookies and Other Tracking Technologies
 
 We use cookies and other similar technologies to improve your user experience. Cookies are small text files stored on your device to help us provide and improve our services. They allow us to:
+
 - Remember your preferences and settings;
 - Analyze how you use our platform;
 - Provide personalized content and advertisements;
