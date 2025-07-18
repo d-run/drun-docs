@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Enterprise/Academic Institution Verification Service (Trial)
 
 > Updated: April 30, 2025  

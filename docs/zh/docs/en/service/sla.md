@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # d.run Service Agreement
 
 Welcome to the d.run!
@@ -79,6 +84,7 @@ This service is intended for adults. When registering and using this service, yo
 - Other circumstances as stipulated by this agreement or applicable laws.
 
 2.5.3 Once your account is canceled, the following consequences will occur:
+
 - You will no longer be able to log in to the d.run with the canceled account, nor use any permissions associated with it;
 - Except as required by applicable laws, this agreement, or to fulfill our compliance obligations or exercise our rights, we will delete all your data, including all cached or backed-up data, and such data cannot be restored once deleted. This means you will not be able to retrieve or recover any of your personal information, business data, log data, etc. You should take your own measures to back up or migrate your data in a timely manner, and we are not responsible for any consequences arising from the deletion of such data.
 - Account cancellation does not exempt or reduce your responsibility for all actions and liabilities associated with the account before its cancellation, and you remain legally liable for all actions performed with the account prior to cancellation.

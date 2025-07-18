@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # d.run Security Whitepaper
 
 The d.run is a computational scheduling and AI open ecosystem platform built on the Kubernetes (K8s) container platform. To ensure the security of the platform, d.run has implemented strict security measures. This whitepaper aims to introduce the platform's security architecture and measures.

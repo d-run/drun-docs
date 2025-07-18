@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Anti-Mining Agreement
 
 Dear User:

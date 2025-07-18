@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Face Information Processing Rules
 
 > Updated: February 12, 2025
