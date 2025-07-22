@@ -63,6 +63,7 @@ nav:
           - 订单管理: leopard/orders.md
           - 账单管理: leopard/bills.md
           - 代金券: leopard/voucher.md
+          - 计费规则: leopard/pricing-rules.md
       - 个人中心:
           - 索引: personal/index.md
           - 安全设置: personal/security.md
