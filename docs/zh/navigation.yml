@@ -39,6 +39,7 @@ nav:
               - 在 Bob Translate 中使用: models/user-guides/bob-translate.md
               - 在 LobeChat 中使用: models/user-guides/lobe-chat.md
       - AI 应用:
+          - 什么是 AI 应用: dak/index.md
           - 功能列表: dak/features.md
           - 应用中心:
               - 创建应用: dak/user-guide/app-center/create-app.md
