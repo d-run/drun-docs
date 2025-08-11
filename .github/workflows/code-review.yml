@@ -1,5 +1,7 @@
 name: Gemini AI Code Reviewer
 on:
+  pull_request:
+    types: [opened]
   issue_comment:
     types: [created]
   pull_request_review_comment:
@@ -14,19 +16,44 @@ jobs:
   gemini-code-review:
     runs-on: ubuntu-latest
     if: >
-      (github.event.issue.pull_request != null || github.event.pull_request != null) &&
-      contains(github.event.comment.body, '/gemini-review')
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '/gemini-review')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '/gemini-review'))
     steps:
-      - name: Install GitHub CLI
-        run: sudo apt-get update && sudo apt-get install gh -y
-
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
+      - name: Install GitHub CLI
+        run: sudo apt-get update && sudo apt-get install gh -y
+
+      - name: Respond with thank you message
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER_PR: ${{ github.event.pull_request.number }}
+          PR_NUMBER_ISSUE: ${{ github.event.issue.number }}
+          PR_NUMBER_FALLBACK: ${{ github.event.pull_request.number }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            PR_NUMBER=$PR_NUMBER_PR
+            MESSAGE="Thanks for your contribution! Gemini AI Code Reviewer has started reviewing this PR and will provide detailed feedback in about 3 minutes. Please wait a moment."
+          else
+            # Try issue number first, fallback to pull request number
+            if [ -n "$PR_NUMBER_ISSUE" ]; then
+              PR_NUMBER=$PR_NUMBER_ISSUE
+            else
+              PR_NUMBER=$PR_NUMBER_FALLBACK
+            fi
+            MESSAGE="Thanks for triggering the review! Gemini AI Code Reviewer has started reviewing this PR and will provide detailed feedback in about 3 minutes. Please wait a moment."
+          fi
+
+          gh issue comment $PR_NUMBER --body "$MESSAGE"
+
       - id: pr
         run: |
-          PR_NUMBER=${{ github.event.issue.number || github.event.pull_request.number }}
+          PR_NUMBER=${{ github.event.pull_request.number || github.event.issue.number }}
           PR_JSON=$(gh api repos/${{ github.repository }}/pulls/${PR_NUMBER})
           echo "head_sha=$(echo $PR_JSON | jq -r .head.sha)" >> $GITHUB_OUTPUT
           echo "base_sha=$(echo $PR_JSON | jq -r .base.sha)" >> $GITHUB_OUTPUT
