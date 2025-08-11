@@ -21,18 +21,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install GitHub CLI
-        run: sudo apt-get update && sudo apt-get install gh -y
+      - name: Install GitHub CLI and jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh jq
+        # jq is installed to parse JSON responses from GitHub API in later steps
 
       - name: Respond with thank you message
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_EVENT_NAME: ${{ github.event_name }}
           PR_NUMBER_ISSUE: ${{ github.event.issue.number }}
           PR_NUMBER_FALLBACK: ${{ github.event.pull_request.number }}
         run: |
-          # Try issue number first, fallback to pull request number
           if [ -n "$PR_NUMBER_ISSUE" ]; then
             PR_NUMBER=$PR_NUMBER_ISSUE
           else
@@ -44,15 +45,52 @@ jobs:
       - id: pr
         run: |
           PR_NUMBER=${{ github.event.pull_request.number || github.event.issue.number }}
-          PR_JSON=$(gh api repos/${{ github.repository }}/pulls/${PR_NUMBER})
-          echo "head_sha=$(echo $PR_JSON | jq -r .head.sha)" >> $GITHUB_OUTPUT
-          echo "base_sha=$(echo $PR_JSON | jq -r .base.sha)" >> $GITHUB_OUTPUT
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: truongnh1992/gemini-ai-code-reviewer@main
+      - name: Run Gemini AI Code Reviewer
+        uses: truongnh1992/gemini-ai-code-reviewer@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: gemini-2.5-pro-preview-05-06
           EXCLUDE: "*.md,*.txt,package-lock.json,*.yml,*.yaml"
+
+      - name: Check Gemini Review Comments and Approve if OK
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.pr.outputs.pr_number }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "Checking Gemini review comments for issues..."
+
+          # 使用 GitHub API 获取 PR 所有 review 记录
+          RESPONSE=$(gh api repos/$REPO/pulls/$PR_NUMBER/reviews)
+          if [ $? -ne 0 ]; then
+            echo "Failed to fetch PR reviews from GitHub API. Exiting."
+            exit 1
+          fi
+
+          # 用 jq 解析评论者用户名包含 'gemini' 的 review body, 合并成字符串
+          COMMENTS=$(echo "$RESPONSE" | jq -r '[.[] | select(.user.login | test("gemini"; "i")) | .body] | join("\n")')
+
+          if [ -z "$COMMENTS" ]; then
+            echo "No Gemini review comments found."
+            # 根据需求：这里可以决定是否自动发 /lgtm, 下面逻辑默认发
+          else
+            echo "Gemini review comments found:"
+            echo "$COMMENTS"
+          fi
+
+          # 精确匹配关键词, 注意大小写敏感以降低误判
+          if echo "$COMMENTS" | grep -qE '\b(issue|error|problem|fail|bug|warn|warning|critical)\b'; then
+            echo "Potential issues detected in Gemini review comments. Skipping /lgtm."
+            exit 0
+          else
+            echo "No issues detected in Gemini review comments. Posting /lgtm."
+            # 自动评论 /lgtm, 注意这将作为 GitHub Actions 机器人账号发出
+            # 如果你希望人工确认, 可以注释掉这行代码
+            gh issue comment $PR_NUMBER --body "/lgtm"
+          fi
