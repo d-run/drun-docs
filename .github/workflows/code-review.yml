@@ -1,7 +1,5 @@
 name: Gemini AI Code Reviewer
 on:
-  pull_request:
-    types: [opened]
   issue_comment:
     types: [created]
   pull_request_review_comment:
@@ -16,7 +14,6 @@ jobs:
   gemini-code-review:
     runs-on: ubuntu-latest
     if: >
-      github.event_name == 'pull_request' ||
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '/gemini-review')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '/gemini-review'))
     steps:
@@ -32,23 +29,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
-          PR_NUMBER_PR: ${{ github.event.pull_request.number }}
           PR_NUMBER_ISSUE: ${{ github.event.issue.number }}
           PR_NUMBER_FALLBACK: ${{ github.event.pull_request.number }}
         run: |
-          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
-            PR_NUMBER=$PR_NUMBER_PR
-            MESSAGE="Thanks for your contribution! Gemini AI Code Reviewer has started reviewing this PR and will provide detailed feedback in about 3 minutes. Please wait a moment."
+          # Try issue number first, fallback to pull request number
+          if [ -n "$PR_NUMBER_ISSUE" ]; then
+            PR_NUMBER=$PR_NUMBER_ISSUE
           else
-            # Try issue number first, fallback to pull request number
-            if [ -n "$PR_NUMBER_ISSUE" ]; then
-              PR_NUMBER=$PR_NUMBER_ISSUE
-            else
-              PR_NUMBER=$PR_NUMBER_FALLBACK
-            fi
-            MESSAGE="Thanks for triggering the review! Gemini AI Code Reviewer has started reviewing this PR and will provide detailed feedback in about 3 minutes. Please wait a moment."
+            PR_NUMBER=$PR_NUMBER_FALLBACK
           fi
-
+          MESSAGE="Thanks for triggering the review! Gemini AI Code Reviewer has started reviewing this PR and will provide detailed feedback in about 3 minutes. Please wait a moment."
           gh issue comment $PR_NUMBER --body "$MESSAGE"
 
       - id: pr
