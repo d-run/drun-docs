@@ -7,6 +7,10 @@ hide:
 
 This channel will closely follow technology trends and collect news from the AI industry.
 
+- [GPT-5 Official Release: The Largest Product Upgrade in OpenAI’s History — Full Analysis of All Four Versions](./2025/gpt5.md)
+
+    On August 7, 2025, OpenAI officially released the GPT-5 series models, marking the most significant product upgrade in the company’s history. The release includes GPT-5, GPT-5Mini, GPT-5Nano, and GPT-5Pro, each deeply optimized for different application scenarios. This milestone signifies a new era of AI development.
+
 - [Announcing the llm-d community!](./2025/llmd.md)
 
     llm-d is a Kubernetes-native high-performance distributed LLM inference framework,

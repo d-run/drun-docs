@@ -85,6 +85,7 @@ nav:
       - 费用中心: videos/bills.md
   - AI 行业新闻:
       - 索引: blogs/index.md
+      - GPT-5 正式发布: blogs/2025/gpt5.md
       - d.run 上新 DeepSeek-R1-0528: blogs/2025/0603-deepseek-0528.md
       - llm-d 它来了: blogs/2025/llmd.md
       - 部署、调用和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
@@ -256,3 +257,4 @@ plugins:
                 访问密钥: Access Key
                 SSH 公钥: SSH Key
                 用量统计: Usage Stats
+                GPT-5 正式发布: GPT-5 Officially Released
