@@ -13,16 +13,16 @@ hide:
     AI 技术快速迭代，谁能抢占先机，谁在笑傲江湖？
 
 <div style="text-align: center;">
-  <p style="font-size: 28px; font-weight: bold;">风起云涌大模型</p>
+  <p style="font-size: 28px; font-weight: bold;">热门 AI 应用</p>
 </div>
 
 <div class="grid cards" markdown>
 
--   :simple-openai:{ .lg .middle } __OpenAI__
+-   :simple-openai:{ .lg .middle } __ChatGPT__
 
     ---
 
-    ChatGPT 一经推出，就引发了人类社会的又一次技术革命；最近 Sora 蓄势待发，仅凭几个视频就引发全球业界热议
+    [ChatGPT](https://chatgpt.com/) 一经推出，就引发了人类社会的又一次技术革命；最新 GPT-5 已经发布，又带来了新一轮浪潮。
 
     [:octicons-arrow-right-24: 了解更多](models/openai.md)
 
@@ -30,7 +30,8 @@ hide:
 
     ---
 
-    起源于 Transformer，逐渐成为机器学习领域中最火热的开源社区，目前汇聚了 58 万个 LLM 大模型
+    [Hugging Face](https://huggingface.co/) 是一个开源的人工智能社区和平台，以其 Transformers 库而闻名，该库提供了用于自然语言处理、
+    计算机视觉和语音任务的先进模型。其模型中心目前已包含近 200 万个国内外大模型。
 
     [:octicons-arrow-right-24: 了解更多](models/huggingface.md)
 
@@ -38,7 +39,7 @@ hide:
 
     ---
 
-    Amazon 与 Google 联手打造的生成式 AI 模型，时刻对标 ChatGPT 步伐
+    [Claude](https://claude.ai/) 是 Amazon 与 Google 联手打造的生成式 AI 模型
 
     [:octicons-arrow-right-24: 了解更多](models/claude.md)
 
@@ -46,7 +47,7 @@ hide:
 
     ---
 
-    这是迄今为止参数量最大的开源大模型，发布不到一个月，Star 数达 46.4k
+    [Grok](https://grok.com/) 是由 xAI 开发的人工智能助手，旨在提供准确、实用的答案，帮助用户理解世界和完成各种任务。
 
     [:octicons-arrow-right-24: 了解更多](https://github.com/xai-org/grok-1)
 
@@ -54,56 +55,41 @@ hide:
 
     ---
 
-    AI 横空出世，Google 在害怕，它必须跟上
+    目前 Gemini 在 GitHub 开发者社区应用广泛，可以添加 Gemini-bot 轻松评审各类代码、文档、测试 PR
 
     [:octicons-arrow-right-24: 了解更多](https://gemini.google.com/)
 
--   :student:{ .lg .middle } __智谱 GLM-130B__
+-   :simple-tiktok:{ .lg .middle } __豆包__
 
     ---
 
-    清华大学计算机系孵化出的一家公司，致力于打造新一代认知智能通用模型
+    [豆包](https://www.doubao.com/chat/)目前在国内的访问量排名第一，简单易用没有门槛。
+    字节还推出了面向开发者的[扣子](https://www.coze.cn/)，文生视频的[即梦](https://jimeng.jianying.com/)。
 
-    [:octicons-arrow-right-24: 了解更多](./models/zhipuai.md)
+    [:octicons-arrow-right-24: 了解更多](./pioneers/bytedance.md)
+
+-   :simple-geeksforgeeks:{ .lg .middle } __DeepSeek__
+
+    ---
+
+    [DeepSeek](https://www.deepseek.com/) 是深度求索公司推出的优秀大模型，其以极致的优化打破了英伟达等硬件厂商的垄断。
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/bytedance.md)
 
 -   :octicons-moon-16:{ .lg .middle } __月之暗面 Kimi__
 
     ---
 
-    一个浪漫而神秘的名字，清华大学出品，无需翻墙，月活近 800 万，国内排名第一的智能聊天 App
+    一个浪漫而神秘的名字，清华大学出品，[Kimi](https://www.kimi.com/) 推出不久，月活近 800 万
 
     [:octicons-arrow-right-24: 了解更多](models/moonshot.md)
 
--   :open_hands:{ .lg .middle } __OpenRouter__
-
-    ---
-
-    倡议为所有 LLM 模型提供统一的 UI 界面，打开网页就能切换不同的模型聊天，无需注册
-
-    [:octicons-arrow-right-24: 了解更多](https://openrouter.ai/)
-
--   :material-chat:{ .lg .middle } __OpenChat__
-
-    ---
-
-    这是一个去中心化的智能聊天 App，口号是：by the People, for the people；人人为我，我为人人
-
-    [:octicons-arrow-right-24: 了解更多](https://oc.app/)
-
--   :octicons-file-binary-16:{ .lg .middle } __零一万物 Yi-34B__
-
-    ---
-
-    李开复博士筹建的一家创新企业，成立不到一年估值过 10 亿美元。
-    旗下经典模型 Yi-34B-200K 能够处理超长上下文，支持约 30 万个中文汉字和英文单词。
-
-    [:octicons-arrow-right-24: 了解更多](https://www.lingyiwanwu.com/)
 
 -   :simple-alibabacloud:{ .lg .middle } __阿里通义千问__
 
     ---
 
-    阿里巴巴发布的聊天机器人，手机注册即可聊天
+    [通义千问](https://www.tongyi.com/)是阿里巴巴发布的聊天机器人，手机注册即可聊天
 
     [:octicons-arrow-right-24: 了解更多](./pioneers/alibaba.md)
 
@@ -235,6 +221,14 @@ hide:
 
 <div class="grid cards" markdown>
 
+-   :simple-bytedance:{ .lg .middle } __字节跳动__
+
+    ---
+
+    字节跳动正在 AI 大模型领域秘密研发多个产品，包括多模态数字人产品以及 AI 生图、AI 生视频产品等
+
+    [:octicons-arrow-right-24: 了解更多](./pioneers/bytedance.md)
+
 -   :cloud_rain:{ .lg .middle } __百川智能__
 
     ---
@@ -242,14 +236,6 @@ hide:
     这家成立仅六个月的人工智能初创企业，获得 3 亿美元融资
 
     [:octicons-arrow-right-24: 了解更多](./pioneers/baichuan.md)
-
--   :simple-baidu:{ .lg .middle } __百度__
-
-    ---
-
-    百度文心一言是首个国内面向 C 端收费的大模型产品
-
-    [:octicons-arrow-right-24: 了解更多](./pioneers/baidu.md)
 
 -   :pen_ballpoint:{ .lg .middle } __汉王科技__
 
@@ -314,14 +300,6 @@ hide:
     专注于智能物联网服务的创新企业，核心业务涵盖了语音识别、语义理解等系统的研发和制造
 
     [:octicons-arrow-right-24: 了解更多](./pioneers/unisound.md)
-
--   :simple-bytedance:{ .lg .middle } __字节跳动__
-
-    ---
-
-    字节跳动正在 AI 大模型领域秘密研发多个产品，包括多模态数字人产品以及 AI 生图、AI 生视频产品等
-
-    [:octicons-arrow-right-24: 了解更多](./pioneers/bytedance.md)
 
 </div>
 
