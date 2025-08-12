@@ -7,6 +7,10 @@ hide:
 
 This channel will closely follow technology trends and collect news from the AI industry.
 
+- [FlowSpeech: The World’s First TTS Converting Written Language into Spoken Language](./2025/flowspeech.md)
+
+    Artificial intelligence voice synthesis technology has reached a new breakthrough. An AI text-to-speech tool named FlowSpeech has been officially released, distinguished by its ability to convert written text into natural, fluent spoken language, providing users with a voice synthesis experience closer to real conversation.
+
 - [GPT-5 Official Release: The Largest Product Upgrade in OpenAI’s History — Full Analysis of All Four Versions](./2025/gpt5.md)
 
     On August 7, 2025, OpenAI officially released the GPT-5 series models, marking the most significant product upgrade in the company’s history. The release includes GPT-5, GPT-5Mini, GPT-5Nano, and GPT-5Pro, each deeply optimized for different application scenarios. This milestone signifies a new era of AI development.
@@ -16,7 +20,7 @@ This channel will closely follow technology trends and collect news from the AI 
     llm-d is a Kubernetes-native high-performance distributed LLM inference framework,
     a well-lit path for anyone to serve at scale, with the fastest time-to-value and competitive performance per dollar for most models across most hardware accelerators.
 
-* [Deploy, Invoke, and Try DeepSeek on d.run](./2025/0210-deep-drun.md)
+- [Deploy, Invoke, and Try DeepSeek on d.run](./2025/0210-deep-drun.md)
 
     This is a quick start guide that teaches you how to deploy DeepSeek models in d.run and use the DeepSeek model service within d.run or any third-party application.
 
