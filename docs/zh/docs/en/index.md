@@ -5,6 +5,17 @@ hide:
 
 # Register Account
 
+**d.run** is a powerful enterprise AI platform developed by DaoCloud, built on a cloud-native architecture.
+It combines compute management, a model marketplace, deployment, inference, and app building into one
+seamless solution that covers the entire AI lifecycle. With efficient heterogeneous GPU scheduling,
+flexible resource management, and strong security features, d.run helps users run large AI models
+and applications faster and more cost-effectively.
+
+Through an intuitive web interface, users can manage models, call APIs, set up vector search,
+and build a variety of AI-powered apps — all while enjoying transparent billing and clear
+operational insights. d.run delivers an all-in-one AI productivity platform designed for
+businesses and developers alike.
+
 !!! tip
 
     <abbr title="DaoCloud Runs Intelligence">d.run</abbr> unlease your AI power.
