@@ -4,6 +4,9 @@ on:
     types: [created]
   pull_request_review_comment:
     types: [created]
+  pull_request:
+    types:
+      - labeled  # 新增此触发条件，监听 PR 被打标签事件
 
 permissions:
   contents: read
@@ -14,8 +17,12 @@ jobs:
   gemini-code-review:
     runs-on: ubuntu-latest
     if: >
+      # 现有条件：issue_comment 或 pull_request_review_comment 中包含 /gemini-review 命令
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '/gemini-review')) ||
-      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '/gemini-review'))
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '/gemini-review')) ||
+      # 新增条件：pull_request labeled 且新增的标签名是 gemini
+      (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'gemini')
+
     steps:
       - uses: actions/checkout@v3
         with:
