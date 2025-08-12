@@ -35,15 +35,7 @@ hide:
 
     [:octicons-arrow-right-24: 了解更多](models/huggingface.md)
 
--   :simple-amazon:{ .lg .middle } __Claude 3__
-
-    ---
-
-    [Claude](https://claude.ai/) 是 Amazon 与 Google 联手打造的生成式 AI 模型
-
-    [:octicons-arrow-right-24: 了解更多](models/claude.md)
-
--   :simple-x:{ .lg .middle } __马斯克 Grok__
+-   :simple-x:{ .lg .middle } __Grok__
 
     ---
 
@@ -284,14 +276,6 @@ hide:
     在自然语言处理、计算机视觉、语音识别等领域有不错表现，被广泛应用于游戏、社交、智慧金融等领域
 
     [:octicons-arrow-right-24: 了解更多](./pioneers/tencent.md)
-
--   :person_walking:{ .lg .middle } __云从科技__
-
-    ---
-
-    一家专注于人机交互技术和人工智能应用的企业
-
-    [:octicons-arrow-right-24: 了解更多](./pioneers/cloudwalk.md)
 
 -   :loud_sound:{ .lg .middle } __云知声__
 
