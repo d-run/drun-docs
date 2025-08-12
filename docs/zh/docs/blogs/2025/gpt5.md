@@ -1,5 +1,7 @@
 # GPT-5 正式发布：OpenAI 史上最大规模产品升级 四大版本全面解析
 
+[体验 GPT-5](https://chatgpt.com/){ .md-button .md-button--primary }
+
 2025 年 8 月 7 日，OpenAI 正式发布 GPT-5 系列模型，这是该公司历史上最重要的产品升级。此次发布包含
 GPT-5、GPT-5Mini、GPT-5Nano 和 GPT-5Pro 四个版本，每个版本针对不同应用场景进行深度优化，标志着 AI 技术进入全新发展阶段。
 
