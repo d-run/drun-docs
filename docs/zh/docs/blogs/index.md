@@ -7,6 +7,11 @@ hide:
 
 本频道将紧跟技术趋势，收集 AI 行业新闻。
 
+* [LMCache 上线即支持 GPT-OSS（20B/120B）](./2025/lmcache.md)
+
+    LMCache 上线就支持 OpenAI 新发布的 GPT-OSS 模型（20B 和 120B 参数）！本文将提供为 GPT-OSS
+    模型配置 vLLM 与 LMCache 的完整步骤，并通过 CPU 缓存卸载功能展示显著的性能提升。
+
 * [FlowSpeech：全球首个书面语转口语的 TTS](./2025/flowspeech.md)
 
     人工智能语音合成技术迎来新突破。一款名为 FlowSpeech 的 AI 文本转语音工具正式发布，
