@@ -7,6 +7,10 @@ hide:
 
 本频道将紧跟技术趋势，收集 AI 行业新闻。
 
+* [CUDA Core Dump：调试内存访问问题的有效工具](./2025/cuda.md)
+
+    揭示一些在 vLLM 中用于调试复杂问题（如 IMA）的高级调试技巧。
+
 * [LMCache 上线即支持 GPT-OSS（20B/120B）](./2025/lmcache.md)
 
     LMCache 上线就支持 OpenAI 新发布的 GPT-OSS 模型（20B 和 120B 参数）！本文将提供为 GPT-OSS
