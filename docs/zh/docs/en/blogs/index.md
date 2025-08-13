@@ -7,6 +7,10 @@ hide:
 
 This channel will closely follow technology trends and collect news from the AI industry.
 
+* [CUDA Core Dump: An Effective Tool to Debug Memory Access Issues and Beyond](./2025/cuda.md)
+
+    Uncover some of advanced debugging techniques we use that can help users debug complicated issues in vLLM, such as IMA.
+
 - [LMCache supports gpt-oss (20B/120B) on Day 1](./2025/lmcache.md)
 
     LMCache now supports OpenAI’s newly released GPT-OSS models (20B and 120B parameters)

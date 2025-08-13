@@ -85,6 +85,7 @@ nav:
       - 费用中心: videos/bills.md
   - AI 行业新闻:
       - 索引: blogs/index.md
+      - CUDA Core Dump调试内存访问: blogs/2025/cuda.md
       - LMCache 上线即支持 GPT-OSS: blogs/2025/lmcache.md
       - FlowSpeech 书面语转口语: blogs/2025/flowspeech.md
       - GPT-5 正式发布: blogs/2025/gpt5.md
@@ -204,7 +205,7 @@ plugins:
                 视频教程: Videos
                 注册与登录: Register and Login
                 AI 行业新闻: Blogs
-                d.run 是支撑生成式 AI 的理想平台: d.run, a Platform for Generative AI
+                d.run 是支撑生成式 AI 的理想平台: d.run, A Platform for Generative AI
                 K8s 与生成式 AI 珠联璧合: K8s and Generative AI
                 OpenAI GPT-4o 完全免费: OpenAI GPT-4o is Completely Free
                 OpenAI 大型语言模型规范: OpenAI LLM Specifications
@@ -263,3 +264,4 @@ plugins:
                 d.run 上新 DeepSeek-R1-0528: d.run Launches DeepSeek-R1-0528
                 FlowSpeech 书面语转口语: FlowSpeech Converts Text into Speech
                 LMCache 上线即支持 GPT-OSS: LMCache supports gpt-oss
+                CUDA Core Dump调试内存访问: CUDA Core Dump, A Tool to Debug Memory Access
