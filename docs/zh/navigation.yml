@@ -33,7 +33,7 @@ nav:
               - 模型调用: models/api-call.md
           - 用量统计: models/usage.md
           - 使用示例场景:
-              - 示例场景介绍: models/user-guides/index.md
+              - d.run 场景介绍: models/user-guides/index.md
               - 在 VSCode 和 Cline 中使用: models/user-guides/cline-in-vscode.md
               - 在 Cherry Studio 中使用: models/user-guides/cherry-studio.md
               - 在 Bob Translate 中使用: models/user-guides/bob-translate.md
@@ -90,9 +90,9 @@ nav:
       - GPT-5 正式发布: blogs/2025/gpt5.md
       - d.run 上新 DeepSeek-R1-0528: blogs/2025/0603-deepseek-0528.md
       - llm-d 它来了: blogs/2025/llmd.md
-      - 部署、调用和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
+      - 部署和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
       - 2025 年人工智能趋势展望: blogs/2025/0102-ai-trend.md
-      - d.run 是支撑生成式 AI 的理想平台: blogs/2024/d.run.md
+      - d.run 是生成式 AI 的理想平台: blogs/2024/d.run.md
       - K8s 与生成式 AI 珠联璧合: blogs/2024/0702-k8s-for-genai.md
       - OpenAI GPT-4o 完全免费: blogs/2024/0514-gpt4o.md
       - OpenAI 大型语言模型规范: blogs/2024/0509-model-spec.md
@@ -204,17 +204,17 @@ plugins:
                 视频教程: Videos
                 注册与登录: Register and Login
                 AI 行业新闻: Blogs
-                d.run 是支撑生成式 AI 的理想平台: d.run is the Ideal Platform for Generative AI
-                K8s 与生成式 AI 珠联璧合: K8s and Generative AI Make a Perfect Match
+                d.run 是支撑生成式 AI 的理想平台: d.run, a Platform for Generative AI
+                K8s 与生成式 AI 珠联璧合: K8s and Generative AI
                 OpenAI GPT-4o 完全免费: OpenAI GPT-4o is Completely Free
                 OpenAI 大型语言模型规范: OpenAI LLM Specifications
-                2024大规模AI基础设施形势调研: 2024 Large-scale AI Infrastructure Survey
-                云原生人工智能白皮书: Cloud-native Artificial Intelligence White Paper
+                2024大规模AI基础设施形势调研: 2024 AI Infrastructure Survey
+                云原生人工智能白皮书: Cloud Native AI White Paper
                 Kimi火了后国内其他大模型: Kimi Success and Other Domestic LLM
                 DBRX 开源 LLM 介绍: Introduction to DBRX Open Source LLM
                 AI 流程编排化算力为算利: Transforms Compute into Profit
                 谁将替代 Transformer: Who Will Replace the Transformer
-                金融行业迎来大模型时代: Financial Industry Welcomes the LLM Era
+                金融行业迎来大模型时代: Fintech Welcomes the LLM Era
                 智海拾贝: Knowledge from AI Industry
                 大模型: LLM
                 OpenAI: OpenAI
@@ -248,7 +248,7 @@ plugins:
                 使用示例场景: Use Cases
                 示例场景介绍: Example Scenarios
                 llm-d 它来了: Announcing the llm-d community
-                部署、调用和体验 d.run DeepSeek: Deploy, Invoke, and Try DeepSeek on d.run
+                部署、调用和体验 d.run DeepSeek: Deploy and Try DeepSeek on d.run
                 服务协议: Service Agreements
                 协议清单: Agreement List
                 我的镜像: My Images
