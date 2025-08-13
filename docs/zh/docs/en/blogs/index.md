@@ -7,6 +7,13 @@ hide:
 
 This channel will closely follow technology trends and collect news from the AI industry.
 
+- [LMCache supports gpt-oss (20B/120B) on Day 1](./2025/lmcache.md)
+
+    LMCache now supports OpenAI’s newly released GPT-OSS models (20B and 120B parameters)
+    from day one! This post provides a complete guide to setting up vLLM with LMCache for
+    GPT-OSS models and demonstrates significant performance improvements through our CPU
+    offloading capabilities.
+
 - [FlowSpeech: The World’s First TTS Converting Written Language into Spoken Language](./2025/flowspeech.md)
 
     Artificial intelligence voice synthesis technology has reached a new breakthrough. An AI text-to-speech tool named FlowSpeech has been officially released, distinguished by its ability to convert written text into natural, fluent spoken language, providing users with a voice synthesis experience closer to real conversation.
