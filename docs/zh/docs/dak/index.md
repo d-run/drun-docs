@@ -12,7 +12,7 @@ d.run 智能问答（AI 应用）是基于 **RAG（Retrieval-Augmented Generatio
 
 在这里，您可以：
 
-- [创建应用与插件](./user-guide/app-center/\)：将智能问答功能灵活集成到不同业务场景。
+- [创建应用与插件](./user-guide/app-center/)：将智能问答功能灵活集成到不同业务场景。
 - [构建专属语料库](./user-guide/corpus/create-corpus.md)：导入文档、FAQ、业务数据等，让 AI 拥有您的专属知识。
 - [实时优化](./data-analysis/qa-quality.md)：通过对话日志与数据分析，持续改进语料与问答质量。
 - [提升用户体验](./data-analysis/suggestions.md)：让回答更贴近实际需求，减少无效信息，增强交互价值。
