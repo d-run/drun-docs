@@ -1,9 +1,3 @@
----
-hide:
-  - navigation
-  - toc
----
-
 # d.run Personal Information Sharing and SDK List
 
 The d.run collects certain personal information for real-name authentication, payments, one-click login, and certification, and shares this information with third-party platforms such as Alipay.

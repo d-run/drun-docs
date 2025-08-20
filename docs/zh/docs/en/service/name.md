@@ -1,8 +1,3 @@
----
-hide:
-  - navigation
----
-
 # Real-name Authentication Service Description
 
 Dear User:

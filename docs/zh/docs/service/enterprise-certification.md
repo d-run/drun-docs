@@ -1,16 +1,6 @@
----
-hide:
-  - navigation
----
-
 # 企业/高校认证服务说明（试运行）
 
-> 更新日期：2025 年 4 月 30 日  
-> 生效日期：2025 年 5 月 1 日
-
 根据《中华人民共和国网络安全法》《企业信息公示暂行条例》等相关法律法规，上海道客网络科技有限公司（以下简称"我们"）对企业/高校用户的实名认证服务说明如下。本说明是[《实名认证服务说明》](./name.md)的补充条款，未尽事宜以《实名认证服务说明》为准。
-
-[点击下载企业认证服务说明 PDF](./attach/enterprise-certification.pdf){ .md-button }
 
 ## 1. 服务范围
 
@@ -94,7 +84,7 @@ hide:
     ```
 
 3. 提交方式（二选一）
-   
+
     - **线上提交** ：登录控制台进入【企业认证-信息变更】模块上传
     - **人工服务** ：发送邮件至 enterprise-support@d.run 并抄送 service@daocloud.io
 
@@ -167,6 +157,3 @@ graph TD
 - 本说明未尽事宜，参照[《实名认证服务说明》](./name.md)执行
 - 认证过程中产生的人脸信息处理，遵循[《人脸信息处理规则》](./face-id.md)
 - 技术实现细节详见[《平台安全白皮书》](../security.md)
-
-[注册并体验企业认证服务](https://console.d.run/enterprise-auth){ .md-button .md-button--primary }
-[返回协议清单页](./index.md){ .md-button .md-button--primary }
