@@ -1,13 +1,4 @@
----
-hide:
-  - navigation
----
-
 # Face Information Processing Rules
-
-> Updated: February 12, 2025
->
-> Effective: March 1, 2025
 
 Shanghai DaoCloud Network Technology Co., Ltd. ("we") attaches great importance to the protection of users' ("you") facial information.  
 These Face Information Processing Rules ("Rules") explain how we handle and protect facial information and are part of the [Real-Name Authentication Service Description](./name.md).

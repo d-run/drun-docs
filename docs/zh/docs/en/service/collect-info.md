@@ -1,8 +1,3 @@
----
-hide:
-  - navigation
----
-
 # d.run Personal Information Collection List
 
 This page explains the personal information that the system may collect when you register and use the d.run.

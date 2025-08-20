@@ -1,8 +1,3 @@
----
-hide:
-  - navigation
----
-
 # d.run Privacy Policy
 
 Shanghai DaoCloud Network Technology Co., Ltd. ("we") fully understand the importance of personal information to you and will make every effort to protect the security and reliability of your personal information. We are committed to maintaining your trust, adhering to legal principles to protect your personal information. At the same time, we promise to adopt appropriate security protection measures in accordance with mature industry security standards to protect your personal information.

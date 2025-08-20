@@ -1,12 +1,4 @@
----
-hide:
-  - navigation
----
-
 # Enterprise/Academic Institution Verification Service (Trial)
-
-> Updated: April 30, 2025  
-> Effective: May 1, 2025
 
 In accordance with the Cybersecurity Law of the People's Republic of China, the Provisional Regulations on Enterprise Information Disclosure, and other relevant laws and regulations, Shanghai DaoCloud Network Technology Co., Ltd. ("we") hereby provides the following instructions for the real-name authentication service for enterprise/academic institution users. This document serves as a supplementary clause to the [Real-Name Authentication Service Description](./name.md). Matters not covered herein shall be subject to the Real-Name Authentication Service Description.
 
@@ -165,5 +157,3 @@ We reserve the right to update this document in accordance with changes in laws 
 - For matters not covered herein, refer to the [Real-Name Authentication Service Description](./name.md)  
 - Face recognition data processing during verification follows the [Face Information Processing Rules](./face-id.md)  
 - For technical implementation details, see the [Platform Security Whitepaper](../security.md)  
-
-[Register and Try Enterprise Authentication Service](https://console.d.run/enterprise-auth){ .md-button .md-button--primary }
