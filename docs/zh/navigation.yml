@@ -15,6 +15,7 @@ nav:
               - 访问管理: zestu/instance/openport.md
               - 磁盘存储: zestu/instance/diskstorage.md
               - 容器实例内服务开机自启: zestu/instance/service-auto-start.md
+              - Docker: zestu/instance/docker.md
           - 文件存储:
               - 初始化文件存储: zestu/filestorage/storage.md
               - 文件存储扩缩容: zestu/filestorage/filescale.md
