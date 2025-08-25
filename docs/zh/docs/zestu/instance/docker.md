@@ -17,11 +17,8 @@ Docker 功能支持完整的容器生命周期管理，包括镜像拉取、容�
 在创建容器实例时启用 Docker 功能：
 
 1. 登录 d.run 平台，进入 **算力云** -> **容器实例** ，点击 **创建** 按钮。
-
 2. 在创建页面中找到 **高级配置** 选项，展开高级配置面板。
-
 3. 在高级配置中勾选 **启用 Docker** 选项。
-
 4. 完成其他配置后，点击 **确定** 创建实例。
 
 !!! tip
@@ -340,43 +337,43 @@ docker info | grep -A 5 "Registry Mirrors"
 
 1. **容器启动失败**：
 
-```bash
-# 查看容器日志
-docker logs container_name
-
-# 查看容器详细信息
-docker inspect container_name
-```
+    ```bash
+    # 查看容器日志
+    docker logs container_name
+    
+    # 查看容器详细信息
+    docker inspect container_name
+    ```
 
 2. **端口访问问题**：
 
-```bash
-# 检查端口映射
-docker port container_name
-
-# 检查防火墙设置
-netstat -tlnp | grep :8080
-```
+    ```bash
+    # 检查端口映射
+    docker port container_name
+    
+    # 检查防火墙设置
+    netstat -tlnp | grep :8080
+    ```
 
 3. **存储挂载问题**：
 
-```bash
-# 检查挂载点
-docker inspect container_name | grep -A 10 "Mounts"
-
-# 验证宿主机路径权限
-ls -la /root/data
-```
+    ```bash
+    # 检查挂载点
+    docker inspect container_name | grep -A 10 "Mounts"
+    
+    # 验证宿主机路径权限
+    ls -la /root/data
+    ```
 
 4. **GPU 不可用**：
 
-```bash
-# 检查 GPU 状态
-nvidia-smi
-
-# 验证容器内 GPU 访问
-docker exec container_name nvidia-smi
-```
+    ```bash
+    # 检查 GPU 状态
+    nvidia-smi
+    
+    # 验证容器内 GPU 访问
+    docker exec container_name nvidia-smi
+    ```
 
 !!! warning "重要提醒"
 
