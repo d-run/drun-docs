@@ -7,6 +7,7 @@ nav:
           - 算力市场: zestu/index.md
           - 容器实例:
               - 创建容器实例: zestu/instance.md
+              - 创建包年包月容器实例: zestu/instance-prepaid.md
               - 容器实例开关机: zestu/instance-on-off.md
               - 通过容器实例使用 DeepSeek: zestu/deepseek.md
               - JupyterLab: zestu/instance/jupyter.md
