@@ -75,6 +75,8 @@ nav:
           - 访问密钥: personal/accesstoken.md
           - SSH 公钥: personal/ssh-key.md
           - 语言设置: personal/language.md
+      - 管理:
+          - 子账号: manage/sub-account.md
       - 服务协议:
           - 协议清单: service/index.md
       - Release Notes: rel-notes.md
