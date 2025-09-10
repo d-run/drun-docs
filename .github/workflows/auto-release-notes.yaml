@@ -56,13 +56,34 @@ jobs:
         env:
           RELEASE_NOTES_FILE: ${{ secrets.RELEASE_NOTES_FILE }}
         run: |
+          echo "File to check: $RELEASE_NOTES_FILE"
+          
+          # Show git status for context
+          echo "Current git status:"
+          git status --porcelain
+          
+          # Check if file has changes compared to origin/main
           if git diff --quiet origin/main -- "$RELEASE_NOTES_FILE"; then
+            echo "No changes detected in release notes file"
+            echo "File content is identical to origin/main"
             echo "files_are_same=true" >> $GITHUB_OUTPUT
           else
+            echo "Changes detected in release notes file!"
+            echo "Showing diff summary:"
+            git diff --stat origin/main -- "$RELEASE_NOTES_FILE"
+            echo ""
+            echo "Detailed changes:"
+            git diff origin/main -- "$RELEASE_NOTES_FILE" | head -50
             echo "files_are_same=false" >> $GITHUB_OUTPUT
           fi
-          # cat $RELEASE_NOTES_FILE
+          
+          echo "Check completed. files_are_same=$(git diff --quiet origin/main -- "$RELEASE_NOTES_FILE" && echo 'true' || echo 'false')"
       
+      - name: Skip commit - No changes detected
+        if: steps.check_changes.outputs.files_are_same == 'true'
+        run: |
+          echo "Skipping commit and PR creation - no changes detected"
+
       - name: Commit and push release notes update
         if: steps.check_changes.outputs.files_are_same == 'false'
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -86,12 +107,19 @@ jobs:
       #     branch: ${{ steps.prepare_branch.outputs.branch }}  # 你新建的分支名
       #     draft: true  # 以草稿状态创建，避免自动合并
       
+      - name: Skip PR creation - No changes detected
+        if: steps.check_changes.outputs.files_are_same == 'true'
+        run: |
+          echo "Skipping PR creation - no changes detected"
+
       - name: Create Pull Request via API
         if: steps.check_changes.outputs.files_are_same == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+          echo "Creating Pull Request for branch: ${{ steps.prepare_branch.outputs.branch }}"
+          
+          PR_RESPONSE=$(curl -s -X POST -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             https://api.github.com/repos/${{ github.repository }}/pulls \
             -d @- << EOF
@@ -102,3 +130,7 @@ jobs:
             "body": "This PR updates rel-notes.md automatically."
           }
           EOF
+          )
+          
+          echo "Pull Request Response:"
+          echo "$PR_RESPONSE" | jq -r '"PR #" + (.number | tostring) + " created successfully: " + .html_url' 2>/dev/null || echo "$PR_RESPONSE"
