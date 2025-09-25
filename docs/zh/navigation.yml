@@ -277,3 +277,9 @@ plugins:
                 退费规则: Refund Rules
                 管理: Management
                 子账号: Subaccount
+                创建包年包月容器实例: Annual/Monthly Container Instances
+                容器实例开关机: Container Instance Power On/Off
+                通过容器实例使用 DeepSeek: Use DeepSeek with Container Instance
+                访问管理: Access Management
+                磁盘存储: Disk Storage
+                容器实例内服务开机自启: Auto-Start Services in Container Instance
