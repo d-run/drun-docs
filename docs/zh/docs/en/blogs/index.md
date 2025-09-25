@@ -7,6 +7,10 @@ hide:
 
 This channel will closely follow technology trends and collect news from the AI industry.
 
+* [KV-Cache Wins You Can See: From Prefix Caching in vLLM to Distributed Scheduling with llm-d](./2025/kvcache-wins-you-can-see.md)
+
+    How does llm-d enable smarter, prefix-aware, load- and SLO-aware routing for better latency and throughput?
+
 * [CUDA Core Dump: An Effective Tool to Debug Memory Access Issues and Beyond](./2025/cuda.md)
 
     Uncover some of advanced debugging techniques we use that can help users debug complicated issues in vLLM, such as IMA.
