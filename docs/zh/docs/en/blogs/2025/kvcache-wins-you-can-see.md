@@ -70,8 +70,6 @@ AI agents represent the most extreme case of prefix dominance. These systems ope
 
 <small>*__FIGURE 2__: A visual of an agent loop, showing the massive, static context (tools, step-history) as the cached prefix and the new observation/action as the small suffix.*</small>
 
-<br/><br/>
-
 Reusing this massive context on each turn is essential for complex agents to be computationally viable and cost-effective.
 
 !!! tip "What about RAG?"
@@ -87,8 +85,6 @@ Let's revisit our agentic workflow example to see the direct impact of being bli
 ![KV-cache miss scenario diagram](./images/image3.png)
 
 <small>*__FIGURE 3__: A heartbreaking KV-cache miss scenario.*</small>
-
-<br/><br/>
 
 This single routing decision triggers a cascade of failures:
 
@@ -119,8 +115,6 @@ This two-layered architecture provides a continuously updated, scalable view of 
 ![llm-d architecture diagram](./images/image4.png)
 
 <small>*__FIGURE 4__: Simplified architecture diagram. (1) - (3) show the read path, while (A) - (B) show the write pipeline.*</small>
-
-<br/><br/>
 
 **What about the overhead?** The memory overhead for this global index is negligible - see **Appendix A.3** for the scaling analysis showing a **1,000,000:1** data-to-metadata ratio.
 
@@ -192,8 +186,6 @@ This allows you to handle significantly more traffic on the exact same hardware,
 
 <small>*__FIGURE 5__: A tri-panel of TTFT, TPoT and Throughput measured through progressively rising QPS rates.*</small>
 
-<br/><br/>
-
 The charts above clearly illustrate these wins. The blue line (`precise-scheduling`) maintains the lowest Mean TTFT and achieves the highest Total Throughput as the request rate increases.
 
 #### The "Why": From Saved Work to System Throughput
@@ -209,8 +201,6 @@ First, we measure the **Effective Cache Throughput** - the number of prompt **to
 ![Effective cache throughput metrics](./images/image6.png)
 
 <small>*__FIGURE 6__: The total computational work **saved** by the KV-cache across the cluster, over the course of the benchmarks.*</small>
-
-<br/><br/>
 
 The chart clearly shows that `precise-scheduling` sustains a massive and stable throughput of saved work by hitting the prefixes effectively. In the middle, we see `approximate-scheduling` with good but lower efficiency, and on the right, `random-scheduling` saving almost no work.
 
