@@ -7,7 +7,7 @@ hide:
 
 本频道将紧跟技术趋势，收集 AI 行业新闻。
 
-* [KV-Cache 可见的收益：从 vLLM 的前缀缓存到 llm-d 的分布式调度](./2025/kvcache-wins-you-can-see.md)
+* [KV 缓存的全面胜利：从 vLLM 的前缀缓存到 llm-d 的分布式调度](./2025/kvcache-wins-you-can-see.md)
 
     llm-d 如何实现更智能的、前缀感知的、负载和 SLO 感知的路由，从而带来更好的延迟和吞吐量？
 
