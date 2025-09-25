@@ -24,7 +24,7 @@
 
 ## 个人中心 - 安全设置
 
-参阅文档[安全设置](../personal/index.md)。
+参阅文档[安全设置](../manage/personal/index.md)。
 
 <div class="responsive-video-container">
   <video controls src="https://harbor-test2.cn-sh2.ufileos.com/drun/videos/security.mp4" preload="metadata" poster="./images/security.png"></video>
@@ -32,7 +32,7 @@
 
 ## 个人中心 - 语言设置
 
-参阅文档[语言设置](../personal/language.md)。
+参阅文档[语言设置](../manage/personal/language.md)。
 
 <div class="responsive-video-container">
   <video controls src="https://harbor-test2.cn-sh2.ufileos.com/drun/videos/lang-settings.mp4" preload="metadata" poster="./images/language.png"></video>
