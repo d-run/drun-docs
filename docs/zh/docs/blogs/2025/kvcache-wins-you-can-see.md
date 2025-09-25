@@ -1,4 +1,4 @@
-# KV 缓存优势浅显易见：从 vLLM 的前缀缓存到 llm-d 的分布式调度
+# KV 缓存的全面胜利：从 vLLM 前缀缓存到 llm-d 分布式调度
 
 > 英文博客转载自 [https://llm-d.ai/blog/](https://llm-d.ai/blog/kvcache-wins-you-can-see)
 
@@ -37,7 +37,7 @@ llm-d 项目提供了一系列“明确的路径”：经过测试和基准验�
 其[定价模型](https://www.anthropic.com/pricing#api)中，处理已在缓存中的 Token
 的成本比未缓存 Token 低 **10 倍**（每百万 Token 分别为 $0.30 和 $3.00）。在
 OpenAI 的 [API 定价](http://openai.com/api/pricing/)页面上也能看到同样的规律。
-高缓存命中率不仅让应用更快，更让其**本质上更便宜** 。这就是 KV 缓存的力量。
+高缓存命中率不仅让应用更快，让其 **本质上更便宜** 。这就是 KV 缓存的力量。
 
 在单实例环境下，像 vLLM 这样的引擎利用自动前缀缓存来消除冗余计算，
 通过重用先前的计算结果来实现更快、更高效的性能。
