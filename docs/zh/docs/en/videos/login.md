@@ -24,7 +24,7 @@ Refer to the documentation on [Account Registration](../index.md).
 
 ## User Center – Security Settings
 
-Refer to the documentation on [Security Settings](../personal/index.md).
+Refer to the documentation on [Security Settings](../manage/personal/index.md).
 
 <div class="responsive-video-container">
   <video controls src="https://harbor-test2.cn-sh2.ufileos.com/drun/videos/security.mp4" preload="metadata" poster="./images/security.png"></video>
@@ -32,7 +32,7 @@ Refer to the documentation on [Security Settings](../personal/index.md).
 
 ## User Center – Language Settings
 
-Refer to the documentation on [Language Settings](../personal/language.md).
+Refer to the documentation on [Language Settings](../manage/personal/language.md).
 
 <div class="responsive-video-container">
   <video controls src="https://harbor-test2.cn-sh2.ufileos.com/drun/videos/lang-settings.mp4" preload="metadata" poster="./images/language.png"></video>

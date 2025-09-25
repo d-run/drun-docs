@@ -69,14 +69,14 @@ nav:
           - 代金券: leopard/voucher.md
           - 计费规则: leopard/pricing-rules.md
           - 退费说明: leopard/refunds.md
-      - 个人中心:
-          - 索引: personal/index.md
-          - 安全设置: personal/security.md
-          - 认证信息: personal/authn.md
-          - 访问密钥: personal/accesstoken.md
-          - SSH 公钥: personal/ssh-key.md
-          - 语言设置: personal/language.md
       - 管理:
+          - 个人中心:
+              - 索引: manage/personal/index.md
+              - 安全设置: manage/personal/security.md
+              - 认证信息: manage/personal/authn.md
+              - 访问密钥: manage/personal/accesstoken.md
+              - SSH 公钥: manage/personal/ssh-key.md
+              - 语言设置: manage/personal/language.md
           - 子账号: manage/sub-account.md
       - 服务协议:
           - 协议清单: service/index.md
