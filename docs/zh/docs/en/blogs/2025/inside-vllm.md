@@ -14,11 +14,11 @@ Later posts will dive into specific subsystems.
 
 This post is structured into five parts:
 
-1. [LLM engine & engine core](#llm-engine--engine-core): fundamentals of vLLM (scheduling, paged attention, continuous batching, etc.)
-2. [Advanced features](#advanced-features--extending-the-core-engine-logic): chunked prefill, prefix caching, guided & speculative decoding, disaggregated P/D
+1. [LLM engine & engine core](#llm-engine-engine-core): fundamentals of vLLM (scheduling, paged attention, continuous batching, etc.)
+2. [Advanced features](#advanced-features-extending-the-core-engine-logic): chunked prefill, prefix caching, guided & speculative decoding, disaggregated P/D
 3. [Scaling up](#from-uniprocexecutor-to-multiprocexecutor): from single-GPU to multi-GPU execution
 4. [Serving layer](#distributed-system-serving-vllm): distributed / concurrent web scaffolding
-5. [Benchmarks and auto-tuning](#benchmarks-and-auto-tuning---latency-vs-throughput): measuring latency and throughput
+5. [Benchmarks and auto-tuning](#benchmarks-and-auto-tuning-latency-vs-throughput): measuring latency and throughput
 
 !!! note
 
@@ -188,7 +188,7 @@ There are two main types of workloads an inference engine handles:
 
 !!! tip
 
-    In the [benchmarking section](#benchmarks-and-auto-tuning---latency-vs-throughput) we'll analyze the so-called roofline model of GPU perf. That will go into more detail behind prefill/decode perf profiles.
+    In the [benchmarking section](#benchmarks-and-auto-tuning-latency-vs-throughput) we'll analyze the so-called roofline model of GPU perf. That will go into more detail behind prefill/decode perf profiles.
 
 The V1 scheduler can mix both types of requests in the same step, thanks to smarter design choices. In contrast, the V0 engine could only process either prefill or decode at once.
 
@@ -518,7 +518,7 @@ The best way to internalize this is to fire up your debugger and step through th
 
 I've already previously hinted at the motivation behind disaggregated P/D (prefill/decode).
 
-Prefill and decode have very different performance profiles (compute-bound vs. memory-bandwidth-bound), so separating their execution is a sensible design. It gives tighter control over latency — both `TFTT` (time-to-first-token) and `ITL` (inter-token latency) — more on this in the [benchmarking](#benchmarks-and-auto-tuning---latency-vs-throughput) section.
+Prefill and decode have very different performance profiles (compute-bound vs. memory-bandwidth-bound), so separating their execution is a sensible design. It gives tighter control over latency — both `TFTT` (time-to-first-token) and `ITL` (inter-token latency) — more on this in the [benchmarking](#benchmarks-and-auto-tuning-latency-vs-throughput) section.
 
 In practice, we run `N` vLLM prefill instances and `M` vLLM decode instances, autoscaling them based on the live request mix. Prefill workers write KV to a dedicated KV-cache service; decode workers read from it. This isolates long, bursty prefill from steady, latency-sensitive decode.
 
