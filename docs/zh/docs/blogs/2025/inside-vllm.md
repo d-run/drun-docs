@@ -1,10 +1,8 @@
 # vLLM 内参：深度剖析高吞吐量大语言模型推理系统
 
-> 英文原稿转载自 [www.aleksagordic.com](https://www.aleksagordic.com/blog/vllm)
+> 英文原稿于 2025 年 8 月 29 日发表于 [www.aleksagordic.com](https://www.aleksagordic.com/blog/vllm)
 
 **从分页注意力、连续批处理、前缀缓存、投机解码等技术，到多 GPU、多节点的大规模动态部署**
-
-2025 年 8 月 29 日
 
 本文将循序渐进地介绍构成现代高吞吐量大语言模型推理系统的所有核心组件和高级特性。
 特别是将深入剖析 [vLLM](https://github.com/vllm-project/vllm) 的工作原理。
@@ -84,7 +82,8 @@ if __name__ == "__main__":
 
 - vLLM 配置（包含模型、缓存、并行机制等的所有配置参数）
 - 处理器（通过验证、分词和处理，将原始输入转化成 `EngineCoreRequests`）
-- 引擎核心客户端（在本文的示例中使用 `InprocClient`，基本上等同于 `EngineCore`；本文将逐步构建到 `DPLBAsyncMPClient`，以支持大规模部署）
+- 引擎核心客户端（在本文的示例中使用 `InprocClient`，基本上等同于 `EngineCore`；
+  本文将逐步构建到 `DPLBAsyncMPClient`，以支持大规模部署）
 - 输出处理器（将原始 `EngineCoreOutputs` 转化成用户可见的 `RequestOutput`）
 
 !!! note
@@ -745,7 +744,7 @@ vLLM 中的实现方式：
 `DPEngineCoreProc` 初始化其父类 `EngineCoreProc`（`EngineCore` 的子类），具体流程如下：
 
 1. 创建 `input_queue` 和 `output_queue`（`queue.Queue`）。
-2. 使用 `DEALER` ZMQ socket（异步消息库）与另一节点的前端进行初始握手，并接收协调地址信息。
+2. 使用 `DEALER` ZMQ 套接字（异步消息库）与另一节点的前端进行初始握手，并接收协调地址信息。
 3. 初始化 DP 组（例如使用 NCCL 后端）。
 4. 使用 `MultiProcExecutor` 初始化 `EngineCore`（如前所述，4 GPU 的 TP=4）。
 5. 创建 `ready_event`（`threading.Event`）。
@@ -754,7 +753,7 @@ vLLM 中的实现方式：
 8. 一旦解除阻塞，向前端发送 "ready" 消息，并附带元数据（例如分页 KV 缓存中可用的 `num_gpu_blocks`）。
 9. 主线程、输入线程和输出线程进入各自的忙循环。
 
-TL;DR：最终我们有 4 个子进程（每个 DP 副本一个），每个子进程运行主线程、输入线程和输出线程。它们与 DP 协调器和前端完成协调握手，然后每个进程的三条线程进入稳定的忙循环状态。
+长话短说，最终有 4 个子进程（每个 DP 副本一个），每个子进程运行主线程、输入线程和输出线程。它们与 DP 协调器和前端完成协调握手，然后每个进程的三条线程进入稳定的忙循环状态。
 
 ![分布式系统中运行 4 个 DPEngineCoreProc 的 4 个 DP 副本](https://www.aleksagordic.com/blog/vllm/dpenginecoreproc.png)
 
@@ -770,19 +769,21 @@ TL;DR：最终我们有 4 个子进程（每个 DP 副本一个），每个子�
 
 **附加机制:**
 
-- **DP wave counter** — 系统跟踪 “waves”；当所有引擎空闲时，它们静止，当新工作到来时计数器递增（用于协调/指标）。
+- **DP 波动计数器** — 系统跟踪 “wave”；当所有引擎空闲时，它们静止，当新工作到来时计数器递增（用于协调/指标）。
 - **控制消息** — API 服务器可以发送不仅限于推理请求的消息（例如中止请求或其他 RPC）。
 - **锁步的 Dummy 步骤** — 如果任何 DP 副本有工作，所有副本执行前向步骤；没有请求的副本执行 dummy 步骤以参与必要的同步点（避免阻塞活动副本）。
 
 !!! tip
 
-    锁步说明：实际上只有 MoE 模型需要，专家层组成 EP 或 TP 组，而 attention 层仍为 DP。目前 DP 总是这样执行，这是因为内置的非 MoE DP 用例有限，你可以直接运行多个独立 vLLM 并在它们之间做负载均衡。
+    锁步说明：实际上只有 MoE 模型需要，专家层组成 EP 或 TP 组，而 attention 层仍为 DP。目前
+    DP 总是这样执行，这是因为内置的非 MoE DP 用例有限，你可以直接运行多个独立 vLLM 并在它们之间做负载均衡。
     
 接下来，我们来看第二部分：API 服务器节点会发生什么？
 
 ### 在 API 服务器节点上
 
-我们实例化一个 `AsyncLLM` 对象（LLM 引擎的 asyncio 包装器）。内部会创建一个 `DPLBAsyncMPClient`（数据并行、负载均衡、异步、多进程客户端）。
+我们实例化一个 `AsyncLLM` 对象（LLM 引擎的 asyncio 包装器）。内部会创建一个
+`DPLBAsyncMPClient`（数据并行、负载均衡、异步、多进程客户端）。
 
 在 `MPClient` 的父类中，`launch_core_engines` 函数会执行：
 
@@ -793,7 +794,8 @@ TL;DR：最终我们有 4 个子进程（每个 DP 副本一个），每个子�
 在 `AsyncMPClient`（`MPClient` 的子类）中，我们：
 
 1. 创建 `outputs_queue`（`asyncio.Queue`）。
-2. 创建一个 asyncio 任务 `process_outputs_socket`，通过输出 socket 与所有 4 个 `DPEngineCoreProc` 的输出线程通信，并将数据写入 `outputs_queue`。
+2. 创建一个 asyncio 任务 `process_outputs_socket`，通过输出套接字与所有 4 个
+   `DPEngineCoreProc` 的输出线程通信，并将数据写入 `outputs_queue`。
 3. 随后，`AsyncLLM` 创建另一个 asyncio 任务 `output_handler` 从队列读取数据，并最终发送到 `create_completion` 函数。
 
 在 `DPAsyncMPClient` 中，我们创建 asyncio 任务 `run_engine_stats_update_task` 与 DP 协调器通信。
@@ -810,7 +812,8 @@ DP 协调器在前端（API 服务器）和后端（引擎核心）之间进行�
 - 两个任务（`process_outputs_socket`、`output_handler`）处理底层引擎的输出消息。
 - 一个任务（`run_engine_stats_update_task`）与 DP 协调器保持通信：发送波触发、轮询负载均衡状态、处理动态扩缩容请求。
 
-最后，主服务器进程创建 FastAPI 应用并挂载接口，例如 `OpenAIServingCompletion` 和 `OpenAIServingChat`，暴露 `/completion`、`/chat/completion` 等接口。整个栈通过 Uvicorn 提供服务。
+最后，主服务器进程创建 FastAPI 应用并挂载接口，例如 `OpenAIServingCompletion` 和 `OpenAIServingChat`，暴露
+`/completion`、`/chat/completion` 等接口。整个栈通过 Uvicorn 提供服务。
 
 将所有流程整合在一起，这就是完整的请求生命周期！
 
@@ -833,15 +836,16 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 4. 该方法会调用 `get_core_engine_for_request`，根据 DP 协调器的状态在多个引擎之间进行负载均衡（选择评分最低/负载最小的引擎：`score = len(waiting) * 4 + len(running)`）。
 5. `ADD` 请求被发送到所选引擎的 `input_socket`。
 6. 在该引擎上：
-   
-    - **输入线程** — 解阻塞，从输入 socket 解码数据，并将工作项放入主线程的 `input_queue`。
+
+    - **输入线程** — 解阻塞，从输入套接字解码数据，并将工作项放入主线程的 `input_queue`。
     - **主线程** — 从 `input_queue` 解阻塞，将请求添加到引擎，并重复调用 `engine_core.step()`，将中间结果放入 `output_queue`，直到满足停止条件。
     
         !!! tip
 
             提醒：`step()` 会调用调度器、模型执行器（可能是 `MultiProcExecutor`！）等。我们前面已经见过这些流程。
 
-    - **输出线程** — 从 `output_queue` 解阻塞，并通过输出 socket 将结果发送回去。
+    - **输出线程** — 从 `output_queue` 解阻塞，并通过输出套接字将结果发送回去。
+
 7. 这些结果触发 `AsyncLLM` 的输出 asyncio 任务（`process_outputs_socket` 和 `output_handler`），将 Token 逐步返回到 FastAPI 的 `create_completion` 路由。
 8. FastAPI 附加元数据（完成原因、logprobs、使用信息等），并通过 Uvicorn 返回一个 `JSONResponse` 到你的终端！
 
@@ -849,12 +853,13 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 
 !!! note "附加说明:"
 
-    - 增加更多 API 服务器时，负载均衡在 OS/socket 层处理。应用层看起来几乎没有变化，复杂性被隐藏了。
+    - 增加更多 API 服务器时，负载均衡在操作系统/套接字层处理。应用层看起来几乎没有变化，复杂性被隐藏了。
     - 使用 Ray 作为 DP 后端时，可以暴露一个 URL 接口（`/scale_elastic_ep`）来自动上下扩缩引擎副本数量。
 
 ## 基准测试与自动调优 — 延迟 vs 吞吐量
 
-到目前为止，我们一直在分析“燃料颗粒”，请求在引擎/系统中的内部流动。现在是时候放大视角，看看整个系统，并思考：我们如何衡量推理系统的性能？
+到目前为止，我们一直在分析“燃料颗粒”，请求在引擎/系统中的内部流动。现在是时候放大视角，看看整个系统，
+并思考：我们如何衡量推理系统的性能？
 
 在最高层面，有两个相互竞争的指标：
 
@@ -891,11 +896,13 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 当观察批大小 `B` 对单步解码的影响时，这种权衡就很清晰了：
 
 - 当 `B ↓` 接近 1 时，ITL 降低：每步工作量减少，Token 之间不会相互“竞争”。  
-- 当 `B ↑` 趋近于无穷大时，ITL 上升，因为每步要计算更多的 FLOP，但吞吐量提高（直到达到峰值性能），因为权重 I/O 被更多 Token 分摊。
+- 当 `B ↑` 趋近于无穷大时，ITL 上升，因为每步要计算更多的 FLOP，但吞吐量提高（直到达到峰值性能），因为权重
+  I/O 被更多 Token 分摊。
 
 屋顶线（roofline）模型有助于理解：
 
-- 在饱和批量 `B_sat` 以下，步骤时间受 HBM 带宽主导（权重按层流入片上内存），所以步骤延迟几乎平稳，计算 1 个 Token 与 10 个 Token 所需时间相似。  
+- 在饱和批量 `B_sat` 以下，步骤时间受 HBM 带宽主导（权重按层流入片上内存），所以步骤延迟几乎平稳，计算
+  1 个 Token 与 10 个 Token 所需时间相似。  
 - 超过 `B_sat` 后，kernel 受计算限制，步骤时间大致随 `B` 增长，每增加一个 Token 都会增加 ITL。
 
 ![roofline perf model](https://www.aleksagordic.com/blog/vllm/roofline.png)
@@ -910,7 +917,8 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 
 ### 如何在 vLLM 中进行基准测试
 
-vLLM 提供了一个 CLI 命令 `vllm bench {serve,latency,throughput}`，它封装了 `vllm/benchmarks/{server,latency,throughput}.py` 脚本。
+vLLM 提供了一个 CLI 命令 `vllm bench {serve,latency,throughput}`，此命令封装了
+`vllm/benchmarks/{server,latency,throughput}.py` 脚本。
 
 这些脚本的作用如下：
 
@@ -934,14 +942,16 @@ vllm bench latency
 
 此外，还有一个自动调优脚本，会驱动 `serve` 基准测试来寻找满足目标 SLO（例如 “在保持 p99 e2e < 500 ms 的前提下最大化吞吐量”）的参数设置，并返回建议的配置。
 
-## 尾声
+## 结语
 
-本文从基础引擎核心（`UniprocExecutor`）开始，加入了如投机解码和前缀缓存等高级特性，接着扩展到 `MultiProcExecutor`（TP/PP > 1），最终实现水平扩展，将所有组件封装到异步引擎和分布式服务栈中，最后展示了如何衡量系统性能。
+本文从基础引擎核心（`UniprocExecutor`）开始，加入了如投机解码和前缀缓存等高级特性，接着扩展到
+`MultiProcExecutor`（TP/PP > 1），最终实现水平扩展，将所有组件封装到异步引擎和分布式服务栈中，最后展示了如何衡量系统性能。
 
 vLLM 还包含一些我未详细展开的专门处理，例如：
 
 - **多样化硬件后端:** TPU、AWS Neuron（Trainium/Inferentia）等
-- **架构/技术:** `MLA`、`MoE`、编码器/解码器（如 Whisper）、池化/嵌入式模型、`EPLB`、`m-RoPE`、`LoRA`、`ALiBi`、无注意力变体、滑动窗口注意力、多模态 LLM、状态空间模型（如 Mamba/Mamba-2、Jamba）
+- **架构/技术:** `MLA`、`MoE`、编码器/解码器（如 Whisper）、池化/嵌入式模型、`EPLB`、`m-RoPE`、`LoRA`、
+  `ALiBi`、无注意力变体、滑动窗口注意力、多模态 LLM、状态空间模型（如 Mamba/Mamba-2、Jamba）
 - **TP/PP/SP**
 - **混合 KV-cache 逻辑**（Jenga）、更复杂的采样方法如束式采样等
 - **实验性特性:** 异步调度
