@@ -90,6 +90,7 @@ nav:
       - 费用中心: videos/bills.md
   - AI 行业新闻:
       - 索引: blogs/index.md
+      - vLLM 内参深度剖析: blogs/2025/inside-vllm.md
       - KV 缓存的全面胜利: blogs/2025/kvcache-wins-you-can-see.md
       - CUDA Core Dump调试内存访问: blogs/2025/cuda.md
       - LMCache 上线即支持 GPT-OSS: blogs/2025/lmcache.md
@@ -283,3 +284,4 @@ plugins:
                 访问管理: Access Management
                 磁盘存储: Disk Storage
                 容器实例内服务开机自启: Auto-Start Services in Container Instance
+                vLLM 内参深度剖析: Anatomy of a High-Throughput LLM Inference System

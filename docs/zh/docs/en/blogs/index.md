@@ -7,6 +7,10 @@ hide:
 
 This channel will closely follow technology trends and collect news from the AI industry.
 
+* [Inside vLLM: Anatomy of a High-Throughput LLM Inference System](./2025/inside-vllm.md)
+
+    From paged attention, continuous batching, prefix caching, specdec, etc. to multi-GPU, multi-node dynamic serving at scale
+
 * [KV-Cache Wins You Can See: From Prefix Caching in vLLM to Distributed Scheduling with llm-d](./2025/kvcache-wins-you-can-see.md)
 
     How does llm-d enable smarter, prefix-aware, load- and SLO-aware routing for better latency and throughput?
