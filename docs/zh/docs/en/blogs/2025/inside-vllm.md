@@ -100,7 +100,9 @@ The KV-cache manager maintains a `free_block_queue` - a pool of available KV-cac
 
 ![LLM engine constructor](https://www.aleksagordic.com/blog/vllm/engine_constructor.png)
 
+<div style="text-align: center;">
 Figure 1. Core components described in this section and their relationships
+</div>
 
 !!! tip
 
@@ -167,7 +169,9 @@ Next, as long as there are requests to process, the engine repeatedly calls its 
 
 ![Engine loop](https://www.aleksagordic.com/blog/vllm/engine_loop.png)
 
+<div style="text-align: center;">
 Figure 2. Engine loop
+</div>
 
 !!! tip
 
@@ -209,7 +213,9 @@ Let's now look at what `allocate_slots` does, it:
 
 ![KV cache blocks](https://www.aleksagordic.com/blog/vllm/kv_cache_blocks.png)
 
+<div style="text-align: center;">
 Figure 3. list of KV cache blocks
+</div>
 
 We're finally ready to do a forward pass!
 
@@ -234,7 +240,9 @@ Here is a concrete example that should make continuous batching and paged attent
 
 ![fwd pass - continuous batching & paged attn](https://www.aleksagordic.com/blog/vllm/fwd_pass.png)
 
+<div style="text-align: center;">
 Figure 4. Forward pass: continuous batching and paged attention
+</div>
 
 ## Advanced Features — extending the core engine logic
 
@@ -382,7 +390,9 @@ In the toy example I gave (assume character-level tokenization): at prefill, the
 
 ![FSM](https://www.aleksagordic.com/blog/vllm/fsm.png)
 
+<div style="text-align: center;">
 Figure 5. Toy example FSM
+</div>
 
 How this works in vLLM:
 
@@ -406,7 +416,9 @@ Here is an even simpler example with vocab_size = 8 and 8-bit integers (for thos
 
 ![FSM](https://www.aleksagordic.com/blog/vllm/fsm2.png)
 
+<div style="text-align: center;">
 Figure 6. Toy example
+</div>
 
 You can enable this in vLLM by passing in a desired `guided_decoding` config.
 
@@ -617,7 +629,9 @@ Here is a visual example:
 
 ![disaggregated P/D](https://www.aleksagordic.com/blog/vllm/pd.png)
 
+<div style="text-align: center;">
 Figure 7. disaggregated P/D
+</div>
 
 !!! note "Additional notes:"
 
@@ -642,7 +656,9 @@ At this stage, we need multiple GPU processes (workers) and an orchestration lay
 
 ![MultiProcExecutor](https://www.aleksagordic.com/blog/vllm/multiprocexecutor.png)
 
+<div style="text-align: center;">
 Figure 8. MultiProcExecutor in a TP=8 setting (driver worker being rank 0)
+</div>
 
 How this works in vLLM:
 
@@ -676,7 +692,9 @@ If the model requires `TP=4`, we can configure the nodes like this.
 
 ![server configuration with 2 8xH100 nodes](https://www.aleksagordic.com/blog/vllm/server_setup.png)
 
+<div style="text-align: center;">
 Figure 9. server configuration with 2 8xH100 nodes (1 headless, 1 api server)
+</div>
 
 On the first node, run the engine in headless mode (no API server) with the following arguments:
 
@@ -732,7 +750,9 @@ TL;DR: We end up with 4 child processes (one per DP replica), each running a mai
 
 ![distributed system with 4 DPEngineCoreProc](https://www.aleksagordic.com/blog/vllm/dpenginecoreproc.png)
 
+<div style="text-align: center;">
 Figure 10. distributed system with 4 DP replicas running 4 DPEngineCoreProc
+</div>
 
 **Current steady state:**
 
@@ -850,7 +870,9 @@ Before explaining why latency and throughput compete, let's define a few common 
 
 ![ttft, itl, e2e latency](https://www.aleksagordic.com/blog/vllm/latency_diagram.png)
 
+<div style="text-align: center;">
 Figure 11. ttft, itl, e2e latency
+</div>
 
 Here is a simplified model explaining the competing nature of these 2 metrics.
 
@@ -864,7 +886,9 @@ A roofline model helps with understanding here: below a saturation batch `B_sat`
 
 ![roofline perf model](https://www.aleksagordic.com/blog/vllm/roofline.png)
 
+<div style="text-align: center;">
 Figure 12. roofline perf model
+</div>
 
 !!! note
 

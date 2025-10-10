@@ -1,37 +1,42 @@
-# vLLM 内参：高吞吐量 LLM 推理系统剖析
+# vLLM 内参：深度剖析高吞吐量大语言模型推理系统
 
 > 英文原稿转载自 [www.aleksagordic.com](https://www.aleksagordic.com/blog/vllm)
 
-**从分页注意力、连续批处理、前缀缓存、推测式解码等技术，到多 GPU、多节点的动态规模化服务**
+**从分页注意力、连续批处理、前缀缓存、投机解码等技术，到多 GPU、多节点的大规模动态部署**
 
 2025 年 8 月 29 日
 
-In this post, I'll gradually introduce all of the core system components and advanced features that make up a modern high-throughput LLM inference system. In particular I'll be doing a breakdown of how vLLM [[1]](https://www.aleksagordic.com/blog/vllm#ref-1) works.
+本文将循序渐进地介绍构成现代高吞吐量大语言模型推理系统的所有核心组件和高级特性。
+特别是将深入剖析 vLLM [[1]](https://www.aleksagordic.com/blog/vllm#ref-1) 的工作原理。
 
-This post is the first in a series. It starts broad and then layers in detail (following an inverse-pyramid approach) so you can form an accurate high-level mental model of the complete system without drowning in minutiae.
+本文是系列文章的第一篇。本文采用倒金字塔方法，从宏观入手，然后逐层深入细节，
+以便你能在不被琐碎细节淹没的情况下，对整个系统形成精确的高层次心智模型。
 
-Later posts will dive into specific subsystems.
+后续博文将深入探讨各个具体的子系统。
 
-This post is structured into five parts:
+本文结构分为五个部分：
 
-1. [LLM engine & engine core](https://www.aleksagordic.com/blog/vllm#cpt1): fundamentals of vLLM (scheduling, paged attention, continuous batching, etc.)
-2. [Advanced features](https://www.aleksagordic.com/blog/vllm#cpt2): chunked prefill, prefix caching, guided & speculative decoding, disaggregated P/D
-3. [Scaling up](https://www.aleksagordic.com/blog/vllm#cpt3): from single-GPU to multi-GPU execution
-4. [Serving layer](https://www.aleksagordic.com/blog/vllm#cpt4): distributed / concurrent web scaffolding
-5. [Benchmarks and auto-tuning](https://www.aleksagordic.com/blog/vllm#cpt5): measuring latency and throughput
+1. [大语言模型引擎和引擎核心](https://www.aleksagordic.com/blog/vllm#cpt1)：vLLM 基础知识（调度、分页注意力、连续批处理等）
+2. [高级特性](https://www.aleksagordic.com/blog/vllm#cpt2)：分块 Prefill、前缀缓存、引导解码与投机解码、P/D 分离
+3. [扩容](https://www.aleksagordic.com/blog/vllm#cpt3)：从单 GPU 到多 GPU
+4. [分层部署](https://www.aleksagordic.com/blog/vllm#cpt4)：分布式/并发 Web 框架
+5. [基准测试与自动调优](https://www.aleksagordic.com/blog/vllm#cpt5)：测量延迟和吞吐量
 
 !!! note
 
-    - Analysis is based on [commit 42172ad](https://github.com/vllm-project/vllm/tree/42172ad) (August 9th, 2025).
-    - Target audience: anyone curious about how state-of-the-art LLM engines work, as well as those interested in contributing to vLLM, SGLang, etc.
-    - I'll focus on the [V1 engine](https://docs.vllm.ai/en/latest/usage/v1_guide.html). I also explored V0 ([now deprecated](https://github.com/vllm-project/vllm/issues/18571)), which was valuable for understanding how the project evolved, and many concepts still carry over.
-    - The first section on LLM Engine / Engine Core might be a bit overwhelming/dry - but the rest of the blog has plenty examples and visuals. :)
+    - 本文的数据分析基于 [commit 42172ad](https://github.com/vllm-project/vllm/tree/42172ad)（2025 年 8 月 9 日）。
+    - 目标受众：对最先进大语言模型引擎工作原理感到好奇的所有人，以及有兴趣为 vLLM、SGLang 等项目做贡献的那些人。
+    - 本文将重点介绍 [V1 引擎](https://docs.vllm.ai/en/latest/usage/v1_guide.html)。
+      本文也探究了 V0（[现已弃用](https://github.com/vllm-project/vllm/issues/18571)），
+      这对于理解 vLLM 项目的演进过程很有价值，因为其中的许多概念是贯穿始终的。
+    - 第一节讲述大语言模型引擎/引擎核心，可能有点枯燥，不过其余的章节提供了大量的示例和插图。😊
 
-## LLM Engine & Engine Core
+## 大语言模型引擎和引擎核心
 
-The LLM engine is the fundamental building block of vLLM. On its own, it already enables high-throughput inference - but only in an offline setting. You can't serve it to customers over the web yet.
+大语言模型引擎是 vLLM 的基础构建模块。仅凭其自身，它已经能够实现高吞吐量推理——但仅限于离线场景。
+你还不能通过网络将其作为服务提供给客户。
 
-We'll use the following offline inference snippet as our running example (adapted from [basic.py](https://github.com/vllm-project/vllm/blob/main/examples/offline_inference/basic/basic.py)).
+我们将使用以下离线推理示例作为运行示例（以下代码改编自 [basic.py](https://github.com/vllm-project/vllm/blob/main/examples/offline_inference/basic/basic.py)）。
 
 ```python
 from vllm import LLM, SamplingParams
@@ -52,221 +57,230 @@ if __name__ == "__main__":
     main()
 ```
 
-!!! note "Environment vars:"
+!!! note "环境变量:"
 
-    - VLLM_USE_V1="1" # we're using engine V1
-    - VLLM_ENABLE_V1_MULTIPROCESSING="0" # we're running in a single process
+    - VLLM_USE_V1="1" # 使用的是引擎 V1
+    - VLLM_ENABLE_V1_MULTIPROCESSING="0" # 在单进程中运行
 
-This configuration is:
+上述配置是：
 
-- offline (no web/distributed system scaffolding)
-- synchronous (all execution happens in a single blocking process)
-- single-GPU (no data/model/pipeline/expert parallelism; DP/TP/PP/EP = 1)
-- using standard transformer [[2]](https://www.aleksagordic.com/blog/vllm#ref-2) (supporting hybrid models like Jamba requires a more complex hybrid KV-cache memory allocator)
+- 离线的（没有 Web/分布式系统的框架）
+- 同步的（所有执行发生在单个阻塞进程中）
+- 单 GPU（没有数据/模型/流水线/专家并行；DP/TP/PP/EP = 1）
+- 使用标准 Transformer [[2]](https://www.aleksagordic.com/blog/vllm#ref-2)（支持 Jamba 等混合模型需要更复杂的混合 KV-cache 内存分配器）
 
-From here, we'll gradually build up to an online, async, multi-GPU, multi-node inference system - but still serving a standard transformer.
+从这里开始，我们将逐步构建一个在线、异步、多 GPU、多节点的推理系统——但仍然部署标准的 Transformer。
 
-In this example we do two things, we:
+在此示例中，我们做两件事：
 
-1. Instantiate an engine
-2. Call `generate` on it to sample from the given prompts
+1. 实例化一个引擎
+2. 调用 `generate` 从给定的提示词中采样
 
-Let's start analyzing the constructor.
+让我们从分析构造函数开始。
 
-## LLM Engine constructor
+## 大语言模型引擎构造函数
 
-The main components of the engine are:
+引擎的主要组件包括：
 
-- vLLM config (contains all of the knobs for configuring model, cache, parallelism, etc.)
-- processor (turns raw inputs → `EngineCoreRequests` via validation, tokenization, and processing)
-- engine core client (in our running example we're using `InprocClient` which is basically == `EngineCore`; we'll gradually build up to `DPLBAsyncMPClient` which allows serving at scale)
-- output processor (converts raw `EngineCoreOutputs` → `RequestOutput` that the user sees)
+- vLLM 配置（包含模型、缓存、并行机制等的所有配置参数）
+- 处理器（通过验证、分词和处理，将原始输入转化成 `EngineCoreRequests`）
+- 引擎核心客户端（在本文的示例中使用 `InprocClient`，基本上等同于 `EngineCore`；本文将逐步构建到 `DPLBAsyncMPClient`，以支持大规模部署）
+- 输出处理器（将原始 `EngineCoreOutputs` 转化成用户可见的 `RequestOutput`）
 
 !!! note
 
-    With the V0 engine being deprecated, class names and details may shift. I'll emphasize the core ideas rather than exact signatures. I'll abstract away some but not all of those details.
+    随着 V0 引擎被弃用，许多类名和细节发生了变化。本文将强调核心理念，而非吹毛求疵。本文将抽象掉部分但不是全部细节。
 
-Engine core itself is made up of several sub components:
+引擎核心本身由几个子组件组成：
 
-- Model Executor (drives forward passes on the model, we're currently dealing with `UniProcExecutor` which has a single `Worker` process on a single GPU). We'll gradually build up to `MultiProcExecutor` which supports multiple GPUs
-- Structured Output Manager (used for guided decoding - we'll cover this later)
-- Scheduler (decides which requests go into the next engine step) - it further contains:
+- 模型执行器（驱动模型的前向计算，目前我们使用 `UniProcExecutor`，它在单 GPU 上有一个 `Worker` 进程）。我们将逐步构建到支持多 GPU 的 `MultiProcExecutor`
+- 结构化输出管理器（用于引导解码——稍后讲解）
+- 调度器（决定哪些请求进入下一步引擎计算）——它进一步包含：
 
-    1. policy setting - it can be either **FCFS** (first come first served) or **priority** (higher priority requests are served first)
-    2. `waiting` and `running` queues
-    3. KV cache manager - the heart of paged attention [[3]](https://www.aleksagordic.com/blog/vllm#ref-3)
+    1. 策略设置——可以是 **FCFS**（先到先服务）或 **priority**（优先级高的请求优先服务）
+    2. `waiting` 和 `running` 队列
+    3. KV-cache 管理器——分页注意力的核心 [[3]](https://www.aleksagordic.com/blog/vllm#ref-3)
 
-The KV-cache manager maintains a `free_block_queue` - a pool of available KV-cache blocks (often on the order of hundreds of thousands, depending on VRAM size and block size). During paged attention, the blocks serve as the indexing structure that map tokens to their computed KV cache blocks.
+KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 块形成的池（通常有几十万块，具体取决于显存大小和块大小）。在分页注意力期间，这些块作为索引结构，将 token 映射到其计算的各个 KV-cache 块上。
 
-![LLM engine constructor](https://www.aleksagordic.com/blog/vllm/engine_constructor.png)
+![大语言模型引擎构造函数](https://www.aleksagordic.com/blog/vllm/engine_constructor.png)
 
-Figure 1. Core components described in this section and their relationships
-
-!!! tip
-
-    Block size for a standard transformer layer (non-MLA [[4]](https://www.aleksagordic.com/blog/vllm#ref-4)) is computed as follows:
-
-    2 (key/value) * `block_size` (default=16) * `num_kv_heads` * `head_size` * `dtype_num_bytes` (e.g. 2 for bf16)
-
-During model executor construction, a `Worker` object is created, and three key procedures are executed. (Later, with `MultiProcExecutor`, these same procedures run independently on each worker process across different GPUs.)
-
-1. Init device:
-
-    - Assign a CUDA device (e.g. "cuda:0") to the worker and check that the model dtype is supported (e.g. bf16)
-    - Verify enough VRAM is available, given the requested `gpu_memory_utilization` (e.g. 0.8 → 80% of total VRAM)
-    - Set up distributed settings (DP / TP / PP / EP, etc.)
-    - Instantiate a `model_runner` (holds the sampler, KV cache, and forward-pass buffers such as `input_ids`, `positions`, etc.)
-    - Instantiate an `InputBatch` object (holds CPU-side forward-pass buffers, block tables for KV-cache indexing, sampling metadata, etc.)
-
-2. Load model:
-
-    - Instantiate the model architecture
-    - Load the model weights
-    - Call model.eval() (PyTorch's inference mode)
-    - Optional: call torch.compile() on the model
-
-3. Initialize KV cache
-
-    - Get per-layer KV-cache spec. Historically this was always `FullAttentionSpec` (homogeneous transformer), but with hybrid models (sliding window, Transformer/SSM like Jamba) it became more complex (see Jenga [[5]](https://www.aleksagordic.com/blog/vllm#ref-5))
-    - Run a dummy/profiling forward pass and take a GPU memory snapshot to compute how many KV cache blocks fit in available VRAM
-    - Allocate, reshape and bind KV cache tensors to attention layers
-    - Prepare attention metadata (e.g. set the backend to FlashAttention) later consumed by kernels during the fwd pass
-    - Unless `--enforce-eager` is provided, for each of warmup batch sizes do a dummy run and capture CUDA graphs. CUDA graphs record the whole sequence of GPU work into a DAG. Later during fwd pass we launch/replay pre-baked graphs and cut on kernel launch overhead and thus improve latency.
-
-I've abstracted away many low-level details here — but these are the core pieces I'll introduce now, since I'll reference them repeatedly in the following sections.
-
-Now that we have the engine initialized let's proceed to the `generate` function.
-
-## Generate function
-
-The first step is to validate and feed requests into the engine. For each prompt we:
-
-1. Create a unique request ID and capture its arrival time
-2. Call an input preprocessor that tokenizes the prompt and returns a dictionary containing `prompt`, `prompt_token_ids`, and a `type` (text, tokens, embeds, etc.)
-3. Pack this info into an `EngineCoreRequest`, adding priority, sampling params, and other metadata
-4. Pass the request into the engine core, which wraps it in a `Request` object and sets its status to `WAITING`. This request is then added to the scheduler's `waiting` queue (append if FCFS, or heap-push if priority)
-
-At this point the engine has been fed and execution can begin. In the synchronous engine example, these initial prompts are the only ones we'll process — there's no mechanism to inject new requests mid-run. In contrast, the asynchronous engine supports this (aka **continuous batching** [[6]](https://www.aleksagordic.com/blog/vllm#ref-6)): after each step, both new and old requests are considered.
+<div style="text-align: center;">
+图 1. 本节描述的核心组件及其关系
+</div>
 
 !!! tip
 
-    Because the forward pass flattens the batch into a single sequence and custom kernels handle it efficiently, continuous batching is fundamentally supported even in the synchronous engine.
+    标准 Transformer 层（非 MLA [[4]](https://www.aleksagordic.com/blog/vllm#ref-4)）的块大小计算公式为：
 
-Next, as long as there are requests to process, the engine repeatedly calls its `step()` function. Each step has three stages:
+    2 (key/value) * `block_size`（默认=16） * `num_kv_heads` * `head_size` * `dtype_num_bytes`（例如 bf16 为 2）
 
-1. Schedule: select which requests to run in this step (decode, and/or (chunked) prefill)
-2. Forward pass: run the model and sample tokens
-3. Postprocess: append sampled token IDs to each `Request`, detokenize, and check stop conditions. If a request is finished, clean up (e.g. return its KV-cache blocks to `free_block_queue`) and return the output early
+在模型执行器构建过程中，会创建一个 `Worker` 对象，并执行三个关键过程。
+（后续在 `MultiProcExecutor` 中，这些过程将在不同 GPU 上的每个 Worker 进程中独立运行。）
 
-!!! note "Stop conditions are:"
+1. 初始化设备：
 
-    - The request exceeds its length limit (`max_model_length` or its own `max_tokens`)
-    - The sampled token is the EOS ID (unless `ignore_eos` is enabled -> useful for benchmarking when we want to force a generation of a certain number of out tokens)
-    - The sampled token matches any of the `stop_token_ids` specified in the sampling parameters
-    - Stop strings are present in the output - we truncate the output until the first stop string appearance and abort the request in the engine (note that `stop_token_ids` will be present in the output but stop strings will not).
+    - 为 Worker 分配 CUDA 设备（例如 "cuda:0"）并检查模型的数据类型是否受支持（例如 bf16）
+    - 根据请求的 `gpu_memory_utilization`（例如 0.8 → 总显存的 80%）验证是否有足够的显存
+    - 设置分布式配置（DP / TP / PP / EP 等）
+    - 实例化一个 `model_runner`（持有采样器、KV-cache 以及前向计算缓冲区，如 `input_ids`、`positions` 等）
+    - 实例化一个 `InputBatch` 对象（持有 CPU 端前向计算缓冲区、KV-cache 索引的块表、采样元数据等）
 
-![Engine loop](https://www.aleksagordic.com/blog/vllm/engine_loop.png)
+2. 加载模型：
 
-Figure 2. Engine loop
+    - 实例化模型架构
+    - 加载模型权重
+    - 调用 model.eval()（PyTorch 的推理模式）
+    - 可选：对模型调用 torch.compile()
+
+3. 初始化 KV-cache：
+
+    - 获取每层的 KV-cache 规格。历史上这总是 `FullAttentionSpec`（同质 Transformer），但对于混合模型（滑动窗口、Transformer/SSM 类 Jamba）会更复杂（参见 Jenga [[5]](https://www.aleksagordic.com/blog/vllm#ref-5)）
+    - 执行一次虚拟/分析前向计算并获取 GPU 内存快照，以计算可用显存中能容纳多少 KV-cache 块
+    - 分配、调整形状并绑定 KV-cache 张量到注意力层
+    - 准备注意力元数据（例如将后端设置为 FlashAttention），以供前向计算时内核使用
+    - 除非提供 `--enforce-eager`，否则对每个预热批次大小执行一次虚拟运行并捕获 CUDA 图。CUDA 图将整个 GPU 工作序列记录为 DAG。在后续前向计算中，我们直接启动/重放预先构建的图，从而减少内核启动开销并改善延迟
+
+这里我抽象掉了许多底层细节——但这些是核心部分，因为在接下来的章节中我会反复引用它们。
+
+现在我们已经初始化了引擎，让我们继续看 `generate` 函数。
+
+## generate 函数
+
+第一步是验证并将请求送入引擎。对于每个提示，我们：
+
+1. 创建唯一请求 ID 并记录到达时间
+2. 调用输入预处理器，将提示分词并返回一个字典，包含 `prompt`、`prompt_token_ids` 和 `type`（text、tokens、embeds 等）
+3. 将这些信息打包进 `EngineCoreRequest`，添加优先级、采样参数和其他元数据
+4. 将请求传入引擎核心，它会将请求包装为 `Request` 对象并将状态设置为 `WAITING`。然后该请求被加入调度器的 `waiting` 队列（FCFS 时 append，优先级模式时 heap-push）
+
+此时，引擎已被喂入数据，执行可以开始。在同步引擎示例中，这些初始提示是唯一处理的请求——没有机制在运行中注入新请求。相比之下，异步引擎支持此功能（即 **连续批处理** [[6]](https://www.aleksagordic.com/blog/vllm#ref-6)）：每步结束后，会同时考虑新旧请求。
 
 !!! tip
 
-    In streaming mode, we would send intermediate tokens as they are generated, but we'll ignore that for now.
+    由于前向计算将批次展平为单个序列，且自定义内核高效处理它，即使在同步引擎中也能从根本上支持连续批处理。
 
-Next, we'll examine scheduling in more detail.
+接下来，只要有请求需要处理，引擎就会反复调用 `step()` 函数。每一步包含三个阶段：
 
-## Scheduler
+1. 调度：选择本步要运行的请求（解码和/或（分块）Prefill）
+2. 前向计算：运行模型并采样 token
+3. 后处理：将采样的 token ID 添加到每个 `Request`，反分词，并检查停止条件。如果请求完成，清理（例如将 KV-cache 块返回 `free_block_queue`）并提前返回输出
 
-There are two main types of workloads an inference engine handles:
+!!! note "停止条件为："
 
-1. **Prefill** requests — a forward pass over all prompt tokens. These are usually **compute-bound** (threshold depends on hardware and prompt length). At the end, we sample a single token from the probability distribution of the final token's position.
-2. **Decode** requests — a forward pass over just the most recent token. All earlier KV vectors are already cached. These are **memory-bandwidth-bound**, since we still need to load all LLM weights (and KV caches) just to compute one token.
+    - 请求超过长度限制（`max_model_length` 或其自身的 `max_tokens`）
+    - 采样 token 为 EOS ID（除非启用 `ignore_eos` -> 用于基准测试时强制生成一定数量的输出 token）
+    - 采样 token 匹配采样参数中指定的任意 `stop_token_ids`
+    - 输出中出现停止字符串——我们会截断输出直到第一个停止字符串出现，并在引擎中终止请求（注意 `stop_token_ids` 会出现在输出中，但停止字符串不会）
+
+![引擎循环](https://www.aleksagordic.com/blog/vllm/engine_loop.png)
+
+<div style="text-align: center;">
+图 2. 引擎循环
+</div>
 
 !!! tip
 
-    In the [benchmarking section](https://www.aleksagordic.com/blog/vllm#cpt5) we'll analyze the so-called roofline model of GPU perf. That will go into more detail behind prefill/decode perf profiles.
+    在流式模式下，我们会在生成中间 token 时发送它们，但这里暂且忽略。
 
-The V1 scheduler can mix both types of requests in the same step, thanks to smarter design choices. In contrast, the V0 engine could only process either prefill or decode at once.
+接下来，我们将更详细地探讨调度。
 
-The scheduler prioritizes decode requests — i.e. those already in the `running` queue. For each such request it:
+## 调度器
 
-1. Computes the number of new tokens to generate (not always 1, due to speculative decoding and async scheduling — more on that later).
-2. Calls the KV-cache manager's `allocate_slots` function (details below).
-3. Updates the token budget by subtracting the number of tokens from step 1.
+推理引擎主要处理两类工作负载：
 
-After that, it processes prefill requests from the `waiting` queue, it:
+1. **Prefill 请求** - 对所有提示 token 执行一次前向计算。这类请求通常是 **计算受限** 的（阈值取决于硬件和提示长度）。在末尾，我们从最后一个 token 的概率分布中采样一个 token。
+2. **Decode 请求** - 仅对最近的 token 执行前向计算。之前的所有 KV 向量已经缓存。这类请求是 **内存带宽受限** 的，因为我们仍然需要加载所有大语言模型权重（以及 KV caches）才能计算一个 token。
 
-1. Retrieves the number of computed blocks (returns 0 if prefix caching is disabled — we'll cover that later).
-2. Calls the KV-cache manager's `allocate_slots` function.
-3. Pops the request from waiting and moves it to running, setting its status to `RUNNING`.
-4. Updates the token budget.
+!!! tip
 
-Let's now look at what `allocate_slots` does, it:
+    在 [基准测试章节](https://www.aleksagordic.com/blog/vllm#cpt5) 中，我们将分析 GPU 性能的所谓 roofline 模型，这将详细说明 prefill/decode 的性能特征。
 
-1. **Computes number of blocks** — determines how many new KV-cache blocks (`n`) must be allocated. Each block stores 16 tokens by default. For example, if a prefill request has 17 new tokens, we need `ceil(17/16) = 2` blocks.
-2. **Checks availability** — if there aren't enough blocks in the manager's pool, exit early. Depending on whether it's a decode or prefill request, the engine may attempt recompute preemption (swap preemption was supported in V0) by evicting low-priority requests (calling `kv_cache_manager.free` which returns KV blocks to block pool), or it might skip scheduling and continue execution.
-3. **Allocates blocks** — via the KV-cache manager's coordinator, fetches the first `n` blocks from the block pool (the `free_block_queue` doubly linked list mentioned earlier). Stores to `req_to_blocks`, the dictionary mapping each `request_id` to its list of KV-cache blocks.
+V1 调度器可以在同一步中混合处理两类请求，这得益于更智能的设计选择。相比之下，V0 引擎一次只能处理 prefill 或 decode 请求。
 
-![KV cache blocks](https://www.aleksagordic.com/blog/vllm/kv_cache_blocks.png)
+调度器优先处理 decode 请求——即那些已在 `running` 队列中的请求。对于每个请求，它会：
 
-Figure 3. list of KV cache blocks
+1. 计算需要生成的新 token 数量（不总是 1，受投机解码和异步调度影响——稍后讲解）。
+2. 调用 KV-cache 管理器的 `allocate_slots` 函数（详情见下文）。
+3. 通过减去步骤 1 的 token 数量更新 token 预算。
 
-We're finally ready to do a forward pass!
+之后，它处理来自 `waiting` 队列的 prefill 请求：
 
-## Run forward pass
+1. 获取已计算块的数量（如果禁用前缀缓存则返回 0——稍后讲解）。
+2. 调用 KV-cache 管理器的 `allocate_slots` 函数。
+3. 将请求从 waiting 弹出并移动到 running，设置状态为 `RUNNING`。
+4. 更新 token 预算。
 
-We call model executor's `execute_model`, which delegates to the `Worker`, which in turn delegates to the model runner.
+接下来看看 `allocate_slots` 的工作：
 
-Here are the main steps:
+1. **计算块数** - 确定需要分配多少新的 KV-cache 块（`n`）。每块默认存储 16 个 token。例如，一个 prefill 请求有 17 个新 token，则需要 `ceil(17/16) = 2` 块。
+2. **检查可用性** - 如果管理器的池中没有足够的块，则提前退出。根据请求类型（decode 或 prefill），引擎可能尝试重新计算抢占（V0 支持交换抢占），通过调用 `kv_cache_manager.free` 将低优先级请求的 KV 块释放回块池，或者跳过调度继续执行。
+3. **分配块** - 通过 KV-cache 管理器的协调器，从块池（前文提到的 `free_block_queue` 双向链表）获取前 `n` 块。存入 `req_to_blocks` 字典，将每个 `request_id` 映射到其 KV-cache 块列表。
 
-1. **Update states** — prune finished requests from `input_batch`; update misc fwd pass related metadata (e.g., KV cache blocks per request that will be used to index into paged KV cache memory).
-2. **Prepare inputs** — copy buffers from CPU→GPU; compute positions; build `slot_mapping` (more on that in example); construct attention metadata.
-3. **Forward pass** — run the model with custom paged attn kernels. All sequences are flattened and concatenated into one long "super sequence". Position indices and attention masks ensure each sequence only attends to its own tokens, which enables continuous batching without right-padding.
-4. **Gather last-token states** — extract hidden states for each sequence's final position and compute logits.
-5. **Sample** — sample tokens from computed logits as dictated by the sampling config (greedy, temperature, top-p, top-k, etc.).
+![KV-cache 块](https://www.aleksagordic.com/blog/vllm/kv_cache_blocks.png)
 
-Forward-pass step itself has two execution modes:
+<div style="text-align: center;">
+图 3. KV-cache 块列表
+</div>
 
-1. **Eager mode** — run the standard PyTorch forward pass when eager execution is enabled.
-2. **"Captured" mode** — execute/replay a pre-captured CUDA Graph when eager is not enforced (remember we captured these during engine construction in the initialize KV cache procedure).
+现在，我们可以进行前向计算了！
 
-Here is a concrete example that should make continuous batching and paged attention clear:
+## 执行前向计算
 
-![fwd pass - continuous batching & paged attn](https://www.aleksagordic.com/blog/vllm/fwd_pass.png)
+我们调用模型执行器的 `execute_model`，它委托给 `Worker`，再由 `Worker` 委托给 `model_runner`。
 
-Figure 4. Forward pass: continuous batching and paged attention
+主要步骤如下：
 
-## Advanced Features — extending the core engine logic
+1. **更新状态** - 从 `input_batch` 中修剪完成的请求；更新前向计算相关的杂项元数据（例如每个请求将用于索引分页 KV-cache 内存的 KV-cache 块）。
+2. **准备输入** - 将缓冲区从 CPU → GPU；计算位置；构建 `slot_mapping`（示例中详细说明）；构建注意力元数据。
+3. **前向计算** - 使用自定义分页注意力内核运行模型。所有序列被展平并连接为一个长的“超序列”。位置索引和注意力掩码确保每个序列只关注自己的 token，从而支持连续批处理而无需右侧填充。
+4. **收集最后 token 状态** - 提取每个序列最终位置的隐藏状态并计算 logits（原始得分）。
+5. **采样** - 根据采样配置（贪心、temperature、top-p、top-k 等）从计算得到的 logits 中采样 token。
 
-With the basic engine flow in place, we can now look at the advanced features.
+前向计算步骤有两种执行模式：
 
-We've already discussed preemption, paged attention, and continuous batching.
+1. **Eager 模式** - 启用 eager 执行时运行标准 PyTorch 前向计算。
+2. **“Captured” 模式** - 如果未强制 eager 执行，则执行/重放预先捕获的 CUDA 图（记住我们在引擎构建期间的初始化 KV-cache 步骤中捕获过这些图）。
 
-Next, we'll dive into:
+下面的示例可以清楚地展示连续批处理和分页注意力：
 
-1. Chunked prefill
-2. Prefix caching
-3. Guided decoding (through grammar-constrained finite-state machines)
-4. Speculative decoding
-5. Disaggregated P/D (prefill/decoding)
+![前向计算 - 连续批处理 & 分页注意力](https://www.aleksagordic.com/blog/vllm/fwd_pass.png)
 
-## Chunked prefill
+<div style="text-align: center;">
+图 4. 前向计算：连续批处理与分页注意力
+</div>
 
-Chunked prefill is a technique for handling long prompts by splitting their prefill step into smaller chunks. Without it, we could end up with a single very long request monopolizing one engine step disallowing other prefill requests to run. That would postpone all other requests and increase their latency.
+## 高级功能 — 扩展核心引擎逻辑
 
-For example, let each chunk contain `n` (=8) tokens, labeled with lowercase letters separated by "-". A long prompt `P` could look like `x-y-z`, where `z` is an incomplete chunk (e.g. 2 toks). Executing the full prefill for `P` would then take ≥ 3 engine steps (> can happen if it's not scheduled for execution in one of the steps), and only in the last chunked prefill step would we sample one new token.
+在基础引擎流程建立之后，我们现在可以看看高级功能。
 
-Here is that same example visually:
+我们已经讨论了抢占、分页注意力和连续批处理。
 
-![Chunked prefilling - pt 1](https://www.aleksagordic.com/blog/vllm/chunked_pt1.png)
+接下来，我们将深入探讨：
 
-Implementation is straightforward: cap the number of new tokens per step. If the requested number exceeds `long_prefill_token_threshold`, reset it to exactly that value. The underlying indexing logic (described earlier) takes care of the rest.
+1. 分块 prefill
+2. 前缀缓存
+3. 引导解码（通过语法约束的有限状态机）
+4. 投机解码
+5. 分离 P/D（prefill/decode）
 
-In vLLM V1, you enable chunked prefill by setting `long_prefill_token_threshold` to a positive integer. (Technically, it can happen irrespective of this, if the prompt length exceeds the token budget we truncate it and run a chunked prefill.)
+## 分块 prefill
 
-## Prefix Caching
+分块 prefill 是处理长提示的一种技术，它通过将 prefill 步骤拆分为更小的块来执行。若不使用此方法，可能会出现单个非常长的请求独占一次引擎步骤，从而阻止其他 prefill 请求运行。这会延迟所有其他请求并增加它们的延迟。
 
-To explain how prefix caching works, let's take the original code example and tweak it a bit:
+例如，每个块包含 `n` (=8) 个 token，用小写字母表示并以 "-" 分隔。一个长提示 `P` 可以表示为 `x-y-z`，其中 `z` 是不完整的块（例如 2 个 token）。执行完整的 `P` prefill 将需要 ≥ 3 个引擎步骤（如果某步未被调度执行，则可能更多），并且仅在最后的分块 prefill 步骤中，我们才会采样一个新的 token。
+
+下面是该示例的可视化表示：
+
+![分块 prefill - pt 1](https://www.aleksagordic.com/blog/vllm/chunked_pt1.png)
+
+实现方法很简单：限制每步的新 token 数量。如果请求的数量超过 `long_prefill_token_threshold`，则重置为该阈值。底层索引逻辑（前文描述）会处理剩余部分。
+
+在 vLLM V1 中，可以通过将 `long_prefill_token_threshold` 设置为正整数来启用分块 prefill。（技术上，即使未设置该值，如果提示长度超过 token 预算，也会截断并执行分块 prefill。）
+
+## 前缀缓存
+
+为了说明前缀缓存的工作原理，我们可以对原始代码示例进行一些调整：
 
 ```python
 from vllm import LLM, SamplingParams
@@ -290,72 +304,72 @@ if __name__ == "__main__":
     main()
 ```
 
-Prefix caching avoids recomputing tokens that multiple prompts share at the beginning - hence **prefix**.
+前缀缓存可以避免重新计算多个提示在开头共享的 token——因此称为 **前缀**。
 
-The crucial piece is the `long_prefix`: it's defined as any prefix longer than a KV-cache block (16 tokens by default). To simplify our example let's say `long_prefix` has exactly length `n x block_size` (where `n ≥ 1`).
+关键在于 `long_prefix`：它被定义为任何比 KV-cache 块长的前缀（默认每块 16 个 token）。为了简化示例，我们假设 `long_prefix` 的长度正好为 `n x block_size`（其中 `n ≥ 1`）。
 
 !!! tip
 
-    i.e. it perfectly aligns with block boundary - otherwise we'd have to recompute `long_prefix_len % block_size` tokens as we can't cache incomplete blocks.
+    即它与块边界完全对齐——否则我们必须重新计算 `long_prefix_len % block_size` 个 token，因为无法缓存不完整的块。
 
-Without prefix caching, each time we process a new request with the same `long_prefix`, we'd recompute all `n x block_size` tokens.
+如果不使用前缀缓存，每次处理带有相同 `long_prefix` 的新请求时，都需要重新计算所有 `n x block_size` 个 token。
 
-With prefix caching, those tokens are computed once (their KVs stored in KV cache paged memory) and then reused, so only the new prompt tokens need processing. This speeds up prefill requests (though it doesn't help with decode).
+使用前缀缓存，这些 token 只计算一次（其 KVs 存储在分页 KV-cache 内存中），然后重复使用，因此只需处理新的提示 token。这会加速 prefill 请求（但对 decode 没有帮助）。
 
-How does this work in vLLM?
+在 vLLM 中这是如何实现的？
 
-During the first `generate` call, in the scheduling stage, inside `kv_cache_manager.get_computed_blocks`, the engine invokes `hash_request_tokens`:
+在第一次 `generate` 调用中，在调度阶段，`kv_cache_manager.get_computed_blocks` 内部，引擎会调用 `hash_request_tokens`：
 
-1. This function splits the `long_prefix + prompts[0]` into 16-token chunks.
-2. For each complete chunk, it computes a hash (using either the built-in hash or SHA-256, which is slower but has fewer collisions). The hash combines the previous block's hash, the current tokens, and optional metadata.
+1. 该函数将 `long_prefix + prompts[0]` 拆分为 16-token 的块。
+2. 对每个完整块，计算一个哈希（使用内置哈希或 SHA-256，SHA-256 更慢但冲突更少）。哈希结合前一个块的哈希、当前 token 和可选元数据。
 
     !!! tip
 
-        optional metadata includes: MM hash, LoRA ID, cache salt (injected into hash of the first block ensures only requests with this cache salt can reuse blocks).
+        可选元数据包括：MM hash、LoRA ID、cache salt（注入到第一个块的哈希中，确保只有具有该 cache salt 的请求才能重用这些块）。
 
-3. Each result is stored as a `BlockHash` object containing both the hash and its token IDs. We return a list of block hashes.
+3. 每个结果存储为一个 `BlockHash` 对象，包含哈希值和其 token IDs。返回块哈希列表。
 
-The list is stored in `self.req_to_block_hashes[request_id]`.
+该列表存储在 `self.req_to_block_hashes[request_id]` 中。
 
-Next, the engine calls `find_longest_cache_hit` to check if any of these hashes already exist in `cached_block_hash_to_block`. On the first request, no hits are found.
+接下来，引擎调用 `find_longest_cache_hit` 检查这些哈希是否已存在于 `cached_block_hash_to_block` 中。对于第一次请求，没有命中。
 
-![Prefix caching logic - pt 1](https://www.aleksagordic.com/blog/vllm/prefix_pt1.png)
+![前缀缓存逻辑 - pt 1](https://www.aleksagordic.com/blog/vllm/prefix_pt1.png)
 
-Then we call `allocate_slots` which calls `coordinator.cache_blocks`, which associates the new `BlockHash` entries with allocated KV blocks and records them in `cached_block_hash_to_block`.
+然后我们调用 `allocate_slots`，它进一步调用 `coordinator.cache_blocks`，将新的 `BlockHash` 条目与分配的 KV 块关联，并记录到 `cached_block_hash_to_block` 中。
 
-Afterwards, the forward pass will populate KVs in paged KV cache memory corresponding to KV cache blocks that we allocated above.
-
-!!! tip
-
-    After many engine steps it'll allocate more KV cache blocks but it doesn't matter for our example because the prefix has diverged immediately after `long_prefix`.
-
-![Prefix caching logic - pt 2](https://www.aleksagordic.com/blog/vllm/prefix_pt2.png)
-
-On a second `generate` call with the same prefix, steps 1-3 repeat, but now `find_longest_cache_hit` finds matches for all `n` blocks (via linear search). The engine can reuse those KV blocks directly.
-
-![Prefix caching logic - pt 3](https://www.aleksagordic.com/blog/vllm/prefix_pt3.png)
-
-If the original request were still alive, the reference count for those blocks would increment (e.g. to 2). In this example, the first request has already completed, so the blocks were freed back to the pool and their reference counts set back to 0. Because we were able to retrieve them from `cached_block_hash_to_block` we know they're valid (the logic of the KV cache manager is setup in such a way), so we just remove them from `free_block_queue` again.
-
-!!! note "Advanced note:"
-
-    KV-cache blocks become invalid only when they're about to be reallocated from the `free_block_queue` (which pops from the left) and we discover the block still has an associated hash and is present in `cached_block_hash_to_block`. At that moment, we clear the block's hash and remove its entry from `cached_block_hash_to_block`, ensuring it can't be reused via prefix caching (at least not for that old prefix).
-
-And that's the gist of prefix caching: don't recompute prefixes you've already seen — just reuse their KV cache!
+随后，前向计算会在分页 KV-cache 内存中填充与上述 KV-cache 块对应的 KVs。
 
 !!! tip
 
-    If you understood this example you also understood how paged attention works.
+    多次引擎步骤后，会分配更多 KV-cache 块，但对于本示例无关紧要，因为前缀在 `long_prefix` 后立即分叉。
 
-Prefix caching is enabled by default. To disable it: `enable_prefix_caching = False`.
+![前缀缓存逻辑 - pt 2](https://www.aleksagordic.com/blog/vllm/prefix_pt2.png)
 
-## Guided Decoding (FSM)
+在第二次带相同前缀的 `generate` 调用中，步骤 1-3 重复执行，但这次 `find_longest_cache_hit` 通过线性搜索找到所有 `n` 块的匹配。引擎可以直接重用这些 KV 块。
 
-Guided decoding is a technique where, at each decoding step, the logits are constrained by a grammar-based finite state machine. This ensures that only tokens allowed by the grammar can be sampled.
+![前缀缓存逻辑 - pt 3](https://www.aleksagordic.com/blog/vllm/prefix_pt3.png)
 
-It's a powerful setup: you can enforce anything from regular grammars (Chomsky type-3, e.g. arbitrary regex patterns) all the way up to context-free grammars (type-2, which cover most programming languages).
+如果原始请求仍然存在，这些块的引用计数会增加（例如为 2）。在本例中，第一个请求已经完成，因此这些块已释放回池，其引用计数恢复为 0。由于我们可以从 `cached_block_hash_to_block` 中检索它们，说明它们有效（KV-cache 管理器的逻辑确保了这一点），因此我们再次将它们从 `free_block_queue` 中移除。
 
-To make this less abstract, let's start with the simplest possible example, building on our earlier code:
+!!! note "高级说明:"
+
+    KV-cache 块只有在即将从 `free_block_queue` 重新分配时才会失效（从左侧弹出），且我们发现该块仍有关联哈希并存在于 `cached_block_hash_to_block` 中。此时，我们清除该块的哈希并从 `cached_block_hash_to_block` 中移除其条目，确保它不能通过前缀缓存重用（至少对旧前缀无效）。
+
+这就是前缀缓存的核心：不要重复计算已经见过的前缀——直接重用它们的 KV-cache！
+
+!!! tip
+
+    如果你理解了这个示例，你也就理解了分页注意力的工作原理。
+
+前缀缓存默认启用。若要禁用：`enable_prefix_caching = False`。
+
+## 引导解码（有限状态机）
+
+引导解码是一种技术，在每个解码步骤中，logits 会受到基于语法的有限状态机约束。这确保了只有符合语法的 token 才能被采样。
+
+这是一个强大的设置：你可以强制执行从正则语法（Chomsky 类型-3，例如任意正则表达式模式）到上下文无关语法（类型-2，覆盖大多数编程语言）的约束。
+
+为了让它不那么抽象，我们从最简单的示例开始，基于之前的代码：
 
 ```python
 from vllm import LLM, SamplingParams
@@ -378,79 +392,83 @@ if __name__ == "__main__":
     main()
 ```
 
-In the toy example I gave (assume character-level tokenization): at prefill, the FSM masks logits so only "P" or "N" are viable. If "P" is sampled, the FSM moves to the "Positive" branch; next step only "o" is allowed, and so on.
+在我给出的玩具示例中（假设字符级分词）：在 prefill 阶段，FSM 会屏蔽 logits，使得只有 "P" 或 "N" 是可行的。如果采样到 "P"，FSM 会移动到 "Positive" 分支；下一步只允许 "o"，依此类推。
 
 ![FSM](https://www.aleksagordic.com/blog/vllm/fsm.png)
 
-Figure 5. Toy example FSM
+<div style="text-align: center;">
+图 5. 玩具示例 FSM
+</div>
 
-How this works in vLLM:
+在 vLLM 中的实现方式：
 
-1. At LLM engine construction, a `StructuredOutputManager` is created; it has access to the tokenizer and maintains a `_grammar_bitmask` tensor.
-2. When adding a request, its status is set to `WAITING_FOR_FSM` and `grammar_init` selects the backend compiler (e.g., `xgrammar` [[7]](https://www.aleksagordic.com/blog/vllm#ref-7); note that backends are 3rd party code).
-3. The grammar for this request is compiled asynchronously.
-4. During scheduling, if the async compile has completed, the status switches to `WAITING` and `request_id` is added to `structured_output_request_ids`; otherwise it's placed in `skipped_waiting_requests` to retry on next engine step.
-5. After the scheduling loop (still inside scheduling), if there are FSM requests, the `StructuredOutputManager` asks the backend to prepare/update `_grammar_bitmask`.
-6. After the forward pass produces logits, xgr_torch_compile's function expands the bitmask to vocab size (32x expansion ratio because we use 32 bit integers) and masks disallowed logits to –∞.
-7. After sampling the next token, the request's FSM is advanced via `accept_tokens`. Visually we move to the next state on the FSM diagram.
+1. 在大语言模型引擎构建时，创建一个 `StructuredOutputManager`；它可以访问分词器，并维护 `_grammar_bitmask` 张量。
+2. 添加请求时，其状态被设置为 `WAITING_FOR_FSM`，并由 `grammar_init` 选择后端编译器（例如 `xgrammar` [[7]](https://www.aleksagordic.com/blog/vllm#ref-7)；注意后端为第三方代码）。
+3. 该请求的语法会异步编译。
+4. 在调度阶段，如果异步编译完成，状态切换为 `WAITING`，并将 `request_id` 添加到 `structured_output_request_ids`；否则，它被放入 `skipped_waiting_requests`，在下一步引擎循环中重试。
+5. 调度循环结束后（仍在调度阶段），如果有 FSM 请求，`StructuredOutputManager` 会请求后端准备/更新 `_grammar_bitmask`。
+6. 前向计算生成 logits 后，xgr_torch_compile 的函数会将 bitmask 扩展到词表大小（因为使用 32 位整数，扩展比例为 32 倍），并将不允许的 logits 设置为 –∞。
+7. 采样下一个 token 后，通过 `accept_tokens` 推进请求的 FSM。在图示中，FSM 状态移动到下一节点。
 
-Step 6 deserves further clarification.
+步骤 6 需要进一步说明。
 
-If `vocab_size = 32`, `_grammar_bitmask` is a single integer; its binary representation encodes which tokens are allowed ("1") vs disallowed ("0"). For example, "101…001" expands to a length-32 array `[1, 0, 1, …, 0, 0, 1]`; positions with 0 get logits set to –∞. For larger vocabularies, multiple 32-bit words are used and expanded/concatenated accordingly. The backend (e.g., `xgrammar`) is responsible for producing these bit patterns using the current FSM state.
+如果 `vocab_size = 32`，`_grammar_bitmask` 是一个整数；其二进制表示编码了允许的 token（"1"）与不允许的 token（"0"）。例如，"101…001" 展开为长度为 32 的数组 `[1, 0, 1, …, 0, 0, 1]`；位置为 0 的 logits 会被设置为 –∞。对于更大的词表，会使用多个 32 位整数并进行扩展/拼接。后端（如 `xgrammar`）负责根据当前 FSM 状态生成这些位模式。
 
 !!! note
 
-    Most of the complexity here is hidden in the 3rd party libs like xgrammar.
+    大部分复杂性隐藏在第三方库（如 xgrammar）中。
 
-Here is an even simpler example with vocab_size = 8 and 8-bit integers (for those of you who like my visuals):
+这里是一个更简单的示例，`vocab_size = 8` 且使用 8 位整数（适合喜欢可视化的朋友）：
 
 ![FSM](https://www.aleksagordic.com/blog/vllm/fsm2.png)
 
-Figure 6. Toy example
+<div style="text-align: center;">
+图 6. 玩具示例
+</div>
 
-You can enable this in vLLM by passing in a desired `guided_decoding` config.
+可以通过传入所需的 `guided_decoding` 配置在 vLLM 中启用此功能。
 
-## Speculative Decoding
+## 投机解码
 
-In autoregressive generation, each new token requires a forward pass of the large LM. This is expensive — every step reloads and applies all model weights just to compute a single token! (assuming batch size == 1, in general it's `B`)
+在自回归生成中，每生成一个新 token 都需要对大语言模型执行一次前向计算。这非常昂贵——每一步都要重新加载并应用所有模型权重，仅为了计算一个 token！（假设批次大小 = 1，一般为 `B`）
 
-Speculative decoding [[8]](https://www.aleksagordic.com/blog/vllm#ref-8) speeds this up by introducing a smaller draft LM. The draft proposes `k` tokens cheaply. But we don't ultimately want to sample from the smaller model — it's only there to guess candidate continuations. The large model still decides what's valid.
+投机解码 [[8]](https://www.aleksagordic.com/blog/vllm#ref-8) 通过引入一个较小的草稿模型来加速。草稿模型廉价地提出 `k` 个 token 候选。但我们最终并不希望从小模型中采样——它只是用来猜测候选续写。大模型仍然决定哪些 token 有效。
 
-Here are the steps:
+步骤如下：
 
-1. **Draft:** run the small model on the current context and propose `k` tokens
+1. **草稿（Draft）：**在当前上下文上运行小模型，提出 `k` 个 token。
 
-2. **Verify:** run the large model once on context + `k` draft tokens. This produces probabilities for those `k` positions plus one extra (so we get `k+1` candidates)
+2. **验证（Verify）：**在上下文 + `k` 个草稿 token 上运行大模型一次。这会生成这 `k` 个位置加上一个额外位置的概率（所以得到 `k+1` 个候选）。
 
-3. Accept/reject: going from left to right over the `k` draft tokens:
+3. **接受/拒绝：**从左到右处理 `k` 个草稿 token：
 
-    - If the large model's probability for the draft token ≥ the draft's probability, accept it
-    - Otherwise, accept it with probability `p_large(token)/p_draft(token)`
-    - Stop at the first rejection, or accept all `k` draft tokens.
+    - 如果大模型对该 token 的概率 ≥ 草稿模型的概率，则接受
+    - 否则，以概率 `p_large(token)/p_draft(token)` 接受
+    - 在第一次拒绝处停止，或者接受全部 `k` 个草稿 token
 
-        - If all `k` draft tokens are accepted, also sample the extra `(k+1)`-th token "for free" from the large model (we already computed that distribution).
-        - If there was a rejection create a new rebalanced distribution at that position (`p_large - p_draft`, clamp min at 0, normalize to sum to 1) and sample the last token from it.
+        - 如果全部 `k` 个 token 都被接受，则还可以“免费”采样额外的第 `(k+1)` 个 token（大模型已经计算了该分布）。
+        - 如果出现拒绝，则在该位置创建新的重新平衡分布 (`p_large - p_draft`，最小值截断为 0，并归一化)，并从中采样最后一个 token。
 
-**Why this works:** Although we use the small model to propose candidates, the accept/reject rule guarantees that in expectation the sequence is distributed exactly as if we had sampled token by token from the large model. This means speculative decoding is statistically equivalent to standard autoregressive decoding — but potentially much faster, since a single large-model pass can yield up to `k+1` tokens.
+**为什么可行：**虽然使用小模型提出候选，但接受/拒绝规则保证在期望上序列分布与逐 token 从大模型采样完全一致。这意味着投机解码在统计上等价于标准自回归解码——但潜在速度更快，因为一次大模型前向计算最多可生成 `k+1` 个 token。
 
 !!! note
 
-    I recommend looking at [gpt-fast](https://github.com/meta-pytorch/gpt-fast) for a simple implementation, and the [original paper](https://arxiv.org/abs/2302.01318) for the math details and the proof of equivalence to sampling from the full model.
+    推荐查看 [gpt-fast](https://github.com/meta-pytorch/gpt-fast) 了解简单实现，以及 [原论文](https://arxiv.org/abs/2302.01318) 获取数学细节及与全模型采样等价的证明。
 
-vLLM V1 does not support the LLM draft model method, instead it implements faster—but less accurate—proposal schemes: n-gram, EAGLE [[9]](https://www.aleksagordic.com/blog/vllm#ref-9), and Medusa [[10]](https://www.aleksagordic.com/blog/vllm#ref-10).
+vLLM V1 不支持使用 LLM 草稿模型方法，而是实现了更快但准确性略低的候选方案：n-gram、EAGLE [[9]](https://www.aleksagordic.com/blog/vllm#ref-9) 和 Medusa [[10]](https://www.aleksagordic.com/blog/vllm#ref-10)。
 
-One-liners on each:
+各方案简述：
 
-1. **n-gram:** take the last `prompt_lookup_max` tokens; find a prior match in the sequence; if found, propose the `k` tokens that followed that match; otherwise decrement the window and retry down to `prompt_lookup_min`
+1. **n-gram：**取最后 `prompt_lookup_max` 个 token；在序列中找到之前匹配；如果找到，提出该匹配后的 `k` 个 token；否则缩小窗口并重试，直到 `prompt_lookup_min`。
 
     !!! tip
 
-        The current implementation returns `k` tokens after the **first** match. It feels more natural to introduce a recency bias and reverse the search direction? (i.e. last match)
+        当前实现返回 **第一次匹配** 后的 `k` 个 token。是否可以引入新近性偏置并反向搜索（即最后一次匹配）会更自然？
 
-2. **Eagle:** perform "model surgery" on the large LM—keep embeddings and LM head, replace the transformer stack with a lightweight MLP; fine-tune that as a cheap draft
-3. **Medusa:** train auxiliary linear heads on top (embeddings before LM head) of the large model to predict the next `k` tokens in parallel; use these heads to propose tokens more efficiently than running a separate small LM
+2. **EAGLE：**对大模型执行“模型手术”——保留 embeddings 和 LM head，将 Transformer 堆替换为轻量 MLP；微调它作为廉价草稿。
+3. **Medusa：**在大模型上训练辅助线性 head（LM head 前的 embeddings）以并行预测下 `k` 个 token；利用这些 head 比运行独立小模型更高效地提出 token。
 
-Here's how to invoke speculative decoding in vLLM using `ngram` as the draft method:
+下面是如何在 vLLM 中使用 `ngram` 方法调用投机解码：
 
 ```python
 from vllm import LLM, SamplingParams
@@ -478,47 +496,47 @@ if __name__ == "__main__":
     main()
 ```
 
-How does this work in vLLM?
+在 vLLM 中，这一流程是如何实现的？
 
-**Setup (during engine construction):**
+**设置（在引擎构建阶段）：**
 
-1. Init device: create a `drafter` (draft model, e.g., `NgramProposer`) and a `rejection_sampler` (parts of it are written in Triton).
-2. Load model: load draft model weights (no-op for n-gram).
+1. 初始化设备：创建一个 `drafter`（草稿模型，例如 `NgramProposer`）和一个 `rejection_sampler`（部分实现基于 Triton）。
+2. 加载模型：加载草稿模型权重（对于 n-gram 无操作）。
 
-**After that in the `generate` function** (assume we get a brand new request):
+**之后在 `generate` 函数中**（假设我们得到一个全新的请求）：
 
-1. Run the regular prefill step with the large model.
-2. After the forward pass and standard sampling, call `propose_draft_token_ids(k)` to sample `k` draft tokens from the draft model.
-3. Store these in `request.spec_token_ids` (update the request metadata).
-4. On the next engine step, when the request is in the running queue, add `len(request.spec_token_ids)` to the "new tokens" count so `allocate_slots` reserves sufficient KV blocks for the fwd pass.
-5. Copy `spec_token_ids` into `input_batch.token_ids_cpu` to form (context + draft) tokens.
-6. Compute metadata via `_calc_spec_decode_metadata` (this copies over tokens from `input_batch.token_ids_cpu`, prepares logits, etc.), then run a large-model forward pass over the draft tokens.
-7. Instead of regular sampling from logits, use the `rejection_sampler` to accept/reject left-to-right and produce `output_token_ids`.
-8. Repeat steps 2-7 until a stop condition is met.
+1. 使用大模型执行常规 prefill 步骤。
+2. 前向计算和标准采样后，调用 `propose_draft_token_ids(k)` 从草稿模型采样 `k` 个草稿 token。
+3. 将这些 token 存储在 `request.spec_token_ids`（更新请求元数据）。
+4. 在下一次引擎步骤中，当请求处于 running 队列时，将 `len(request.spec_token_ids)` 添加到“新 token”计数，以便 `allocate_slots` 为前向计算保留足够的 KV 块。
+5. 将 `spec_token_ids` 拷贝到 `input_batch.token_ids_cpu` 中，形成（上下文 + 草稿）tokens。
+6. 通过 `_calc_spec_decode_metadata` 计算元数据（这会拷贝 `input_batch.token_ids_cpu` 中的 token，准备 logits 等），然后对草稿 token 运行大模型前向计算。
+7. 不再从 logits 常规采样，而是使用 `rejection_sampler` 左到右进行接受/拒绝，生成 `output_token_ids`。
+8. 重复步骤 2-7，直到满足停止条件。
 
-The best way to internalize this is to fire up your debugger and step through the codebase, but this section hopefully gives you a taste for it. This as well:
+理解这一流程的最佳方式是启动调试器，逐步跟踪代码。但本节希望给你一个直观的感觉：
 
 ![Drafting stage](https://www.aleksagordic.com/blog/vllm/specdec_pt1.png)
 
 ![Verify stage & rejection sampling stage](https://www.aleksagordic.com/blog/vllm/specdec_pt2.png)
 
-## Disaggregated P/D
+## 分离 P/D（Prefill/Decode）
 
-I've already previously hinted at the motivation behind disaggregated P/D (prefill/decode).
+之前已提到分离 P/D 的动机。
 
-Prefill and decode have very different performance profiles (compute-bound vs. memory-bandwidth-bound), so separating their execution is a sensible design. It gives tighter control over latency — both `TFTT` (time-to-first-token) and `ITL` (inter-token latency) — more on this in the [benchmarking](https://www.aleksagordic.com/blog/vllm#cpt5) section.
+Prefill 和 decode 的性能特性非常不同（计算受限 vs. 内存带宽受限），因此将它们分离执行是合理的设计。这能更紧密地控制延迟——包括 `TFTT`（time-to-first-token）和 `ITL`（inter-token latency）——更多内容见 [基准测试](https://www.aleksagordic.com/blog/vllm#cpt5) 章节。
 
-In practice, we run `N` vLLM prefill instances and `M` vLLM decode instances, autoscaling them based on the live request mix. Prefill workers write KV to a dedicated KV-cache service; decode workers read from it. This isolates long, bursty prefill from steady, latency-sensitive decode.
+实际操作中，我们运行 `N` 个 vLLM prefill 实例和 `M` 个 vLLM decode 实例，根据实时请求负载自动伸缩。Prefill 工作线程将 KV 写入专用 KV-cache 服务；decode 工作线程从中读取。这将长时间、突发的 prefill 与稳定、延迟敏感的 decode 隔离开来。
 
-How does this work in vLLM?
+在 vLLM 中是如何实现的？
 
-For clarity, the example below relies on `SharedStorageConnector`, a debugging connector implementation used to illustrate the mechanics.
+为便于说明，下面示例依赖 `SharedStorageConnector`，这是一个用于调试的 connector 实现，用于演示 KV 交换机制。
 
 !!! tip
 
-    Connector is vLLM's abstraction for handling the exchange of KVs between instances. Connector interface is not yet stable, there are some near-term improvements planned which will involve changes, some potentially breaking.
+    Connector 是 vLLM 对实例间 KV 交换的抽象。Connector 接口尚不稳定，近期计划会有改进，其中一些可能涉及破坏性更改。
 
-We launch 2 vLLM instances (GPU 0 for prefill and GPU 1 for decode), and then transfer the KV cache between them:
+我们启动 2 个 vLLM 实例（GPU 0 用于 prefill，GPU 1 用于 decode），然后在它们之间传输 KV cache：
 
 ```python
 import os
@@ -590,95 +608,101 @@ if __name__ == "__main__":
 
 !!! note
 
-    I've also experimented with `LMCache` [[11]](https://www.aleksagordic.com/blog/vllm#ref-11), the fastest production-ready connector (uses NVIDIA's NIXL as the backend), but it's still at the bleeding edge and I ran into some bugs. Since much of its complexity lives in an external repo, `SharedStorageConnector` is a better choice for explanation.
+    我还尝试过 `LMCache` [[11]](https://www.aleksagordic.com/blog/vllm#ref-11)，这是最快的生产就绪 connector（使用 NVIDIA 的 NIXL 作为后端），但它仍处于前沿状态，我遇到了一些 bug。由于其复杂性大多存在于外部仓库中，因此 `SharedStorageConnector` 更适合作为讲解示例。
 
-These are the steps in vLLM:
+在 vLLM 中的步骤如下：
 
-1. Instantiation — During engine construction, connectors are created in two places:
+1. **实例化** — 在引擎构建阶段，connector 在两个地方创建：
 
-    - Inside the worker's init device procedure (under init worker distributed environment function), with role "worker".
-    - Inside the scheduler constructor, with role "scheduler".
+    - 在 Worker 的初始化设备流程中（位于初始化 Worker 分布式环境函数下），角色为 "worker"。
+    - 在 scheduler 构造函数中，角色为 "scheduler"。
 
-2. **Cache lookup** — When the scheduler processes prefill requests from the `waiting` queue (after local prefix-cache checks), it calls connector's `get_num_new_matched_tokens`. This checks for externally cached tokens in the KV-cache server. Prefill always sees 0 here; decode may have a cache hit. The result is added to the local count before calling `allocate_slots`.
+2. **缓存查询** — 当 scheduler 处理 `waiting` 队列中的 prefill 请求（本地前缀缓存检查后），调用 connector 的 `get_num_new_matched_tokens`。该函数检查 KV-cache 服务器中是否有外部缓存的 token。Prefill 始终返回 0；decode 可能命中缓存。结果会在调用 `allocate_slots` 前加入本地计数。
 
-3. **State update** — The scheduler then calls `connector.update_state_after_alloc`, which records requests that had a cache (no-op for prefill).
+3. **状态更新** — scheduler 调用 `connector.update_state_after_alloc`，记录有缓存的请求（对于 prefill 为 no-op）。
 
-4. Meta build — At the end of scheduling, the scheduler calls `meta = connector.build_connector_meta`
+4. **元数据构建** — 调度结束时，scheduler 调用 `meta = connector.build_connector_meta`
 
-    - Prefill adds all requests with `is_store=True` (to upload KV).
-    - Decode adds requests with `is_store=False` (to fetch KV).
+    - Prefill 将所有 `is_store=True` 的请求添加进来（用于上传 KV）。
+    - Decode 将 `is_store=False` 的请求添加进来（用于获取 KV）。
 
-5. Context manager — Before the forward pass, the engine enters a KV-connector context manager:
+5. **上下文管理器** — 在前向计算之前，引擎进入 KV-connector 上下文管理器：
 
-    - On enter: `kv_connector.start_load_kv` is called. For decode, this loads KV from the external server and injects it into paged memory. For prefill, it's a no-op.
-    - On exit: `kv_connector.wait_for_save` is called. For prefill, this blocks until KV is uploaded to the external server. For decode, it's a no-op.
+    - 进入时：调用 `kv_connector.start_load_kv`。对于 decode，这会从外部服务器加载 KV 并注入分页内存；对于 prefill，则为 no-op。
+    - 退出时：调用 `kv_connector.wait_for_save`。对于 prefill，会阻塞直到 KV 上传到外部服务器；对于 decode，则为 no-op。
 
-Here is a visual example:
+下面是一个可视化示例：
 
-![disaggregated P/D](https://www.aleksagordic.com/blog/vllm/pd.png)
+![分离 P/D](https://www.aleksagordic.com/blog/vllm/pd.png)
 
-Figure 7. disaggregated P/D
+<div style="text-align: center;">
+图 7. 分离 P/D
+</div>
 
-!!! note "Additional notes:"
+!!! note "附加说明:"
 
-    - For `SharedStorageConnector` "external server" is just a local file system.
-    - Depending on configuration, KV transfers can also be done layer-by-layer (before/after each attention layer).
-    - Decode loads external KV only once, on the first step of its requests; afterwards it computes/stores locally.
+    - 对于 `SharedStorageConnector`，“外部服务器”仅为本地文件系统。
+    - 根据配置，KV 传输也可以按层进行（在每个 attention 层前/后）。
+    - Decode 只在请求的第一步加载外部 KV；之后在本地计算/存储。
 
-## From UniprocExecutor to MultiProcExecutor
+## 从 UniprocExecutor 到 MultiProcExecutor
 
-With the core techniques in place, we can now talk about scaling up.
+在掌握了核心技术之后，我们可以讨论扩展方案。
 
-Suppose your model weights no longer fit into a single GPU's VRAM.
+假设你的模型权重已经无法放入单个 GPU 的显存。
 
-The first option is to shard the model across multiple GPUs on the same node using tensor parallelism (e.g., `TP=8`). If the model still doesn't fit, the next step is pipeline parallelism across nodes.
+第一个方案是在同一节点的多块 GPU 上进行张量并行（tensor parallelism, TP，例如 `TP=8`）来切分模型。如果模型仍然无法容纳，下一步就是跨节点的流水线并行（pipeline parallelism, PP）。
 
 !!! note
 
-    - Intranode bandwidth is significantly higher than internode, which is why tensor parallelism (TP) is generally preferred over pipeline parallelism (PP). (It is also true that PP communicates less data than TP.)
-    - I'm not covering expert parallelism (EP) since we're focusing on standard transformers rather than MoE, nor sequence parallelism, as TP and PP are the most commonly used in practice.
+    - 节点内带宽远高于节点间带宽，这也是为什么通常优先选择张量并行（TP）而非流水线并行（PP）。（同时，PP 传输的数据量也少于 TP。）
+    - 我不讨论 expert parallelism (EP)，因为我们关注的是标准 Transformer 而非 MoE，也不讨论 sequence parallelism，因为 TP 和 PP 在实践中最常用。
 
-At this stage, we need multiple GPU processes (workers) and an orchestration layer to coordinate them. That's exactly what `MultiProcExecutor` provides.
+在这个阶段，我们需要多个 GPU 进程（Worker）以及一个协调层来管理它们。这正是 `MultiProcExecutor` 提供的功能。
 
 ![MultiProcExecutor](https://www.aleksagordic.com/blog/vllm/multiprocexecutor.png)
 
-Figure 8. MultiProcExecutor in a TP=8 setting (driver worker being rank 0)
+<div style="text-align: center;">
+图 8. TP=8 设置下的 MultiProcExecutor（驱动 Worker 为 rank 0）
+</div>
 
-How this works in vLLM:
+在 vLLM 中的实现方式：
 
-1. `MultiProcExecutor` initializes an `rpc_broadcast_mq` message queue (implemented with shared memory under the hood).
-2. The constructor loops over `world_size` (e.g. `TP=8 ⇒ world_size=8`) and spawns a daemon process for each rank via `WorkerProc.make_worker_process`.
-3. For each worker, the parent first creates a reader and writer pipe.
-4. The new process runs `WorkerProc.worker_main`, which instantiates a worker (going through the same "init device", "load model", etc. as in `UniprocExecutor`).
-5. Each worker determines whether it is the driver (rank 0 in the TP group) or a regular worker. Every worker sets up two queues:
-   
-    - `rpc_broadcast_mq` (shared with the parent) for receiving work.
-    - `worker_response_mq` for sending responses back.
+1. `MultiProcExecutor` 初始化一个 `rpc_broadcast_mq` 消息队列（底层基于共享内存实现）。
+2. 构造函数遍历 `world_size`（例如 `TP=8 ⇒ world_size=8`），并通过 `WorkerProc.make_worker_process` 为每个 rank 启动守护进程。
+3. 对每个 Worker，父进程首先创建 reader 和 writer 管道。
+4. 新进程运行 `WorkerProc.worker_main`，实例化 Worker（经历与 `UniprocExecutor` 相同的“init device”、“load model”等流程）。
+5. 每个 Worker 判断自己是否为 driver（TP 组中的 rank 0）或普通 Worker。每个 Worker 设置两个队列：
 
-6. During initialization, each child sends its `worker_response_mq` handle to the parent via the pipe. Once all are received, the parent unblocks — this completes coordination.
-7. Workers then enter a busy loop, blocking on `rpc_broadcast_mq.dequeue`. When a work item arrives, they execute it (just like in `UniprocExecutor`, but now with TP/PP-specific partitioned work). Results are sent back through `worker_response_mq.enqueue`.
-8. At runtime, when a request arrives, `MultiProcExecutor` enqueues it into `rpc_broadcast_mq` (non-blocking) for all children workers. It then waits on the designated output rank's `worker_response_mq.dequeue` to collect the final result.
+    - `rpc_broadcast_mq`（与父进程共享）用于接收工作任务。
+    - `worker_response_mq` 用于发送结果回父进程。
 
-From the engine's perspective, nothing has changed — all of this multiprocessing complexity is abstracted away through a call to model executor's `execute_model`.
+6. 初始化期间，每个子进程通过管道将其 `worker_response_mq` handle 发送给父进程。收到所有 handle 后，父进程解除阻塞——完成协调。
+7. Worker 进入忙循环，阻塞于 `rpc_broadcast_mq.dequeue`。当有工作到来时执行任务（类似 `UniprocExecutor`，但现在是 TP/PP 分区的任务）。结果通过 `worker_response_mq.enqueue` 返回。
+8. 运行时，当请求到来时，`MultiProcExecutor` 将其入队到所有子 Worker 的 `rpc_broadcast_mq`（非阻塞）。然后等待指定输出 rank 的 `worker_response_mq.dequeue` 收集最终结果。
 
-- In the `UniProcExecutor` case: execute_model directly leads to calling execute_model on the worker
-- In the `MultiProcExecutor` case: execute_model indirectly leads to calling execute_model on each worker through `rpc_broadcast_mq`
+从引擎的角度来看，一切接口不变——所有多进程复杂性都通过调用模型执行器的 `execute_model` 被抽象掉。
 
-At this point, we can run models that are as large as resources allow using the same engine interface.
+- 对于 `UniProcExecutor`：`execute_model` 直接调用 Worker 的 execute_model
+- 对于 `MultiProcExecutor`：`execute_model` 间接通过 `rpc_broadcast_mq` 调用每个 Worker 的 execute_model
 
-The next step is to scale out: enable data parallelism (`DP > 1`) replicating the model across nodes, add a lightweight DP coordination layer, introduce load balancing across replicas, and place one or more API servers in front to handle incoming traffic.
+至此，我们可以使用同一个引擎接口运行尽可能大的模型。
 
-## Distributed system serving vLLM
+下一步是横向扩展：启用数据并行（`DP > 1`），在各节点上复制模型，引入轻量级 DP 协调层，对副本进行负载均衡，并在前端部署一个或多个 API 服务器以处理入站流量。
 
-There are many ways to set up serving infrastructure, but to stay concrete, here's one example: suppose we have two H100 nodes and want to run four vLLM engines across them.
+## 分布式系统部署 vLLM
 
-If the model requires `TP=4`, we can configure the nodes like this.
+部署基础设施有多种方式，为了具体说明，这里给出一个示例：假设我们有两台 H100 节点，并希望在它们上运行四个 vLLM 引擎。
 
-![server configuration with 2 8xH100 nodes](https://www.aleksagordic.com/blog/vllm/server_setup.png)
+如果模型需要 `TP=4`，我们可以将节点配置如下：
 
-Figure 9. server configuration with 2 8xH100 nodes (1 headless, 1 api server)
+![2 台 8xH100 节点的服务器配置](https://www.aleksagordic.com/blog/vllm/server_setup.png)
 
-On the first node, run the engine in headless mode (no API server) with the following arguments:
+<div style="text-align: center;">
+图 9. 2 台 8xH100 节点的服务器配置（1 台 headless，1 台 API 服务器）
+</div>
+
+在第一台节点上，以 headless 模式运行引擎（无 API 服务器），并使用以下参数：
 
 ```python
 vllm serve <model-name>
@@ -691,10 +715,10 @@ vllm serve <model-name>
   --headless
 ```
 
-and run that same command on the other node with few tweaks:
+并在另一台节点上运行同样的命令，但进行以下调整：
 
-- no `--headless`
-- modify DP start rank
+- 去掉 `--headless`
+- 修改 DP 起始 rank
 
 ```python
 vllm serve <model-name>
@@ -708,85 +732,87 @@ vllm serve <model-name>
 
 !!! note
 
-    This assumes networking is configured so all nodes can reach the specified IP and port.
+    这假设网络已配置好，所有节点都可以访问指定的 IP 和端口。
 
-How does this work in VLLM?
+vLLM 中的实现方式：
 
-## On the headless server node
+## 在 headless 服务器节点
 
-On the headless node, a `CoreEngineProcManager` launches 2 processes (per `--data-parallel-size-local`) each running `EngineCoreProc.run_engine_core`. Each of these functions creates a `DPEngineCoreProc` (the engine core) and then enters its busy loop.
+在 headless 节点上，`CoreEngineProcManager` 启动 2 个进程（根据 `--data-parallel-size-local`），每个进程运行 `EngineCoreProc.run_engine_core`。每个函数会创建一个 `DPEngineCoreProc`（引擎核心），然后进入其忙循环。
 
-`DPEngineCoreProc` initializes its parent `EngineCoreProc` (child of `EngineCore`), which:
+`DPEngineCoreProc` 初始化其父类 `EngineCoreProc`（`EngineCore` 的子类），具体流程如下：
 
-1. Creates an `input_queue` and `output_queue` (`queue.Queue`).
-2. Performs an initial handshake with the frontend on the other node using a `DEALER` ZMQ socket (async messaging lib), and receives coordination address info.
-3. Initializes DP group (e.g. using NCCL backend).
-4. Initializes the `EngineCore` with `MultiProcExecutor` (`TP=4` on 4 GPUs as described earlier).
-5. Creates a `ready_event` (`threading.Event`).
-6. Starts an input deamon thread (`threading.Thread`) running `process_input_sockets(…, ready_event)`. Similarly starts an output thread.
-7. Still in the main thread, waits on `ready_event` until all input threads across all 4 processes (spanning the 2 nodes) have completed the coordination handshake finally executing `ready_event.set()`.
-8. Once unblocked, sends a "ready" message to the frontend with metadata (e.g., `num_gpu_blocks` available in paged KV cache memory).
-9. The main, input, and output threads then enter their respective busy loops.
+1. 创建 `input_queue` 和 `output_queue`（`queue.Queue`）。
+2. 使用 `DEALER` ZMQ socket（异步消息库）与另一节点的前端进行初始握手，并接收协调地址信息。
+3. 初始化 DP 组（例如使用 NCCL 后端）。
+4. 使用 `MultiProcExecutor` 初始化 `EngineCore`（如前所述，4 GPUs 的 TP=4）。
+5. 创建 `ready_event`（`threading.Event`）。
+6. 启动输入守护线程（`threading.Thread`）运行 `process_input_sockets(..., ready_event)`。同样启动输出线程。
+7. 在主线程中等待 `ready_event`，直到所有 4 个进程的输入线程（跨 2 个节点）完成协调握手，最终执行 `ready_event.set()`。
+8. 一旦解除阻塞，向前端发送 "ready" 消息，并附带元数据（例如分页 KV 缓存中可用的 `num_gpu_blocks`）。
+9. 主线程、输入线程和输出线程进入各自的忙循环。
 
-TL;DR: We end up with 4 child processes (one per DP replica), each running a main, input, and output thread. They complete a coordination handshake with the DP coordinator and frontend, then all three threads per process run in steady-state busy loops.
+TL;DR：最终我们有 4 个子进程（每个 DP 副本一个），每个子进程运行主线程、输入线程和输出线程。它们与 DP 协调器和前端完成协调握手，然后每个进程的三条线程进入稳定的忙循环状态。
 
-![distributed system with 4 DPEngineCoreProc](https://www.aleksagordic.com/blog/vllm/dpenginecoreproc.png)
+![分布式系统中运行 4 个 DPEngineCoreProc 的 4 个 DP 副本](https://www.aleksagordic.com/blog/vllm/dpenginecoreproc.png)
 
-Figure 10. distributed system with 4 DP replicas running 4 DPEngineCoreProc
+<div style="text-align: center;">
+图 10. 分布式系统中运行 4 个 DP 副本的 4 个 DPEngineCoreProc
+</div>
 
-**Current steady state:**
+**当前稳定状态：**
 
-- **Input thread** — blocks on the input socket until a request is routed from the API server; upon receipt, it decodes the payload, enqueues a work item via `input_queue.put_nowait(...)`, and returns to blocking on the socket.
-- **Main thread** — wakes on `input_queue.get(...)`, feeds the request to the engine; `MultiProcExecutor` runs the forward pass and enqueues results to `output_queue`.
-- **Output thread** — wakes on `output_queue.get(...)`, sends the result back to the API server, then resumes blocking.
+- **输入线程** — 阻塞在输入 socket，直到 API 服务器路由请求；收到请求后，解码 payload，通过 `input_queue.put_nowait(...)` 入队工作项，然后返回阻塞。
+- **主线程** — 从 `input_queue.get(...)` 唤醒，将请求送入引擎；`MultiProcExecutor` 执行前向计算并将结果入队到 `output_queue`。
+- **输出线程** — 从 `output_queue.get(...)` 唤醒，将结果发送回 API 服务器，然后继续阻塞。
 
-**Additional mechanics:**
+**附加机制：**
 
-- **DP wave counter** — the system tracks "waves"; when all engines become idle they quiesce, and the counter increments when new work arrives (useful for coordination/metrics).
-- **Control messages** — the API server can send more than just inference requests (e.g., aborts and utility/control RPCs).
-- **Dummy steps for lockstep** — if any DP replica has work, all replicas execute a forward step; replicas without requests perform a dummy step to participate in required synchronization points (avoids blocking the active replica).
+- **DP wave counter** — 系统跟踪 “waves”；当所有引擎空闲时，它们静止，当新工作到来时计数器递增（用于协调/指标）。
+- **控制消息** — API 服务器可以发送不仅限于推理请求的消息（例如中止请求或其他 RPC）。
+- **锁步的 Dummy 步骤** — 如果任何 DP 副本有工作，所有副本执行前向步骤；没有请求的副本执行 dummy 步骤以参与必要的同步点（避免阻塞活动副本）。
 
 !!! tip
 
-    Lockstep clarification: this is actually only required for MoE models where the expert layers form an EP or TP group while attention layers are still DP. It's currently always done with DP - this is just because there's limited use for "built-in" non-MoE DP since you could just run multiple independent vLLMs and load-balance between them in a normal way.
+    锁步说明：实际上只有 MoE 模型需要，专家层组成 EP 或 TP 组，而 attention 层仍为 DP。目前 DP 总是这样执行——这是因为内置的非 MoE DP 用例有限，你可以直接运行多个独立 vLLM 并在它们之间做负载均衡。
+    
+接下来，我们来看第二部分：API 服务器节点会发生什么？
 
-Now for the second part, what happens on the API server node?
+## 在 API 服务器节点
 
-## On the API server node
+我们实例化一个 `AsyncLLM` 对象（LLM 引擎的 asyncio 包装器）。内部会创建一个 `DPLBAsyncMPClient`（数据并行、负载均衡、异步、多进程客户端）。
 
-We instantiate an `AsyncLLM` object (an asyncio wrapper around the LLM engine). Internally this creates a `DPLBAsyncMPClient` (data-parallel, load-balancing, asynchronous, multiprocessing client).
+在 `MPClient` 的父类中，`launch_core_engines` 函数会执行：
 
-Inside the parent class of `MPClient`, the `launch_core_engines` function runs and:
+1. 创建启动握手使用的 ZMQ 地址（如 headless 节点所见）。
+2. 启动一个 `DPCoordinator` 进程。
+3. 创建一个 `CoreEngineProcManager`（与 headless 节点相同）。
 
-1. Creates the ZMQ addresses used for the startup handshake (as seen on the headless node).
-2. Spawns a `DPCoordinator` process.
-3. Creates a `CoreEngineProcManager` (same as on the headless node).
+在 `AsyncMPClient`（`MPClient` 的子类）中，我们：
 
-Inside `AsyncMPClient` (child of `MPClient`), we:
+1. 创建 `outputs_queue`（`asyncio.Queue`）。
+2. 创建一个 asyncio 任务 `process_outputs_socket`，通过输出 socket 与所有 4 个 `DPEngineCoreProc` 的输出线程通信，并将数据写入 `outputs_queue`。
+3. 随后，`AsyncLLM` 创建另一个 asyncio 任务 `output_handler` 从队列读取数据，并最终发送到 `create_completion` 函数。
 
-1. Create an `outputs_queue` (`asyncio.Queue`).
-2. We create an asyncio task `process_outputs_socket` which communicates (through the output socket) with output threads of all 4 `DPEngineCoreProc` and writes into `outputs_queue`.
-3. Subsequently one more asyncio task `output_handler` from `AsyncLLM` reads from this queue and finally sends out information to the `create_completion` function.
+在 `DPAsyncMPClient` 中，我们创建 asyncio 任务 `run_engine_stats_update_task` 与 DP 协调器通信。
 
-Inside `DPAsyncMPClient` we create an asyncio task `run_engine_stats_update_task` which communicates with DP coordinator.
+DP 协调器在前端（API 服务器）和后端（引擎核心）之间进行中介。它会：
 
-The DP coordinator mediates between the frontend (API server) and backend (engine cores). It:
+- 定期向前端的 `run_engine_stats_update_task` 发送负载均衡信息（队列大小、等待/运行请求）。
+- 处理前端的 `SCALE_ELASTIC_EP` 命令，通过动态调整引擎数量（仅 Ray 后端可用）。
+- 向后端发送 `START_DP_WAVE` 事件（前端触发时），并报告波状态更新。
 
-- Periodically sends load-balancing info (queue sizes, waiting/running requests) to the frontend's `run_engine_stats_update_task`.
-- Handles `SCALE_ELASTIC_EP` commands from the frontend by dynamically changing the number of engines (only works with Ray backend).
-- Sends `START_DP_WAVE` events to the backend (when triggered by frontend) and reports wave-state updates back.
+总结一下，前端（`AsyncLLM`）运行多个 asyncio 任务（注意：并发，而非并行）：
 
-To recap, the frontend (`AsyncLLM`) runs several asyncio tasks (remember: concurrent, not parallel):
+- 一类任务处理输入请求，通过 `generate` 路径（每个新客户端请求生成一个新的 asyncio 任务）。
+- 两个任务（`process_outputs_socket`、`output_handler`）处理底层引擎的输出消息。
+- 一个任务（`run_engine_stats_update_task`）与 DP 协调器保持通信：发送波触发、轮询负载均衡状态、处理动态扩缩容请求。
 
-- A class of tasks handles input requests through the `generate` path (each new client request spawns a new asyncio task).
-- Two tasks (`process_outputs_socket`, `output_handler`) process output messages from the underlying engines.
-- One task (`run_engine_stats_update_task`) maintains communication with the DP coordinator: sending wave triggers, polling LB state, and handling dynamic scaling requests.
+最后，主服务器进程创建 FastAPI 应用并挂载接口，例如 `OpenAIServingCompletion` 和 `OpenAIServingChat`，暴露 `/completion`、`/chat/completion` 等接口。整个栈通过 Uvicorn 提供服务。
 
-Finally, the main server process creates a FastAPI app and mounts endpoints such as `OpenAIServingCompletion` and `OpenAIServingChat`, which expose `/completion`, `/chat/completion`, and others. The stack is then served via Uvicorn.
+将所有流程整合在一起，这就是完整的请求生命周期！
 
-So, putting it all together, here's the full request lifecycle!
-
-You send from your terminal:
+你可以从终端发送请求：
 
 ```bash
 curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/json" -d '{
@@ -797,90 +823,98 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 }'
 ```
 
-What happens next:
+接下来会发生什么：
 
-1. The request hits `OpenAIServingCompletion`'s `create_completion` route on the API server.
-2. The function tokenizes the prompt asynchronously, and prepares metadata (request ID, sampling params, timestamp, etc.).
-3. It then calls `AsyncLLM.generate`, which follows the same flow as the synchronous engine, eventually invoking `DPAsyncMPClient.add_request_async`.
-4. This in turn calls `get_core_engine_for_request`, which does load balancing across engines based on the DP coordinator's state (picking the one that has minimal score / lowest load: `score = len(waiting) * 4 + len(running)`).
-5. The `ADD` request is sent to the chosen engine's `input_socket`.
-6. At that engine:
+1. 请求到达 API 服务器上 `OpenAIServingCompletion` 的 `create_completion` 路由。
+2. 函数异步对 prompt 进行分词，并准备元数据（请求 ID、采样参数、时间戳等）。
+3. 然后调用 `AsyncLLM.generate`，它遵循与同步引擎相同的流程，最终调用 `DPAsyncMPClient.add_request_async`。
+4. 该方法会调用 `get_core_engine_for_request`，根据 DP 协调器的状态在多个引擎之间进行负载均衡（选择评分最低/负载最小的引擎：`score = len(waiting) * 4 + len(running)`）。
+5. `ADD` 请求被发送到所选引擎的 `input_socket`。
+6. 在该引擎上：
    
-    - Input thread — unblocks, decodes data from the input socket, and places a work item on the `input_queue` for the main thread.
-    - Main thread — unblocks on `input_queue`, adds the request to the engine, and repeatedly calls `engine_core.step()`, enqueueing intermediate results to `output_queue` until a stop condition is met.
+    - **输入线程** — 解阻塞，从输入 socket 解码数据，并将工作项放入主线程的 `input_queue`。
+    - **主线程** — 从 `input_queue` 解阻塞，将请求添加到引擎，并重复调用 `engine_core.step()`，将中间结果放入 `output_queue`，直到满足停止条件。
     
         !!! tip
 
-            Reminder: `step()` calls the scheduler, model executor (which in turn can be `MultiProcExecutor`!), etc. We have already seen this!
+            提醒：`step()` 会调用调度器、模型执行器（可能是 `MultiProcExecutor`！）等。我们前面已经见过这些流程。
 
-    - Output thread — unblocks on `output_queue` and sends results back through the output socket.
-7. Those results trigger the `AsyncLLM` output asyncio tasks (`process_outputs_socket` and `output_handler`), which propagate tokens back to FastAPI's `create_completion` route.
-8. FastAPI attaches metadata (finish reason, logprobs, usage info, etc.) and returns a `JSONResponse` via Uvicorn to your terminal!
+    - **输出线程** — 从 `output_queue` 解阻塞，并通过输出 socket 将结果发送回去。
+7. 这些结果触发 `AsyncLLM` 的输出 asyncio 任务（`process_outputs_socket` 和 `output_handler`），将 token 逐步返回到 FastAPI 的 `create_completion` 路由。
+8. FastAPI 附加元数据（完成原因、logprobs、使用信息等），并通过 Uvicorn 返回一个 `JSONResponse` 到你的终端！
 
-And just like that, your completion came back — the whole distributed machinery hidden behind a simple `curl` command! :) So much fun!!!
+就这样，你的 completion 返回了——整个分布式机制被隐藏在一个简单的 `curl` 命令背后！:) 真是太有趣了！！！
 
-!!! note "Additional notes:"
+!!! note "附加说明:"
 
-    - When adding more API servers, load balancing is handled at the OS/socket level. From the application's perspective, nothing significant changes — the complexity is hidden.
-    - With Ray as a DP backend, you can expose a URL endpoint (`/scale_elastic_ep`) that enables automatic scaling of the number of engine replicas up or down.
+    - 增加更多 API 服务器时，负载均衡在 OS/socket 层处理。应用层看起来几乎没有变化——复杂性被隐藏了。
+    - 使用 Ray 作为 DP 后端时，可以暴露一个 URL 接口（`/scale_elastic_ep`）来自动上下扩缩引擎副本数量。
 
-## Benchmarks and auto-tuning - latency vs throughput
+## 基准测试与自动调优 — 延迟 vs 吞吐量
 
-So far we've been analyzing the "gas particles" — the internals of how requests flow through the engine/system. Now it's time to zoom out and look at the system as a whole, and ask: how do we measure the performance of an inference system?
+到目前为止，我们一直在分析“燃料颗粒”——请求在引擎/系统中的内部流动。现在是时候放大视角，看整个系统，并思考：我们如何衡量推理系统的性能？
 
-At the highest level there are two competing metrics:
+在最高层面，有两个相互竞争的指标：
 
-1. **Latency** — the time from when a request is submitted until tokens are returned
-2. **Throughput** — the number of tokens/requests per second the system can generate/process
+1. **延迟（Latency）** — 从请求提交到 token 返回所花费的时间  
+2. **吞吐量（Throughput）** — 系统每秒能生成/处理的 token 或请求数量
 
-**Latency** matters most for interactive applications, where users are waiting on responses.
+**延迟** 对于交互式应用最重要，因为用户在等待响应。  
 
-**Throughput** matters in offline workloads like synthetic data generation for pre/post-training runs, data cleaning/processing, and in general - any type of offline batch inference jobs.
+**吞吐量** 对于离线工作负载最重要，例如用于训练前/后数据生成、数据清理/处理，以及一般的离线批量推理任务。
 
-Before explaining why latency and throughput compete, let's define a few common inference metrics:
+在解释为什么延迟与吞吐量相互竞争之前，我们先定义几个常见的推理指标：
 
-| Metric                               | Definition                                                   |
+| 指标 | 定义 |
 | :----------------------------------- | :----------------------------------------------------------- |
-| `TTFT` (time to first token)         | Time from request submission until the first output token is received |
-| `ITL` (inter-token latency)          | Time between two consecutive tokens (e.g., from token i-1 to token i) |
-| `TPOT` (time per output token)       | The average ITL across all output tokens in a request        |
-| `Latency / E2E` (end-to-end latency) | Total time to process a request, i.e. TTFT + sum of all ITLs, or equivalently the time between submitting request and receiving the last output token |
-| `Throughput`                         | Total tokens processed per second (input, output, or both), or alternatively requests per second |
-| `Goodput`                            | Throughput that meets service-level objectives (SLOs) such as max TTFT, TPOT, or e2e latency. For example, only tokens from requests meeting those SLOs are counted |
+| `TTFT` (time to first token) | 从请求提交到接收到第一个输出 token 的时间 |
+| `ITL` (inter-token latency) | 两个连续 token 之间的时间（例如，从 token i-1 到 token i） |
+| `TPOT` (time per output token) | 单个请求中所有输出 token 的平均 ITL |
+| `Latency / E2E` (端到端延迟) | 处理请求的总时间，即 TTFT + 所有 ITL 之和，或等价地，从提交请求到接收最后一个输出 token 的时间 |
+| `Throughput` | 系统每秒处理的总 token（输入、输出或两者），或每秒请求数 |
+| `Goodput` | 满足服务级别目标（SLO，如最大 TTFT、TPOT 或端到端延迟）的吞吐量。例如，只有满足这些 SLO 的请求 token 才计入吞吐量 |
 
 ![ttft, itl, e2e latency](https://www.aleksagordic.com/blog/vllm/latency_diagram.png)
 
-Figure 11. ttft, itl, e2e latency
+<div style="text-align: center;">
+图 11. TTFT、ITL 与端到端延迟
+</div>
 
-Here is a simplified model explaining the competing nature of these 2 metrics.
+下面是一个简化模型，用于说明这两个指标的竞争关系。
 
 !!! tip
 
-    Assumption: weight i/o and not KV cache i/o dominates; i.e. we're dealing with short sequences.
+    假设：权重 I/O 主导性能，而不是 KV cache I/O；即处理的是短序列。
 
-The tradeoff becomes clear when looking at how batch size `B` affects a single decode step. As `B ↓` toward 1, ITL drops: there's less work per step and the token isn't "competing" with others. As `B ↑` toward infinity, ITL rises because we do more FLOPs per step—but throughput improves (until we hit peak perf) because weight I/O is amortized across more tokens.
+当观察批大小 `B` 对单步 decode 的影响时，这种权衡就很清晰了：  
+- 当 `B ↓` 接近 1 时，ITL 降低：每步工作量减少，token 之间不会相互“竞争”。  
+- 当 `B ↑` 趋近于无穷大时，ITL 上升，因为每步计算更多 FLOPs —— 但吞吐量提高（直到达到峰值性能），因为权重 I/O 被更多 token 分摊。
 
-A roofline model helps with understanding here: below a saturation batch `B_sat`, the step time is dominated by HBM bandwidth (streaming weights layer-by-layer into on-chip memory), so step latency is nearly flat—computing 1 vs 10 tokens can take a similar time. Beyond `B_sat`, the kernels become compute-bound and step time grows roughly with `B`; each extra token adds to ITL.
+屋顶线（roofline）模型有助于理解：  
+- 在饱和批量 `B_sat` 以下，步骤时间受 HBM 带宽主导（权重按层流入片上内存），所以步骤延迟几乎平稳 —— 计算 1 个 token 与 10 个 token 所需时间相似。  
+- 超过 `B_sat` 后，kernel 受计算限制，步骤时间大致随 `B` 增长，每增加一个 token 都会增加 ITL。
 
 ![roofline perf model](https://www.aleksagordic.com/blog/vllm/roofline.png)
 
-Figure 12. roofline perf model
+<div style="text-align: center;">
+图 12. 屋顶线性能模型
+</div>
 
 !!! note
 
-    For a more rigorous treatment, we have to account for kernel auto-tuning: as `B` grows, the runtime may switch to more efficient kernels for that shape, changing the achieved performance `P_kernel`. Step latency is `t = FLOPs_step / P_kernel`, where `FLOPs_step` is the work in the step. You can see that as `P_kernel` hits `P_peak` more compute per step will directly lead to an increase in latency.
+    更严格的分析需要考虑 kernel 自动调优：随着 `B` 增大，运行时可能为该形状切换到更高效的 kernel，从而改变实际性能 `P_kernel`。步骤延迟为 `t = FLOPs_step / P_kernel`，其中 `FLOPs_step` 为该步的计算量。可以看到，当 `P_kernel` 达到 `P_peak` 时，每步更多的计算量会直接导致延迟增加。
 
-## How to benchmark in vLLM
+## 如何在 vLLM 中进行基准测试
 
-vLLM provides a `vllm bench {serve,latency,throughput}` CLI that wraps vllm / benchmarks / {server,latency,throughput}.py.
+vLLM 提供了一个 CLI 命令 `vllm bench {serve,latency,throughput}`，它封装了 `vllm/benchmarks/{server,latency,throughput}.py` 脚本。
 
-Here is what the scripts do:
+这些脚本的作用如下：
 
-- **latency** — uses a short input (default 32 tokens) and samples 128 output tokens with a small batch (default 8). It runs several iterations and reports e2e latency for the batch.
-- **throughput** — submits a fixed set of prompts (default: 1000 ShareGPT samples) all at once (aka as `QPS=Inf` mode), and reports input/output/total tokens and requests per second across the run.
-- **serve** — Launches a vLLM server and simulates a real-world workload by sampling request inter-arrival times from a Poisson (or more generally, Gamma) distribution. It sends requests over a time window, measures all the metrics we’ve discussed, and can optionally enforce a server-side max concurrency (via a semaphore, e.g. limiting the server to 64 concurrent requests).
+- **latency（延迟）** — 使用较短的输入（默认 32 个 token），生成 128 个输出 token，使用小批量（默认 8）。脚本会执行多次迭代，并报告批量的端到端延迟。
+- **throughput（吞吐量）** — 同时提交固定集合的 prompts（默认 1000 个 ShareGPT 样本，即 `QPS=Inf` 模式），报告整个运行期间的输入/输出/总 token 数和每秒请求数。
+- **serve（服务模拟）** — 启动一个 vLLM 服务，并模拟真实工作负载。请求的到达间隔时间遵循 Poisson 分布（或更通用的 Gamma 分布）。脚本在时间窗口内发送请求，测量前文提到的所有指标，并可选择通过信号量限制服务器最大并发数（例如限制为 64 个并发请求）。
 
-Here is an example of how you can run the latency script:
+下面是运行延迟测试脚本的示例：
 
 ```bash
 vllm bench latency
@@ -892,37 +926,37 @@ vllm bench latency
 
 !!! tip
 
-    Benchmark configs used in CI live under `.buildkite/nightly-benchmarks/tests`.
+    用于 CI 的基准测试配置存放在 `.buildkite/nightly-benchmarks/tests` 目录下。
 
-There is also an auto-tune script that drives the serve benchmark to find argument settings that meet target SLOs (e.g., "maximize throughput while keeping p99 e2e < 500 ms"), returning a suggested config.
+此外，还有一个自动调优脚本，会驱动 `serve` 基准测试来寻找满足目标 SLO（例如 “在保持 p99 e2e < 500 ms 的前提下最大化吞吐量”）的参数设置，并返回建议的配置。
 
-## Epilogue
+## 尾声
 
-We began with the basic engine core (`UniprocExecutor`), added advanced features like speculative decoding and prefix caching, scaled up to `MultiProcExecutor` (with `TP/PP > 1`), and finally scaled out, wrapped everything in the asynchronous engine and distributed serving stack—closing with how to measure system performance.
+我们从基础引擎核心（`UniprocExecutor`）开始，加入了如推测解码（speculative decoding）和前缀缓存（prefix caching）等高级特性，接着扩展到 `MultiProcExecutor`（TP/PP > 1），最终实现水平扩展，将所有组件封装到异步引擎和分布式服务栈中——最后展示了如何衡量系统性能。
 
-vLLM also includes specialized handling that I've skipped. E.g.:
+vLLM 还包含一些我未详细展开的专门处理，例如：
 
-- **Diverse hardware backends:** TPUs, AWS Neuron (Trainium/Inferentia), etc.
-- **Architectures/techniques:** `MLA`, `MoE`, encoder-decoder (e.g., Whisper), pooling/embedding models, `EPLB`, `m-RoPE`, `LoRA`, `ALiBi`, attention-free variants, sliding-window attention, multimodal LMs, and state-space models (e.g., Mamba/Mamba-2, Jamba)
+- **多样化硬件后端：** TPU、AWS Neuron（Trainium/Inferentia）等
+- **架构/技术：** `MLA`、`MoE`、编码器-解码器（如 Whisper）、pooling/embedding 模型、`EPLB`、`m-RoPE`、`LoRA`、`ALiBi`、无注意力变体、滑动窗口注意力、多模态 LLM、状态空间模型（如 Mamba/Mamba-2、Jamba）
 - **TP/PP/SP**
-- **Hybrid KV-cache logic** (Jenga), more complex sampling methods like beam sampling, and more
-- **Experimental**: async scheduling
+- **混合 KV-cache 逻辑**（Jenga）、更复杂的采样方法如 beam sampling 等
+- **实验性功能：** 异步调度
 
-The nice thing is that most of these are orthogonal to the main flow described above—you can almost treat them like "plugins" (in practice there's some coupling, of course).
+好的一点是，这些大多数功能与上文描述的核心流程是正交的——几乎可以把它们当作“插件”来理解（当然实际中有部分耦合）。
 
-I love understanding systems. Having said that, the resolution definitely suffered at this altitude. In the next posts I'll zoom in on specific subsystems and get into the nitty-gritty details.
+我热爱理解系统。话虽如此，在这个高度概览中，细节有所损失。在后续文章中，我会聚焦具体子系统，深入探讨细节。
 
-!!! tip "💡Get in touch:"
+!!! tip "💡联系我："
 
-    If you spot any errors in the post, please DM me - feel free to drop me a message on [X](https://x.com/gordic_aleksa) or [LinkedIn](https://www.linkedin.com/in/aleksagordic/) or via [anon feedback](https://docs.google.com/forms/d/1z1fEirrN2xtGxAsJvptpM7yV4ByT5SF25S-XiMPrXNA/edit).
+    如果你在本文中发现任何错误，请随时联系我——可以通过 [X](https://x.com/gordic_aleksa) 或 [LinkedIn](https://www.linkedin.com/in/aleksagordic/) 给我留言，也可以通过 [匿名反馈](https://docs.google.com/forms/d/1z1fEirrN2xtGxAsJvptpM7yV4ByT5SF25S-XiMPrXNA/edit) 提交。
 
-## Acknowledgements
+## 致谢
 
-A huge thank you to [Hyperstack](https://www.hyperstack.cloud/) for providing me with H100s for my experiments over the past year!
+衷心感谢 [Hyperstack](https://www.hyperstack.cloud/) 在过去一年中提供 H100 GPU 供我进行实验！
 
-Thanks to [Nick Hill](https://www.linkedin.com/in/nickhillprofile/) (core vLLM contributor, RedHat), [Mark Saroufim](https://x.com/marksaroufim) (PyTorch), [Kyle Krannen](https://www.linkedin.com/in/kyle-kranen/) (NVIDIA, Dynamo), and [Ashish Vaswani](https://www.linkedin.com/in/ashish-vaswani-99892181/) for reading pre-release version of this blog post and providing feedback!
+感谢 [Nick Hill](https://www.linkedin.com/in/nickhillprofile/)（vLLM 核心贡献者，RedHat）、[Mark Saroufim](https://x.com/marksaroufim)（PyTorch）、[Kyle Krannen](https://www.linkedin.com/in/kyle-kranen/)（NVIDIA, Dynamo）以及 [Ashish Vaswani](https://www.linkedin.com/in/ashish-vaswani-99892181/) 在博客预发布版本中提供反馈！
 
-## References
+## 参考文献
 
 1. [vLLM](https://github.com/vllm-project/vllm)
 2. ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762)
