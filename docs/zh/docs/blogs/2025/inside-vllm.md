@@ -19,7 +19,7 @@
 1. [大语言模型引擎和引擎核心](#_1)：vLLM 基础知识（调度、分页注意力、连续批处理等）
 2. [高级特性](#_5)：分块预填充、前缀缓存、引导解码与投机解码、P/D 分离
 3. [扩容](#uniprocexecutor-multiprocexecutor)：从单 GPU 到多 GPU
-4. [分层部署](#vllm_1)：分布式/并发 Web 框架
+4. [分层部署](#vllm_1)：分布式/并发式 Web 框架
 5. [基准测试与自动调优](#vs)：测量延迟和吞吐量
 
 !!! note
@@ -194,7 +194,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 
 !!! tip
 
-    在 [基准测试章节](https://www.aleksagordic.com/blog/vllm#cpt5) 中，我们将分析 GPU 性能的所谓 roofline 模型，这将详细说明预填充/解码的性能特征。
+    在 [基准测试章节](#vs) 中，我们将分析 GPU 性能的所谓 roofline 模型，这将详细说明预填充/解码的性能特征。
 
 V1 调度器可以在同一步中混合处理两类请求，这得益于更智能的设计选择。相比之下，V0 引擎一次只能处理预填充或解码请求。
 
@@ -526,7 +526,7 @@ if __name__ == "__main__":
 
 预填充和解码的性能特性非常不同（计算受限 vs. 内存带宽受限），因此将它们分离执行是合理的设计。这能更紧密地控制延迟，
 包括 `TFTT`（time-to-first-token，第一个 Token 的时间）和 `ITL`（inter-token latency，即 Token 间延迟）。
-更多内容见[基准测试](https://www.aleksagordic.com/blog/vllm#cpt5) 章节。
+更多内容见[基准测试](#vs) 章节。
 
 实际操作中，我们运行 `N` 个 vLLM预填充实例和 `M` 个 vLLM 解码实例，根据实时请求负载自动伸缩。预填充工作线程将 KV 写入专用 KV-cache 服务；解码工作线程从中读取。这将长时间、突发的预填充与稳定、延迟敏感的解码隔离开来。
 
@@ -738,7 +738,7 @@ vllm serve <model-name>
 
 vLLM 中的实现方式：
 
-### 在 headless 服务器节点
+### 在 headless 服务器节点上
 
 在 headless 节点上，`CoreEngineProcManager` 启动 2 个进程（根据 `--data-parallel-size-local`），每个进程运行 `EngineCoreProc.run_engine_core`。每个函数会创建一个 `DPEngineCoreProc`（引擎核心），然后进入其忙循环。
 
@@ -780,7 +780,7 @@ TL;DR：最终我们有 4 个子进程（每个 DP 副本一个），每个子�
     
 接下来，我们来看第二部分：API 服务器节点会发生什么？
 
-### 在 API 服务器节点
+### 在 API 服务器节点上
 
 我们实例化一个 `AsyncLLM` 对象（LLM 引擎的 asyncio 包装器）。内部会创建一个 `DPLBAsyncMPClient`（数据并行、负载均衡、异步、多进程客户端）。
 
