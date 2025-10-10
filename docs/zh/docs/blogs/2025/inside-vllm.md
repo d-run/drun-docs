@@ -33,7 +33,7 @@
 
 ## 大语言模型引擎和引擎核心
 
-大语言模型引擎是 vLLM 的基础构建模块。仅凭其自身，它已经能够实现高吞吐量推理——但仅限于离线场景。
+大语言模型引擎是 vLLM 的基础构建模块。仅凭其自身，它已经能够实现高吞吐量推理，但仅限于离线场景。
 你还不能通过网络将其作为服务提供给客户。
 
 本文将使用以下离线推理示例作为运行示例（以下代码改编自 [basic.py](https://github.com/vllm-project/vllm/blob/main/examples/offline_inference/basic/basic.py)）。
@@ -69,7 +69,7 @@ if __name__ == "__main__":
 - 单 GPU（没有数据/模型/流水线/专家并行；DP/TP/PP/EP = 1）
 - 使用[标准 Transformer](https://arxiv.org/abs/1706.03762)（支持 Jamba 等混合模型需要更复杂的混合 KV-cache 内存分配器）
 
-从这里开始，本文将逐步构建一个在线、异步、多 GPU、多节点的推理系统——但仍然部署标准的 Transformer。
+从这里开始，本文将逐步构建一个在线、异步、多 GPU、多节点的推理系统，但仍然部署标准的 Transformer。
 
 在此示例中，我们做两件事：
 
@@ -94,7 +94,7 @@ if __name__ == "__main__":
 引擎核心本身由几个子组件组成：
 
 - 模型执行器（驱动模型的前向计算，目前我们使用 `UniProcExecutor`，它在单 GPU 上有一个 `Worker` 进程）。本文将逐步构建到支持多 GPU 的 `MultiProcExecutor`
-- 结构化输出管理器（用于引导解码——稍后讲解）
+- 结构化输出管理器（用于引导解码）
 - 调度器（决定哪些请求进入下一步引擎计算），调度器进一步包含：
 
     1. 策略设置：可以是 **FCFS**（先到先服务）或 **priority**（优先级高的请求优先服务）
@@ -141,7 +141,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
     - 准备注意力元数据（例如将后端设置为 FlashAttention），以供前向计算时内核使用
     - 除非提供 `--enforce-eager`，否则对每个预热批次大小执行一次虚拟运行并捕获 CUDA 图。CUDA 图将整个 GPU 工作序列记录为 DAG。在后续前向计算中，我们直接启动/重放预先构建的图，从而减少内核启动开销并改善延迟。
 
-这里我抽象掉了许多底层细节——但这些是核心部分，因为在接下来的章节中我会反复引用它们。
+这里抽象掉了许多底层细节，但这些是核心部分，因为在接下来的章节中我会反复引用它们。
 
 现在我们已经初始化了引擎，让我们继续看看 `generate` 函数。
 
@@ -154,7 +154,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 3. 将这些信息打包进 `EngineCoreRequest`，添加优先级、采样参数和其他元数据
 4. 将请求传入引擎核心，它会将请求包装为 `Request` 对象并将状态设置为 `WAITING`。然后该请求被加入调度器的 `waiting` 队列（如果是先来先服务（FCFS），则追加；如果是按优先级，则使用堆插入（heap-push）。）
 
-此时，引擎已被喂入数据，执行可以开始。在同步引擎示例中，这些初始提示词是唯一处理的请求——没有机制在运行中注入新请求。相比之下，异步引擎支持此特性（即[连续批处理](https://www.usenix.org/conference/osdi22/presentation/yu)）：每步结束后，会同时考虑新旧请求。
+此时，引擎已被喂入数据，执行可以开始。在同步引擎示例中，这些初始提示词是唯一处理的请求，没有机制在运行中注入新请求。相比之下，异步引擎支持此特性（即[连续批处理](https://www.usenix.org/conference/osdi22/presentation/yu)）：每步结束后，会同时考虑新旧请求。
 
 !!! tip
 
@@ -171,7 +171,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
     - 请求超过长度限制（`max_model_length` 或其自身的 `max_tokens`）
     - 采样 Token 为 EOS ID（除非启用 `ignore_eos` -> 用于基准测试时强制生成一定数量的输出 Token）
     - 采样 Token 匹配采样参数中指定的任意 `stop_token_ids`
-    - 输出中出现停止字符串——我们会截断输出直到第一个停止字符串出现，并在引擎中终止请求（注意 `stop_token_ids` 会出现在输出中，但停止字符串不会）
+    - 输出中出现停止字符串，我们会截断输出直到第一个停止字符串出现，并在引擎中终止请求（注意 `stop_token_ids` 会出现在输出中，但停止字符串不会）
 
 ![引擎循环](https://www.aleksagordic.com/blog/vllm/engine_loop.png)
 
@@ -198,15 +198,15 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 
 V1 调度器可以在同一步中混合处理两类请求，这得益于更智能的设计选择。相比之下，V0 引擎一次只能处理预填充或解码请求。
 
-调度器优先处理解码请求——即那些已在 `running` 队列中的请求。对于每个请求，它会：
+调度器优先处理解码请求，即那些已在 `running` 队列中的请求。对于每个请求，它会：
 
-1. 计算需要生成的新 Token 数量（不总是 1，受投机解码和异步调度影响——稍后讲解）。
+1. 计算需要生成的新 Token 数量（不总是 1，受投机解码和异步调度影响）。
 2. 调用 KV-cache 管理器的 `allocate_slots` 函数（详情见下文）。
 3. 通过减去步骤 1 的 Token 数量更新 Token 预算。
 
 之后，它处理来自 `waiting` 队列的预填充请求：
 
-1. 获取已计算块的数量（如果禁用前缀缓存则返回 0——稍后讲解）。
+1. 获取已计算块的数量（如果禁用前缀缓存则返回 0）。
 2. 调用 KV-cache 管理器的 `allocate_slots` 函数。
 3. 将请求从 waiting 弹出并移动到 running，设置状态为 `RUNNING`。
 4. 更新 Token 预算。
@@ -304,13 +304,13 @@ if __name__ == "__main__":
     main()
 ```
 
-前缀缓存可以避免重新计算多个提示词在开头共享的 Token——因此称为 **前缀** 。
+前缀缓存可以避免重新计算多个提示词在开头共享的 Token，因此称为 **前缀** 。
 
 关键在于 `long_prefix`：它被定义为任何比 KV-cache 块长的前缀（默认每块 16 个 Token）。为了简化示例，我们假设 `long_prefix` 的长度正好为 `n x block_size`（其中 `n ≥ 1`）。
 
 !!! tip
 
-    即它与块边界完全对齐——否则我们必须重新计算 `long_prefix_len % block_size` 个 Token，因为无法缓存不完整的块。
+    即它与块边界完全对齐，否则我们必须重新计算 `long_prefix_len % block_size` 个 Token，因为无法缓存不完整的块。
 
 如果不使用前缀缓存，每次处理带有相同 `long_prefix` 的新请求时，都需要重新计算所有 `n x block_size` 个 Token。
 
@@ -355,7 +355,7 @@ if __name__ == "__main__":
 
     KV-cache 块只有在即将从 `free_block_queue` 重新分配时才会失效（从左侧弹出），且我们发现该块仍有关联哈希并存在于 `cached_block_hash_to_block` 中。此时，我们清除该块的哈希并从 `cached_block_hash_to_block` 中移除其条目，确保它不能通过前缀缓存重用（至少对旧前缀无效）。
 
-这就是前缀缓存的核心：不要重复计算已经见过的前缀——直接重用它们的 KV-cache！
+这就是前缀缓存的核心：不重复计算已经见过的前缀，而是直接重用它们的 KV-cache！
 
 !!! tip
 
@@ -418,7 +418,7 @@ if __name__ == "__main__":
 
     大部分复杂性隐藏在第三方库（如 xgrammar）中。
 
-这里是一个更简单的示例，`vocab_size = 8` 且使用 8 位整数（适合喜欢可视化的朋友）：
+这里是一个更简单的示例，`vocab_size = 8` 且使用 8 位的整数（适合喜欢可视化的朋友）：
 
 ![FSM](https://www.aleksagordic.com/blog/vllm/fsm2.png)
 
@@ -426,13 +426,13 @@ if __name__ == "__main__":
 图 6. 玩具示例
 </div>
 
-可以通过传入所需的 `guided_decoding` 配置在 vLLM 中启用此特性。
+你可以通过传入所需的 `guided_decoding` 配置在 vLLM 中启用此特性。
 
 ### 投机解码
 
-在自回归生成中，每生成一个新 Token 都需要对大语言模型执行一次前向计算。这非常昂贵——每一步都要重新加载并应用所有模型权重，仅为了计算一个 Token！（假设批次大小 = 1，一般为 `B`）
+在自回归生成中，每生成一个新 Token 都需要对大语言模型执行一次前向计算。这非常昂贵，每一步都要重新加载并应用所有模型权重，仅为了计算一个 Token！（假设批次大小 = 1，一般为 `B`）
 
-[投机解码](https://arxiv.org/abs/2302.01318)通过引入一个较小的草稿模型来加速。草稿模型廉价地提出 `k` 个 Token 候选。但我们最终并不希望从小模型中采样——它只是用来猜测候选续写。大模型仍然决定哪些 Token 有效。
+[投机解码](https://arxiv.org/abs/2302.01318)通过引入一个较小的草稿模型来加速。草稿模型廉价地提出 `k` 个 Token 候选。但我们最终并不希望从小模型中采样，它只是用来猜测候选续写。大模型仍然决定哪些 Token 有效。
 
 步骤如下：
 
@@ -449,11 +449,11 @@ if __name__ == "__main__":
         - 如果全部 `k` 个 Token 都被接受，则还可以“免费”采样额外的第 `(k+1)` 个 Token（大模型已经计算了该分布）。
         - 如果出现拒绝，则在该位置创建新的重新平衡分布 (`p_large - p_draft`，最小值截断为 0，并归一化)，并从中采样最后一个 Token。
 
-**为什么可行:** 虽然使用小模型提出候选，但接受/拒绝规则保证在期望上序列分布与逐 Token 从大模型采样完全一致。这意味着投机解码在统计上等价于标准自回归解码——但潜在速度更快，因为一次大模型前向计算最多可生成 `k+1` 个 Token。
+**为什么可行:** 虽然使用小模型提出候选，但接受/拒绝规则保证在期望上序列分布与逐 Token 从大模型采样完全一致。这意味着投机解码在统计上等价于标准自回归解码，但潜在速度更快，因为一次大模型前向计算最多可生成 `k+1` 个 Token。
 
 !!! note
 
-    推荐查看 [gpt-fast](https://github.com/meta-pytorch/gpt-fast) 了解简单实现，以及 [原论文](https://arxiv.org/abs/2302.01318) 获取数学细节及与全模型采样等价的证明。
+    推荐查看 [gpt-fast](https://github.com/meta-pytorch/gpt-fast) 了解简单实现，以及[原论文](https://arxiv.org/abs/2302.01318)获取数学细节及与全模型采样等价的证明。
 
 vLLM V1 不支持使用 LLM 草稿模型方法，而是实现了更快但准确性略低的候选方案：n-gram、[EAGLE](https://arxiv.org/abs/2401.15077) 和 [Medusa](https://arxiv.org/abs/2401.10774)。
 
@@ -465,7 +465,7 @@ vLLM V1 不支持使用 LLM 草稿模型方法，而是实现了更快但准确�
 
         当前实现返回 **第一次匹配** 后的 `k` 个 Token。是否可以引入新近性偏置并反向搜索（即最后一次匹配）会更自然？
 
-2. **EAGLE:** 对大模型执行“模型手术”——保留 embeddings 和 LM head，将 Transformer 堆替换为轻量 MLP；微调它作为廉价草稿。
+2. **EAGLE:** 对大模型执行“模型手术”，保留 embeddings 和 LM head，将 Transformer 堆替换为轻量 MLP；微调它作为廉价草稿。
 3. **Medusa:** 在大模型上训练辅助线性 head（LM head 前的 embeddings）以并行预测下 `k` 个 Token；利用这些 head 比运行独立小模型更高效地提出 Token。
 
 下面是如何在 vLLM 中使用 `ngram` 方法调用投机解码：
@@ -498,7 +498,7 @@ if __name__ == "__main__":
 
 在 vLLM 中，这一流程是如何实现的？
 
-**设置（在引擎构建阶段）:** 
+**设置（在引擎构建阶段）:**
 
 1. 初始化设备：创建一个 `drafter`（草稿模型，例如 `NgramProposer`）和一个 `rejection_sampler`（部分实现基于 Triton）。
 2. 加载模型：加载草稿模型权重（对于 n-gram 无操作）。
@@ -616,7 +616,7 @@ if __name__ == "__main__":
 
 1. **实例化** — 在引擎构建阶段，Connector 在两个地方创建：
 
-    - 在 Worker 的初始化设备流程中（位于初始化 Worker 分布式环境函数下），角色为 "worker"。
+    - 在 Worker 的初始化设备流程中（位于初始化 Worker 分布式环境函数下），角色为 "Worker"。
     - 在 Scheduler 构造函数中，角色为 "Scheduler"。
 
 2. **缓存查询** — 当 Scheduler 处理 `waiting` 队列中的预填充请求（本地前缀缓存检查后），调用 Connector 的 `get_num_new_matched_tokens`。该函数检查 KV-cache 服务器中是否有外部缓存的 Token。预填充始终返回 0；解码可能命中缓存。结果会在调用 `allocate_slots` 前加入本地计数。
@@ -653,12 +653,12 @@ if __name__ == "__main__":
 
 假设你的模型权重已经无法放入单个 GPU 的显存。
 
-第一个方案是在同一节点的多块 GPU 上进行张量并行（tensor parallelism, TP，例如 `TP=8`）来切分模型。如果模型仍然无法容纳，下一步就是跨节点的流水线并行（pipeline parallelism, PP）。
+第一个方案是在同一节点的多块 GPU 上执行 TP（tensor parallelism, 张量并行）来切分模型，例如 `TP=8`。如果模型仍然无法容纳，下一步就是跨节点的 PP（pipeline parallelism, 流水线并行）。
 
 !!! note
 
     - 节点内带宽远高于节点间带宽，这也是为什么通常优先选择张量并行（TP）而非流水线并行（PP）。（同时，PP 传输的数据量也少于 TP。）
-    - 我不讨论 expert parallelism (EP)，因为我们关注的是标准 Transformer 而非 MoE，也不讨论 sequence parallelism，因为 TP 和 PP 在实践中最常用。
+    - 我不讨论 EP（expert parallelism，专家并行），因为我们关注的是标准 Transformer 而非 MoE，也不讨论 SP（sequence parallelism，顺序并行），因为 TP 和 PP 在实践中最常用。
 
 在这个阶段，我们需要多个 GPU 进程（Worker）以及一个协调层来管理它们。这正是 `MultiProcExecutor` 提供的特性。
 
@@ -679,11 +679,11 @@ if __name__ == "__main__":
     - `rpc_broadcast_mq`（与父进程共享）用于接收工作任务。
     - `worker_response_mq` 用于发送结果回父进程。
 
-6. 初始化期间，每个子进程通过管道将其 `worker_response_mq` handle 发送给父进程。收到所有 handle 后，父进程解除阻塞——完成协调。
+6. 初始化期间，每个子进程通过管道将其 `worker_response_mq` 句柄发送给父进程。收到所有句柄后，父进程解除阻塞，完成协调。
 7. Worker 进入忙循环，阻塞于 `rpc_broadcast_mq.dequeue`。当有工作到来时执行任务（类似 `UniprocExecutor`，但现在是 TP/PP 分区的任务）。结果通过 `worker_response_mq.enqueue` 返回。
-8. 运行时，当请求到来时，`MultiProcExecutor` 将其入队到所有子 Worker 的 `rpc_broadcast_mq`（非阻塞）。然后等待指定输出 rank 的 `worker_response_mq.dequeue` 收集最终结果。
+8. 运行时，当请求到来时，`MultiProcExecutor` 将其加入到所有子 Worker 的 `rpc_broadcast_mq`（非阻塞）队列。然后等待指定输出 rank 的 `worker_response_mq.dequeue` 收集最终结果。
 
-从引擎的角度来看，一切接口不变——所有多进程复杂性都通过调用模型执行器的 `execute_model` 被抽象掉。
+从引擎的角度来看，一切接口不变，所有多进程复杂性都通过调用模型执行器的 `execute_model` 被抽象掉。
 
 - 对于 `UniProcExecutor`：`execute_model` 直接调用 Worker 的 execute_model
 - 对于 `MultiProcExecutor`：`execute_model` 间接通过 `rpc_broadcast_mq` 调用每个 Worker 的 execute_model
@@ -747,7 +747,7 @@ vLLM 中的实现方式：
 1. 创建 `input_queue` 和 `output_queue`（`queue.Queue`）。
 2. 使用 `DEALER` ZMQ socket（异步消息库）与另一节点的前端进行初始握手，并接收协调地址信息。
 3. 初始化 DP 组（例如使用 NCCL 后端）。
-4. 使用 `MultiProcExecutor` 初始化 `EngineCore`（如前所述，4 GPUs 的 TP=4）。
+4. 使用 `MultiProcExecutor` 初始化 `EngineCore`（如前所述，4 GPU 的 TP=4）。
 5. 创建 `ready_event`（`threading.Event`）。
 6. 启动输入守护线程（`threading.Thread`）运行 `process_input_sockets(..., ready_event)`。同样启动输出线程。
 7. 在主线程中等待 `ready_event`，直到所有 4 个进程的输入线程（跨 2 个节点）完成协调握手，最终执行 `ready_event.set()`。
@@ -762,13 +762,13 @@ TL;DR：最终我们有 4 个子进程（每个 DP 副本一个），每个子�
 图 10. 分布式系统中运行 4 个 DP 副本的 4 个 DPEngineCoreProc
 </div>
 
-**当前稳定状态:** 
+**当前稳定状态:**
 
-- **输入线程** — 阻塞在输入套接字，直到 API 服务器路由请求；收到请求后，解码有效载荷，通过 `input_queue.put_nowait(...)` 入队工作项，然后返回阻塞。
-- **主线程** — 从 `input_queue.get(...)` 唤醒，将请求送入引擎；`MultiProcExecutor` 执行前向计算并将结果入队到 `output_queue`。
+- **输入线程** — 阻塞在输入套接字，直到 API 服务器路由请求；收到请求后，解码有效载荷，通过 `input_queue.put_nowait(...)` 将工作项加入队列，然后返回套接字上的阻塞。
+- **主线程** — 从 `input_queue.get(...)` 唤醒，将请求送入引擎；`MultiProcExecutor` 执行前向计算并将结果加入到 `output_queue` 队列。
 - **输出线程** — 从 `output_queue.get(...)` 唤醒，将结果发送回 API 服务器，然后继续阻塞。
 
-**附加机制:** 
+**附加机制:**
 
 - **DP wave counter** — 系统跟踪 “waves”；当所有引擎空闲时，它们静止，当新工作到来时计数器递增（用于协调/指标）。
 - **控制消息** — API 服务器可以发送不仅限于推理请求的消息（例如中止请求或其他 RPC）。
@@ -776,7 +776,7 @@ TL;DR：最终我们有 4 个子进程（每个 DP 副本一个），每个子�
 
 !!! tip
 
-    锁步说明：实际上只有 MoE 模型需要，专家层组成 EP 或 TP 组，而 attention 层仍为 DP。目前 DP 总是这样执行——这是因为内置的非 MoE DP 用例有限，你可以直接运行多个独立 vLLM 并在它们之间做负载均衡。
+    锁步说明：实际上只有 MoE 模型需要，专家层组成 EP 或 TP 组，而 attention 层仍为 DP。目前 DP 总是这样执行，这是因为内置的非 MoE DP 用例有限，你可以直接运行多个独立 vLLM 并在它们之间做负载均衡。
     
 接下来，我们来看第二部分：API 服务器节点会发生什么？
 
@@ -845,16 +845,16 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 7. 这些结果触发 `AsyncLLM` 的输出 asyncio 任务（`process_outputs_socket` 和 `output_handler`），将 Token 逐步返回到 FastAPI 的 `create_completion` 路由。
 8. FastAPI 附加元数据（完成原因、logprobs、使用信息等），并通过 Uvicorn 返回一个 `JSONResponse` 到你的终端！
 
-就这样，你的 completion 返回了——整个分布式机制被隐藏在一个简单的 `curl` 命令背后！:) 真是太有趣了！！！
+就这样，你的 completion 返回了，整个分布式机制被隐藏在一个简单的 `curl` 命令背后！😊 真是太有趣了！！！
 
 !!! note "附加说明:"
 
-    - 增加更多 API 服务器时，负载均衡在 OS/socket 层处理。应用层看起来几乎没有变化——复杂性被隐藏了。
+    - 增加更多 API 服务器时，负载均衡在 OS/socket 层处理。应用层看起来几乎没有变化，复杂性被隐藏了。
     - 使用 Ray 作为 DP 后端时，可以暴露一个 URL 接口（`/scale_elastic_ep`）来自动上下扩缩引擎副本数量。
 
 ## 基准测试与自动调优 — 延迟 vs 吞吐量
 
-到目前为止，我们一直在分析“燃料颗粒”——请求在引擎/系统中的内部流动。现在是时候放大视角，看整个系统，并思考：我们如何衡量推理系统的性能？
+到目前为止，我们一直在分析“燃料颗粒”，请求在引擎/系统中的内部流动。现在是时候放大视角，看看整个系统，并思考：我们如何衡量推理系统的性能？
 
 在最高层面，有两个相互竞争的指标：
 
@@ -888,12 +888,14 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 
     假设：权重 I/O 主导性能，而不是 KV-cache I/O；即处理的是短序列。
 
-当观察批大小 `B` 对单步解码的影响时，这种权衡就很清晰了：  
-- 当 `B ↓` 接近 1 时，ITL 降低：每步工作量减少，Token 之间不会相互“竞争”。  
-- 当 `B ↑` 趋近于无穷大时，ITL 上升，因为每步计算更多 FLOPs —— 但吞吐量提高（直到达到峰值性能），因为权重 I/O 被更多 Token 分摊。
+当观察批大小 `B` 对单步解码的影响时，这种权衡就很清晰了：
 
-屋顶线（roofline）模型有助于理解：  
-- 在饱和批量 `B_sat` 以下，步骤时间受 HBM 带宽主导（权重按层流入片上内存），所以步骤延迟几乎平稳 —— 计算 1 个 Token 与 10 个 Token 所需时间相似。  
+- 当 `B ↓` 接近 1 时，ITL 降低：每步工作量减少，Token 之间不会相互“竞争”。  
+- 当 `B ↑` 趋近于无穷大时，ITL 上升，因为每步要计算更多的 FLOP，但吞吐量提高（直到达到峰值性能），因为权重 I/O 被更多 Token 分摊。
+
+屋顶线（roofline）模型有助于理解：
+
+- 在饱和批量 `B_sat` 以下，步骤时间受 HBM 带宽主导（权重按层流入片上内存），所以步骤延迟几乎平稳，计算 1 个 Token 与 10 个 Token 所需时间相似。  
 - 超过 `B_sat` 后，kernel 受计算限制，步骤时间大致随 `B` 增长，每增加一个 Token 都会增加 ITL。
 
 ![roofline perf model](https://www.aleksagordic.com/blog/vllm/roofline.png)
@@ -914,7 +916,7 @@ vLLM 提供了一个 CLI 命令 `vllm bench {serve,latency,throughput}`，它封
 
 - **latency（延迟）** — 使用较短的输入（默认 32 个 Token），生成 128 个输出 Token，使用小批量（默认 8）。脚本会执行多次迭代，并报告批量的端到端延迟。
 - **throughput（吞吐量）** — 同时提交固定集合的 prompts（默认 1000 个 ShareGPT 样本，即 `QPS=Inf` 模式），报告整个运行期间的输入/输出/总 Token 数和每秒请求数。
-- **serve（部署）** — 启动一个 vLLM 服务，并模拟真实工作负载。请求的到达间隔时间遵循 Poisson 分布（或更通用的 Gamma 分布）。脚本在时间窗口内发送请求，测量前文提到的所有指标，并可选择通过信号量限制服务器最大并发数（例如限制为 64 个并发请求）。
+- **serve（部署）** — 启动一个 vLLM 服务，并模拟真实工作负载。请求的到达间隔时间遵循 Poisson 分布（或更通用的 Gamma 分布）。在时间窗口内发送请求，测量前文提到的所有指标，并可选择通过信号量限制服务器最大并发数（例如限制为 64 个并发请求）。
 
 下面是运行延迟测试脚本的示例：
 
@@ -934,7 +936,7 @@ vllm bench latency
 
 ## 尾声
 
-本文从基础引擎核心（`UniprocExecutor`）开始，加入了如投机解码和前缀缓存等高级特性，接着扩展到 `MultiProcExecutor`（TP/PP > 1），最终实现水平扩展，将所有组件封装到异步引擎和分布式服务栈中——最后展示了如何衡量系统性能。
+本文从基础引擎核心（`UniprocExecutor`）开始，加入了如投机解码和前缀缓存等高级特性，接着扩展到 `MultiProcExecutor`（TP/PP > 1），最终实现水平扩展，将所有组件封装到异步引擎和分布式服务栈中，最后展示了如何衡量系统性能。
 
 vLLM 还包含一些我未详细展开的专门处理，例如：
 
@@ -944,13 +946,15 @@ vLLM 还包含一些我未详细展开的专门处理，例如：
 - **混合 KV-cache 逻辑**（Jenga）、更复杂的采样方法如束式采样等
 - **实验性特性:** 异步调度
 
-好的一点是，这些大多数特性与上文描述的核心流程是正交的——几乎可以把它们当作“插件”来理解（当然实际中有部分耦合）。
+好的一点是，这些大多数特性与上文描述的核心流程是正交的，几乎可以把它们当作“插件”来理解（当然实际中有部分耦合）。
 
 我热爱理解系统。话虽如此，在这个高度概览中，细节有所损失。在后续文章中，我会聚焦具体的子系统，深入探讨细节。
 
 !!! tip "💡联系我："
 
-    如果你在本文中发现任何错误，请随时联系我——可以通过 [X](https://x.com/gordic_aleksa) 或 [LinkedIn](https://www.linkedin.com/in/aleksagordic/) 给我留言，也可以通过 [匿名反馈](https://docs.google.com/forms/d/1z1fEirrN2xtGxAsJvptpM7yV4ByT5SF25S-XiMPrXNA/edit) 提交。
+    如果你在本文中发现任何错误，请随时联系我，可以通过 [X](https://x.com/gordic_aleksa) 或
+    [LinkedIn](https://www.linkedin.com/in/aleksagordic/) 给我留言，
+    也可以通过[匿名反馈](https://docs.google.com/forms/d/1z1fEirrN2xtGxAsJvptpM7yV4ByT5SF25S-XiMPrXNA/edit)提交。
 
 ## 参考文献
 
