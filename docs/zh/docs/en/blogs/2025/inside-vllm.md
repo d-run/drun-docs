@@ -6,7 +6,7 @@
 
 August 29, 2025
 
-In this post, I'll gradually introduce all of the core system components and advanced features that make up a modern high-throughput LLM inference system. In particular I'll be doing a breakdown of how vLLM [[1]](https://www.aleksagordic.com/blog/vllm#ref-1) works.
+In this post, I'll gradually introduce all of the core system components and advanced features that make up a modern high-throughput LLM inference system. In particular I'll be doing a breakdown of how [vLLM](https://github.com/vllm-project/vllm) works.
 
 This post is the first in a series. It starts broad and then layers in detail (following an inverse-pyramid approach) so you can form an accurate high-level mental model of the complete system without drowning in minutiae.
 
@@ -62,7 +62,7 @@ This configuration is:
 - offline (no web/distributed system scaffolding)
 - synchronous (all execution happens in a single blocking process)
 - single-GPU (no data/model/pipeline/expert parallelism; DP/TP/PP/EP = 1)
-- using standard transformer [[2]](https://www.aleksagordic.com/blog/vllm#ref-2) (supporting hybrid models like Jamba requires a more complex hybrid KV-cache memory allocator)
+- using [standard transformer](https://arxiv.org/abs/1706.03762) (supporting hybrid models like Jamba requires a more complex hybrid KV-cache memory allocator)
 
 From here, we'll gradually build up to an online, async, multi-GPU, multi-node inference system - but still serving a standard transformer.
 
@@ -73,7 +73,7 @@ In this example we do two things, we:
 
 Let's start analyzing the constructor.
 
-## LLM Engine constructor
+### LLM Engine constructor
 
 The main components of the engine are:
 
@@ -94,7 +94,7 @@ Engine core itself is made up of several sub components:
 
     1. policy setting - it can be either **FCFS** (first come first served) or **priority** (higher priority requests are served first)
     2. `waiting` and `running` queues
-    3. KV cache manager - the heart of paged attention [[3]](https://www.aleksagordic.com/blog/vllm#ref-3)
+    3. KV cache manager - [the heart of paged attention](https://arxiv.org/abs/2309.06180)
 
 The KV-cache manager maintains a `free_block_queue` - a pool of available KV-cache blocks (often on the order of hundreds of thousands, depending on VRAM size and block size). During paged attention, the blocks serve as the indexing structure that map tokens to their computed KV cache blocks.
 
@@ -106,7 +106,7 @@ Figure 1. Core components described in this section and their relationships
 
 !!! tip
 
-    Block size for a standard transformer layer (non-MLA [[4]](https://www.aleksagordic.com/blog/vllm#ref-4)) is computed as follows:
+    Block size for a standard transformer layer ([non-MLA](https://arxiv.org/abs/2405.04434)) is computed as follows:
 
     2 (key/value) * `block_size` (default=16) * `num_kv_heads` * `head_size` * `dtype_num_bytes` (e.g. 2 for bf16)
 
@@ -129,7 +129,7 @@ During model executor construction, a `Worker` object is created, and three key 
 
 3. Initialize KV cache
 
-    - Get per-layer KV-cache spec. Historically this was always `FullAttentionSpec` (homogeneous transformer), but with hybrid models (sliding window, Transformer/SSM like Jamba) it became more complex (see Jenga [[5]](https://www.aleksagordic.com/blog/vllm#ref-5))
+    - Get per-layer KV-cache spec. Historically this was always `FullAttentionSpec` (homogeneous transformer), but with hybrid models (sliding window, Transformer/SSM like Jamba) it became more complex (see [Jenga](https://arxiv.org/abs/2503.18292))
     - Run a dummy/profiling forward pass and take a GPU memory snapshot to compute how many KV cache blocks fit in available VRAM
     - Allocate, reshape and bind KV cache tensors to attention layers
     - Prepare attention metadata (e.g. set the backend to FlashAttention) later consumed by kernels during the fwd pass
@@ -139,7 +139,7 @@ I've abstracted away many low-level details here — but these are the core piec
 
 Now that we have the engine initialized let's proceed to the `generate` function.
 
-## Generate function
+### Generate function
 
 The first step is to validate and feed requests into the engine. For each prompt we:
 
@@ -148,7 +148,7 @@ The first step is to validate and feed requests into the engine. For each prompt
 3. Pack this info into an `EngineCoreRequest`, adding priority, sampling params, and other metadata
 4. Pass the request into the engine core, which wraps it in a `Request` object and sets its status to `WAITING`. This request is then added to the scheduler's `waiting` queue (append if FCFS, or heap-push if priority)
 
-At this point the engine has been fed and execution can begin. In the synchronous engine example, these initial prompts are the only ones we'll process — there's no mechanism to inject new requests mid-run. In contrast, the asynchronous engine supports this (aka **continuous batching** [[6]](https://www.aleksagordic.com/blog/vllm#ref-6)): after each step, both new and old requests are considered.
+At this point the engine has been fed and execution can begin. In the synchronous engine example, these initial prompts are the only ones we'll process — there's no mechanism to inject new requests mid-run. In contrast, the asynchronous engine supports this (aka [continuous batching](https://www.usenix.org/conference/osdi22/presentation/yu)): after each step, both new and old requests are considered.
 
 !!! tip
 
@@ -179,7 +179,7 @@ Figure 2. Engine loop
 
 Next, we'll examine scheduling in more detail.
 
-## Scheduler
+### Scheduler
 
 There are two main types of workloads an inference engine handles:
 
@@ -219,7 +219,7 @@ Figure 3. list of KV cache blocks
 
 We're finally ready to do a forward pass!
 
-## Run forward pass
+### Run forward pass
 
 We call model executor's `execute_model`, which delegates to the `Worker`, which in turn delegates to the model runner.
 
@@ -258,7 +258,7 @@ Next, we'll dive into:
 4. Speculative decoding
 5. Disaggregated P/D (prefill/decoding)
 
-## Chunked prefill
+### Chunked prefill
 
 Chunked prefill is a technique for handling long prompts by splitting their prefill step into smaller chunks. Without it, we could end up with a single very long request monopolizing one engine step disallowing other prefill requests to run. That would postpone all other requests and increase their latency.
 
@@ -272,7 +272,7 @@ Implementation is straightforward: cap the number of new tokens per step. If the
 
 In vLLM V1, you enable chunked prefill by setting `long_prefill_token_threshold` to a positive integer. (Technically, it can happen irrespective of this, if the prompt length exceeds the token budget we truncate it and run a chunked prefill.)
 
-## Prefix Caching
+### Prefix Caching
 
 To explain how prefix caching works, let's take the original code example and tweak it a bit:
 
@@ -357,7 +357,7 @@ And that's the gist of prefix caching: don't recompute prefixes you've already s
 
 Prefix caching is enabled by default. To disable it: `enable_prefix_caching = False`.
 
-## Guided Decoding (FSM)
+### Guided Decoding (FSM)
 
 Guided decoding is a technique where, at each decoding step, the logits are constrained by a grammar-based finite state machine. This ensures that only tokens allowed by the grammar can be sampled.
 
@@ -397,7 +397,7 @@ Figure 5. Toy example FSM
 How this works in vLLM:
 
 1. At LLM engine construction, a `StructuredOutputManager` is created; it has access to the tokenizer and maintains a `_grammar_bitmask` tensor.
-2. When adding a request, its status is set to `WAITING_FOR_FSM` and `grammar_init` selects the backend compiler (e.g., `xgrammar` [[7]](https://www.aleksagordic.com/blog/vllm#ref-7); note that backends are 3rd party code).
+2. When adding a request, its status is set to `WAITING_FOR_FSM` and `grammar_init` selects the backend compiler (e.g., [`xgrammar`](https://arxiv.org/abs/2411.15100); note that backends are 3rd party code).
 3. The grammar for this request is compiled asynchronously.
 4. During scheduling, if the async compile has completed, the status switches to `WAITING` and `request_id` is added to `structured_output_request_ids`; otherwise it's placed in `skipped_waiting_requests` to retry on next engine step.
 5. After the scheduling loop (still inside scheduling), if there are FSM requests, the `StructuredOutputManager` asks the backend to prepare/update `_grammar_bitmask`.
@@ -422,11 +422,11 @@ Figure 6. Toy example
 
 You can enable this in vLLM by passing in a desired `guided_decoding` config.
 
-## Speculative Decoding
+### Speculative Decoding
 
 In autoregressive generation, each new token requires a forward pass of the large LM. This is expensive — every step reloads and applies all model weights just to compute a single token! (assuming batch size == 1, in general it's `B`)
 
-Speculative decoding [[8]](https://www.aleksagordic.com/blog/vllm#ref-8) speeds this up by introducing a smaller draft LM. The draft proposes `k` tokens cheaply. But we don't ultimately want to sample from the smaller model — it's only there to guess candidate continuations. The large model still decides what's valid.
+[Speculative decoding](https://arxiv.org/abs/2302.01318) speeds this up by introducing a smaller draft LM. The draft proposes `k` tokens cheaply. But we don't ultimately want to sample from the smaller model — it's only there to guess candidate continuations. The large model still decides what's valid.
 
 Here are the steps:
 
@@ -449,7 +449,7 @@ Here are the steps:
 
     I recommend looking at [gpt-fast](https://github.com/meta-pytorch/gpt-fast) for a simple implementation, and the [original paper](https://arxiv.org/abs/2302.01318) for the math details and the proof of equivalence to sampling from the full model.
 
-vLLM V1 does not support the LLM draft model method, instead it implements faster—but less accurate—proposal schemes: n-gram, EAGLE [[9]](https://www.aleksagordic.com/blog/vllm#ref-9), and Medusa [[10]](https://www.aleksagordic.com/blog/vllm#ref-10).
+vLLM V1 does not support the LLM draft model method, instead it implements faster—but less accurate—proposal schemes: n-gram, [EAGLE](https://arxiv.org/abs/2401.15077), and [Medusa](https://arxiv.org/abs/2401.10774).
 
 One-liners on each:
 
@@ -514,7 +514,7 @@ The best way to internalize this is to fire up your debugger and step through th
 
 ![Verify stage & rejection sampling stage](https://www.aleksagordic.com/blog/vllm/specdec_pt2.png)
 
-## Disaggregated P/D
+### Disaggregated P/D
 
 I've already previously hinted at the motivation behind disaggregated P/D (prefill/decode).
 
@@ -602,7 +602,7 @@ if __name__ == "__main__":
 
 !!! note
 
-    I've also experimented with `LMCache` [[11]](https://www.aleksagordic.com/blog/vllm#ref-11), the fastest production-ready connector (uses NVIDIA's NIXL as the backend), but it's still at the bleeding edge and I ran into some bugs. Since much of its complexity lives in an external repo, `SharedStorageConnector` is a better choice for explanation.
+    I've also experimented with [`LMCache`](https://github.com/LMCache/LMCache), the fastest production-ready connector (uses NVIDIA's NIXL as the backend), but it's still at the bleeding edge and I ran into some bugs. Since much of its complexity lives in an external repo, `SharedStorageConnector` is a better choice for explanation.
 
 These are the steps in vLLM:
 
@@ -730,7 +730,7 @@ vllm serve <model-name>
 
 How does this work in VLLM?
 
-## On the headless server node
+### On the headless server node
 
 On the headless node, a `CoreEngineProcManager` launches 2 processes (per `--data-parallel-size-local`) each running `EngineCoreProc.run_engine_core`. Each of these functions creates a `DPEngineCoreProc` (the engine core) and then enters its busy loop.
 
@@ -772,7 +772,7 @@ Figure 10. distributed system with 4 DP replicas running 4 DPEngineCoreProc
 
 Now for the second part, what happens on the API server node?
 
-## On the API server node
+### On the API server node
 
 We instantiate an `AsyncLLM` object (an asyncio wrapper around the LLM engine). Internally this creates a `DPLBAsyncMPClient` (data-parallel, load-balancing, asynchronous, multiprocessing client).
 
@@ -894,7 +894,7 @@ Figure 12. roofline perf model
 
     For a more rigorous treatment, we have to account for kernel auto-tuning: as `B` grows, the runtime may switch to more efficient kernels for that shape, changing the achieved performance `P_kernel`. Step latency is `t = FLOPs_step / P_kernel`, where `FLOPs_step` is the work in the step. You can see that as `P_kernel` hits `P_peak` more compute per step will directly lead to an increase in latency.
 
-## How to benchmark in vLLM
+### How to benchmark in vLLM
 
 vLLM provides a `vllm bench {serve,latency,throughput}` CLI that wraps vllm / benchmarks / {server,latency,throughput}.py.
 
@@ -939,12 +939,6 @@ I love understanding systems. Having said that, the resolution definitely suffer
 !!! tip "💡Get in touch:"
 
     If you spot any errors in the post, please DM me - feel free to drop me a message on [X](https://x.com/gordic_aleksa) or [LinkedIn](https://www.linkedin.com/in/aleksagordic/) or via [anon feedback](https://docs.google.com/forms/d/1z1fEirrN2xtGxAsJvptpM7yV4ByT5SF25S-XiMPrXNA/edit).
-
-## Acknowledgements
-
-A huge thank you to [Hyperstack](https://www.hyperstack.cloud/) for providing me with H100s for my experiments over the past year!
-
-Thanks to [Nick Hill](https://www.linkedin.com/in/nickhillprofile/) (core vLLM contributor, RedHat), [Mark Saroufim](https://x.com/marksaroufim) (PyTorch), [Kyle Krannen](https://www.linkedin.com/in/kyle-kranen/) (NVIDIA, Dynamo), and [Ashish Vaswani](https://www.linkedin.com/in/ashish-vaswani-99892181/) for reading pre-release version of this blog post and providing feedback!
 
 ## References
 
