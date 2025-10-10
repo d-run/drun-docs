@@ -7,7 +7,7 @@
 2025 年 8 月 29 日
 
 本文将循序渐进地介绍构成现代高吞吐量大语言模型推理系统的所有核心组件和高级特性。
-特别是将深入剖析 vLLM [[1]](https://www.aleksagordic.com/blog/vllm#ref-1) 的工作原理。
+特别是将深入剖析 [vLLM](https://github.com/vllm-project/vllm) 的工作原理。
 
 本文是系列文章的第一篇。本文采用倒金字塔方法，从宏观入手，然后逐层深入细节，
 以便你能在不被琐碎细节淹没的情况下，对整个系统形成精确的高层次心智模型。
@@ -16,11 +16,11 @@
 
 本文结构分为五个部分：
 
-1. [大语言模型引擎和引擎核心](https://www.aleksagordic.com/blog/vllm#cpt1)：vLLM 基础知识（调度、分页注意力、连续批处理等）
-2. [高级特性](https://www.aleksagordic.com/blog/vllm#cpt2)：分块预填充、前缀缓存、引导解码与投机解码、P/D 分离
-3. [扩容](https://www.aleksagordic.com/blog/vllm#cpt3)：从单 GPU 到多 GPU
-4. [分层部署](https://www.aleksagordic.com/blog/vllm#cpt4)：分布式/并发 Web 框架
-5. [基准测试与自动调优](https://www.aleksagordic.com/blog/vllm#cpt5)：测量延迟和吞吐量
+1. [大语言模型引擎和引擎核心](#_1)：vLLM 基础知识（调度、分页注意力、连续批处理等）
+2. [高级特性](#_5)：分块预填充、前缀缓存、引导解码与投机解码、P/D 分离
+3. [扩容](#uniprocexecutor-multiprocexecutor)：从单 GPU 到多 GPU
+4. [分层部署](#vllm_1)：分布式/并发 Web 框架
+5. [基准测试与自动调优](#vs)：测量延迟和吞吐量
 
 !!! note
 
@@ -67,7 +67,7 @@ if __name__ == "__main__":
 - 离线的（没有 Web/分布式系统的框架）
 - 同步的（所有执行发生在单个阻塞进程中）
 - 单 GPU（没有数据/模型/流水线/专家并行；DP/TP/PP/EP = 1）
-- 使用标准 Transformer [[2]](https://www.aleksagordic.com/blog/vllm#ref-2)（支持 Jamba 等混合模型需要更复杂的混合 KV-cache 内存分配器）
+- 使用[标准 Transformer](https://arxiv.org/abs/1706.03762)（支持 Jamba 等混合模型需要更复杂的混合 KV-cache 内存分配器）
 
 从这里开始，我们将逐步构建一个在线、异步、多 GPU、多节点的推理系统——但仍然部署标准的 Transformer。
 
@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
 让我们从分析构造函数开始。
 
-## 大语言模型引擎构造函数
+### 大语言模型引擎构造函数
 
 引擎的主要组件包括：
 
@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
     1. 策略设置：可以是 **FCFS**（先到先服务）或 **priority**（优先级高的请求优先服务）
     2. `waiting` 和 `running` 队列
-    3. KV-cache 管理器：分页注意力的核心 [[3]](https://www.aleksagordic.com/blog/vllm#ref-3)
+    3. KV-cache 管理器：[分页注意力的核心](https://arxiv.org/abs/2309.06180)
 
 KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 块形成的池（通常有几十万块，具体取决于显存大小和块大小）。在分页注意力期间，这些块作为索引结构，将 Token 映射到其计算的各个 KV-cache 块上。
 
@@ -111,7 +111,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 
 !!! tip
 
-    标准 Transformer 层（非 MLA [[4]](https://www.aleksagordic.com/blog/vllm#ref-4)）的块大小计算公式为：
+    标准 Transformer 层（[非 MLA](https://arxiv.org/abs/2405.04434)）的块大小计算公式为：
 
     2 (key/value) * `block_size`（默认=16） * `num_kv_heads` * `head_size` * `dtype_num_bytes`（例如 bf16 为 2）
 
@@ -135,7 +135,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 
 3. 初始化 KV-cache：
 
-    - 获取每层的 KV-cache 规格。历史上这总是 `FullAttentionSpec`（同质 Transformer），但对于混合模型（滑动窗口、Transformer/SSM 类 Jamba）会更复杂（参见 Jenga [[5]](https://www.aleksagordic.com/blog/vllm#ref-5)）
+    - 获取每层的 KV-cache 规格。历史上这总是 `FullAttentionSpec`（同质 Transformer），但对于混合模型（滑动窗口、Transformer/SSM 类 Jamba）会更复杂（参见 [Jenga](https://arxiv.org/abs/2503.18292)）
     - 执行一次虚拟/分析前向计算并获取 GPU 内存快照，以计算可用显存中能容纳多少 KV-cache 块
     - 分配、调整形状并绑定 KV-cache 张量到注意力层
     - 准备注意力元数据（例如将后端设置为 FlashAttention），以供前向计算时内核使用
@@ -145,7 +145,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 
 现在我们已经初始化了引擎，让我们继续看 `generate` 函数。
 
-## `generate` 函数
+### `generate` 函数
 
 第一步是验证并将请求送入引擎。对于每个提示词，我们：
 
@@ -154,7 +154,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 3. 将这些信息打包进 `EngineCoreRequest`，添加优先级、采样参数和其他元数据
 4. 将请求传入引擎核心，它会将请求包装为 `Request` 对象并将状态设置为 `WAITING`。然后该请求被加入调度器的 `waiting` 队列（如果是先来先服务（FCFS），则追加；如果是按优先级，则使用堆插入（heap-push）。）
 
-此时，引擎已被喂入数据，执行可以开始。在同步引擎示例中，这些初始提示词是唯一处理的请求——没有机制在运行中注入新请求。相比之下，异步引擎支持此功能（即 **连续批处理** [[6]](https://www.aleksagordic.com/blog/vllm#ref-6)）：每步结束后，会同时考虑新旧请求。
+此时，引擎已被喂入数据，执行可以开始。在同步引擎示例中，这些初始提示词是唯一处理的请求——没有机制在运行中注入新请求。相比之下，异步引擎支持此特性（即[连续批处理](https://www.usenix.org/conference/osdi22/presentation/yu)）：每步结束后，会同时考虑新旧请求。
 
 !!! tip
 
@@ -185,7 +185,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 
 接下来，我们将更详细地探讨调度。
 
-## 调度器
+### 调度器
 
 推理引擎主要处理两类工作负载：
 
@@ -225,7 +225,7 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 
 现在，我们可以进行前向计算了！
 
-## 执行前向计算
+### 执行前向计算
 
 我们调用模型执行器的 `execute_model`，它委托给 `Worker`，再由 `Worker` 委托给 `model_runner`。
 
@@ -250,9 +250,9 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 图 4. 前向计算：连续批处理与分页注意力
 </div>
 
-## 高级功能 — 扩展核心引擎逻辑
+## 高级特性 — 扩展核心引擎逻辑
 
-在基础引擎流程建立之后，我们现在可以看看高级功能。
+在基础引擎流程建立之后，我们现在可以看看高级特性。
 
 我们已经讨论了抢占、分页注意力和连续批处理。
 
@@ -264,7 +264,7 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 4. 投机解码
 5. P/D 分离（预填充/解码）
 
-## 分块预填充
+### 分块预填充
 
 分块预填充是处理长提示词的一种技术，它通过将预填充步骤拆分为更小的块来执行。若不使用此方法，可能会出现单个非常长的请求独占一次引擎步骤，从而阻止其他预填充请求运行。这会延迟所有其他请求并增加它们的延迟。
 
@@ -278,7 +278,7 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 
 在 vLLM V1 中，可以通过将 `long_prefill_token_threshold` 设置为正整数来启用分块预填充。（技术上，即使未设置该值，如果提示词长度超过 Token 预算，也会截断并执行分块预填充。）
 
-## 前缀缓存
+### 前缀缓存
 
 为了说明前缀缓存的工作原理，我们可以对原始代码示例进行一些调整：
 
@@ -363,7 +363,7 @@ if __name__ == "__main__":
 
 前缀缓存默认启用。若要禁用：`enable_prefix_caching = False`。
 
-## 引导解码（有限状态机）
+### 引导解码
 
 引导解码是一种技术，在每个解码步骤中，logits 会受到基于语法的有限状态机约束。这确保了只有符合语法的 Token 才能被采样。
 
@@ -403,7 +403,7 @@ if __name__ == "__main__":
 在 vLLM 中的实现方式：
 
 1. 在大语言模型引擎构建时，创建一个 `StructuredOutputManager`；它可以访问分词器，并维护 `_grammar_bitmask` 张量。
-2. 添加请求时，其状态被设置为 `WAITING_FOR_FSM`，并由 `grammar_init` 选择后端编译器（例如 `xgrammar` [[7]](https://www.aleksagordic.com/blog/vllm#ref-7)；注意后端为第三方代码）。
+2. 添加请求时，其状态被设置为 `WAITING_FOR_FSM`，并由 `grammar_init` 选择后端编译器（例如 [XGrammar](https://arxiv.org/abs/2411.15100)；注意后端为第三方代码）。
 3. 该请求的语法会异步编译。
 4. 在调度阶段，如果异步编译完成，状态切换为 `WAITING`，并将 `request_id` 添加到 `structured_output_request_ids`；否则，它被放入 `skipped_waiting_requests`，在下一步引擎循环中重试。
 5. 调度循环结束后（仍在调度阶段），如果有 FSM 请求，`StructuredOutputManager` 会请求后端准备/更新 `_grammar_bitmask`。
@@ -426,13 +426,13 @@ if __name__ == "__main__":
 图 6. 玩具示例
 </div>
 
-可以通过传入所需的 `guided_decoding` 配置在 vLLM 中启用此功能。
+可以通过传入所需的 `guided_decoding` 配置在 vLLM 中启用此特性。
 
-## 投机解码
+### 投机解码
 
 在自回归生成中，每生成一个新 Token 都需要对大语言模型执行一次前向计算。这非常昂贵——每一步都要重新加载并应用所有模型权重，仅为了计算一个 Token！（假设批次大小 = 1，一般为 `B`）
 
-投机解码 [[8]](https://www.aleksagordic.com/blog/vllm#ref-8) 通过引入一个较小的草稿模型来加速。草稿模型廉价地提出 `k` 个 Token 候选。但我们最终并不希望从小模型中采样——它只是用来猜测候选续写。大模型仍然决定哪些 Token 有效。
+[投机解码](https://arxiv.org/abs/2302.01318)通过引入一个较小的草稿模型来加速。草稿模型廉价地提出 `k` 个 Token 候选。但我们最终并不希望从小模型中采样——它只是用来猜测候选续写。大模型仍然决定哪些 Token 有效。
 
 步骤如下：
 
@@ -455,7 +455,7 @@ if __name__ == "__main__":
 
     推荐查看 [gpt-fast](https://github.com/meta-pytorch/gpt-fast) 了解简单实现，以及 [原论文](https://arxiv.org/abs/2302.01318) 获取数学细节及与全模型采样等价的证明。
 
-vLLM V1 不支持使用 LLM 草稿模型方法，而是实现了更快但准确性略低的候选方案：n-gram、EAGLE [[9]](https://www.aleksagordic.com/blog/vllm#ref-9) 和 Medusa [[10]](https://www.aleksagordic.com/blog/vllm#ref-10)。
+vLLM V1 不支持使用 LLM 草稿模型方法，而是实现了更快但准确性略低的候选方案：n-gram、[EAGLE](https://arxiv.org/abs/2401.15077) 和 [Medusa](https://arxiv.org/abs/2401.10774)。
 
 各方案简述：
 
@@ -520,7 +520,7 @@ if __name__ == "__main__":
 
 ![Verify stage & rejection sampling stage](https://www.aleksagordic.com/blog/vllm/specdec_pt2.png)
 
-## P/D 分离
+### P/D 分离
 
 上文提到了 P/D 分离的动机。
 
@@ -610,7 +610,7 @@ if __name__ == "__main__":
 
 !!! note
 
-    我还尝试过 `LMCache` [[11]](https://www.aleksagordic.com/blog/vllm#ref-11)，这是最快的生产就绪 Connector（使用 NVIDIA 的 NIXL 作为后端），但它仍处于前沿状态，我遇到了一些 bug。由于其复杂性大多存在于外部仓库中，因此 `SharedStorageConnector` 更适合作为讲解示例。
+    我还尝试过 [`LMCache`](https://github.com/LMCache/LMCache)，这是最快的生产就绪 Connector（使用 NVIDIA 的 NIXL 作为后端），但它仍处于前沿状态，我遇到了一些 bug。由于其复杂性大多存在于外部仓库中，因此 `SharedStorageConnector` 更适合作为讲解示例。
 
 在 vLLM 中的步骤如下：
 
@@ -660,7 +660,7 @@ if __name__ == "__main__":
     - 节点内带宽远高于节点间带宽，这也是为什么通常优先选择张量并行（TP）而非流水线并行（PP）。（同时，PP 传输的数据量也少于 TP。）
     - 我不讨论 expert parallelism (EP)，因为我们关注的是标准 Transformer 而非 MoE，也不讨论 sequence parallelism，因为 TP 和 PP 在实践中最常用。
 
-在这个阶段，我们需要多个 GPU 进程（Worker）以及一个协调层来管理它们。这正是 `MultiProcExecutor` 提供的功能。
+在这个阶段，我们需要多个 GPU 进程（Worker）以及一个协调层来管理它们。这正是 `MultiProcExecutor` 提供的特性。
 
 ![MultiProcExecutor](https://www.aleksagordic.com/blog/vllm/multiprocexecutor.png)
 
@@ -738,7 +738,7 @@ vllm serve <model-name>
 
 vLLM 中的实现方式：
 
-## 在 headless 服务器节点
+### 在 headless 服务器节点
 
 在 headless 节点上，`CoreEngineProcManager` 启动 2 个进程（根据 `--data-parallel-size-local`），每个进程运行 `EngineCoreProc.run_engine_core`。每个函数会创建一个 `DPEngineCoreProc`（引擎核心），然后进入其忙循环。
 
@@ -780,7 +780,7 @@ TL;DR：最终我们有 4 个子进程（每个 DP 副本一个），每个子�
     
 接下来，我们来看第二部分：API 服务器节点会发生什么？
 
-## 在 API 服务器节点
+### 在 API 服务器节点
 
 我们实例化一个 `AsyncLLM` 对象（LLM 引擎的 asyncio 包装器）。内部会创建一个 `DPLBAsyncMPClient`（数据并行、负载均衡、异步、多进程客户端）。
 
@@ -868,7 +868,7 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 在解释为什么延迟与吞吐量相互竞争之前，我们先定义几个常见的推理指标：
 
 | 指标 | 定义 |
-| :----------------------------------- | :----------------------------------------------------------- |
+| --- | --- |
 | `TTFT` (time to first token) | 从请求提交到接收到第一个输出 Token 的时间 |
 | `ITL` (inter-token latency) | 两个连续 Token 之间的时间（例如，从 Token i-1 到 Token i） |
 | `TPOT` (time per output token) | 单个请求中所有输出 Token 的平均 ITL |
@@ -906,7 +906,7 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 
     更严格的分析需要考虑 kernel 自动调优：随着 `B` 增大，运行时可能为该形状切换到更高效的 kernel，从而改变实际性能 `P_kernel`。步骤延迟为 `t = FLOPs_step / P_kernel`，其中 `FLOPs_step` 为该步的计算量。可以看到，当 `P_kernel` 达到 `P_peak` 时，每步更多的计算量会直接导致延迟增加。
 
-## 如何在 vLLM 中进行基准测试
+### 如何在 vLLM 中进行基准测试
 
 vLLM 提供了一个 CLI 命令 `vllm bench {serve,latency,throughput}`，它封装了 `vllm/benchmarks/{server,latency,throughput}.py` 脚本。
 
@@ -934,7 +934,7 @@ vllm bench latency
 
 ## 尾声
 
-我们从基础引擎核心（`UniprocExecutor`）开始，加入了如推测解码（speculative decoding）和前缀缓存（prefix caching）等高级特性，接着扩展到 `MultiProcExecutor`（TP/PP > 1），最终实现水平扩展，将所有组件封装到异步引擎和分布式服务栈中——最后展示了如何衡量系统性能。
+我们从基础引擎核心（`UniprocExecutor`）开始，加入了如投机解码和前缀缓存等高级特性，接着扩展到 `MultiProcExecutor`（TP/PP > 1），最终实现水平扩展，将所有组件封装到异步引擎和分布式服务栈中——最后展示了如何衡量系统性能。
 
 vLLM 还包含一些我未详细展开的专门处理，例如：
 
@@ -942,21 +942,15 @@ vLLM 还包含一些我未详细展开的专门处理，例如：
 - **架构/技术:** `MLA`、`MoE`、编码器/解码器（如 Whisper）、池化/嵌入式模型、`EPLB`、`m-RoPE`、`LoRA`、`ALiBi`、无注意力变体、滑动窗口注意力、多模态 LLM、状态空间模型（如 Mamba/Mamba-2、Jamba）
 - **TP/PP/SP**
 - **混合 KV-cache 逻辑**（Jenga）、更复杂的采样方法如束式采样等
-- **实验性功能:** 异步调度
+- **实验性特性:** 异步调度
 
-好的一点是，这些大多数功能与上文描述的核心流程是正交的——几乎可以把它们当作“插件”来理解（当然实际中有部分耦合）。
+好的一点是，这些大多数特性与上文描述的核心流程是正交的——几乎可以把它们当作“插件”来理解（当然实际中有部分耦合）。
 
-我热爱理解系统。话虽如此，在这个高度概览中，细节有所损失。在后续文章中，我会聚焦具体子系统，深入探讨细节。
+我热爱理解系统。话虽如此，在这个高度概览中，细节有所损失。在后续文章中，我会聚焦具体的子系统，深入探讨细节。
 
 !!! tip "💡联系我："
 
     如果你在本文中发现任何错误，请随时联系我——可以通过 [X](https://x.com/gordic_aleksa) 或 [LinkedIn](https://www.linkedin.com/in/aleksagordic/) 给我留言，也可以通过 [匿名反馈](https://docs.google.com/forms/d/1z1fEirrN2xtGxAsJvptpM7yV4ByT5SF25S-XiMPrXNA/edit) 提交。
-
-## 致谢
-
-衷心感谢 [Hyperstack](https://www.hyperstack.cloud/) 在过去一年中提供 H100 GPU 供我进行实验！
-
-感谢 [Nick Hill](https://www.linkedin.com/in/nickhillprofile/)（vLLM 核心贡献者，RedHat）、[Mark Saroufim](https://x.com/marksaroufim)（PyTorch）、[Kyle Krannen](https://www.linkedin.com/in/kyle-kranen/)（NVIDIA, Dynamo）以及 [Ashish Vaswani](https://www.linkedin.com/in/ashish-vaswani-99892181/) 在博客预发布版本中提供反馈！
 
 ## 参考文献
 
