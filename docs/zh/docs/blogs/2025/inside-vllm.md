@@ -273,6 +273,10 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 
 ![分块预填充- pt 1](https://www.aleksagordic.com/blog/vllm/chunked_pt1.png)
 
+<div style="text-align: center;">
+图 5. 分块预填充示例
+</div>
+
 实现方法很简单：限制每步的新 Token 数量。如果请求的数量超过 `long_prefill_token_threshold`，则重置为该阈值。底层索引逻辑（前文描述）会处理剩余部分。
 
 在 vLLM V1 中，可以通过将 `long_prefill_token_threshold` 设置为正整数来启用分块预填充。（技术上，即使未设置该值，如果 Prompt 长度超过 Token 预算，也会截断并执行分块预填充。）
@@ -336,6 +340,10 @@ if __name__ == "__main__":
 
 ![前缀缓存逻辑 - pt 1](https://www.aleksagordic.com/blog/vllm/prefix_pt1.png)
 
+<div style="text-align: center;">
+图 6. 前缀缓存逻辑 1
+</div>
+
 然后我们调用 `allocate_slots`，它进一步调用 `coordinator.cache_blocks`，将新的 `BlockHash` 条目与分配的 KV block 关联，并记录到 `cached_block_hash_to_block` 中。
 
 随后，前向计算会在分页 KV-cache 内存中填充与上述 KV-cache block 对应的 KV。
@@ -346,9 +354,17 @@ if __name__ == "__main__":
 
 ![前缀缓存逻辑 - pt 2](https://www.aleksagordic.com/blog/vllm/prefix_pt2.png)
 
+<div style="text-align: center;">
+图 7. 前缀缓存逻辑 2
+</div>
+
 在第二次带相同前缀的 `generate` 调用中，步骤 1-3 重复执行，但这次 `find_longest_cache_hit` 通过线性搜索找到所有 `n` 个 block 的匹配。引擎可以直接重用这些 KV block。
 
 ![前缀缓存逻辑 - pt 3](https://www.aleksagordic.com/blog/vllm/prefix_pt3.png)
+
+<div style="text-align: center;">
+图 8. 前缀缓存逻辑 3
+</div>
 
 如果原始请求仍然存在，这些 block 的引用计数会增加（例如为 2）。在本例中，第一个请求已经完成，因此这些 block 已释放回池，其引用计数恢复为 0。由于我们可以从 `cached_block_hash_to_block` 中检索它们，说明它们有效（KV-cache 管理器的逻辑确保了这一点），因此我们再次将它们从 `free_block_queue` 中移除。
 
@@ -398,7 +414,7 @@ if __name__ == "__main__":
 ![FSM](https://www.aleksagordic.com/blog/vllm/fsm.png)
 
 <div style="text-align: center;">
-图 5. 玩具示例 FSM
+图 9. 玩具示例 FSM
 </div>
 
 在 vLLM 中的实现方式：
@@ -424,7 +440,7 @@ if __name__ == "__main__":
 ![FSM](https://www.aleksagordic.com/blog/vllm/fsm2.png)
 
 <div style="text-align: center;">
-图 6. 玩具示例
+图 10. 玩具示例
 </div>
 
 你可以通过传入所需的 `guided_decoding` 配置在 vLLM 中启用此特性。
@@ -519,7 +535,15 @@ if __name__ == "__main__":
 
 ![Drafting stage](https://www.aleksagordic.com/blog/vllm/specdec_pt1.png)
 
+<div style="text-align: center;">
+图 11. 草稿阶段
+</div>
+
 ![Verify stage & rejection sampling stage](https://www.aleksagordic.com/blog/vllm/specdec_pt2.png)
+
+<div style="text-align: center;">
+图 12. 验证阶段和拒绝采样阶段
+</div>
 
 ### P/D 分离
 
@@ -639,7 +663,7 @@ if __name__ == "__main__":
 ![P/D 分离](https://www.aleksagordic.com/blog/vllm/pd.png)
 
 <div style="text-align: center;">
-图 7. P/D 分离
+图 13. P/D 分离
 </div>
 
 !!! note "附加说明:"
@@ -666,7 +690,7 @@ if __name__ == "__main__":
 ![MultiProcExecutor](https://www.aleksagordic.com/blog/vllm/multiprocexecutor.png)
 
 <div style="text-align: center;">
-图 8. TP=8 设置下的 MultiProcExecutor（驱动 Worker 为 rank 0）
+图 14. TP=8 设置下的 MultiProcExecutor（驱动 Worker 为 rank 0）
 </div>
 
 在 vLLM 中的实现方式：
@@ -702,7 +726,7 @@ if __name__ == "__main__":
 ![2 台 8xH100 节点的服务器配置](https://www.aleksagordic.com/blog/vllm/server_setup.png)
 
 <div style="text-align: center;">
-图 9. 2 台 8xH100 节点的服务器配置（1 台 headless，1 台 API 服务器）
+图 15. 2 台 8xH100 节点的服务器配置（1 台 headless，1 台 API 服务器）
 </div>
 
 在第一台节点上，以 headless 模式运行引擎（无 API 服务器），并使用以下参数：
@@ -760,7 +784,7 @@ vLLM 中的实现方式：
 ![分布式系统中运行 4 个 DPEngineCoreProc 的 4 个 DP 副本](https://www.aleksagordic.com/blog/vllm/dpenginecoreproc.png)
 
 <div style="text-align: center;">
-图 10. 分布式系统中运行 4 个 DP 副本的 4 个 DPEngineCoreProc
+图 16. 分布式系统中运行 4 个 DP 副本的 4 个 DPEngineCoreProc
 </div>
 
 **当前稳定状态:**
@@ -886,7 +910,7 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 ![ttft, itl, e2e latency](https://www.aleksagordic.com/blog/vllm/latency_diagram.png)
 
 <div style="text-align: center;">
-图 11. TTFT、ITL 与端到端延迟
+图 17. TTFT、ITL 与端到端延迟
 </div>
 
 下面是一个简化模型，用于说明这两个指标的竞争关系。
@@ -910,7 +934,7 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 ![roofline perf model](https://www.aleksagordic.com/blog/vllm/roofline.png)
 
 <div style="text-align: center;">
-图 12. 屋顶线性能模型
+图 18. 屋顶线性能模型
 </div>
 
 !!! note
