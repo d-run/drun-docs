@@ -207,10 +207,10 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 
 1. 获取已计算 block 的数量（如果禁用前缀缓存则返回 0）。
 2. 调用 KV-cache 管理器的 `allocate_slots` 函数。
-3. 将请求从 waiting 弹出并移动到 running，设置状态为 `RUNNING`。
+3. 将请求从等待状态变为运行中，将其状态设置为 `RUNNING`。
 4. 更新 Token 预算。
 
-接下来看看 `allocate_slots` 的工作：
+接下来看看 `allocate_slots` 的作用：
 
 1. **计算 block 数** - 确定需要分配多少新的 KV-cache block（`n`）。每 block 默认存储 16 个 Token。例如，一个预填充请求有 17 个新 Token，则需要 `ceil(17/16) = 2` 个 block。
 2. **检查可用性** - 如果管理器的池中没有足够的 block，则提前退出。根据请求类型（解码或预填充），引擎可能尝试重新计算抢占（V0 支持交换抢占），通过调用 `kv_cache_manager.free` 将低优先级请求的 KV block 释放回 block 池，或者跳过调度继续执行。
@@ -226,7 +226,7 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 
 ### 执行前向计算
 
-我们调用模型执行器的 `execute_model`，它委托给 `Worker`，再由 `Worker` 委托给 `model_runner`。
+我们调用模型执行器的 `execute_model`，它委派给 `Worker`，再由 `Worker` 委派给 `model_runner`。
 
 主要步骤如下：
 
@@ -234,12 +234,12 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 2. **准备输入** - 将缓冲区从 CPU → GPU；计算位置；构建 `slot_mapping`（示例中详细说明）；构建注意力元数据。
 3. **前向计算** - 使用自定义分页注意力内核运行模型。所有序列被展平并连接为一个长的“超序列”。位置索引和注意力掩码确保每个序列只关注自己的 Token，从而支持连续批处理而无需右侧填充。
 4. **收集最后 Token 状态** - 提取每个序列最终位置的隐藏状态并计算 logits（原始得分）。
-5. **采样** - 根据采样配置（贪心、temperature、top-p、top-k 等）从计算得到的 logits 中采样 Token。
+5. **采样** - 根据采样配置（贪婪指数、temperature、top-p、top-k 等）从计算得到的 logits 中采样 Token。
 
 前向计算步骤有两种执行模式：
 
-1. **Eager 模式** - 启用 eager 执行时运行标准 PyTorch 前向计算。
-2. **“Captured” 模式** - 如果未强制 eager 执行，则执行/重放预先捕获的 CUDA 图（记住我们在引擎构建期间的初始化 KV-cache 步骤中捕获过这些图）。
+1. **Eager 模式** - 启用 Eager 执行时，运行标准 PyTorch 前向计算。
+2. **“Captured” 模式** - 如果未强制 Eager 执行，则执行/重放预先捕获的 CUDA 图（记住我们在引擎构建期间的初始化 KV-cache 步骤中捕获过这些图）。
 
 下面的示例可以清楚地展示连续批处理和分页注意力：
 
@@ -368,9 +368,9 @@ if __name__ == "__main__":
 
 引导解码是一种技术，在每个解码步骤中，logits 会受到基于语法的有限状态机约束。这确保了只有符合语法的 Token 才能被采样。
 
-这是一个强大的设置：你可以强制执行从正则语法（Chomsky 类型-3，例如任意正则表达式模式）到上下文无关语法（类型-2，覆盖大多数编程语言）的约束。
+这是一个强大的设置：你可以强制执行从正则语法（Chomsky 文法 3 型，例如任意正则表达式模式）到上下文无关语法（Chomsky 文法 2 型，覆盖大多数编程语言）的约束。
 
-为了让它不那么抽象，我们从最简单的示例开始，基于之前的代码：
+为了让引导解码不那么抽象，我们基于之前的代码从最简单的示例开始：
 
 ```python
 from vllm import LLM, SamplingParams
@@ -393,7 +393,7 @@ if __name__ == "__main__":
     main()
 ```
 
-在我给出的玩具示例中（假设字符级分词）：在预填充阶段，FSM 会屏蔽 logits，使得只有 "P" 或 "N" 是可行的。如果采样到 "P"，FSM 会移动到 "Positive" 分支；下一步只允许 "o"，依此类推。
+在以下玩具示例中（假设字符级分词）：在预填充阶段，FSM 会屏蔽 logits，使得只有 "P" 或 "N" 是可行的。如果采样到 "P"，FSM 会移动到 "Positive" 分支；下一步只允许 "o"，依此类推。
 
 ![FSM](https://www.aleksagordic.com/blog/vllm/fsm.png)
 
@@ -529,7 +529,7 @@ if __name__ == "__main__":
 包括 `TFTT`（time-to-first-token，第一个 Token 的时间）和 `ITL`（inter-token latency，即 Token 间延迟）。
 更多内容见[基准测试](#vs) 章节。
 
-实际操作中，我们运行 `N` 个 vLLM预填充实例和 `M` 个 vLLM 解码实例，根据实时请求负载自动伸缩。预填充工作线程将 KV 写入专用 KV-cache 服务；解码工作线程从中读取。这将长时间、突发的预填充与稳定、延迟敏感的解码隔离开来。
+实际操作中，我们运行 `N` 个 vLLM 预填充实例和 `M` 个 vLLM 解码实例，根据实时请求负载自动伸缩。预填充工作线程将 KV 写入专用 KV-cache 服务；解码工作线程从中读取。这将长时间、突发的预填充与稳定、延迟敏感的解码隔离开来。
 
 在 vLLM 中是如何实现的？
 
@@ -611,9 +611,9 @@ if __name__ == "__main__":
 
 !!! note
 
-    我还尝试过 [`LMCache`](https://github.com/LMCache/LMCache)，这是最快的生产就绪 Connector（使用 NVIDIA 的 NIXL 作为后端），但它仍处于前沿状态，我遇到了一些 bug。由于其复杂性大多存在于外部仓库中，因此 `SharedStorageConnector` 更适合作为讲解示例。
+    我还尝试过 [`LMCache`](https://github.com/LMCache/LMCache)，这是最快的生产就绪 Connector（使用 NVIDIA 的 NIXL 作为后端），但它仍处于前沿状态，我遇到了一些 Bug。由于其复杂性大多存在于外部仓库中，因此 `SharedStorageConnector` 更适合作为讲解示例。
 
-在 vLLM 中的步骤如下：
+使用 vLLM 的步骤如下：
 
 1. **实例化** — 在引擎构建阶段，Connector 在两个地方创建：
 
