@@ -72,7 +72,7 @@ if __name__ == "__main__":
 在此示例中，我们做两件事：
 
 1. 实例化一个引擎
-2. 调用 `generate` 从给定的提示词中采样
+2. 调用 `generate` 从给定的 Prompt 中采样
 
 让我们从分析构造函数开始。
 
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     2. `waiting` 和 `running` 队列
     3. KV-cache 管理器：[分页注意力的核心](https://arxiv.org/abs/2309.06180)
 
-KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 块形成的池（通常有几十万块，具体取决于显存大小和块大小）。在分页注意力期间，这些块作为索引结构，将 Token 映射到其计算的各个 KV-cache 块上。
+KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache block 形成的池（通常有几十万个 block，具体取决于显存大小和 block 大小）。在分页注意力期间，这些 block 作为索引结构，将 Token 映射到其计算的各个 KV-cache block 上。
 
 ![大语言模型引擎构造函数](https://www.aleksagordic.com/blog/vllm/engine_constructor.png)
 
@@ -110,7 +110,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 
 !!! tip
 
-    标准 Transformer 层（[非 MLA](https://arxiv.org/abs/2405.04434)）的块大小计算公式为：
+    标准 Transformer 层（[非 MLA](https://arxiv.org/abs/2405.04434)）的 block 大小计算公式为：
 
     2 (key/value) * `block_size`（默认=16） * `num_kv_heads` * `head_size` * `dtype_num_bytes`（例如 bf16 为 2）
 
@@ -123,7 +123,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
     - 根据请求的 `gpu_memory_utilization`（例如 0.8 是总显存的 80%）验证是否有足够的显存
     - 设置分布式配置（DP/TP/PP/EP 等）
     - 实例化一个 `model_runner`（持有采样器、KV-cache 以及前向计算缓冲区，如 `input_ids`、`positions` 等）
-    - 实例化一个 `InputBatch` 对象（持有 CPU 端前向计算缓冲区、KV-cache 索引的块表、采样元数据等）
+    - 实例化一个 `InputBatch` 对象（持有 CPU 端前向计算缓冲区、KV-cache 索引的 block 表、采样元数据等）
 
 2. 加载模型：
 
@@ -135,7 +135,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 3. 初始化 KV-cache：
 
     - 获取每层的 KV-cache 规格。历史上这总是 `FullAttentionSpec`（同质 Transformer），但对于混合模型（滑动窗口、Transformer/SSM 类 Jamba）会更复杂（参见 [Jenga](https://arxiv.org/abs/2503.18292)）
-    - 执行一次虚拟/分析前向计算并获取 GPU 内存快照，以计算可用显存中能容纳多少 KV-cache 块
+    - 执行一次虚拟/分析前向计算并获取 GPU 内存快照，以计算可用显存中能容纳多少 KV-cache block
     - 分配、调整形状并绑定 KV-cache 张量到注意力层
     - 准备注意力元数据（例如将后端设置为 FlashAttention），以供前向计算时内核使用
     - 除非提供 `--enforce-eager`，否则对每个预热批次大小执行一次虚拟运行并捕获 CUDA 图。CUDA 图将整个 GPU 工作序列记录为 DAG。在后续前向计算中，我们直接启动/重放预先构建的图，从而减少内核启动开销并改善延迟。
@@ -146,14 +146,14 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 
 ### `generate` 函数
 
-第一步是验证并将请求送入引擎。对于每个提示词：
+第一步是验证并将请求送入引擎。对于每个 Prompt：
 
 1. 创建唯一请求 ID 并记录到达时间
-2. 调用输入预处理器，将提示词分词并返回一个字典，包含 `prompt`、`prompt_token_ids` 和 `type`（text、tokens、embeds 等）
+2. 调用输入预处理器，将 Prompt 分词并返回一个字典，包含 `prompt`、`prompt_token_ids` 和 `type`（text、tokens、embeds 等）
 3. 将这些信息打包进 `EngineCoreRequest`，添加优先级、采样参数和其他元数据
 4. 将请求传入引擎核心，它会将请求包装为 `Request` 对象并将状态设置为 `WAITING`。然后该请求被加入调度器的 `waiting` 队列（如果是先来先服务（FCFS），则追加；如果是按优先级，则使用堆插入（heap-push）。）
 
-此时，引擎已被喂入数据，执行可以开始。在同步引擎示例中，这些初始提示词是唯一处理的请求，没有机制在运行中注入新请求。相比之下，异步引擎支持此特性（即[连续批处理](https://www.usenix.org/conference/osdi22/presentation/yu)）：每步结束后，会同时考虑新旧请求。
+此时，引擎已被喂入数据，执行可以开始。在同步引擎示例中，这些初始 Prompt 是唯一处理的请求，没有机制在运行中注入新请求。相比之下，异步引擎支持此特性（即[连续批处理](https://www.usenix.org/conference/osdi22/presentation/yu)）：每步结束后，会同时考虑新旧请求。
 
 !!! tip
 
@@ -163,7 +163,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 
 1. 调度：选择本步要运行的请求（解码和/或（分块）预填充）
 2. 前向计算：运行模型并采样 Token
-3. 后处理：将采样的 Token ID 添加到每个 `Request`，反分词，并检查停止条件。如果请求完成，清理（例如将 KV-cache 块返回 `free_block_queue`）并提前返回输出
+3. 后处理：将采样的 Token ID 添加到每个 `Request`，反分词，并检查停止条件。如果请求完成，清理（例如将 KV-cache block 返回 `free_block_queue`）并提前返回输出
 
 !!! note "停止条件为："
 
@@ -188,7 +188,7 @@ KV-cache 管理器维护一个 `free_block_queue`。这是所有可用 KV-cache 
 
 推理引擎主要处理两类工作负载：
 
-1. **预填充请求** - 对所有提示词 Token 执行一次前向计算。这类请求通常是 **计算受限** 的（阈值取决于硬件和提示词长度）。在末尾，我们从最后一个 Token 的概率分布中采样一个 Token。
+1. **预填充请求** - 对所有 Prompt Token 执行一次前向计算。这类请求通常是 **计算受限** 的（阈值取决于硬件和 Prompt 长度）。在末尾，我们从最后一个 Token 的概率分布中采样一个 Token。
 2. **解码请求** - 仅对最近的 Token 执行前向计算。之前的所有 KV 向量已经缓存。这类请求是 **内存带宽受限** 的，因为我们仍然需要加载所有大语言模型权重（以及 KV-cache）才能计算一个 Token。
 
 !!! tip
@@ -205,21 +205,21 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 
 之后，它处理来自 `waiting` 队列的预填充请求：
 
-1. 获取已计算块的数量（如果禁用前缀缓存则返回 0）。
+1. 获取已计算 block 的数量（如果禁用前缀缓存则返回 0）。
 2. 调用 KV-cache 管理器的 `allocate_slots` 函数。
 3. 将请求从 waiting 弹出并移动到 running，设置状态为 `RUNNING`。
 4. 更新 Token 预算。
 
 接下来看看 `allocate_slots` 的工作：
 
-1. **计算块数** - 确定需要分配多少新的 KV-cache 块（`n`）。每块默认存储 16 个 Token。例如，一个预填充请求有 17 个新 Token，则需要 `ceil(17/16) = 2` 块。
-2. **检查可用性** - 如果管理器的池中没有足够的块，则提前退出。根据请求类型（解码或预填充），引擎可能尝试重新计算抢占（V0 支持交换抢占），通过调用 `kv_cache_manager.free` 将低优先级请求的 KV 块释放回块池，或者跳过调度继续执行。
-3. **分配块** - 通过 KV-cache 管理器的协调器，从块池（前文提到的 `free_block_queue` 双向链表）获取前 `n` 块。存入 `req_to_blocks` 字典，将每个 `request_id` 映射到其 KV-cache 块列表。
+1. **计算 block 数** - 确定需要分配多少新的 KV-cache block（`n`）。每 block 默认存储 16 个 Token。例如，一个预填充请求有 17 个新 Token，则需要 `ceil(17/16) = 2` 个 block。
+2. **检查可用性** - 如果管理器的池中没有足够的 block，则提前退出。根据请求类型（解码或预填充），引擎可能尝试重新计算抢占（V0 支持交换抢占），通过调用 `kv_cache_manager.free` 将低优先级请求的 KV block 释放回 block 池，或者跳过调度继续执行。
+3. **分配 block** - 通过 KV-cache 管理器的协调器，从 block 池（前文提到的 `free_block_queue` 双向链表）获取前 `n` 个 block。存入 `req_to_blocks` 字典，将每个 `request_id` 映射到其 KV-cache block 列表。
 
-![KV-cache 块](https://www.aleksagordic.com/blog/vllm/kv_cache_blocks.png)
+![KV-cache block](https://www.aleksagordic.com/blog/vllm/kv_cache_blocks.png)
 
 <div style="text-align: center;">
-图 3. KV-cache 块列表
+图 3. KV-cache block 列表
 </div>
 
 现在，我们可以进行前向计算了！
@@ -230,7 +230,7 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 
 主要步骤如下：
 
-1. **更新状态** - 从 `input_batch` 中修剪完成的请求；更新前向计算相关的杂项元数据（例如每个请求将用于索引分页 KV-cache 内存的 KV-cache 块）。
+1. **更新状态** - 从 `input_batch` 中修剪完成的请求；更新前向计算相关的杂项元数据（例如每个请求将用于索引分页 KV-cache 内存的 KV-cache block）。
 2. **准备输入** - 将缓冲区从 CPU → GPU；计算位置；构建 `slot_mapping`（示例中详细说明）；构建注意力元数据。
 3. **前向计算** - 使用自定义分页注意力内核运行模型。所有序列被展平并连接为一个长的“超序列”。位置索引和注意力掩码确保每个序列只关注自己的 Token，从而支持连续批处理而无需右侧填充。
 4. **收集最后 Token 状态** - 提取每个序列最终位置的隐藏状态并计算 logits（原始得分）。
@@ -265,9 +265,9 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 
 ### 分块预填充
 
-分块预填充是处理长提示词的一种技术，它通过将预填充步骤拆分为更小的块来执行。若不使用此方法，可能会出现单个非常长的请求独占一次引擎步骤，从而阻止其他预填充请求运行。这会延迟所有其他请求并增加它们的延迟。
+分块预填充是处理长 Prompt 的一种技术，它通过将预填充步骤拆分为更小的块来执行。若不使用此方法，可能会出现单个非常长的请求独占一次引擎步骤，从而阻止其他预填充请求运行。这会延迟所有其他请求并增加它们的延迟。
 
-例如，每个块包含 `n` (=8) 个 Token，用小写字母表示并以 "-" 分隔。一个长提示词 `P` 可以表示为 `x-y-z`，其中 `z` 是不完整的块（例如 2 个 Token）。执行完整的 `P`预填充将需要 ≥ 3 个引擎步骤（如果某步未被调度执行，则可能更多），并且仅在最后的分块预填充步骤中，我们才会采样一个新的 Token。
+例如，每个块包含 `n` (=8) 个 Token，用小写字母表示并以 "-" 分隔。一个长 Prompt `P` 可以表示为 `x-y-z`，其中 `z` 是不完整的块（例如 2 个 Token）。执行完整的 `P`预填充将需要 ≥ 3 个引擎步骤（如果某步未被调度执行，则可能更多），并且仅在最后的分块预填充步骤中，我们才会采样一个新的 Token。
 
 下面是该示例的可视化表示：
 
@@ -275,7 +275,7 @@ V1 调度器可以在同一步中混合处理两类请求，这得益于更智�
 
 实现方法很简单：限制每步的新 Token 数量。如果请求的数量超过 `long_prefill_token_threshold`，则重置为该阈值。底层索引逻辑（前文描述）会处理剩余部分。
 
-在 vLLM V1 中，可以通过将 `long_prefill_token_threshold` 设置为正整数来启用分块预填充。（技术上，即使未设置该值，如果提示词长度超过 Token 预算，也会截断并执行分块预填充。）
+在 vLLM V1 中，可以通过将 `long_prefill_token_threshold` 设置为正整数来启用分块预填充。（技术上，即使未设置该值，如果 Prompt 长度超过 Token 预算，也会截断并执行分块预填充。）
 
 ### 前缀缓存
 
@@ -303,30 +303,32 @@ if __name__ == "__main__":
     main()
 ```
 
-前缀缓存可以避免重新计算多个提示词在开头共享的 Token，因此称为 **前缀** 。
+前缀缓存可以避免重新计算多个 Prompt 在开头共享的 Token，因此称为 **前缀** 。
 
-关键在于 `long_prefix`：它被定义为任何比 KV-cache 块长的前缀（默认每块 16 个 Token）。为了简化示例，我们假设 `long_prefix` 的长度正好为 `n x block_size`（其中 `n ≥ 1`）。
+关键在于 `long_prefix`：它被定义为任何比 KV-cache block（默认 16 个 Token）更长的前缀。为了简化示例，我们假设 `long_prefix` 的长度正好为 `n x block_size`（其中 `n ≥ 1`）。
 
 !!! tip
 
-    即它与块边界完全对齐，否则我们必须重新计算 `long_prefix_len % block_size` 个 Token，因为无法缓存不完整的块。
+    即它与 block 边界完全对齐，否则我们必须重新计算 `long_prefix_len % block_size` 个 Token，因为无法缓存不完整的 block。
 
 如果不使用前缀缓存，每次处理带有相同 `long_prefix` 的新请求时，都需要重新计算所有 `n x block_size` 个 Token。
 
-使用前缀缓存，这些 Token 只计算一次（其 KV 存储在分页 KV-cache 内存中），然后重复使用，因此只需处理新的提示词 Token。这会加速预填充请求（但对解码没有帮助）。
+使用前缀缓存，这些 Token 只计算一次（其 KV 存储在分页 KV-cache 内存中），然后重复使用，因此只需处理新的 Prompt Token。这会加速预填充请求（但对解码没有帮助）。
 
 在 vLLM 中这是如何实现的？
 
 在第一次 `generate` 调用中，在调度阶段，`kv_cache_manager.get_computed_blocks` 内部，引擎会调用 `hash_request_tokens`：
 
-1. 该函数将 `long_prefix + prompts[0]` 拆分为 16-token 的块。
-2. 对每个完整块，计算一个哈希（使用内置哈希或 SHA-256，SHA-256 更慢但冲突更少）。哈希结合前一个块的哈希、当前 Token 和可选元数据。
+1. 此函数将 `long_prefix + prompts[0]` 拆分为 16-token 的块。
+2. 对每个完整块，计算一个哈希（使用内置哈希或 SHA-256，SHA-256 更慢但冲突更少）。哈希结合前一个 block 的哈希、当前 Token 和可选元数据。
 
     !!! tip
 
-        可选元数据包括：MM hash、LoRA ID、cache salt（注入到第一个块的哈希中，确保只有具有该 cache salt 的请求才能重用这些块）。
+        可选元数据包括：MM hash、LoRA ID、cache salt（注入到第一个 block 的哈希中，确保只有具有该 cache salt 的请求才能重用这些 block）。
 
-3. 每个结果存储为一个 `BlockHash` 对象，包含哈希值和其 Token ID。返回块哈希列表。
+3. 每个结果存储为一个 `BlockHash` 对象，包含哈希值和其 Token ID。返回 block 哈希列表。
+
+*[cache salt]: 一种加盐哈希缓存，在前缀缓存中，cache salt 会被注入到第一个 block 的哈希中，以确保不同用户、上下文或配置的请求不会错误复用已有缓存。
 
 该列表存储在 `self.req_to_block_hashes[request_id]` 中。
 
@@ -334,25 +336,25 @@ if __name__ == "__main__":
 
 ![前缀缓存逻辑 - pt 1](https://www.aleksagordic.com/blog/vllm/prefix_pt1.png)
 
-然后我们调用 `allocate_slots`，它进一步调用 `coordinator.cache_blocks`，将新的 `BlockHash` 条目与分配的 KV 块关联，并记录到 `cached_block_hash_to_block` 中。
+然后我们调用 `allocate_slots`，它进一步调用 `coordinator.cache_blocks`，将新的 `BlockHash` 条目与分配的 KV block 关联，并记录到 `cached_block_hash_to_block` 中。
 
-随后，前向计算会在分页 KV-cache 内存中填充与上述 KV-cache 块对应的 KV。
+随后，前向计算会在分页 KV-cache 内存中填充与上述 KV-cache block 对应的 KV。
 
 !!! tip
 
-    多次引擎步骤后，会分配更多 KV-cache 块，但对于本示例无关紧要，因为前缀在 `long_prefix` 后立即分叉。
+    多次引擎步骤后，会分配更多 KV-cache block，但对于本示例无关紧要，因为前缀在 `long_prefix` 后立即分叉。
 
 ![前缀缓存逻辑 - pt 2](https://www.aleksagordic.com/blog/vllm/prefix_pt2.png)
 
-在第二次带相同前缀的 `generate` 调用中，步骤 1-3 重复执行，但这次 `find_longest_cache_hit` 通过线性搜索找到所有 `n` 块的匹配。引擎可以直接重用这些 KV 块。
+在第二次带相同前缀的 `generate` 调用中，步骤 1-3 重复执行，但这次 `find_longest_cache_hit` 通过线性搜索找到所有 `n` 个 block 的匹配。引擎可以直接重用这些 KV block。
 
 ![前缀缓存逻辑 - pt 3](https://www.aleksagordic.com/blog/vllm/prefix_pt3.png)
 
-如果原始请求仍然存在，这些块的引用计数会增加（例如为 2）。在本例中，第一个请求已经完成，因此这些块已释放回池，其引用计数恢复为 0。由于我们可以从 `cached_block_hash_to_block` 中检索它们，说明它们有效（KV-cache 管理器的逻辑确保了这一点），因此我们再次将它们从 `free_block_queue` 中移除。
+如果原始请求仍然存在，这些 block 的引用计数会增加（例如为 2）。在本例中，第一个请求已经完成，因此这些 block 已释放回池，其引用计数恢复为 0。由于我们可以从 `cached_block_hash_to_block` 中检索它们，说明它们有效（KV-cache 管理器的逻辑确保了这一点），因此我们再次将它们从 `free_block_queue` 中移除。
 
 !!! note "高级说明:"
 
-    KV-cache 块只有在即将从 `free_block_queue` 重新分配时才会失效（从左侧弹出），且我们发现该块仍有关联哈希并存在于 `cached_block_hash_to_block` 中。此时，我们清除该块的哈希并从 `cached_block_hash_to_block` 中移除其条目，确保它不能通过前缀缓存重用（至少对旧前缀无效）。
+    KV-cache block只有在即将从 `free_block_queue` 重新分配时才会失效（从左侧弹出），且我们发现该 block 仍有关联哈希并存在于 `cached_block_hash_to_block` 中。此时，我们清除该 block 的哈希并从 `cached_block_hash_to_block` 中移除其条目，确保它不能通过前缀缓存重用（至少对旧前缀无效）。
 
 这就是前缀缓存的核心：不重复计算已经见过的前缀，而是直接重用它们的 KV-cache！
 
@@ -507,7 +509,7 @@ if __name__ == "__main__":
 1. 使用大模型执行常规预填充步骤。
 2. 前向计算和标准采样后，调用 `propose_draft_token_ids(k)` 从草稿模型采样 `k` 个草稿 Token。
 3. 将这些 Token 存储在 `request.spec_token_ids`（更新请求元数据）。
-4. 在下一次引擎步骤中，当请求处于 running 队列时，将 `len(request.spec_token_ids)` 添加到“新 Token”计数，以便 `allocate_slots` 为前向计算保留足够的 KV 块。
+4. 在下一次引擎步骤中，当请求处于 running 队列时，将 `len(request.spec_token_ids)` 添加到“新 Token”计数，以便 `allocate_slots` 为前向计算保留足够的 KV block。
 5. 将 `spec_token_ids` 拷贝到 `input_batch.token_ids_cpu` 中，形成（上下文 + 草稿）Token。
 6. 通过 `_calc_spec_decode_metadata` 计算元数据（这会拷贝 `input_batch.token_ids_cpu` 中的 Token，准备 logits 等），然后对草稿 Token 运行大模型前向计算。
 7. 不再从 logits 常规采样，而是使用 `rejection_sampler` 左到右进行接受/拒绝，生成 `output_token_ids`。
@@ -652,7 +654,7 @@ if __name__ == "__main__":
 
 假设你的模型权重已经无法放入单个 GPU 的显存。
 
-第一个方案是在同一节点的多块 GPU 上执行 TP（tensor parallelism, 张量并行）来切分模型，例如 `TP=8`。如果模型仍然无法容纳，下一步就是跨节点的 PP（pipeline parallelism, 流水线并行）。
+第一个方案是在同一节点的多个 GPU 上执行 TP（tensor parallelism, 张量并行）来切分模型，例如 `TP=8`。如果模型仍然无法容纳，下一步就是跨节点的 PP（pipeline parallelism, 流水线并行）。
 
 !!! note
 
@@ -831,7 +833,7 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 接下来会发生什么：
 
 1. 请求到达 API 服务器上 `OpenAIServingCompletion` 的 `create_completion` 路由。
-2. 函数异步对 prompt 进行分词，并准备元数据（请求 ID、采样参数、时间戳等）。
+2. 函数异步对 Prompt 进行分词，并准备元数据（请求 ID、采样参数、时间戳等）。
 3. 然后调用 `AsyncLLM.generate`，它遵循与同步引擎相同的流程，最终调用 `DPAsyncMPClient.add_request_async`。
 4. 该方法会调用 `get_core_engine_for_request`，根据 DP 协调器的状态在多个引擎之间进行负载均衡（选择评分最低/负载最小的引擎：`score = len(waiting) * 4 + len(running)`）。
 5. `ADD` 请求被发送到所选引擎的 `input_socket`。
@@ -877,9 +879,9 @@ curl -X POST http://localhost:8000/v1/completions -H "Content-Type: application/
 | `TTFT` (time to first token) | 从请求提交到接收到第一个输出 Token 的时间 |
 | `ITL` (inter-token latency) | 两个连续 Token 之间的时间（例如，从 Token i-1 到 Token i） |
 | `TPOT` (time per output token) | 单个请求中所有输出 Token 的平均 ITL |
-| `Latency / E2E` (端到端延迟) | 处理请求的总时间，即 TTFT + 所有 ITL 之和，或等价地，从提交请求到接收最后一个输出 Token 的时间 |
+| `Latency / E2E` (end-to-end latency) | 处理请求的总时间，即 TTFT + 所有 ITL 之和，或等价地，从提交请求到接收最后一个输出 Token 的时间 |
 | `Throughput` | 系统每秒处理的总 Token（输入、输出或两者），或每秒请求数 |
-| `Goodput` | 满足服务级别目标（SLO，如最大 TTFT、TPOT 或端到端延迟）的吞吐量。例如，只有满足这些 SLO 的请求 Token 才计入吞吐量 |
+| `Goodput` | 满足服务级别目标（SLO，如最大 TTFT、TPOT 或端到端延迟）的吞吐量。例如，只有满足这些 SLO 的请求所用的 Token 才计入吞吐量 |
 
 ![ttft, itl, e2e latency](https://www.aleksagordic.com/blog/vllm/latency_diagram.png)
 
@@ -923,7 +925,7 @@ vLLM 提供了一个 CLI 命令 `vllm bench {serve,latency,throughput}`，此命
 这些脚本的作用如下：
 
 - **latency（延迟）** — 使用较短的输入（默认 32 个 Token），生成 128 个输出 Token，使用小批量（默认 8）。脚本会执行多次迭代，并报告批量的端到端延迟。
-- **throughput（吞吐量）** — 同时提交固定集合的 prompts（默认 1000 个 ShareGPT 样本，即 `QPS=Inf` 模式），报告整个运行期间的输入/输出/总 Token 数和每秒请求数。
+- **throughput（吞吐量）** — 同时提交固定集合的 Prompt（默认 1000 个 ShareGPT 样本，即 `QPS=Inf` 模式），报告整个运行期间的输入/输出/总 Token 数和每秒请求数。
 - **serve（部署）** — 启动一个 vLLM 服务，并模拟真实工作负载。请求的到达间隔时间遵循 Poisson 分布（或更通用的 Gamma 分布）。在时间窗口内发送请求，测量前文提到的所有指标，并可选择通过信号量限制服务器最大并发数（例如限制为 64 个并发请求）。
 
 下面是运行延迟测试脚本的示例：

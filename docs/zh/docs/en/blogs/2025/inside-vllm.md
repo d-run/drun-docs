@@ -98,7 +98,7 @@ Engine core itself is made up of several sub components:
 
 The KV-cache manager maintains a `free_block_queue` - a pool of available KV-cache blocks (often on the order of hundreds of thousands, depending on VRAM size and block size). During paged attention, the blocks serve as the indexing structure that map tokens to their computed KV cache blocks.
 
-![LLM engine constructor](https://www.aleksagordic.com/blog/vllm/engine_constructor.png)
+![LLM engine constructor](./images/engine_constructor.png)
 
 <div style="text-align: center;">
 Figure 1. Core components described in this section and their relationships
@@ -167,7 +167,7 @@ Next, as long as there are requests to process, the engine repeatedly calls its 
     - The sampled token matches any of the `stop_token_ids` specified in the sampling parameters
     - Stop strings are present in the output - we truncate the output until the first stop string appearance and abort the request in the engine (note that `stop_token_ids` will be present in the output but stop strings will not).
 
-![Engine loop](https://www.aleksagordic.com/blog/vllm/engine_loop.png)
+![Engine loop](./images/engine_loop.png)
 
 <div style="text-align: center;">
 Figure 2. Engine loop
@@ -211,7 +211,7 @@ Let's now look at what `allocate_slots` does, it:
 2. **Checks availability** — if there aren't enough blocks in the manager's pool, exit early. Depending on whether it's a decode or prefill request, the engine may attempt recompute preemption (swap preemption was supported in V0) by evicting low-priority requests (calling `kv_cache_manager.free` which returns KV blocks to block pool), or it might skip scheduling and continue execution.
 3. **Allocates blocks** — via the KV-cache manager's coordinator, fetches the first `n` blocks from the block pool (the `free_block_queue` doubly linked list mentioned earlier). Stores to `req_to_blocks`, the dictionary mapping each `request_id` to its list of KV-cache blocks.
 
-![KV cache blocks](https://www.aleksagordic.com/blog/vllm/kv_cache_blocks.png)
+![KV cache blocks](./images/kv_cache_blocks.png)
 
 <div style="text-align: center;">
 Figure 3. list of KV cache blocks
@@ -238,7 +238,7 @@ Forward-pass step itself has two execution modes:
 
 Here is a concrete example that should make continuous batching and paged attention clear:
 
-![fwd pass - continuous batching & paged attn](https://www.aleksagordic.com/blog/vllm/fwd_pass.png)
+![fwd pass - continuous batching & paged attn](./images/fwd_pass.png)
 
 <div style="text-align: center;">
 Figure 4. Forward pass: continuous batching and paged attention
@@ -266,7 +266,7 @@ For example, let each chunk contain `n` (=8) tokens, labeled with lowercase lett
 
 Here is that same example visually:
 
-![Chunked prefilling - pt 1](https://www.aleksagordic.com/blog/vllm/chunked_pt1.png)
+![Chunked prefilling - pt 1](./images/chunked_pt1.png)
 
 Implementation is straightforward: cap the number of new tokens per step. If the requested number exceeds `long_prefill_token_threshold`, reset it to exactly that value. The underlying indexing logic (described earlier) takes care of the rest.
 
@@ -327,7 +327,7 @@ The list is stored in `self.req_to_block_hashes[request_id]`.
 
 Next, the engine calls `find_longest_cache_hit` to check if any of these hashes already exist in `cached_block_hash_to_block`. On the first request, no hits are found.
 
-![Prefix caching logic - pt 1](https://www.aleksagordic.com/blog/vllm/prefix_pt1.png)
+![Prefix caching logic - pt 1](./images/prefix_pt1.png)
 
 Then we call `allocate_slots` which calls `coordinator.cache_blocks`, which associates the new `BlockHash` entries with allocated KV blocks and records them in `cached_block_hash_to_block`.
 
@@ -337,13 +337,13 @@ Afterwards, the forward pass will populate KVs in paged KV cache memory correspo
 
     After many engine steps it'll allocate more KV cache blocks but it doesn't matter for our example because the prefix has diverged immediately after `long_prefix`.
 
-![Prefix caching logic - pt 2](https://www.aleksagordic.com/blog/vllm/prefix_pt2.png)
+![Prefix caching logic - pt 2](./images/prefix_pt2.png)
 
 On a second `generate` call with the same prefix, steps 1-3 repeat, but now `find_longest_cache_hit` finds matches for all `n` blocks (via linear search). The engine can reuse those KV blocks directly.
 
-![Prefix caching logic - pt 3](https://www.aleksagordic.com/blog/vllm/prefix_pt3.png)
+![Prefix caching logic - pt 3](./images/prefix_pt3.png)
 
-If the original request were still alive, the reference count for those blocks would increment (e.g. to 2). In this example, the first request has already completed, so the blocks were freed back to the pool and their reference counts set back to 0. Because we were able to retrieve them from `cached_block_hash_to_block` we know they're valid (the logic of the KV cache manager is setup in such a way), so we just remove them from `free_block_queue` again.
+If the original request were still alive, the reference count for those blocks would increment (e.g. to 2). In this example, the first request has already completed, so the blocks were freed back to the pool and their reference counts set back to 0. Because we were able to retrieve them from `cached_block_hash_to_block` we know they're valid (the logic of the KV cache manager is to set up in such a way), so we just remove them from `free_block_queue` again.
 
 !!! note "Advanced note:"
 
@@ -388,7 +388,7 @@ if __name__ == "__main__":
 
 In the toy example I gave (assume character-level tokenization): at prefill, the FSM masks logits so only "P" or "N" are viable. If "P" is sampled, the FSM moves to the "Positive" branch; next step only "o" is allowed, and so on.
 
-![FSM](https://www.aleksagordic.com/blog/vllm/fsm.png)
+![FSM](./images/fsm.png)
 
 <div style="text-align: center;">
 Figure 5. Toy example FSM
@@ -414,7 +414,7 @@ If `vocab_size = 32`, `_grammar_bitmask` is a single integer; its binary represe
 
 Here is an even simpler example with vocab_size = 8 and 8-bit integers (for those of you who like my visuals):
 
-![FSM](https://www.aleksagordic.com/blog/vllm/fsm2.png)
+![FSM](./images/fsm2.png)
 
 <div style="text-align: center;">
 Figure 6. Toy example
@@ -510,9 +510,9 @@ How does this work in vLLM?
 
 The best way to internalize this is to fire up your debugger and step through the codebase, but this section hopefully gives you a taste for it. This as well:
 
-![Drafting stage](https://www.aleksagordic.com/blog/vllm/specdec_pt1.png)
+![Drafting stage](./images/specdec_pt1.png)
 
-![Verify stage & rejection sampling stage](https://www.aleksagordic.com/blog/vllm/specdec_pt2.png)
+![Verify stage & rejection sampling stage](./images/specdec_pt2.png)
 
 ### Disaggregated P/D
 
@@ -627,7 +627,7 @@ These are the steps in vLLM:
 
 Here is a visual example:
 
-![disaggregated P/D](https://www.aleksagordic.com/blog/vllm/pd.png)
+![disaggregated P/D](./images/pd.png)
 
 <div style="text-align: center;">
 Figure 7. disaggregated P/D
@@ -654,7 +654,7 @@ The first option is to shard the model across multiple GPUs on the same node usi
 
 At this stage, we need multiple GPU processes (workers) and an orchestration layer to coordinate them. That's exactly what `MultiProcExecutor` provides.
 
-![MultiProcExecutor](https://www.aleksagordic.com/blog/vllm/multiprocexecutor.png)
+![MultiProcExecutor](./images/multiprocexecutor.png)
 
 <div style="text-align: center;">
 Figure 8. MultiProcExecutor in a TP=8 setting (driver worker being rank 0)
@@ -690,7 +690,7 @@ There are many ways to set up serving infrastructure, but to stay concrete, here
 
 If the model requires `TP=4`, we can configure the nodes like this.
 
-![server configuration with 2 8xH100 nodes](https://www.aleksagordic.com/blog/vllm/server_setup.png)
+![server configuration with 2 8xH100 nodes](./images/server_setup.png)
 
 <div style="text-align: center;">
 Figure 9. server configuration with 2 8xH100 nodes (1 headless, 1 api server)
@@ -748,7 +748,7 @@ On the headless node, a `CoreEngineProcManager` launches 2 processes (per `--dat
 
 TL;DR: We end up with 4 child processes (one per DP replica), each running a main, input, and output thread. They complete a coordination handshake with the DP coordinator and frontend, then all three threads per process run in steady-state busy loops.
 
-![distributed system with 4 DPEngineCoreProc](https://www.aleksagordic.com/blog/vllm/dpenginecoreproc.png)
+![distributed system with 4 DPEngineCoreProc](./images/dpenginecoreproc.png)
 
 <div style="text-align: center;">
 Figure 10. distributed system with 4 DP replicas running 4 DPEngineCoreProc
@@ -868,7 +868,7 @@ Before explaining why latency and throughput compete, let's define a few common 
 | `Throughput`                         | Total tokens processed per second (input, output, or both), or alternatively requests per second |
 | `Goodput`                            | Throughput that meets service-level objectives (SLOs) such as max TTFT, TPOT, or e2e latency. For example, only tokens from requests meeting those SLOs are counted |
 
-![ttft, itl, e2e latency](https://www.aleksagordic.com/blog/vllm/latency_diagram.png)
+![ttft, itl, e2e latency](./images/latency_diagram.png)
 
 <div style="text-align: center;">
 Figure 11. ttft, itl, e2e latency
@@ -884,7 +884,7 @@ The tradeoff becomes clear when looking at how batch size `B` affects a single d
 
 A roofline model helps with understanding here: below a saturation batch `B_sat`, the step time is dominated by HBM bandwidth (streaming weights layer-by-layer into on-chip memory), so step latency is nearly flat—computing 1 vs 10 tokens can take a similar time. Beyond `B_sat`, the kernels become compute-bound and step time grows roughly with `B`; each extra token adds to ITL.
 
-![roofline perf model](https://www.aleksagordic.com/blog/vllm/roofline.png)
+![roofline perf model](./images/roofline.png)
 
 <div style="text-align: center;">
 Figure 12. roofline perf model
