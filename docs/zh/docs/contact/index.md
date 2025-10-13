@@ -8,19 +8,19 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :simple-wechat:{ .lg .middle } __d.run 微信群__
+-   :simple-wechat:{ .lg .middle } __沟通和反馈__
 
     ---
 
-    扫码联系道客船长小助手后，聊天窗口输入 **d.run** 加入微信群
+    扫码添加 道客船长助手，在聊天窗口输入 **d.run** 加入微信群
 
     ![d.run group1](images/assist.jpg)
 
--   :material-sail-boat:{ .lg .middle } __道客船长__
+-   :material-sail-boat:{ .lg .middle } __关注公众号__
 
     ---
 
-    了解云原生、AI、大模型和开源技术，洞察新闻时事
+    了解云原生、AI、大模型和开源技术，跟踪新闻时事
 
     ![道客船长](./images/capitain.png)
 
