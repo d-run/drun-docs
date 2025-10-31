@@ -8,6 +8,7 @@ import yaml
 import re
 import logging
 import os
+from textwrap import dedent
 
 
 # 配置日志
@@ -195,33 +196,44 @@ def get_release_info(data, filename="rel-notes.md"):
     }
 
     # 定义模板
-    header_template = Template("""---
-hide:
--  toc
----
+    header_template = Template(
+        dedent(
+            """\
+            ---
+            hide:
+            -  toc
+            ---
 
-# Release Notes
+            # Release Notes
 
-本页列出 d.run 各项功能的一些重要变更。
+            本页列出 d.run 各项功能的一些重要变更。
+            """
+        ).strip()
+    )
 
-    """)
-
-    pub_date_template = Template("## $pub_date\n\n")
-    module_version_template = Template("### $module $version\n\n")
-    update_type_template = Template("#### $emoji_title\n\n")
+    pub_date_template = Template("## $pub_date")
+    module_version_template = Template("### $module $version")
+    update_type_template = Template("#### $emoji_title")
     entry_with_baseline_template = Template("- [$primary_func] $baseline")
     entry_without_baseline_template = Template("- [$primary_func]")
 
-    lines = []
-    lines.append(header_template.substitute())
+    def ensure_blank_line(lines_list):
+        if lines_list and lines_list[-1] != "":
+            lines_list.append("")
+
+    lines = header_template.substitute().splitlines()
+    ensure_blank_line(lines)
 
     for pub_date, modules in result.items():
+        ensure_blank_line(lines)
         lines.append(pub_date_template.substitute(pub_date=pub_date))
+        ensure_blank_line(lines)
         for module, versions in modules.items():
             for version, update_types in versions.items():
                 lines.append(
                     module_version_template.substitute(module=module, version=version)
                 )
+                ensure_blank_line(lines)
                 for update_type in ["新功能", "增强优化", "故障修复", "无更新类型"]:
                     if update_type in update_types:
                         entries = update_types[update_type]
@@ -231,6 +243,7 @@ hide:
                                     emoji_title=emoji_map[update_type]
                                 )
                             )
+                            ensure_blank_line(lines)
                         for primary_func, entry in entries:
                             baseline = entry.get("基线参数", "")
                             if baseline:
@@ -245,9 +258,11 @@ hide:
                                         primary_func=primary_func
                                     )
                                 )
-                        lines.append("")  # 空行分隔
+                        ensure_blank_line(lines)
+    if lines and lines[-1] == "":
+        lines.pop()
 
-    md_content = "\n".join(lines)
+    md_content = "\n".join(lines) + "\n"
     try:
         with open(filename, "w", encoding="utf-8") as f:
             f.write(md_content)
