@@ -3,7 +3,7 @@ name: Scheduled Update of Release Notes
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 2 * * 3"  # 每周三UTC时间2点运行一次，即北京时间10点
+    - cron: "0 2 * * 3" # Runs every Wednesday at 2:00 UTC (10:00 Beijing Time)
 
 permissions:
   contents: write
@@ -12,125 +12,74 @@ permissions:
 jobs:
   run-script:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      RELEASE_NOTES_FILE: ${{ secrets.RELEASE_NOTES_FILE }}
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: main
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.9
+          python-version: "3.9"
+          cache: pip
 
       - name: Install dependencies
-        run: pip install requests pandas pyyaml jq
+        run: pip install requests pandas pyyaml jq mdformat
 
       - name: Prepare branch
         id: prepare_branch
         run: |
-          DATE=$(date +%Y%m%d)
-          BRANCH="update-rel-notes-$DATE"
-          git fetch origin "$BRANCH" || true
-
-          if git show-ref --verify --quiet "refs/remotes/origin/$BRANCH"; then
-            git checkout -b "$BRANCH" "origin/$BRANCH"
-          else
-            git checkout -b "$BRANCH"
-          fi
+          BRANCH="update-rel-notes-${{ github.run_id }}"
+          git switch -c "$BRANCH"
           echo "branch=$BRANCH" >> $GITHUB_OUTPUT
 
-      - name: Run auto-release-notes.py script
+      - name: Run Script
+        id: run_script
         env:
           FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
-          RELEASE_NOTES_FILE: ${{ secrets.RELEASE_NOTES_FILE }}
         run: |
+          set -e
           IFS=',' read -r APP_ID APP_SECRET URL <<< "$FEISHU_SECRET"
-          export APP_ID APP_SECRET URL
-          export FILENAME="${RELEASE_NOTES_FILE}"
+          export APP_ID APP_SECRET URL FILENAME="$RELEASE_NOTES_FILE"
           python scripts/auto-release-notes.py
-          
-      - name: Check if release notes file changed and commit
+
+      - name: Check Changes
         id: check_changes
-        env:
-          RELEASE_NOTES_FILE: ${{ secrets.RELEASE_NOTES_FILE }}
         run: |
-          echo "File to check: $RELEASE_NOTES_FILE"
-          
-          # Show git status for context
-          echo "Current git status:"
-          git status --porcelain
-          
-          # Check if file has changes compared to origin/main
+          if [ ! -f "$RELEASE_NOTES_FILE" ]; then
+            echo "❌ Release notes file not found: $RELEASE_NOTES_FILE"
+            exit 1
+          fi
           if git diff --quiet origin/main -- "$RELEASE_NOTES_FILE"; then
-            echo "No changes detected in release notes file"
-            echo "File content is identical to origin/main"
             echo "files_are_same=true" >> $GITHUB_OUTPUT
           else
-            echo "Changes detected in release notes file!"
-            echo "Showing diff summary:"
-            git diff --stat origin/main -- "$RELEASE_NOTES_FILE"
-            echo ""
-            echo "Detailed changes:"
-            git diff origin/main -- "$RELEASE_NOTES_FILE" | head -50
             echo "files_are_same=false" >> $GITHUB_OUTPUT
+            git diff --stat origin/main -- "$RELEASE_NOTES_FILE"
           fi
-          
-          echo "Check completed. files_are_same=$(git diff --quiet origin/main -- "$RELEASE_NOTES_FILE" && echo 'true' || echo 'false')"
-      
-      - name: Skip commit - No changes detected
-        if: steps.check_changes.outputs.files_are_same == 'true'
-        run: |
-          echo "Skipping commit and PR creation - no changes detected"
 
-      - name: Commit and push release notes update
+      - name: Commit and Push If Changes Exist
+        id: commit_and_push
         if: steps.check_changes.outputs.files_are_same == 'false'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Update rel-notes.md via automation
           file_pattern: ${{ secrets.RELEASE_NOTES_FILE }}
+          skip_dirty_check: true
           push_options: --set-upstream
           branch: ${{ steps.prepare_branch.outputs.branch }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 使用这个有问题，会覆盖分支且不提交pr
-      # - name: Create Pull Request
-      #   if: steps.check_changes.outputs.files_are_same == 'false'
-      #   uses: peter-evans/create-pull-request@v7
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     title: "Automated update of rel-notes.md"
-      #     body: "This PR updates rel-notes.md automatically."
-      #     base: main
-      #     branch: ${{ steps.prepare_branch.outputs.branch }}  # 你新建的分支名
-      #     draft: true  # 以草稿状态创建，避免自动合并
-      
-      - name: Skip PR creation - No changes detected
-        if: steps.check_changes.outputs.files_are_same == 'true'
+      - name: Create Pull Request If Push Succeeded
+        if: steps.commit_and_push.outcome == 'success'
         run: |
-          echo "Skipping PR creation - no changes detected"
-
-      - name: Create Pull Request via API
-        if: steps.check_changes.outputs.files_are_same == 'false'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Creating Pull Request for branch: ${{ steps.prepare_branch.outputs.branch }}"
-          
-          PR_RESPONSE=$(curl -s -X POST -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ github.repository }}/pulls \
-            -d @- << EOF
-          {
-            "title": "Automated update of rel-notes.md",
-            "head": "${{ steps.prepare_branch.outputs.branch }}",
-            "base": "main",
-            "body": "This PR updates rel-notes.md automatically."
-          }
-          EOF
-          )
-          
-          echo "Pull Request Response:"
-          echo "$PR_RESPONSE" | jq -r '"PR #" + (.number | tostring) + " created successfully: " + .html_url' 2>/dev/null || echo "$PR_RESPONSE"
+          gh pr create \
+            --title "Automated update of rel-notes.md" \
+            --body "This PR updates rel-notes.md automatically." \
+            --base main \
+            --head "${{ steps.prepare_branch.outputs.branch }}" \
+            --repo "${{ github.repository }}"
