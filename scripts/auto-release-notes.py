@@ -8,6 +8,7 @@ import yaml
 import re
 import logging
 import os
+import subprocess
 from textwrap import dedent
 
 
@@ -195,15 +196,9 @@ def get_release_info(data, filename="rel-notes.md"):
         "无更新类型": "",
     }
 
-    # 定义模板
     header_template = Template(
         dedent(
             """\
-            ---
-            hide:
-            -  toc
-            ---
-
             # Release Notes
 
             本页列出 d.run 各项功能的一些重要变更。
@@ -217,49 +212,63 @@ def get_release_info(data, filename="rel-notes.md"):
     entry_with_baseline_template = Template("- [$primary_func] $baseline")
     entry_without_baseline_template = Template("- [$primary_func]")
 
-    def ensure_blank_line(lines_list):
+    def emit(lines_list, line=""):
+        """Add a line to the list, stripping trailing whitespace"""
+        if line:
+            lines_list.append(line.rstrip())
+
+    def ensure_single_blank_line(lines_list):
+        """Ensure there's exactly one blank line before adding new content"""
         if lines_list and lines_list[-1] != "":
             lines_list.append("")
+        elif len(lines_list) > 1 and lines_list[-1] == "" and lines_list[-2] == "":
+            lines_list.pop()
 
     lines = header_template.substitute().splitlines()
-    ensure_blank_line(lines)
 
     for pub_date, modules in result.items():
-        ensure_blank_line(lines)
-        lines.append(pub_date_template.substitute(pub_date=pub_date))
-        ensure_blank_line(lines)
+        ensure_single_blank_line(lines)
+        emit(lines, pub_date_template.substitute(pub_date=pub_date))
         for module, versions in modules.items():
             for version, update_types in versions.items():
-                lines.append(
-                    module_version_template.substitute(module=module, version=version)
+                ensure_single_blank_line(lines)
+                emit(
+                    lines,
+                    module_version_template.substitute(module=module, version=version),
                 )
-                ensure_blank_line(lines)
                 for update_type in ["新功能", "增强优化", "故障修复", "无更新类型"]:
-                    if update_type in update_types:
-                        entries = update_types[update_type]
-                        if update_type != "无更新类型":
-                            lines.append(
-                                update_type_template.substitute(
-                                    emoji_title=emoji_map[update_type]
-                                )
+                    if update_type not in update_types:
+                        continue
+                    entries = update_types[update_type]
+                    if not entries:
+                        continue
+                    if update_type != "无更新类型":
+                        ensure_single_blank_line(lines)
+                        emit(
+                            lines,
+                            update_type_template.substitute(
+                                emoji_title=emoji_map[update_type]
+                            ),
+                        )
+                        ensure_single_blank_line(lines)
+                    for primary_func, entry in entries:
+                        baseline = entry.get("基线参数", "")
+                        if baseline:
+                            emit(
+                                lines,
+                                entry_with_baseline_template.substitute(
+                                    primary_func=primary_func, baseline=baseline
+                                ),
                             )
-                            ensure_blank_line(lines)
-                        for primary_func, entry in entries:
-                            baseline = entry.get("基线参数", "")
-                            if baseline:
-                                lines.append(
-                                    entry_with_baseline_template.substitute(
-                                        primary_func=primary_func, baseline=baseline
-                                    )
-                                )
-                            else:
-                                lines.append(
-                                    entry_without_baseline_template.substitute(
-                                        primary_func=primary_func
-                                    )
-                                )
-                        ensure_blank_line(lines)
-    if lines and lines[-1] == "":
+                        else:
+                            emit(
+                                lines,
+                                entry_without_baseline_template.substitute(
+                                    primary_func=primary_func
+                                ),
+                            )
+
+    while lines and lines[-1] == "":
         lines.pop()
 
     md_content = "\n".join(lines) + "\n"
@@ -267,6 +276,25 @@ def get_release_info(data, filename="rel-notes.md"):
         with open(filename, "w", encoding="utf-8") as f:
             f.write(md_content)
         logging.info("Release notes已保存到 %s", filename)
+        
+        # Format Markdown file using mdformat
+        try:
+            result = subprocess.run(
+                ["mdformat", filename],
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            if result.returncode == 0:
+                logging.info("✅ Markdown文件已格式化")
+            else:
+                logging.warning("Markdown格式化警告: %s", result.stderr)
+        except FileNotFoundError:
+            logging.warning("mdformat未安装，跳过格式化步骤。可通过 'pip install mdformat' 安装")
+        except subprocess.TimeoutExpired:
+            logging.warning("Markdown格式化超时，跳过格式化步骤")
+        except Exception as e:
+            logging.warning("Markdown格式化失败: %s", e)
     except Exception as e:
         logging.error("写入release notes文件失败: %s", e)
 
