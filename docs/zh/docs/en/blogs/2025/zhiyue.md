@@ -76,7 +76,7 @@ Product Qualification Seal
 
 ### ZHIYUE | Sojasun
 
-France’s #1 Plant-Based Yogurt Brand
+France’s \#1 Plant-Based Yogurt Brand
 
 Soy Milk Yogurt  
 
@@ -85,7 +85,7 @@ Blueberry–Mulberry–Water Chestnut Popping Pearls
 Illustrations for reference only.
 
 ZHIYUE | Sojasun  
-France’s #1 Plant-Based Yogurt Brand
+France’s \#1 Plant-Based Yogurt Brand
 
 Soy Milk Yogurt
 
@@ -171,7 +171,7 @@ Product Qualification Seal
 
 ### ZHIYUE | Sojasun
 
-France’s #1 Plant-Based Yogurt Brand
+France’s \#1 Plant-Based Yogurt Brand
 
 Soy Milk Yogurt  
 Green Grape–Jasmine–Water Chestnut–Kiwi  
@@ -179,7 +179,7 @@ Green Grape–Jasmine–Water Chestnut–Kiwi
 Illustrations for reference only.
 
 ZHIYUE | Sojasun  
-France’s #1 Plant-Based Yogurt Brand
+France’s \#1 Plant-Based Yogurt Brand
 
 Soy Milk Yogurt
 
@@ -203,7 +203,7 @@ Color scheme: Black and white
 
 ### ZHIYUE | Sojasun
 
-France’s #1 Plant-Based Yogurt Brand
+France’s \#1 Plant-Based Yogurt Brand
 
 Soy Milk Yogurt
 
@@ -280,7 +280,7 @@ Product Qualification Seal
 
 ### ZHIYUE | Sojasun
 
-France’s #1 Plant-Based Yogurt Brand
+France’s \#1 Plant-Based Yogurt Brand
 
 Soy Milk Yogurt
 
@@ -304,7 +304,7 @@ Color scheme: Black and white
 
 ### ZHIYUE | Sojasun
 
-France’s #1 Plant-Based Yogurt Brand
+France’s \#1 Plant-Based Yogurt Brand
 
 Soy Milk Yogurt
 
@@ -382,7 +382,7 @@ Product Qualification Seal
 
 ### ZHIYUE | Sojasun
 
-France’s #1 Plant-Based Yogurt Brand
+France’s \#1 Plant-Based Yogurt Brand
 
 Soy Milk Yogurt
 
@@ -457,7 +457,7 @@ Illustrations for reference only.
 
 ### ZHIYUE & Sojasun
 
-Best-selling in France for 37 years, soy milk yogurt has been crafted by the Olga Group since 1951, adhering to the mission: “Deliver nutrition from healthy fields to the table.” With three generations of artisanal expertise, Sojasun has become France’s #1 plant-based yogurt brand. Now, the ZHIYUE brand combines 70 years of Olga’s craftsmanship and core formulas to bring this French health wisdom to China, creating ZHIYUE Soy Milk Yogurt and writing a new chapter in healthy plant-based nutrition.
+Best-selling in France for 37 years, soy milk yogurt has been crafted by the Olga Group since 1951, adhering to the mission: “Deliver nutrition from healthy fields to the table.” With three generations of artisanal expertise, Sojasun has become France’s \#1 plant-based yogurt brand. Now, the ZHIYUE brand combines 70 years of Olga’s craftsmanship and core formulas to bring this French health wisdom to China, creating ZHIYUE Soy Milk Yogurt and writing a new chapter in healthy plant-based nutrition.
 
 Manufacturer: Junlebao Dairy Group Co., Ltd.  
 Address: 68 Shitong Road, Luquan District, Shijiazhuang, Hebei Province  
@@ -543,7 +543,7 @@ Illustrations for reference only.
 
 ### ZHIYUE & Sojasun
 
-Soy milk yogurt has been best-selling in France for 37 years. Since 1951, the Olga Group has upheld the mission: “Deliver nutrition from healthy fields to the table.” With three generations of artisanal craftsmanship, Sojasun became France’s #1 plant-based yogurt brand. Now, the ZHIYUE brand combines 70 years of Olga’s expertise and core formulas to bring this French health wisdom to China, creating ZHIYUE Soy Milk Yogurt and a new chapter in healthy plant-based nutrition.
+Soy milk yogurt has been best-selling in France for 37 years. Since 1951, the Olga Group has upheld the mission: “Deliver nutrition from healthy fields to the table.” With three generations of artisanal craftsmanship, Sojasun became France’s \#1 plant-based yogurt brand. Now, the ZHIYUE brand combines 70 years of Olga’s expertise and core formulas to bring this French health wisdom to China, creating ZHIYUE Soy Milk Yogurt and a new chapter in healthy plant-based nutrition.
 
 Manufacturer: Junlebao Dairy Group Co., Ltd.  
 Address: 68 Shitong Road, Luquan District, Shijiazhuang, Hebei Province  
@@ -572,7 +572,7 @@ For feedback, call our customer service hotline: 4006128138
 ![ZHIYUE – Cup Lid](./images/jia07.jpg)
 
 ZHIYUE | Sojasun
-France’s #1 Plant-Based Yogurt Brand  
+France’s \#1 Plant-Based Yogurt Brand  
 
 0 Cholesterol  
 0 Trans Fat  
@@ -582,7 +582,7 @@ France’s #1 Plant-Based Yogurt Brand
 ![ZHIYUE – Tear Film 1](./images/jia08.jpg)
 
 ZHIYUE | Sojasun
-France’s #1 Plant-Based Yogurt Brand  
+France’s \#1 Plant-Based Yogurt Brand  
 
 0 Cholesterol  
 0 Trans Fat  
@@ -594,7 +594,7 @@ Excessive intake of trans fats can raise blood cholesterol levels, increasing th
 ![ZHIYUE – Tear Film 2](./images/jia09.jpg)
 
 ZHIYUE | Sojasun
-France’s #1 Plant-Based Yogurt Brand  
+France’s \#1 Plant-Based Yogurt Brand  
 
 Rich in Dietary Fiber  
 
