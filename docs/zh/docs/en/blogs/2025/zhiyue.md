@@ -57,14 +57,14 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 2℃–10℃  
+Storage & Transport Conditions: 36°F–50°F  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 2℃–10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
@@ -152,14 +152,14 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 2℃–10℃  
+Storage & Transport Conditions: 36°F–50°F  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 2℃–10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
@@ -265,14 +265,14 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 2℃–10℃  
+Storage & Transport Conditions: 36°F–50°F  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 2℃–10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
@@ -367,14 +367,14 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 2℃–10℃  
+Storage & Transport Conditions: 36°F–50°F  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 2℃–10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
@@ -466,14 +466,14 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 2℃–10℃  
+Storage & Transport Conditions: 36°F–50°F  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 2℃–10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
@@ -543,7 +543,7 @@ Illustrations for reference only.
 
 ### ZHIYUE & Sojasun
 
-Soy milk yogurt has been best-selling in France for 37 years. Since 1951, the Olga Group has upheld the mission: “Deliver nutrition from healthy fields to the table.” With three generations of artisanal craftsmanship, Sojasun became France’s #1 plant-based yogurt brand. Now, the ZHIYUE brand combines 70 years of Oga’s expertise and core formulas to bring this French health wisdom to China, creating ZHIYUE Soy Milk Yogurt and a new chapter in healthy plant-based nutrition.
+Soy milk yogurt has been best-selling in France for 37 years. Since 1951, the Olga Group has upheld the mission: “Deliver nutrition from healthy fields to the table.” With three generations of artisanal craftsmanship, Sojasun became France’s #1 plant-based yogurt brand. Now, the ZHIYUE brand combines 70 years of Olga’s expertise and core formulas to bring this French health wisdom to China, creating ZHIYUE Soy Milk Yogurt and a new chapter in healthy plant-based nutrition.
 
 Manufacturer: Junlebao Dairy Group Co., Ltd.  
 Address: 68 Shitong Road, Luquan District, Shijiazhuang, Hebei Province  
@@ -552,14 +552,14 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 2℃–10℃  
+Storage & Transport Conditions: 36°F–50°F  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 2℃–10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
