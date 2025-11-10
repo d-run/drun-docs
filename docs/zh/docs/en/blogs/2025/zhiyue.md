@@ -57,18 +57,18 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 36°F–50°F  
+Storage & Transport Conditions: 2℃~10℃  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 2℃~10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
-\*Source: France Circana SCS, census and retail sample data of the French plant-based refrigerated dairy market, market share by brand, sales value, and volume from June 30, 2024, to June 29, 2025.
+\*Source: Circana SCS, InfoScan Census & Retail Panel Data, FR, Total Plant-Based Chilled Dairy Market by Brand, Value & Volume Share, MAT from June 30, 2024, to June 29, 2025.
 
 \*Refers to fermented and prepared soy milk.
 
@@ -152,18 +152,18 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 36°F–50°F  
+Storage & Transport Conditions: 2℃~10℃  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 2℃~10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
-\*Source: France Circana SCS, census and retail sample data of the French plant-based refrigerated dairy market, market share by brand, sales value, and volume from June 30, 2024, to June 29, 2025.
+\*Source: Circana SCS, InfoScan Census & Retail Panel Data, FR, Total Plant-Based Chilled Dairy Market by Brand, Value & Volume Share, MAT from June 30, 2024, to June 29, 2025.
 
 \*Refers to fermented and prepared soy milk.
 
@@ -211,7 +211,7 @@ Soy Milk Yogurt
 - 0 Trans Fat  
 - Rich in Dietary Fiber  
 
-Net Weight/Specification: 270g (135g × 2)  
+Net Weight/Specification: 405g (135g × 3)  
 
 Blueberry–Mulberry–Water Chestnut Popping Pearls
 
@@ -225,7 +225,7 @@ Excessive intake of trans fats can increase blood cholesterol levels, raising th
 
 Dietary fiber is a low-calorie substance that helps maintain normal bowel function.
 
-\*Source: France Circana SCS, census and retail sample data of the French plant-based refrigerated dairy market, market share by brand, sales value, and volume from June 30, 2024, to June 29, 2025.
+\*Source: Circana SCS, InfoScan Census & Retail Panel Data, FR, Total Plant-Based Chilled Dairy Market by Brand, Value & Volume Share, MAT from June 30, 2024, to June 29, 2025.
 
 \*Refers to fermented and prepared soy milk.
 
@@ -265,14 +265,14 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 36°F–50°F  
+Storage & Transport Conditions: 2℃~10℃  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 2℃~10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
@@ -288,7 +288,7 @@ Soy Milk Yogurt
 - 0 Trans Fat  
 - Rich in Dietary Fiber  
 
-Net Weight/Specification: 270g (135g × 2)  
+Net Weight/Specification: 405g (135g × 3)  
 
 Blueberry–Mulberry–Water Chestnut Popping Pearls
 
@@ -312,7 +312,7 @@ Soy Milk Yogurt
 - 0 Trans Fat  
 - Rich in Dietary Fiber  
 
-Net Weight/Specification: 270g (135g × 2)  
+Net Weight/Specification: 405g (135g × 3)  
 
 Green Grape–Jasmine–Water Chestnut
 
@@ -326,7 +326,7 @@ Excessive intake of trans fats can raise blood cholesterol levels, increasing th
 
 Dietary fiber is a low-calorie substance that helps maintain normal bowel function.
 
-\*Source: France Circana SCS, census and retail sample data of the French plant-based refrigerated dairy market, market share by brand, sales value, and volume from June 30, 2024, to June 29, 2025.
+\*Source: Circana SCS, InfoScan Census & Retail Panel Data, FR, Total Plant-Based Chilled Dairy Market by Brand, Value & Volume Share, MAT from June 30, 2024, to June 29, 2025.
 
 \*Refers to fermented and prepared soy milk.
 
@@ -367,14 +367,14 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 36°F–50°F  
+Storage & Transport Conditions: 2℃~10℃  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 2℃~10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
@@ -390,7 +390,7 @@ Soy Milk Yogurt
 - 0 Trans Fat  
 - Rich in Dietary Fiber  
 
-Net Weight/Specification: 270g (135g × 2)  
+Net Weight/Specification: 405g (135g × 3)  
 
 Green Grape–Jasmine–Water Chestnut
 
@@ -466,18 +466,18 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 36°F–50°F  
+Storage & Transport Conditions: 2℃~10℃  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 2℃~10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
-\*Source: France Circana SCS, census and retail sample data of the French plant-based refrigerated dairy market, market share by brand, sales value, and volume from June 30, 2024, to June 29, 2025.
+\*Source: Circana SCS, InfoScan Census & Retail Panel Data, FR, Total Plant-Based Chilled Dairy Market by Brand, Value & Volume Share, MAT from June 30, 2024, to June 29, 2025.
 
 \*Refers to fermented and prepared soy milk
 
@@ -552,18 +552,18 @@ Address/Origin: 68 Junlebao Avenue, Zhenyang Town, Zhengyang County, Zhumadian, 
 Food Production License: SC10541172400044  
 Product Type: Fermented and prepared soy milk  
 Product Standard Code: Q/JLB0064S  
-Storage & Transport Conditions: 36°F–50°F  
+Storage & Transport Conditions: 2℃~10℃  
 Shelf Life: 25 days  
 Production Date: See cup  
 Inspection Certificate Number: Same as production date and preceding characters (including origin)
 
 ### Tips
 
-To maintain product quality, store at 36°F–50°F. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
+To maintain product quality, store at 2℃~10℃. Slight separation of soy milk or minor clumping is normal and does not affect consumption. Do not consume if there is an unusual smell or damaged packaging.
 
 For feedback, call our customer service hotline: 4006128138
 
-\*Source: France Circana SCS, census and retail sample data of the French plant-based refrigerated dairy market, market share by brand, sales value, and volume from June 30, 2024, to June 29, 2025.
+\*Source: Circana SCS, InfoScan Census & Retail Panel Data, FR, Total Plant-Based Chilled Dairy Market by Brand, Value & Volume Share, MAT from June 30, 2024, to June 29, 2025.
 
 \*Refers to fermented and prepared soy milk
 
