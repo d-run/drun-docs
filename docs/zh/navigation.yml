@@ -34,7 +34,7 @@ nav:
               - models/apikey.md
               - 模型调用: models/api-call.md
           - 用量统计: models/usage.md
-          - 使用示例场景:
+          - 用例场景举例:
               - d.run 场景介绍: models/user-guides/index.md
               - 在 VSCode 和 Cline 中使用: models/user-guides/cline-in-vscode.md
               - 在 Cherry Studio 中使用: models/user-guides/cherry-studio.md
