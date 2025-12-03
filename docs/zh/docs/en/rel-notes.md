@@ -7,6 +7,121 @@ hide:
 
 This page outlines key feature updates for d.run.
 
+## 2025-10-30
+
+### Billing Center v0.10.0
+
+#### 🚀 New Features
+
+- **[Wallet]** Supports balance alerts. Users can set a threshold balance and receive notifications when available cash drops below this value.
+- **[Quota Management]** Supports cost quotas for sub-accounts, allowing limitation of maximum spendable amounts; supports top-up/deduction for sub-accounts; supports restricting and shutting down services when the quota is exhausted.
+- **[Quota Management]** Supports topping up or deducting quota amounts for sub-accounts to adjust available balances.
+- **[Quota Management]** Supports controlling whether services should be restricted or shut down when the quota is exhausted.
+
+## 2025-09-29
+
+### Compute Cloud v0.11.0
+
+#### 🚀 New Features
+
+- **[Compute Marketplace]** Supports viewing sub-account lists and resources.
+- **[Image Registry]** Added new alert rules for saving images.
+
+#### 🐛 Bug Fixes
+
+- **[Container Instance]** Fixed an issue where inventory was not released after yearly/monthly prepaid instances were automatically shut down upon expiration.
+- **[Container Instance]** Supports cardless boot mode (unified configuration, free of charge).
+- **[File Storage]** File storage now supports scaling up and down.
+
+### Billing Center v0.9.0
+
+#### 🚀 New Features
+
+- **[Transaction Details]** Supports viewing sub-account consumption records.
+- **[Transaction Details]** Supports exporting transaction detail reports.
+- **[Order Management]** Supports exporting order record reports.
+- **[Bill Management]** Supports exporting billing record reports.
+- **[Bill Management]** Supports exporting monthly bill reports.
+
+#### 🐛 Bug Fixes
+
+- **[Bill Management]** Monthly billing timezone changed to UTC+8.
+
+### Large Model Service Platform (WS Mode – Private Cloud) v0.10.0
+
+#### 🚀 New Features
+
+- Supports viewing audit logs.
+
+## 2025-08-30
+
+### Compute Cloud v0.10.0
+
+#### 🚀 New Features
+
+- **[Container Instance]** Supports saving system disks when shutting down an instance.
+- **[Container Instance]** Supports manually specifying image addresses during instance creation.
+- **[Container Instance]** Clearer SSH passwordless login guidance.
+- **[Container Instance]** Supports viewing image descriptions when selecting images, helping users understand which ports the image exposes by default.
+- **[Container Instance]** Supports sorting GPU type, VRAM, and quantity when selecting resources to quickly find suitable specifications.
+- **[Container Instance]** Supports searching instances by ID.
+- **[Access Management]** Supports exposing ports via HTTPS.
+- **[Container Instance]** Supports domestic GPUs: Iluvatar (燧原).
+- **[Container Instance]** Supports domestic GPUs: Biren (壁仞).
+- **[Container Instance]** SSH welcome message language follows the user's language settings in the personal center.
+- **[Compute Marketplace]** Supports purchasing yearly/monthly prepaid instances and displaying discounts.
+
+### Personal Center v0.7.0
+
+#### 🚀 New Features
+
+- **[Sub-Account Management]** Supports managing sub-accounts.
+
+## 2025-07-30
+
+### Compute Cloud v0.8.0
+
+#### 🚀 New Features
+
+- **[Container Instance]** Supports purchasing container instances using yearly/monthly prepaid plans.
+- **[Container Instance]** Supports lifecycle management (create/delete/start/stop) for prepaid instances.
+- **[Container Instance]** Supports expiration reminders for prepaid instances.
+- **[Container Instance]** Supports adding custom startup commands.
+- **[Container Instance]** Supports mounting data disks.
+- **[Container Instance]** Adds event display during instance startup.
+- **[File Storage]** Supports folder display.
+
+#### ⚡ Enhancements
+
+- **[Compute Cloud]** Improved compute cloud audit log event entries.
+- **[Compute Cloud]** Improved Zestu alert rules.
+- **[Container Instance]** Improved event display for abnormal runtime states.
+- **[Image Registry]** Improved image name display.
+- **[Image Registry]** Improved error messages for failed system disk save attempts during shutdown.
+
+#### 🐛 Bug Fixes
+
+- **[Compute Cloud]** Fixed missing CPU and memory info for existing container instances after upgrade.
+- **[Compute Cloud]** Fixed issue where modifying image registry info in admin caused image save failures.
+
+### Large Model Service Platform (WS Mode – Private Cloud) v0.8
+
+#### 🚀 New Features
+
+- **[Admin Console]** Model list display.
+- **[Admin Console]** Supports batch importing models from URLs.
+- **[Admin Console]** Supports creating models.
+- **[Admin Console]** MaaS model list display.
+- **[Admin Console]** Supports adding MaaS models.
+- **[Admin Console]** Supports adding multiple upstream endpoint configurations.
+- **[Admin Console]** Supports rate limiting per API key.
+- **[Admin Console]** Supports rate limiting per workspace.
+- **[Admin Console]** Supports adding multiple rate-limit rules.
+- **[Admin Console]** Supports load balancing (round-robin).
+- **[Admin Console]** Model deployment list display.
+- **[Admin Console]** Supports adding multiple model configuration sets.
+- **[Admin Console]** Supports vLLM model deployment.
+
 ## 2025-06-29
 
 ### Compute Cloud v0.7.0
