@@ -91,6 +91,7 @@ nav:
       - 费用中心: videos/bills.md
   - AI 行业新闻:
       - 索引: blogs/index.md
+      - K8s 全新特性 Gang Scheduling: blogs/2025/gang-scheduling.md
       - 推理是下一个独角兽赛道: blogs/2025/ai-infra.md
       - vLLM 内参深度剖析: blogs/2025/inside-vllm.md
       - KV 缓存的全面胜利: blogs/2025/kvcache-wins-you-can-see.md
