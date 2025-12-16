@@ -103,9 +103,9 @@ plugins:
     htmlmin_opts:
       remove_comments: true
 
-  # - redirects:
-  #     redirect_maps:
-  #       "api.md": "dce/index.md"
+  redirects:
+    redirect_maps:
+      "personal/ssh-key.md": "manage/personal/ssh-key.md"
 # Customization
 extra:
   homepage: /
