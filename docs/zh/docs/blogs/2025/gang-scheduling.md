@@ -232,9 +232,13 @@ AI/ML 正在重塑基础设施，而 Kubernetes 也正在重塑自己。
 从 **机会式批处理** 到 **工作负载感知调度** ，
 这些变化背后，是 AI Infra 对云原生基础能力提出的全新要求。
 
+这里给出一些参考文档：
+
 - [Workload API 和 Gang Scheduling KEP](https://github.com/kubernetes/enhancements/tree/master/keps/sig-scheduling/4671-gang-scheduling)
 - [Opportunistic Batching KEP](https://github.com/kubernetes/enhancements/tree/master/keps/sig-scheduling/5598-opportunistic-batching)
 - [Slack (#sig-scheduling)](https://kubernetes.slack.com/archives/C09TP78DV)
+- [KubeCon 欧洲 2025 议题：Kueue、Volcano 和 YuniKorn 的调度能力对比分析 - Shiming Zhang, DaoCloud](https://sched.co/1txHR)
+- [KubeCon 中国 2024 议题：Kubernetes调度社区碎片化现状及如何应对AI/ML工作负载带来的挑战 - Kante Yin & QiuPing Dai, DaoCloud](https://sched.co/1eYZF)
 
 DaoCloud 将持续深度参与 Kubernetes 核心调度能力的演进，
 让云原生真正成为 **AI Infra 时代最稳固、最高效的基础底座** 。
