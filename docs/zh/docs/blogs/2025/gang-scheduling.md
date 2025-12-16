@@ -4,18 +4,19 @@
 
     DaoCloud 率先发起 Kubernetes 全新特性 Gang Scheduling，夯实 AI Infra 调度底座，全面适配 AI/ML 负载。
 
-在 **AI Infra** 时代，Kubernetes 正在经历一次深刻的调度范式转变。
-随着大模型训练、分布式推理、向量检索、批处理计算等 **AI/ML 与 GenAI 场景** 的爆发式增长，
-**如何高效调度“大规模 AI 工作负载”**，已经成为 AI Infra 与云原生平台必须直面的核心问题。
+在 AI Infra 时代，Kubernetes 正在经历一次深刻的调度范式转变。
+随着大模型训练、分布式推理、向量检索、批处理计算等 AI/ML 与 GenAI 场景的爆发式增长，
+**如何高效调度“大规模 AI 负载”**，已经成为 AI Infra 与云原生平台必须直面的核心问题。
 
-而这类问题，仅靠 **单 Pod 调度** 的传统思路，已经远远不够了。
-Kubernetes v1.35 基于 Gang Scheduling 等全新特性推出了工作负载感知调度（Workload Aware Scheduling）。
+而这类问题，仅靠单个 Pod 或逐个 Pod 调度的传统思路，已经远远不够了。
+Kubernetes v1.35 基于 Gang Scheduling 等全新特性推出了
+**工作负载感知调度（Workload Aware Scheduling）** 。
 
 ![gang 架构](./images/gang01.png)
 
-## 从「调度 Pod」到「调度 AI 工作负载」
+## 从「调度 Pod」到「调度 AI 负载」
 
-在 AI Infra 场景中，调度一个大型工作负载，要比调度一个单独的 Pod **复杂且脆弱得多** 。
+在 AI Infra 场景中，调度一个大型工作负载，要比调度一个单独的 Pod 复杂且脆弱得多。
 
 现实中的 AI 训练与推理任务，往往具有以下特征：
 
@@ -53,7 +54,7 @@ Kubernetes v1.35 基于 Gang Scheduling 等全新特性推出了工作负载感�
     * 生态不统一
     * 运维与演进成本极高
 
-因此，让 **AI 工作负载成为 kube-scheduler 的一等公民** ，
+因此，让 **AI 负载成为 kube-scheduler 的一等公民** ，
 在 Kubernetes 原生调度层面提供能力支持，已经成为社区共识。
 
 这也是 **新一代 AI Infra 调度体系** 的必经之路。
@@ -141,8 +142,8 @@ spec:
 
 ## Gang Scheduling 在 kube-scheduler 中的工作机制
 
-启用 Gang Scheduling 后，`kube-scheduler` 中的 `GangScheduling` 插件，
-将以 **Pod Group（AI 作业单元）** 为核心管理调度流程：
+启用 Gang Scheduling 后，kube-scheduler 中的 `GangScheduling`
+插件将以 **Pod Group（AI 作业单元）** 为核心管理调度流程：
 
 1. **阻断阶段（Blocking）**
 
@@ -179,7 +180,7 @@ spec:
 ## 机会式批处理：让同构 AI Pod 调度更快
 
 除了显式的 Gang Scheduling，Kubernetes v1.35 还引入了一个
-对 **AI Infra 极其友好** 的 **Beta 特性** ：
+对 AI Infra 极其友好的 Beta 特性：
 **Opportunistic Batching（机会式批处理）**
 
 其核心优势在于：
