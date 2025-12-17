@@ -7,6 +7,10 @@ hide:
 
 本频道将紧跟技术趋势，收集 AI 行业新闻。
 
+* [Agent Sandbox 深度解析：当 AI 学会“动手”，我们如何不被它“误伤”？](./2025/agent-sandbox.md)
+
+    Agent Sandbox 不只是技术方案，更是长期命题：如何在赋能 AI 的同时，确保人类始终掌握控制权？
+
 * [DaoCloud 发起 Kubernetes 全新特性 Gang Scheduling，夯实 AI Infra 调度底座，全面适配 AI/ML 负载](./2025/gang-scheduling.md)
 
     在 **AI Infra** 时代，Kubernetes 正在经历一次深刻的调度范式转变。
