@@ -228,7 +228,7 @@ Routed experts per GPU = Total Routed Experts / EP_SIZE
 | 8 | 1 | 8 | 256 / 8 = 32 | 在 8 个 GPU 上切分 |
 | 1 | 8 | 8 | 256 / 8 = 32 | 在 8 个 GPU 上切分 |
 
-**关键洞察：** 在 GPU 数量相同（此处为 8 张 GPU）的情况下，只要启用了 EP，`TP=8` 和 `DP=8` 在路由专家分布上是相同的（每 GPU 32 个专家）。
+**关键点：** 在 GPU 数量相同（此处为 8 张 GPU）的情况下，只要启用了 EP，`TP=8` 和 `DP=8` 在路由专家分布上是相同的（每 GPU 32 个专家）。
 
 ### 误区 4：“TP+EP 像 DP+EP 一样使用 AllToAll 通信”
 
@@ -275,7 +275,7 @@ def flatten_tp_across_dp(tp_size: int, dp_size: int, dp_rank: int):
 
 **为什么专家并行可以降低 MoE 模型的延迟：**
 
-关键洞察：**瓶颈在内存带宽，而不是计算能力。**
+关键点：**瓶颈在内存带宽，而不是计算能力。**
 
 * MoE 模型具有稀疏激活（例如 DeepSeek 每个 token 只使用 671B 中的 37B 参数）
 * GPU 大部分时间花在从内存加载专家权重上，而不是计算
@@ -395,7 +395,7 @@ vllm serve model-name --data-parallel-size 8
 <a id="figure6"></a>
 
 <div style="text-align:center;">
-Figure 6：DP=8 且未开启 Expert Parallelism 的数据流
+图 6：DP=8 且未开启 Expert Parallelism 的数据流
 </div>
 
 #### 开启 EP 的 DP
@@ -422,7 +422,7 @@ vllm serve model-name --data-parallel-size 8 --enable-expert-parallel
 <a id="figure7"></a>
 
 <div style="text-align:center;">
-Figure 7：DP=8 且开启 Expert Parallelism 的数据流
+图 7：DP=8 且开启 Expert Parallelism 的数据流
 </div>
 
 **为什么 MoE 模型要用 DP+EP？**
@@ -477,7 +477,7 @@ DP+EP 为 MoE 模型带来特定优势，但最优策略取决于你的工作负
 
 ## 基准测试结果：策略性能
 
-在 8× AMD Instinct™ MI300X GPU 上的真实基准测试揭示了并行策略选择的关键洞见。
+在 8× AMD Instinct™ MI300X GPU 上的真实基准测试揭示了并行策略选择的关键点。
 
 ### 测试配置
 
@@ -506,7 +506,7 @@ DP+EP 为 MoE 模型带来特定优势，但最优策略取决于你的工作负
 <a id="figure8"></a>
 
 <div style="text-align:center;">
-Figure 8：DeepSeek-R1 DP+EP vs TP+EP 扩展性能
+图 8：DeepSeek-R1 DP+EP vs TP+EP 扩展性能
 </div>
 
 **关键发现**（来自[图 8](#figure8)）：
@@ -523,7 +523,7 @@ Figure 8：DeepSeek-R1 DP+EP vs TP+EP 扩展性能
 <a id="figure9"></a>
 
 <div style="text-align:center;">
-Figure 9：Qwen3-235B-A22B DP+EP vs TP+EP 扩展性能
+图 9：Qwen3-235B-A22B DP+EP vs TP+EP 扩展性能
 </div>
 
 **关键发现：** 如[图 9](#figure9) 所示，尽管激活密度更高（6.25% vs DeepSeek 的 3.13%），在 256–512 并发请求处仍出现相似的交叉点。
@@ -537,7 +537,7 @@ Figure 9：Qwen3-235B-A22B DP+EP vs TP+EP 扩展性能
 <a id="figure10"></a>
 
 <div style="text-align:center;">
-Figure 10：Llama-4-Maverick-17B-128E 启用/不启用 EP 的 TP vs DP 扩展
+图 10：Llama-4-Maverick-17B-128E 启用/不启用 EP 的 TP vs DP 扩展
 </div>
 
 **关键发现：** 如[图 10](#figure10) 所示，**EP=0 比 EP=1 快 7–12%** ，适用于超稀疏模型。仅 0.78% 的激活密度下，AllToAll 的开销超过其收益。
@@ -548,9 +548,9 @@ EP 标志的收益与专家激活密度相关：
 
 | 模型 | Experts/Token | 激活密度 | EP 建议 | 影响 |
 | --- | ------------- | ----- | -------- | --- |
-| **Llama-4-Maverick-17B-128E-Instruct-FP8** | 1 / 128 | 0.78% | **EP=0** | EP=1 增加 7–12% 开销 |
-| **DeepSeek-R1** | 8 / 256 | 3.13% | **EP=1（MLA 必需）** | |
-| **Qwen3-235B-A22B-Instruct-2507** | 8 / 128 | 6.25% | **EP=1** | 开销极小，支持更多优化 |
+| Llama-4-Maverick-17B-128E-Instruct-FP8 | 1 / 128 | 0.78% | EP=0 | EP=1 增加 7–12% 开销 |
+| DeepSeek-R1 | 8 / 256 | 3.13% | EP=1（MLA 必需） | |
+| Qwen3-235B-A22B-Instruct-2507 | 8 / 128 | 6.25% | EP=1 | 开销极小，支持更多优化 |
 
 **规律：**
 
@@ -601,25 +601,25 @@ EP 标志的收益与专家激活密度相关：
 
 #### 3. 模型是否使用 MLA/MQA Attention？
 
-**MLA/MQA 模型（DeepSeek-R1、DeepSeek-V2、DeepSeek-V3）：**
+MLA/MQA 模型（DeepSeek-R1、DeepSeek-V2、DeepSeek-V3）：
 
 * **关键：** DP 配置下始终使用 EP=1
 * **原因：** MLA 的单 KV 头需要 DP Attention 才能正确处理 KV cache
 * **若未用 EP=1：** 38.6% 失败率 + KV cache 完整复制
 
-**Grouped-Query Attention 模型（Qwen3、Llama-4、Mixtral）：**
+Grouped-Query Attention 模型（Qwen3、Llama-4、Mixtral）：
 
 * **更灵活：** 是否启用 EP 取决于激活密度
 * **非关键：** EP 属于优化，而非正确性要求
 
 #### 4. 硬件约束是什么？
 
-**单节点（≤8 GPU，快速互联）：**
+单节点（≤8 GPU，快速互联）：
 
 * **优选：** TP 或 DP（除非必要，避免 PP）
 * **原因：** 充分利用 XGMI 的高带宽 AllReduce/AllToAll
 
-**内存受限：**
+内存受限：
 
 * **优选：** DP + EP 以分区 KV cache
 
@@ -664,7 +664,7 @@ vLLM 允许组合多种策略以高效地将模型分布到 GPU 上。理解哪�
 | 8 | 1 | No | 8 | No | AllReduce |
 | 1 | 1 | Yes | 1 | No | N/A（违反约束） |
 
-**关键洞见：** AllToAll 通信需要 `dp_size > 1`。在仅 TP 的配置（`dp_size=1`）下，即使启用了 EP，vLLM 也始终使用 AllReduce。
+**关键点：** AllToAll 通信需要 `dp_size > 1`。在仅 TP 的配置（`dp_size=1`）下，即使启用了 EP，vLLM 也始终使用 AllReduce。
 
 ### Pipeline Parallelism 与 Expert Parallelism 的限制
 
