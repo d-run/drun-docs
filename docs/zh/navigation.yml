@@ -91,6 +91,7 @@ nav:
       - 费用中心: videos/bills.md
   - AI 行业新闻:
       - 索引: blogs/index.md
+      - vLLM MoE 实战手册: blogs/2025/vllm-moe-playbook.md
       - Agent Sandbox 深度解析: blogs/2025/agent-sandbox.md
       - K8s 全新特性 Gang Scheduling: blogs/2025/gang-scheduling.md
       - 推理是下一个独角兽赛道: blogs/2025/ai-infra.md
@@ -289,3 +290,6 @@ plugins:
                 磁盘存储: Disk Storage
                 容器实例内服务开机自启: Auto-Start Services in Container Instance
                 vLLM 内参深度剖析: Anatomy of a High-Throughput LLM Inference System
+                vLLM MoE 实战手册: The vLLM MoE Playbook
+                Agent Sandbox 深度解析: Deep Dive into Agent Sandbox
+                K8s 全新特性 Gang Scheduling: Gang Scheduling in Kubernetes 1.35
