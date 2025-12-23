@@ -7,6 +7,11 @@ hide:
 
 本频道将紧跟技术趋势，收集 AI 行业新闻。
 
+* [vLLM MoE 实战手册：TP、DP、PP 与 EP 的实用指南](./2025/vllm-moe-playbook.md)
+
+    本指南提供了一个全面、可视化的框架，用于理解和部署 vLLM 常用的并行策略：
+    张量并行（Tensor Parallelism，TP）、数据并行（Data Parallelism，DP）、流水线并行（Pipeline Parallelism，PP）以及专家并行（Expert Parallelism，EP）。
+
 * [Agent Sandbox 深度解析：当 AI 学会“动手”，我们如何不被它“误伤”？](./2025/agent-sandbox.md)
 
     Agent Sandbox 不只是技术方案，更是长期命题：如何在赋能 AI 的同时，确保人类始终掌握控制权？

@@ -7,6 +7,10 @@ hide:
 
 This channel will closely follow technology trends and collect news from the AI industry.
 
+* [The vLLM MoE Playbook: A Practical Guide to TP, DP, PP and EP](./2025/vllm-moe-playbook.md)
+
+    This guide provides a comprehensive, visual framework for understanding and deploying vLLM’s parallelism strategies: Tensor Parallelism (TP), Data Parallelism (DP), Pipeline Parallelism (PP), and Expert Parallelism (EP).
+
 * [Inside vLLM: Anatomy of a High-Throughput LLM Inference System](./2025/inside-vllm.md)
 
     From paged attention, continuous batching, prefix caching, specdec, etc. to multi-GPU, multi-node dynamic serving at scale
