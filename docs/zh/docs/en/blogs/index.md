@@ -1,11 +1,12 @@
----
-hide:
-  - toc
----
-
 # AI Industry News
 
 This channel will closely follow technology trends and collect news from the AI industry.
+
+## 2025
+
+* [AI Wrapped: The 14 AI terms you couldn’t avoid in 2025](./2025/ai-terms.md)
+
+    From “superintelligence” to “slop,” here are the words and phrases that defined another year of AI craziness.
 
 * [The vLLM MoE Playbook: A Practical Guide to TP, DP, PP and EP](./2025/vllm-moe-playbook.md)
 
@@ -54,6 +55,8 @@ This channel will closely follow technology trends and collect news from the AI 
     From smart assistants to automated processes, AI's applications touch nearly every aspect of society.
     Looking ahead to 2025, several key trends in AI development are poised to shape the future of this
     technology in profound ways.
+
+## 2024
 
 - [Why K8s and Generative AI Are a Perfect Match](2024/0702-k8s-for-genai.md)
 
