@@ -91,32 +91,34 @@ nav:
       - 费用中心: videos/bills.md
   - AI 行业新闻:
       - 索引: blogs/index.md
-      - 2025 年 14 个 AI 术语: blogs/2025/ai-terms.md
-      - vLLM MoE 实战手册: blogs/2025/vllm-moe-playbook.md
-      - Agent Sandbox 深度解析: blogs/2025/agent-sandbox.md
-      - K8s 全新特性 Gang Scheduling: blogs/2025/gang-scheduling.md
-      - 推理是下一个独角兽赛道: blogs/2025/ai-infra.md
-      - vLLM 内参深度剖析: blogs/2025/inside-vllm.md
-      - KV 缓存的全面胜利: blogs/2025/kvcache-wins-you-can-see.md
-      - CUDA Core Dump调试内存访问: blogs/2025/cuda.md
-      - LMCache 上线即支持 GPT-OSS: blogs/2025/lmcache.md
-      - FlowSpeech 书面语转口语: blogs/2025/flowspeech.md
-      - GPT-5 正式发布: blogs/2025/gpt5.md
-      - d.run 上新 DeepSeek-R1-0528: blogs/2025/0603-deepseek-0528.md
-      - llm-d 它来了: blogs/2025/llmd.md
-      - 部署和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
-      - 2025 年人工智能趋势展望: blogs/2025/0102-ai-trend.md
-      - d.run 是生成式 AI 的理想平台: blogs/2024/d.run.md
-      - K8s 与生成式 AI 珠联璧合: blogs/2024/0702-k8s-for-genai.md
-      - OpenAI GPT-4o 完全免费: blogs/2024/0514-gpt4o.md
-      - OpenAI 大型语言模型规范: blogs/2024/0509-model-spec.md
-      - 2024大规模AI基础设施形势调研: blogs/2024/0429-ai-survey.md
-      - 云原生人工智能白皮书: blogs/2024/0410-cnai-wp.md
-      - Kimi火了后国内其他大模型: blogs/2024/0408-after-kimi.md
-      - DBRX 开源 LLM 介绍: blogs/2024/0407-dbrx.md
-      - AI 流程编排化算力为算利: blogs/2024/0403-cp-to-profit.md
-      - 谁将替代 Transformer: blogs/2024/0327-transformer.md
-      - 金融行业迎来大模型时代: blogs/2024/0326-compute-power.md
+      - 2025:
+          - 2025 年 14 个 AI 术语: blogs/2025/ai-terms.md
+          - vLLM MoE 实战手册: blogs/2025/vllm-moe-playbook.md
+          - Agent Sandbox 深度解析: blogs/2025/agent-sandbox.md
+          - K8s 全新特性 Gang Scheduling: blogs/2025/gang-scheduling.md
+          - 推理是下一个独角兽赛道: blogs/2025/ai-infra.md
+          - vLLM 内参深度剖析: blogs/2025/inside-vllm.md
+          - KV 缓存的全面胜利: blogs/2025/kvcache-wins-you-can-see.md
+          - CUDA Core Dump调试内存访问: blogs/2025/cuda.md
+          - LMCache 上线即支持 GPT-OSS: blogs/2025/lmcache.md
+          - FlowSpeech 书面语转口语: blogs/2025/flowspeech.md
+          - GPT-5 正式发布: blogs/2025/gpt5.md
+          - d.run 上新 DeepSeek-R1-0528: blogs/2025/0603-deepseek-0528.md
+          - llm-d 它来了: blogs/2025/llmd.md
+          - 部署和体验 d.run DeepSeek: blogs/2025/0210-deep-drun.md
+          - 2025 年人工智能趋势展望: blogs/2025/0102-ai-trend.md
+      - 2024:
+          - d.run 是生成式 AI 的理想平台: blogs/2024/d.run.md
+          - K8s 与生成式 AI 珠联璧合: blogs/2024/0702-k8s-for-genai.md
+          - OpenAI GPT-4o 完全免费: blogs/2024/0514-gpt4o.md
+          - OpenAI 大型语言模型规范: blogs/2024/0509-model-spec.md
+          - 2024大规模AI基础设施形势调研: blogs/2024/0429-ai-survey.md
+          - 云原生人工智能白皮书: blogs/2024/0410-cnai-wp.md
+          - Kimi火了后国内其他大模型: blogs/2024/0408-after-kimi.md
+          - DBRX 开源 LLM 介绍: blogs/2024/0407-dbrx.md
+          - AI 流程编排化算力为算利: blogs/2024/0403-cp-to-profit.md
+          - 谁将替代 Transformer: blogs/2024/0327-transformer.md
+          - 金融行业迎来大模型时代: blogs/2024/0326-compute-power.md
   - 智海拾贝:
       - 索引: open/index.md
       - 大模型:

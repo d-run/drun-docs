@@ -1,6 +1,6 @@
 # AI 年度盘点：2025 年涌现的 14 个 AI 术语
 
-> 本文基于《麻省理工科技评论》的一篇报道 [AI Wrapped: The 14 AI terms you couldn’t avoid in 2025](https://www.technologyreview.com/2025/12/25/1130298/ai-wrapped-the-14-ai-terms-you-couldnt-avoid-in-2025/) 加工而成
+> 基础素材源自《麻省理工科技评论》的一篇报道 [AI Wrapped: The 14 AI terms you couldn’t avoid in 2025](https://www.technologyreview.com/2025/12/25/1130298/ai-wrapped-the-14-ai-terms-you-couldnt-avoid-in-2025/)
 
 回首 2025 年，这是 ChatGPT 问世后的第三年。从“超级智能”到“Slop 猪食”，这些词汇和短语，定义了又一个疯狂而喧嚣的 AI 之年。
 

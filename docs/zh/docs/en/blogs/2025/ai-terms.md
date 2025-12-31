@@ -12,7 +12,7 @@ Make sure you take the time to brace yourself for what promises to be another bo
 
 ## 1. Superintelligence
 
-![a jack russell terrier wearing glasses and a bow tie](./images/Wrapped_embed_0000_superintelligence.webp?w=980)
+<img src="./images/Wrapped_embed_0000_superintelligence.webp" alt="a jack russell terrier wearing glasses and a bow tie" width="200">
 
 As long as people have been hyping AI, they have been coming up with names for a future, ultra-powerful form of the technology that could bring about utopian or dystopian consequences for humanity. “Superintelligence” is that latest hot term. Meta announced in July that it would form an AI team to pursue superintelligence, and it was reportedly offering nine-figure compensation packages to AI experts from the company’s competitors to join.
 
@@ -20,19 +20,19 @@ In December, Microsoft’s head of AI followed suit, saying the company would be
 
 ## 2. Vibe coding
 
-![img](./images/Wrapped_embed_0001_vibe-coding.webp?w=980)
+<img src="./images/Wrapped_embed_0001_vibe-coding.webp" alt="img" width="200">
 
 Thirty years ago, Steve Jobs said everyone in America should learn how to program a computer. Today, people with zero knowledge of how to code can knock up an app, game, or website in no time at all thanks to vibe coding—a catch-all phrase coined by OpenAI cofounder Andrej Karpathy. To vibe-code, you simply prompt generative AI models’ coding assistants to create the digital object of your desire and accept pretty much everything they spit out. Will the result work? Possibly not. Will it be secure? Almost definitely not, but the technique’s biggest champions aren’t letting those minor details stand in their way. Also—it sounds fun! **— Rhiannon Williams**
 
 ## 3. Chatbot psychosis
 
-![img](./images/Wrapped_embed_0002_rorshach.webp?w=980)
+<img src="./images/Wrapped_embed_0002_rorshach.webp" alt="img" width="200">
 
 One of the biggest AI stories over the past year has been how prolonged interactions with chatbots can cause vulnerable people to experience delusions and, in some extreme cases, can either cause or worsen psychosis. Although “chatbot psychosis” is not a recognized medical term, researchers are paying close attention to the growing anecdotal evidence from users who say it’s happened to them or someone they know. Sadly, the increasing number of lawsuits filed against AI companies by the families of people who died following their conversations with chatbots demonstrate the technology’s potentially deadly consequences. **—Rhiannon Williams**
 
 ## 4. Reasoning
 
-![img](./images/Wrapped_embed_0003_reasoning.webp?w=980)
+<img src="./images/Wrapped_embed_0003_reasoning.webp" alt="img" width="200">
 
 Few things kept the AI hype train going this year more than so-called reasoning models, LLMs that can break down a problem into multiple steps and work through them one by one. OpenAI released its first reasoning models, o1 and o3, a year ago.
 
@@ -40,7 +40,7 @@ A month later, the Chinese firm DeepSeek took everyone by surprise with a very f
 
 ## 5. World models
 
-![img](./images/Wrapped_embed_0004_world-model.webp?w=980)
+<img src="./images/Wrapped_embed_0004_world-model.webp" alt="img" width="200">
 
 For all their uncanny facility with language, LLMs have very little common sense. Put simply, they don’t have any grounding in how the world works. Book learners in the most literal sense, LLMs can wax lyrical about everything under the sun and then fall flat with a howler about how many elephants you could fit into an Olympic swimming pool (exactly one, according to one of Google DeepMind’s LLMs).
 
@@ -48,7 +48,7 @@ World models—a broad church encompassing various technologies—aim to give AI
 
 ## 6. Hyperscalers
 
-![img](./images/Wrapped_embed_0007_hyperscale.webp?w=980)
+<img src="./images/Wrapped_embed_0007_hyperscale.webp" alt="img" width="200">
 
 Have you heard about all the people saying no thanks, we actually don’t want a giant data center plopped in our backyard? The data centers in question—which tech companies want to built everywhere, including space—are typically referred to as hyperscalers: massive buildings purpose-built for AI operations and used by the likes of OpenAI and Google to build bigger and more powerful AI models. Inside such buildings, the world’s best chips hum away training and fine-tuning models, and they’re built to be modular and grow according to needs.
 
@@ -56,7 +56,7 @@ It’s been a big year for hyperscalers. OpenAI announced, alongside President D
 
 ## 7. Bubble
 
-![img](./images/Wrapped_embed_0006_bubble.webp?w=980)
+<img src="./images/Wrapped_embed_0006_bubble.webp" alt="img" width="200">
 
 The lofty promises of AI are levitating the economy. AI companies are raising eye-popping sums of money and watching their valuations soar into the stratosphere. They’re pouring hundreds of billions of dollars into chips and data centers, financed increasingly by debt and eyebrow-raising circular deals. Meanwhile, the companies leading the gold rush, like OpenAI and Anthropic, might not turn a profit for years, if ever. Investors are betting big that AI will usher in a new era of riches, yet no one knows how transformative the technology will actually be.
 
@@ -64,13 +64,13 @@ Most organizations using AI aren’t yet seeing the payoff, and AI work slop is 
 
 ## 8. Agentic
 
-![img](./images/Wrapped_embed_0005_Agentic.webp?w=980)
+<img src="./images/Wrapped_embed_0005_Agentic.webp" alt="img" width="200">
 
 This year, AI agents were everywhere. Every new feature announcement, model drop, or security report throughout 2025 was peppered with mentions of them, even though plenty of AI companies and experts disagree on exactly what counts as being truly “agentic,” a vague term if ever there was one. No matter that it’s virtually impossible to guarantee that an AI acting on your behalf out in the wide web will always do exactly what it’s supposed to do—it seems as though agentic AI is here to stay for the foreseeable. Want to sell something? Call it agentic! **—Rhiannon Williams**
 
 ## 9. Distillation
 
-![img](./images/Wrapped_embed_0008_distill.webp?w=980)
+<img src="./images/Wrapped_embed_0008_distill.webp" alt="img" width="200">
 
 Early this year, DeepSeek unveiled its new model DeepSeek R1, an open-source reasoning model that matches top Western models but costs a fraction of the price. Its launch freaked Silicon Valley out, as many suddenly realized for the first time that huge scale and resources were not necessarily the key to high-level AI models. Nvidia stock plunged by 17% the day after R1 was released.
 
@@ -78,13 +78,13 @@ The key to R1’s success was distillation, a technique that makes AI models mor
 
 ## 10. Sycophancy
 
-![img](./images/Wrapped_embed_0009_sycophancy.webp?w=980)
+<img src="./images/Wrapped_embed_0009_sycophancy.webp" alt="img" width="200">
 
 As people across the world spend increasing amounts of time interacting with chatbots like ChatGPT, chatbot makers are struggling to work out the kind of tone and “personality” the models should adopt. Back in April, OpenAI admitted it’d struck the wrong balance between helpful and sniveling, saying a new update had rendered GPT-4o too sycophantic. Having it suck up to you isn’t just irritating—it can mislead users by reinforcing their incorrect beliefs and spreading misinformation. So consider this your reminder to take everything—yes, everything—LLMs produce with a pinch of salt. **—Rhiannon Williams**
 
 ## 11. Slop
 
-![img](./images/Wrapped_embed_0010_slop.webp?w=980)
+<img src="./images/Wrapped_embed_0010_slop.webp" alt="img" width="200">
 
 If there is one AI-related term that has fully escaped the nerd enclosures and entered public consciousness, it’s “slop.” The word itself is old (think pig feed), but “slop” is now commonly used to refer to low-effort, mass-produced content generated by AI, often optimized for online traffic. A lot of people even use it as a shorthand for any AI-generated content. It has felt inescapable in the past year: We have been marinated in it, from fake biographies to shrimp Jesus images to surreal human-animal hybrid videos.
 
@@ -92,7 +92,7 @@ But people are also having fun with it. The term’s sardonic flexibility has ma
 
 ## 12. Physical intelligence
 
-![img](./images/Wrapped_embed_0011_physical-intelligence.webp?w=980)
+<img src="./images/Wrapped_embed_0011_physical-intelligence.webp" alt="img" width="200">
 
 Did you come across the hypnotizing video from earlier this year of a humanoid robot putting away dishes in a bleak, gray-scale kitchen? That pretty much embodies the idea of physical intelligence: the idea that advancements in AI can help robots better move around the physical world.
 
@@ -102,7 +102,7 @@ The road ahead for physical intelligence is also sure to be weird. Large languag
 
 ## 13. Fair use
 
-![img](./images/Wrapped_embed_0012_scales.webp?w=980)
+<img src="./images/Wrapped_embed_0012_scales.webp" alt="img" width="200">
 
 AI models are trained by devouring millions of words and images across the internet, including copyrighted work by artists and writers. AI companies argue this is “fair use”—a legal doctrine that lets you use copyrighted material without permission if you transform it into something new that doesn’t compete with the original. Courts are starting to weigh in. In June, Anthropic’s training of its AI model Claude on a library of books was ruled fair use because the technology was “exceedingly transformative.”
 
@@ -110,6 +110,6 @@ That same month, Meta scored a similar win, but only because the authors couldn�
 
 ## 14. GEO
 
-![img](./images/Wrapped_embed_0013_GEO.webp?w=980)
+<img src="./images/Wrapped_embed_0013_GEO.webp" alt="img" width="200">
 
 Just a few short years ago, an entire industry was built around helping websites rank highly in search results (okay, just in Google). Now search engine optimization (SEO), is giving way to GEO—generative engine optimization—as the AI boom forces brands and businesses to scramble to maximize their visibility in AI, whether that’s in AI-enhanced search results like Google’s AI Overviews or within responses from LLMs. It’s no wonder they’re freaked out. We already know that news companies have experienced a colossal drop in search-driven web traffic, and AI companies are working on ways to cut out the middleman and allow their users to visit sites from directly within their platforms. It’s time to adapt or die. **—Rhiannon Williams**
