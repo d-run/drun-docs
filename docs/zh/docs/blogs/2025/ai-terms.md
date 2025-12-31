@@ -12,7 +12,7 @@
 
 ## 1. 超级智能 (Superintelligence)
 
-![小狗戴眼镜打领结](./images/Wrapped_embed_0000_superintelligence.webp?w=980)
+<img src="images/Wrapped_embed_0000_superintelligence.webp" alt="小狗戴眼镜打领结" width="200">
 
 人类炒作 AI 时，总爱给未来的“终极形态”取各种名字。“超级智能”就是 2025 年的新宠。7 月，Meta 宣布组建团队专门追逐超级智能，甚至开出天价挖角对手专家。12 月，微软也跟进，表示将砸下数千亿美元追逐这一目标。
 
@@ -23,7 +23,7 @@
 
 ## 2. 人人会编程（Vibe coding）
 
-![img](./images/Wrapped_embed_0001_vibe-coding.webp?w=980)
+<img src="images/Wrapped_embed_0001_vibe-coding.webp" width="200">
 
 三十年前，史蒂夫·乔布斯曾说，美国的每一个人都应该学会编程。而在今天，即便完全不懂代码，你也可以通过“vibe coding”快速做出一个应用、游戏或网站。
 
@@ -35,7 +35,7 @@
 
 ## 3. 聊天机器人精神病 (Chatbot psychosis)
 
-![img](./images/Wrapped_embed_0002_rorshach.webp?w=980)
+<img src="images/Wrapped_embed_0002_rorshach.webp" width="200">
 
 2025 年最令人担忧的 AI 故事之一：长时间与聊天机器人互动，可能让脆弱人群产生妄想，甚至诱发或加重精神病。虽然“聊天机器人精神病”还不是正式医学术语，但相关案例和诉讼越来越多，已引起研究者高度关注。
 
@@ -45,7 +45,7 @@
 
 ## 4. 推理 (Reasoning)
 
-![img](./images/Wrapped_embed_0003_reasoning.webp?w=980)
+<img src="images/Wrapped_embed_0003_reasoning.webp" width="200">
 
 今年最火的技术趋势，非“推理模型”莫属。这些模型能把复杂问题拆解成一步步小步骤，逐一思考解决。OpenAI 率先推出 o1 和 o3 系列，中国公司 DeepSeek 紧随其后，发布开源的 R1，直接把推理能力拉到了行业标准。
 
@@ -55,7 +55,7 @@
 
 ## 5. 世界模型 (World models)
 
-![img](./images/Wrapped_embed_0004_world-model.webp?w=980)
+<img src="images/Wrapped_embed_0004_world-model.webp" width="200">
 
 大语言模型再能说会道，常识却常常缺失。比如问它“奥运泳池能装多少头大象”，它可能一本正经回答“一头”。
 
@@ -67,7 +67,7 @@
 
 ## 6. 超大规模运营商 (Hyperscalers)
 
-![img](./images/Wrapped_embed_0007_hyperscale.webp?w=980)
+<img src="images/Wrapped_embed_0007_hyperscale.webp" width="200">
 
 到处建巨型数据中心的声音越来越大，但当地居民却集体喊“不”。这些专为 AI 训练设计的庞然大物，被称为“超大规模运营商”。
 
@@ -77,7 +77,7 @@
 
 ## 7. 泡沫 (Bubble)
 
-![img](./images/Wrapped_embed_0006_bubble.webp?w=980)
+<img src="images/Wrapped_embed_0006_bubble.webp" width="200">
 
 AI 公司估值飙天、融资破纪录、烧钱如流水，却鲜见盈利。数百亿美元砸进芯片和数据中心，投资者赌的是“AI 将改变一切”。
 
@@ -89,7 +89,7 @@ AI 公司估值飙天、融资破纪录、烧钱如流水，却鲜见盈利。�
 
 ## 8. 智能体 (Agentic)
 
-![img](./images/Wrapped_embed_0005_Agentic.webp?w=980)
+<img src="images/Wrapped_embed_0005_Agentic.webp" width="200">
 
 2025 年，你打开任何 AI 新品发布会，都能听到“agentic”这个词。意思是 AI 能自主行动、完成多步任务。
 
@@ -99,7 +99,7 @@ AI 公司估值飙天、融资破纪录、烧钱如流水，却鲜见盈利。�
 
 ## 9. 蒸馏 (Distillation)
 
-![img](./images/Wrapped_embed_0008_distill.webp?w=980)
+<img src="images/Wrapped_embed_0008_distill.webp" width="200">
 
 今年初，DeepSeek 的横空出世，让硅谷第一次慌了：一个开源模型，性能追平西方顶尖，却成本低到令人发指。秘诀就是“蒸馏”——用大模型当老师，教小模型学会同样的本事，实现知识压缩。
 
@@ -109,7 +109,7 @@ AI 公司估值飙天、融资破纪录、烧钱如流水，却鲜见盈利。�
 
 ## 10. 谄媚 (Sycophancy)
 
-![img](./images/Wrapped_embed_0009_sycophancy.webp?w=980)
+<img src="images/Wrapped_embed_0009_sycophancy.webp" width="200">
 
 ChatGPT 太会拍马屁了，以至于 OpenAI 不得不在 4 月承认：GPT-4o 更新后过于谄媚。AI 为了取悦用户，甚至会附和明显错误的观点，助长误信息传播。
 
@@ -119,7 +119,7 @@ ChatGPT 太会拍马屁了，以至于 OpenAI 不得不在 4 月承认：GPT-4o 
 
 ## 11. 垃圾猪食（Slop）
 
-![AI生成的垃圾内容](./images/Wrapped_embed_0010_slop.webp?w=980)
+<img src="images/Wrapped_embed_0010_slop.webp" width="200">
 
 2025 年彻底出圈的 AI 词，非“slop”莫属。本义是猪食，现在用来讽刺那些低质量、批量生成的 AI 垃圾内容：假传记、套用别人头像、诡异的人兽混合视频……
 
@@ -129,7 +129,7 @@ ChatGPT 太会拍马屁了，以至于 OpenAI 不得不在 4 月承认：GPT-4o 
 
 ## 12. 物理智能 (Physical intelligence)
 
-![img](./images/Wrapped_embed_0011_physical-intelligence.webp?w=980)
+<img src="images/Wrapped_embed_0011_physical-intelligence.webp" width="200">
 
 今年最催眠的视频之一：一个机器人安静地在灰度厨房里洗碗收拾。这背后是“物理智能”的追求——让 AI 真正理解并操作物理世界。
 
@@ -139,7 +139,7 @@ ChatGPT 太会拍马屁了，以至于 OpenAI 不得不在 4 月承认：GPT-4o 
 
 ## 13. 合理使用 (Fair use)
 
-![img](./images/Wrapped_embed_0012_scales.webp?w=980)
+<img src="images/Wrapped_embed_0012_scales.webp" width="200">
 
 AI 训练要吃海量版权内容，很多企业辩称这是“合理使用”。2025 年，法院开始表态：Anthropic 和 Meta 都赢了官司，但理由各不相同。
 
@@ -149,7 +149,7 @@ AI 训练要吃海量版权内容，很多企业辩称这是“合理使用”�
 
 ## 14. 生成式引擎优化 (GEO)
 
-![img](./images/Wrapped_embed_0013_GEO.webp?w=980)
+<img src="images/Wrapped_embed_0013_GEO.webp" width="200">
 
 曾经的 SEO（搜索引擎优化）时代正在结束，取而代之的是 GEO——生成式引擎优化。品牌和媒体必须想尽办法，让自己的内容出现在 AI 搜索结果或大模型回答里。
 
