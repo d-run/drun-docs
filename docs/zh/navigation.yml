@@ -91,6 +91,7 @@ nav:
       - 费用中心: videos/bills.md
   - AI 行业新闻:
       - 索引: blogs/index.md
+      - 2025 年 14 个 AI 术语: blogs/2025/ai-terms.md
       - vLLM MoE 实战手册: blogs/2025/vllm-moe-playbook.md
       - Agent Sandbox 深度解析: blogs/2025/agent-sandbox.md
       - K8s 全新特性 Gang Scheduling: blogs/2025/gang-scheduling.md
@@ -293,3 +294,4 @@ plugins:
                 vLLM MoE 实战手册: The vLLM MoE Playbook
                 Agent Sandbox 深度解析: Deep Dive into Agent Sandbox
                 K8s 全新特性 Gang Scheduling: Gang Scheduling in Kubernetes 1.35
+                2025 年 14 个 AI 术语: New AI terms in 2025
