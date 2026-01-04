@@ -2,6 +2,12 @@
 
 This channel will closely follow technology trends and collect news from the AI industry.
 
+## 2026
+
+* [In 2026, AI will move from hype to pragmatism](./2026/ai-hype-to-pragmatism.md)
+
+    If 2025 was the year AI got a vibe check, 2026 will be the year the tech gets practical.
+
 ## 2025
 
 * [AI Wrapped: The 14 AI terms you couldn’t avoid in 2025](./2025/ai-terms.md)

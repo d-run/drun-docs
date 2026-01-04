@@ -91,6 +91,8 @@ nav:
       - 费用中心: videos/bills.md
   - AI 行业新闻:
       - 索引: blogs/index.md
+      - 2026:
+          - 2026 年 AI 从炒作走向务实: blogs/2026/ai-hype-to-pragmatism.md
       - 2025:
           - 2025 年 14 个 AI 术语: blogs/2025/ai-terms.md
           - vLLM MoE 实战手册: blogs/2025/vllm-moe-playbook.md
@@ -297,3 +299,4 @@ plugins:
                 Agent Sandbox 深度解析: Deep Dive into Agent Sandbox
                 K8s 全新特性 Gang Scheduling: Gang Scheduling in Kubernetes 1.35
                 2025 年 14 个 AI 术语: New AI terms in 2025
+                2026 年 AI 从炒作走向务实: AI will move from hype to pragmatism in 2026
