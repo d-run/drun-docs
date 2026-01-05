@@ -1,10 +1,10 @@
 # Kubernetes v1.35 引入原地重启所有容器，强化 AI 训练与加速计算能力
 
 在 Kubernetes v1.35 的众多更新中，有一个看似不起眼，却正在 AI Infra 领域引发关注的 Alpha 特性：
-**Restart All Containers（原地重启所有容器）**
+**RestartAllContainers（原地重启所有容器）**
 
 从传统微服务的角度，它可能只是“更灵活的重启策略”；
-但放到 **AI Infra** 场景，你会发现：这是 Kubernetes 第一次真正对齐 AI 训练与加速计算的失败模型。
+但放到 AI Infra 场景，你会发现：这是 Kubernetes 第一次真正对齐 AI 训练与加速计算的失败模型。
 
 ## AI Infra 的核心矛盾：失败不可避免，但恢复代价高昂
 
@@ -101,49 +101,49 @@ v1.35 引入了全新的 **RestartAllContainers** 动作：
 
 ## 为什么 AI Infra 迫切需要 RestartAllContainers
 
-### GPU 是稀缺资源：保留热缓存，减少等待
+1. GPU 是稀缺资源：保留热缓存，减少等待
 
-| 操作方式       | GPU 状态 | 缓存状态                     | 恢复时间 |
-|----------------|---------|-----------------------------|---------|
-| Pod 重建       | GPU 释放 | Page Cache、模型缓存失效     | 分钟级  |
-| 原地重启       | GPU 保留 | 所有缓存保留                 | 秒级    |
+    | 操作方式       | GPU 状态 | 缓存状态                     | 恢复时间 |
+    |----------------|---------|-----------------------------|---------|
+    | Pod 重建       | GPU 释放 | Page Cache、模型缓存失效     | 分钟级  |
+    | 原地重启       | GPU 保留 | 所有缓存保留                 | 秒级    |
 
-利用 GPU 级快速复位能力，训练恢复时间可以大幅缩短。
+    利用 GPU 级快速复位能力，训练恢复时间可以大幅缩短。
 
-### 分布式训练要求同步：秒级恢复全局一致
+1. 分布式训练要求同步：秒级恢复全局一致
 
-- 任意一个 Worker 异常 → 全体 Worker 必须回到一致状态  
-- 传统模式：整批 Pod 删除 → 重新调度 → 分钟级恢复  
-- RestartAllContainers：异常 Pod 原地重启，其他 Pod 无需调度 → 秒级恢复  
+    - 任意一个 Worker 异常 → 全体 Worker 必须回到一致状态  
+    - 传统模式：整批 Pod 删除 → 重新调度 → 分钟级恢复  
+    - RestartAllContainers：异常 Pod 原地重启，其他 Pod 无需调度 → 秒级恢复  
 
-秒级恢复意味着训练作业几乎不中断，极大提升资源利用率。
+    秒级恢复意味着训练作业几乎不中断，极大提升资源利用率。
 
-### Init Container 可重复执行：支持数据/缓存热重置
+1. Init Container 可重复执行：支持数据/缓存热重置
 
-- Init Container 负责：模型下载、数据准备、NCCL/CUDA 初始化、缓存预热  
-- 过去：只在 Pod 创建时运行一次  
-- 现在：RestartAllContainers 支持在不删除 Pod 的情况下重新执行 Init Container  
+    - Init Container 负责：模型下载、数据准备、NCCL/CUDA 初始化、缓存预热  
+    - 过去：只在 Pod 创建时运行一次  
+    - 现在：RestartAllContainers 支持在不删除 Pod 的情况下重新执行 Init Container  
 
-数据准备和缓存预热无需重复浪费时间或 GPU 资源。
+    数据准备和缓存预热无需重复浪费时间或 GPU 资源。
 
-### Sidecar/Watcher 实现自动自愈
+1. Sidecar/Watcher 实现自动自愈
 
-- Watcher/Agent 监控 NCCL、GPU、进程状态  
-- 当状态不可恢复 → 特定 exit code 触发 Pod 原地重启  
-- 无需 Job 或 Operator 介入  
+    - Watcher/Agent 监控 NCCL、GPU、进程状态  
+    - 当状态不可恢复 → 特定 exit code 触发 Pod 原地重启  
+    - 无需 Job 或 Operator 介入  
 
-AI 作业的自愈逻辑下沉到 Pod 内部，减少运维干预。
+    AI 作业的自愈逻辑下沉到 Pod 内部，减少运维干预。
 
-### 快速恢复优先于优雅终止：优化 MTTR
+1. 快速恢复优先于优雅终止：优化 MTTR
 
-| 设计选择           | 传统方式 | RestartAllContainers |
-|-------------------|---------|------------------|
-| preStop 执行       | ✅       | ❌               |
-| 强制终止           | ❌       | ✅               |
-| 重启速度           | 分钟级   | 秒级             |
-| 从 checkpoint 恢复 | ✅       | ✅               |
+    | 设计选择           | 传统方式 | RestartAllContainers |
+    |-------------------|---------|------------------|
+    | preStop 执行       | ✅       | ❌               |
+    | 强制终止           | ❌       | ✅               |
+    | 重启速度           | 分钟级   | 秒级             |
+    | 从 checkpoint 恢复 | ✅       | ✅               |
 
-目标是最大化作业恢复速度（MTTR），即使牺牲优雅终止，也能保证 AI 训练连续性。
+    目标是最大化作业恢复速度（MTTR），即使牺牲优雅终止，也能保证 AI 训练连续性。
 
 ## 示例：AI Worker Pod 的原地快速恢复
 
@@ -183,7 +183,7 @@ spec:
 
 `RestartAllContainers` 标志着 Kubernetes 正在从面向 Web 服务的容器编排系统，迈向面向加速计算与 AI 训练的基础设施操作系统的关键一步。
 
-DaoCloud 将在 DCE 平台中：
+DaoCloud 将在自研的 AI Infra 算力调度平台中：
 
 - 引入 RestartAllContainers 能力
 - 与 AI 作业、批处理、JobSet 等场景结合
