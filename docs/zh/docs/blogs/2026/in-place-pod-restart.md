@@ -99,42 +99,51 @@ v1.35 引入了全新的 **RestartAllContainers** 动作：
     - 外部工具需支持 Init Container 多次运行
     - preStop 不执行，容器需安全应对突发终止
 
-## 为什么 AI Infra 需要 RestartAllContainers
+## 为什么 AI Infra 迫切需要 RestartAllContainers
 
-### 1️⃣ GPU 是稀缺资源
+### GPU 是稀缺资源：保留热缓存，减少等待
 
-- Pod 重建 → GPU 释放 → 排队等待 → Page Cache、模型缓存失效
-- 原地重启 → GPU 不释放，节点亲和、缓存全部保留
+| 操作方式       | GPU 状态 | 缓存状态                     | 恢复时间 |
+|----------------|---------|-----------------------------|---------|
+| Pod 重建       | GPU 释放 | Page Cache、模型缓存失效     | 分钟级  |
+| 原地重启       | GPU 保留 | 所有缓存保留                 | 秒级    |
 
-> 借助 GPU 级快速复位能力，能够大幅缩短训练恢复时间。
+利用 GPU 级快速复位能力，训练恢复时间可以大幅缩短。
 
-### 2️⃣ 分布式训练是同步系统
+### 分布式训练要求同步：秒级恢复全局一致
 
-- 任意一个 Worker 异常 → 全体 Worker 必须回到一致状态
-- 传统模式 → 整批 Pod 删除 → 重新调度 → 分钟级恢复
-- 原地重启 → 异常 Pod 可触发 RestartAllContainers，其他 Pod 无需调度 → 秒级恢复
+- 任意一个 Worker 异常 → 全体 Worker 必须回到一致状态  
+- 传统模式：整批 Pod 删除 → 重新调度 → 分钟级恢复  
+- RestartAllContainers：异常 Pod 原地重启，其他 Pod 无需调度 → 秒级恢复  
 
-### 3️⃣ Init Container 的可恢复性
+秒级恢复意味着训练作业几乎不中断，极大提升资源利用率。
 
-- Init Container 负责：模型下载、数据准备、NCCL/CUDA 初始化、缓存预热
-- 过去只在 Pod 创建时运行一次
-- RestartAllContainers 首次支持：
-  **在不删除 Pod 的情况下重新执行 Init Container**
+### Init Container 可重复执行：支持数据/缓存热重置
 
-### 4️⃣ Sidecar/Watcher 下沉自愈逻辑
+- Init Container 负责：模型下载、数据准备、NCCL/CUDA 初始化、缓存预热  
+- 过去：只在 Pod 创建时运行一次  
+- 现在：RestartAllContainers 支持在不删除 Pod 的情况下重新执行 Init Container  
 
-- Watcher/Agent 监控 NCCL、GPU、进程状态
-- 当状态不可恢复 → 特定 exit code 退出 → 触发 Pod 原地重启
-- 无需 Job 或 Operator 介入
+数据准备和缓存预热无需重复浪费时间或 GPU 资源。
 
-### 5️⃣ 快速恢复优先于优雅终止
+### Sidecar/Watcher 实现自动自愈
 
-- 关注 MTTR（平均恢复时间）
-- 设计选择：
-    - ❌ 不执行 preStop
-    - ✅ 强制终止
-    - ✅ 快速重启
-    - ✅ 从 checkpoint 恢复
+- Watcher/Agent 监控 NCCL、GPU、进程状态  
+- 当状态不可恢复 → 特定 exit code 触发 Pod 原地重启  
+- 无需 Job 或 Operator 介入  
+
+AI 作业的自愈逻辑下沉到 Pod 内部，减少运维干预。
+
+### 快速恢复优先于优雅终止：优化 MTTR
+
+| 设计选择           | 传统方式 | RestartAllContainers |
+|-------------------|---------|------------------|
+| preStop 执行       | ✅       | ❌               |
+| 强制终止           | ❌       | ✅               |
+| 重启速度           | 分钟级   | 秒级             |
+| 从 checkpoint 恢复 | ✅       | ✅               |
+
+目标是最大化作业恢复速度（MTTR），即使牺牲优雅终止，也能保证 AI 训练连续性。
 
 ## 示例：AI Worker Pod 的原地快速恢复
 
