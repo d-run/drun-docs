@@ -4,6 +4,11 @@
 
 ## 2026
 
+* [Kubernetes v1.35 引入原地重启所有容器，强化 AI 训练与加速计算能力](./2026/in-place-pod-restart.md)
+
+    在 Kubernetes v1.35 的众多更新中，有一个看似不起眼，却正在 AI Infra 领域引发关注的 Alpha 特性：
+    **Restart All Containers（原地重启所有容器）**
+
 * [2026 年，AI 从炒作走向务实](./2026/ai-hype-to-pragmatism.md)
 
     如果你觉得 2025 年是 AI 经历“现实考验”的一年，那 2026 年，将是它真正落地生根、开始改变我们日常生活和工作的一年。
