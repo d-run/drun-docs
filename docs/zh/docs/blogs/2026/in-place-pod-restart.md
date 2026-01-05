@@ -71,7 +71,7 @@ v1.35 引入了全新的 **RestartAllContainers** 动作：
 
 4. **完整重启序列**
 
-    - 所有 Init Container 按顺序重新执行
+    - 所有 Init 容器按顺序重新执行
     - Sidecar 和主容器依次启动
     - 容器重启计数正确累加
 
@@ -82,21 +82,21 @@ v1.35 引入了全新的 **RestartAllContainers** 动作：
 | Pod UID | 改变 | 保留 |
 | Pod IP | 改变 | 保留 |
 | 重新调度 | 需要 | 不需要 |
-| Init Container | 不重跑 | 会重新执行 |
+| Init 容器 | 不重跑 | 会重新执行 |
 | preStop Hook | 会执行 | 不执行 |
 | 网络/卷 | 可能重建 | 保持不变 |
 | CPU/GPU 资源 | 重新分配 | 保留 |
 
 ### 官方使用建议
 
-- 重新执行 Init Container 来恢复 Pod 环境
+- 重新执行 Init 容器来恢复 Pod 环境
 - 由 Sidecar 监测逻辑判断失败并触发 Pod 重启
 - 适用于调度和资源敏感的批处理或 AI/ML 任务
 
 !!! caution "注意事项"
 
     - 所有容器需具备可重入设计
-    - 外部工具需支持 Init Container 多次运行
+    - 外部工具需支持 Init 容器多次运行
     - preStop 不执行，容器需安全应对突发终止
 
 ## 为什么 AI Infra 迫切需要 RestartAllContainers
@@ -118,11 +118,11 @@ v1.35 引入了全新的 **RestartAllContainers** 动作：
 
     秒级恢复意味着训练作业几乎不中断，极大提升资源利用率。
 
-1. Init Container 可重复执行：支持数据/缓存热重置
+1. Init 容器可重复执行：支持数据/缓存热重置
 
-    - Init Container 负责：模型下载、数据准备、NCCL/CUDA 初始化、缓存预热  
+    - Init 容器负责：模型下载、数据准备、NCCL/CUDA 初始化、缓存预热  
     - 过去：只在 Pod 创建时运行一次  
-    - 现在：RestartAllContainers 支持在不删除 Pod 的情况下重新执行 Init Container  
+    - 现在：RestartAllContainers 支持在不删除 Pod 的情况下重新执行 Init 容器
 
     数据准备和缓存预热无需重复浪费时间或 GPU 资源。
 
@@ -145,7 +145,9 @@ v1.35 引入了全新的 **RestartAllContainers** 动作：
 
     目标是最大化作业恢复速度（MTTR），即使牺牲优雅终止，也能保证 AI 训练连续性。
 
-## 示例：AI Worker Pod 的原地快速恢复
+## 使用场景
+
+以下是一个 AI Worker Pod 原地快速恢复的 YAML 示例：
 
 ```yaml
 apiVersion: v1
@@ -155,29 +157,60 @@ metadata:
 spec:
   restartPolicy: Never
   initContainers:
-    - name: setup-environment
-      image: my-repo/setup-worker:1.0
+  # 每次原地重启时重新运行这个 Init 容器
+  - name: setup-environment
+    image: my-repo/setup-worker:1.0
+  - name: watcher-sidecar
+    image: my-repo/watcher:1.0
+    restartPolicy: Always
+    restartPolicyRules:
+    - action: RestartAllContainers
+      onExit:
+        exitCodes:
+          operator: In
+          # watcher 发出的特定退出码会触发 Pod 重启
+          values: [88]
   containers:
-    - name: watcher
-      image: my-repo/watcher:1.0
-      restartPolicy: Always
-      restartPolicyRules:
-        - action: RestartAllContainers
-          onExit:
-            exitCodes:
-              operator: In
-              values: [88]
-    - name: trainer
-      image: my-repo/training-app:1.0
+  - name: main-application
+    image: my-repo/training-app:1.0
 ```
 
-触发流程：
+以上 YAML 的触发流程为：
 
 1. Watcher 检测到不可恢复错误，以退出码 `88` 退出
 2. kubelet 触发 `RestartAllContainers`
 3. Pod 内所有容器被终止
-4. Init Container 重新执行
+4. Init 容器重新执行
 5. Trainer 从 checkpoint 恢复训练
+
+`RestartAllContainers` 大体可用于下述三种场景：
+
+### 高效重启 ML/批处理任务
+
+对于机器学习训练任务来说，当某个 worker Pod 失败时重新调度非常昂贵，会浪费大量计算资源。在一个 1000 节点的训练集群里，这种重调度每月可能造成超过十万美元的资源损耗。
+
+使用 `RestartAllContainers` 可以启用一种更快的混合恢复策略：
+
+- 对真正失效的 Pod 重新创建（如节点不健康的 Pod）  
+- 对剩余健康的 Pod 使用原地重启
+
+基准测试表明，这种方式能将恢复开销从 **分钟级** 降到 **几秒级** 。
+
+同时可以在 Pod 内运行一个 watcher sidecar 监控主训练进程。一旦出现可重试的错误，watcher 以特定退出码退出，从而触发原地 Pod 重启，让 worker Pod 从最近的 checkpoint 恢复，而无需 Job 控制器介入。
+
+### 重新运行 Init 容器以恢复干净状态
+
+在某些场景下，Init 容器负责获取凭据或设置共享卷等初始状态。如果主应用破坏了共享状态，就需要重新执行 Init 容器来恢复干净的环境。
+
+通过将主应用配置为在检测到状态损坏时以特定错误码退出，就可以触发 `RestartAllContainers`，保证 Init 容器按顺序重新运行，为后续容器提供清洁的启动环境。
+
+### 处理高频短任务
+
+有些场景下，每次任务最好表现为一个 Pod 的完整执行流程，例如游戏会话后台、队列项处理等。
+若任务执行频率高，传统 Pod 创建和调度流程开销过大，尤其任务本身很短时。
+
+`RestartAllContainers` 使 Kubernetes 能够原生处理这类场景：
+**无需删除和重新创建整个 Pod，就能让所有容器重新走一遍启动流程** ，实现任务执行与资源效率的平衡。
 
 ## DaoCloud 的实践与展望
 
@@ -192,7 +225,7 @@ DaoCloud 将在自研的 AI Infra 算力调度平台中：
 建议 AI Infra 用户：
 
 - 在测试集群启用 Alpha 特性
-- 结合 Sidecar/Init Container 架构验证
+- 结合 Sidecar/Init 容器架构验证
 - 向社区与 DaoCloud 反馈实践经验
 
 !!! tip "结语"
