@@ -92,6 +92,7 @@ nav:
   - AI 行业新闻:
       - 索引: blogs/index.md
       - 2026:
+          - K8s 1.35 支持原地重启所有容器: blogs/2026/in-place-pod-restart.md
           - 2026 年 AI 从炒作走向务实: blogs/2026/ai-hype-to-pragmatism.md
       - 2025:
           - 2025 年 14 个 AI 术语: blogs/2025/ai-terms.md
