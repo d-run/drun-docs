@@ -12,18 +12,7 @@
 1. 概率筛选：对输出向量进行概率计算，选出概率最高的 token 序号
 1. 结果解码：通过词典映射表将序号还原为文字，得到最终输出词
 
-```mermaid
-flowchart LR
-    A[文本输入<br/>自然语言文本]
-    B[词典映射（编码）<br/>文本 → Token 序号]
-    C[Embedding 计算<br/>Token → 语义向量]
-    D[向量送入模型<br/>输入推理系统]
-    E[模型内部计算<br/>矩阵运算 / 非线性函数]
-    F[概率筛选<br/>输出向量 → Token 概率]
-    G[结果解码<br/>Token → 文本输出]
-
-    A --> B --> C --> D --> E --> F --> G
-```
+![流程图](./images/flowchart.png)
 
 以上是对大模型推理流程的最朴素理解。尽管整体步骤看起来并不复杂，但真正发生在模型内部的推理计算，对大多数开发者而言仍然像一个“黑盒”。如果希望进一步拆解推理引擎的底层计算与加速原理，nano-vllm 是一个非常理想的入门切入点。
 
@@ -87,9 +76,7 @@ Qwen3-0.6B 的配置文件位于 `~/.cache/huggingface/hub/models--Qwen--Qwen3-0
 }
 ```
 
-### 核心字段解读
-
-以下是关键配置字段的解释，使用表格总结：
+以下是 config.json 关键配置字段的解释：
 
 | 字段名称                  | 值                  | 解释 |
 |---------------------------|---------------------|------|
@@ -102,8 +89,6 @@ Qwen3-0.6B 的配置文件位于 `~/.cache/huggingface/hub/models--Qwen--Qwen3-0
 | RMSNorm Epsilon (rms_norm_eps) | 1e-06 | 归一化层的小值防止除零。 |
 | RoPE Theta (rope_theta) | 1000000 | Rotary Position Embedding 的基频。 |
 | 词表大小 (vocab_size) | 151936 | 词汇表大小。 |
-
-### 分析
 
 - **GQA 确认**：Q 头数 (16) != KV 头数 (8)，因此使用 Grouped Query Attention (GQA)。分组大小：16 / 8 = 2（每个 KV 头对应 2 个 Q 头）。
 - **FFN 扩展比例**：d_ff / d_model = 3072 / 1024 ≈ 3.00。
