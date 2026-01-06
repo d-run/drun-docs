@@ -92,6 +92,7 @@ nav:
   - AI 行业新闻:
       - 索引: blogs/index.md
       - 2026:
+          - Nano-vLLM 学习教程: blogs/2026/nano-vllm.md
           - K8s 1.35 支持原地重启所有容器: blogs/2026/in-place-pod-restart.md
           - 2026 年 AI 从炒作走向务实: blogs/2026/ai-hype-to-pragmatism.md
       - 2025:
@@ -301,3 +302,4 @@ plugins:
                 K8s 全新特性 Gang Scheduling: Gang Scheduling in Kubernetes 1.35
                 2025 年 14 个 AI 术语: New AI terms in 2025
                 2026 年 AI 从炒作走向务实: AI will move from hype to pragmatism in 2026
+                Nano-vLLM 学习教程: Nano-vLLM Tutorial
