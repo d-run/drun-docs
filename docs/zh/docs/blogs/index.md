@@ -4,6 +4,10 @@
 
 ## 2026
 
+* [Nano-vLLM 学习教程：基于 Qwen3-0.6B 模型的深度剖析](./2026/nano-vllm.md)
+
+    基于 nano-vLLM 项目和 Qwen3-0.6B 模型，提供一个完整的学习路径。我们将从模型结构入手，逐步解读配置、代码实现和关键组件。
+
 * [Kubernetes v1.35 引入原地重启所有容器，强化 AI 训练与加速计算能力](./2026/in-place-pod-restart.md)
 
     在 Kubernetes v1.35 的众多更新中，有一个看似不起眼，却正在 AI Infra 领域引发关注的 Alpha 特性：
