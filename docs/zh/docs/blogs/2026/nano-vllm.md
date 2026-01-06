@@ -2,6 +2,38 @@
 
 > 原作者 [lengrongfu](https://github.com/lengrongfu)
 
+大模型推理的最简流程可以概括为
+
+1. 文本输入：输入一串自然语言文本
+1. 词典映射（编码）：通过词典映射表，将文本转换为一串数字序号（token）
+1. Embedding 计算：token 序号经过 embedding 层，映射为表示语义的浮点数向量
+1. 向量送入模型：将语义向量输入推理系统
+1. 模型内部计算：经过多层矩阵乘法、加法及各类专用函数运算，生成输出向量
+1. 概率筛选：对输出向量进行概率计算，选出概率最高的 token 序号
+1. 结果解码：通过词典映射表将序号还原为文字，得到最终输出词
+
+```mermaid
+flowchart LR
+    A[文本输入<br/>自然语言文本]
+    B[词典映射（编码）<br/>文本 → Token 序号]
+    C[Embedding 计算<br/>Token → 语义向量]
+    D[向量送入模型<br/>输入推理系统]
+    E[模型内部计算<br/>矩阵运算 / 非线性函数]
+    F[概率筛选<br/>输出向量 → Token 概率]
+    G[结果解码<br/>Token → 文本输出]
+
+    A --> B --> C --> D --> E --> F --> G
+```
+
+以上是对大模型推理流程的最朴素理解。尽管整体步骤看起来并不复杂，但真正发生在模型内部的推理计算，对大多数开发者而言仍然像一个“黑盒”。如果希望进一步拆解推理引擎的底层计算与加速原理，nano-vllm 是一个非常理想的入门切入点。
+
+[nano-vLLM](https://github.com/GeeeekExplorer/nano-vllm) 代码量仅约 1200 行，却实现了生产级推理框架的核心技术原型，具体包括：
+
+- 连续批处理（Continuous Batching）
+- KV 缓存（Prefix KV Cache / Paged KV Cache）
+- 高性能编译与执行优化（Torch Compilation、Triton、CUDA Graph）
+- 张量并行（Tensor Parallelism）
+
 本教程基于 nano-vLLM 项目和 Qwen3-0.6B 模型，提供一个完整的学习路径。我们将从模型结构入手，逐步解读配置、代码实现和关键组件。教程旨在帮助您理解 nano-vLLM 的工作原理，包括模型加载、调度、KV 缓存管理和推理流程。所有内容均基于提供的分析信息，确保全面覆盖。
 
 ## 1. Qwen3-0.6B 模型结构概述
