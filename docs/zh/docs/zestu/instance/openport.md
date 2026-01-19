@@ -11,7 +11,7 @@ hide:
 
 ## 前提条件
 
-- 登录 d.run 账号
+- 登录 [d.run 账号](../../index.md)
 - 已通过算力云[创建容器实例](../instance.md)，且容器实例状态为 **运行中**
 
 ## 操作步骤
@@ -23,7 +23,7 @@ hide:
 1. 在容器实例列表页面，点击 __SSH 登录__ ，通过 SSH 命令登录容器实例。
 
     ![SSH 登录1](../images/sshsecret.png)
-    
+
     ![SSH 登录2](../images/terminal1.jpeg)
 
 1. 安装并启动 nginx 服务。
@@ -39,10 +39,10 @@ hide:
     ```bash
     lsof -i:80
     ```
-    
+
     返回如下信息，表明端口被 nginx 正常占用。
-    
-    ```bash
+
+    ```
     COMMAND  PID USER   FD   TYPE    DEVICE SIZE/OFF NODE NAME
     nginx   2693 root    6u  IPv4 723250562      0t0  TCP *:80 (LISTEN)
     nginx   2693 root    7u  IPv6 723250563      0t0  TCP *:80 (LISTEN)
@@ -51,7 +51,7 @@ hide:
 1. 将 nginx 的端口添加到访问管理，并等待外部端口的分配（约 1 分钟）。
 
     ![开放端口2](../images/openport2.png)
-    
+
     ![开放端口3](../images/openport3.png)
 
 1. 点击生成的外部访问链接，即可访问 nginx 服务。
