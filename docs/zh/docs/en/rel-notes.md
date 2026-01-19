@@ -13,10 +13,30 @@ This page outlines key feature updates for d.run.
 
 #### 🚀 New Features
 
-- **[Wallet]** Supports balance alerts. Users can set a threshold balance and receive notifications when available cash drops below this value.
-- **[Quota Management]** Supports cost quotas for sub-accounts, allowing limitation of maximum spendable amounts; supports top-up/deduction for sub-accounts; supports restricting and shutting down services when the quota is exhausted.
-- **[Quota Management]** Supports topping up or deducting quota amounts for sub-accounts to adjust available balances.
-- **[Quota Management]** Supports controlling whether services should be restricted or shut down when the quota is exhausted.
+- **[Wallet]** Supports balance alerts. Users can set a threshold balance, and an alert notification will be triggered when the available cash balance falls below this threshold.
+- **[Quota Management]** Supports expense limits for sub-accounts, allowing restriction of the maximum available spending amount; supports crediting/deducting balance for sub-accounts; supports controlling whether services are suspended when the limit is exhausted.
+- **[Quota Management]** Supports crediting/deducting expense limits for sub-accounts to adjust the available balance.
+- **[Quota Management]** Supports controlling whether services are suspended after the expense limit is exhausted.
+
+### LLM Studio (WS Mode – Private Cloud) v0.11.0
+
+#### ⚡ Enhancements & Optimizations
+
+- **[Admin Console]** Supports local upload of model icons for Model Hub management.
+
+## 2025-10-29
+
+### Computing Power Cloud v0.12.0
+
+#### 🚀 New Features
+
+- [File Storage] Supports persistent root directory functionality.
+
+### LLM Studio (WS Mode – Private Cloud) v0.12.1
+
+#### 🚀 New Features
+
+- **[Admin Console]** Supports custom inference frameworks in model deployment management.
 
 ## 2025-09-29
 
@@ -24,14 +44,14 @@ This page outlines key feature updates for d.run.
 
 #### 🚀 New Features
 
+- **[Container Instance]** Supports cardless boot mode (unified configuration, free of charge).
+- **[File Storage]** Supports scaling up and down.
 - **[Compute Marketplace]** Supports viewing sub-account lists and resources.
 - **[Image Registry]** Added new alert rules for saving images.
 
 #### 🐛 Bug Fixes
 
 - **[Container Instance]** Fixed an issue where inventory was not released after yearly/monthly prepaid instances were automatically shut down upon expiration.
-- **[Container Instance]** Supports cardless boot mode (unified configuration, free of charge).
-- **[File Storage]** File storage now supports scaling up and down.
 
 ### Billing Center v0.9.0
 
@@ -47,11 +67,12 @@ This page outlines key feature updates for d.run.
 
 - **[Bill Management]** Monthly billing timezone changed to UTC+8.
 
-### Large Model Service Platform (WS Mode – Private Cloud) v0.10.0
+### LLM Studio (WS Mode – Private Cloud) v0.10.0
 
 #### 🚀 New Features
 
-- Supports viewing audit logs.
+- **[Admin Console]** Supports viewing audit logs.
+- **[Admin Console]** Supports SGLang runtime framework.
 
 ## 2025-08-30
 
@@ -104,7 +125,7 @@ This page outlines key feature updates for d.run.
 - **[Compute Cloud]** Fixed missing CPU and memory info for existing container instances after upgrade.
 - **[Compute Cloud]** Fixed issue where modifying image registry info in admin caused image save failures.
 
-### Large Model Service Platform (WS Mode – Private Cloud) v0.8
+### LLM Studio (WS Mode – Private Cloud) v0.8
 
 #### 🚀 New Features
 
