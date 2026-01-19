@@ -110,6 +110,10 @@ plugins:
 extra:
   homepage: /
 
+  analytics:
+    provider: google
+    property: G-WDCH551J9C
+
   # comments
   comments:
     enabled: true
@@ -132,7 +136,8 @@ extra:
 
 # Customization Javascript
 extra_javascript:
-  - static/stylesheets/zoom_image.js
+  - stylesheets/zoom_image.js
+  - stylesheets/language-redirect.js
   # - https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js # disable fix mermaid not working
 
 # Customization css
