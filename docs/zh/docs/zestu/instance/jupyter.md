@@ -1,7 +1,7 @@
-# JupyterLab 
+# JupyterLab
 
 **JupyterLab** 是基于 Web 的新一代 **Jupyter** 交互式开发环境，可以通过 Web 管理文件并执行 Shell 命令和Python 代码，还支持插件扩展。
-**JupyterLab** 包含了**Jupyter Notebook** 的全部功能。
+**JupyterLab** 包含了 **Jupyter Notebook** 的全部功能。
 
 下文介绍如何在 d.run 上使用 JupyterLab。
 
@@ -29,7 +29,7 @@
 
     ![teminal2](../images/terminal2.png)
 
-使用完成后再终端内执行 logout 或 Ctrl+D 正常退出终端。
+使用完成后再终端内执行 logout 或按下 Ctrl+D 正常退出终端。
 
 如果直接关闭了终端窗口，这个终端仍然会在后台继续运行，包括正在执行的命令任务。
 您可以在左侧菜单栏点击正在运行终端和内核按钮，查看运行中的终端。
@@ -40,11 +40,11 @@
 
 1. 首先创建一个为 TensorFlow 2 的实例。
 
-2. 下载 beginner.ipynb 记事本文件并通过 JupyterLab 上传到服务器中。双击打开记事本，在右方工作区中可以看到笔记本中的代码内容。
+2. 下载 `beginner.ipynb` 记事本文件并通过 JupyterLab 上传到服务器中。双击打开记事本，在右方工作区中可以看到笔记本中的代码内容。
 
     ![teminal4](../images/terminal4.png)
 
-3. 在菜单中选择 运行-运行所有单元格，即可运行所有代码。
+3. 在菜单中选择 **运行** -> **运行所有单元格** ，即可运行所有代码。
 
     ![teminal5](../images/terminal5.png)
 
