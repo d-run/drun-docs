@@ -16,6 +16,9 @@ and build a variety of AI-powered apps — all while enjoying transparent billin
 operational insights. d.run delivers an all-in-one AI productivity platform designed for
 businesses and developers alike.
 
+DaoCloud is a [Kubernetes Certified Service Provider (KCSP)](https://landscape.cncf.io/?group=certified-partners-and-providers&item=platform--certified-kubernetes-distribution--daocloud-enterprise).
+Currently, in the [Certified Kubernetes - AI Platform](https://landscape.cncf.io/?group=certified-partners-and-providers) category, DaoCloud ranks first.
+
 !!! tip
 
     <abbr title="DaoCloud Runs Intelligence">d.run</abbr> unlease your AI power.
