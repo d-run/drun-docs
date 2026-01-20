@@ -13,6 +13,10 @@ hide:
 在统一的 Web 界面中，用户可完成模型管理、API 调用、向量检索配置及多类型 AI 应用创建，
 并享有透明计费与可视化运营支持，为企业与开发者提供一站式 AI 生产力解决方案。
 
+DaoCloud 是[经 CNCF 官方认证的 Kubernetes 提供商](https://landscape.cncf.io/?group=certified-partners-and-providers&item=platform--certified-kubernetes-distribution--daocloud-enterprise)，
+即 Kubernetes Certified Service Provider (KCSP)。
+目前在 [Certified Kubernetes - AI Platform](https://landscape.cncf.io/?group=certified-partners-and-providers) 细分子项中，DaoCloud 位列第一。
+
 !!! tip
 
     <abbr title="DaoCloud Runs Intelligence">d.run</abbr> 让算力更自由。
