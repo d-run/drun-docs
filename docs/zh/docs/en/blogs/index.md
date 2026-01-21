@@ -4,6 +4,10 @@ This channel will closely follow technology trends and collect news from the AI 
 
 ## 2026
 
+* [llm-d as the Agentic Runtime Northstar](./2026/llm-d.md)
+
+    This Northstar defines the architectural evolution of llm-d from a generic, **request-centric** inference engine to a specialized **agentic-runtime**, in the framework’s shift towards **workload-aware inference**
+
 * [In 2026, AI will move from hype to pragmatism](./2026/ai-hype-to-pragmatism.md)
 
     If 2025 was the year AI got a vibe check, 2026 will be the year the tech gets practical.
