@@ -92,6 +92,7 @@ nav:
   - AI 行业新闻:
       - 索引: blogs/index.md
       - 2026:
+          - vLLM Semantic Router v0.1 Iris 发布: blogs/2026/vllm-sr-iris.md
           - llm-d 智能代理运行时未来指北: blogs/2026/llm-d.md
           - Nano-vLLM 学习教程: blogs/2026/nano-vllm.md
           - K8s 1.35 支持原地重启所有容器: blogs/2026/in-place-pod-restart.md
@@ -305,3 +306,4 @@ plugins:
                 2026 年 AI 从炒作走向务实: AI will move from hype to pragmatism in 2026
                 Nano-vLLM 学习教程: Nano-vLLM Tutorial
                 llm-d 智能代理运行时未来指北: llm-d as the Agentic Runtime Northstar
+                vLLM Semantic Router v0.1 Iris 发布: vLLM Semantic Router v0.1 Iris Released

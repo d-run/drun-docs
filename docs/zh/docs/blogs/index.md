@@ -4,6 +4,10 @@
 
 ## 2026
 
+* [vLLM Semantic Router v0.1 Iris：首个大版本发布](./2026/vllm-sr-iris.md)
+
+    vLLM Semantic Router 正式发布 v0.1，代号 **Iris**
+
 * [llm-d 智能代理运行时未来指北](./2026/llm-d.md)
 
     本文规划了 llm-d 的架构演进——从通用的、**以请求为中心** 的推理引擎，迈向专门的 **智能代理运行时**，支持框架向 **工作负载感知推理** 的转型。

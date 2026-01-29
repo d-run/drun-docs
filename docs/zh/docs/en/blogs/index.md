@@ -4,6 +4,10 @@ This channel will closely follow technology trends and collect news from the AI 
 
 ## 2026
 
+* [vLLM Semantic Router v0.1 Iris: The First Major Release](./2026/vllm-sr-iris.md)
+
+    We are thrilled to announce the release of vLLM Semantic Router v0.1, codename **Iris**
+
 * [llm-d as the Agentic Runtime Northstar](./2026/llm-d.md)
 
     This Northstar defines the architectural evolution of llm-d from a generic, **request-centric** inference engine to a specialized **agentic-runtime**, in the framework’s shift towards **workload-aware inference**
