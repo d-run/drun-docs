@@ -6,13 +6,13 @@
 
 We are thrilled to announce the release of **vLLM Semantic Router v0.1**, codename **Iris**—our first major release that marks a transformative milestone for intelligent LLM routing. Since our experimental launch in September 2025, we've witnessed extraordinary community growth: over **600 Pull Requests** merged, **300+ Issues** addressed, and contributions from more than **50 outstanding engineers worldwide**. As we kick off 2026, we're excited to deliver a production-ready semantic routing platform that has evolved dramatically from its origins.
 
-![](/assets/figures/semantic-router/iris-0.png)
+![](./images/iris-0.png)
 
 ## Why Iris?
 
 In Greek mythology, Iris (Ἶρις) served as the divine messenger who bridged the realms of gods and mortals, traveling on the arc of the rainbow to deliver messages across vast distances. This symbolism perfectly captures what vLLM Semantic Router v0.1 achieves: **a bridge between users and diverse AI models**, intelligently routing requests across different LLM providers and architectures.
 
-![](/assets/figures/semantic-router/iris-1.png)
+![](./images/iris-1.png)
 
 ## What's New in v0.1 Iris?
 
@@ -22,7 +22,7 @@ In Greek mythology, Iris (Ἶρις) served as the divine messenger who bridged 
 
 **Now:** We've introduced the **Signal-Decision Driven Plugin Chain Architecture**, a complete reimagining of semantic routing that scales from 14 fixed categories to unlimited intelligent routing decisions.
 
-![](/assets/figures/semantic-router/iris-2.png)
+![](./images/iris-2.png)
 
 The new architecture extracts **six types of signals** from user queries:
 
@@ -50,7 +50,7 @@ This modular design enables unlimited extensibility—new signals, plugins, and 
 
 In collaboration with the **Hugging Face Candle team**, we've completely refactored the router's inference kernel. The previous implementation required loading and running multiple fine-tuned models independently—computational cost grew linearly with the number of classification tasks.
 
-![](/assets/figures/semantic-router/iris-3.png)
+![](./images/iris-3.png)
 
 **The breakthrough:** By adopting **Low-Rank Adaptation (LoRA)**, we now share base model computation across all classification tasks:
 
@@ -73,7 +73,7 @@ Beyond request-time safety (jailbreak, PII), v0.1 introduces **HaluGate**—a th
 
 **Stage 3: HaluGate Explainer** – NLI-based classification explaining *why* each flagged span is problematic (CONTRADICTION vs NEUTRAL).
 
-![](/assets/figures/semantic-router/iris-4.png)
+![](./images/iris-4.png)
 
 HaluGate integrates seamlessly with function-calling workflows—tool results serve as ground truth for verification. Detection results are propagated via HTTP headers, enabling downstream systems to implement custom policies. Dive deeper in our [HaluGate blog post](https://blog.vllm.ai/2025/12/14/halugate.html).
 
@@ -85,7 +85,7 @@ HaluGate integrates seamlessly with function-calling workflows—tool results se
 pip install vllm-sr
 ```
 
-![](/assets/figures/semantic-router/iris-7.png)
+![](./images/iris-7.png)
 
 Get started in seconds with a single pip command. The package includes all core dependencies for quickstart.
 
@@ -137,7 +137,7 @@ vLLM Semantic Router v0.1 integrates seamlessly with the broader AI infrastructu
 
 ### 6. MoM (Mixture of Models) Family
 
-![](/assets/figures/semantic-router/iris-6.png)
+![](./images/iris-6.png)
 
 We're proud to introduce the **MoM Family**—a comprehensive suite of specialized models purpose-built for semantic routing:
 
@@ -178,7 +178,7 @@ Intelligent tool management for agentic workflows:
 
 While v0.1 Iris establishes a solid foundation, we're already planning significant enhancements for v0.2:
 
-![](/assets/figures/semantic-router/iris-5.png)
+![](./images/iris-5.png)
 
 ### Signal-Decision Architecture Enhancements
 
@@ -188,7 +188,7 @@ While v0.1 Iris establishes a solid foundation, we're already planning significa
 
 ### Model Selection Algorithms
 
-![](/assets/figures/semantic-router/iris-8.png)
+![](./images/iris-8.png)
 
 Building on the Signal-Decision foundation, we're researching intelligent model selection algorithms:
 
