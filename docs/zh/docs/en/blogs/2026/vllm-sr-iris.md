@@ -261,3 +261,8 @@ Every contribution matters—from fixing a typo to architecting a new feature. J
 - **Community**: Join us on Slack in [vLLM Slack](https://vllm-dev.slack.com/archives/C09CTGF8KCN)
 
 *The rainbow bridge is now open. Welcome to Iris.* 🌈
+
+## Reference
+
+- [vLLM Semantic Router Website](https://vllm-semantic-router.com/)
+- [vLLM Semantic Router Playground](https://play.vllm-semantic-router.com/)
