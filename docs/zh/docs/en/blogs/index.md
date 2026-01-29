@@ -6,7 +6,7 @@ This channel will closely follow technology trends and collect news from the AI 
 
 * [vLLM Semantic Router v0.1 Iris: The First Major Release](./2026/vllm-sr-iris.md)
 
-    We are thrilled to announce the release of **vLLM Semantic Router v0.1**, codename **Iris**
+    We are thrilled to announce the release of vLLM Semantic Router v0.1, codename **Iris**
 
 * [llm-d as the Agentic Runtime Northstar](./2026/llm-d.md)
 

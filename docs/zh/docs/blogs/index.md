@@ -6,7 +6,7 @@
 
 * [vLLM Semantic Router v0.1 Iris：首个大版本发布](./2026/vllm-sr-iris.md)
 
-    **vLLM Semantic Router v0.1** 正式发布 v0.1，代号 **Iris**
+    vLLM Semantic Router 正式发布 v0.1，代号 **Iris**
 
 * [llm-d 智能代理运行时未来指北](./2026/llm-d.md)
 
