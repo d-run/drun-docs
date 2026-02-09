@@ -38,4 +38,4 @@ d.run 支持 **个人认证** 和 **企业/高校认证** 两种方式。
 - 当前仅支持**人工客服认证**流程  
   请根据文档指引准备材料并联系平台客服提交申请。
 
-详细步骤请参考[企业/高校认证流程](../service/enterprise-certification.md)。
+详细步骤请参考[企业/高校认证流程](../../service/enterprise-certification.md)。

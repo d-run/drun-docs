@@ -38,4 +38,4 @@ Verification method:
 - Currently, only **manual customer service verification** is supported  
   Please follow the documentation guidelines to prepare your materials and contact platform support to submit your application.
 
-For detailed steps, see [Enterprise/University Verification Process](../service/enterprise-certification.md).
+For detailed steps, see [Enterprise/University Verification Process](../../service/enterprise-certification.md).
