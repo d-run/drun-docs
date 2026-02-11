@@ -47,14 +47,14 @@ d.run 提供了两种大模型的托管方式，您可以根据自己的需求�
 import openai
 
 openai.api_key = "your-api-key" # 替换为您的 API Key
-openai.api_base = "https://chat.d.run"
+openai.api_base = "https://chat.d.run/v1"
 
-response = openai.Completion.create(
-  model="public/deepseek-r1",
-  prompt="What is your name?"
+response = openai.ChatCompletion.create(
+    model="public/deepseek-v3",
+    messages=[{"role": "user", "content": "What is your name?"}],
 )
 
-print(response.choices[0].text)
+print(response.choices[0].message["content"])
 ```
 
 ### 使用独立模型服务调用
