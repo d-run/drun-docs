@@ -44,4 +44,13 @@ hide:
     
     4. 核对成功后，转账金额将增加到 **现金余额** 中，并可在[收支明细](./transactions.md)中可查看充值的记录。
 
+
+  ## 余额提醒
+
+    1. 点击**现金余额** 旁 **余额提醒已关闭**（默认为关闭状态），可开启余额提醒。
+        ![charge](images/balance.png){width=900px}
+
+    2. 在弹窗中启用余额提醒，并设置提醒金额。当余额低于设定的提醒金额时，会发送提醒短信到用户绑定的手机号。
+        ![charge](images/balance_setting.png){width=900px}
+
 [注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
