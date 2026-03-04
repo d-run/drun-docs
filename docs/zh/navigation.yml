@@ -70,6 +70,7 @@ nav:
               - 计费规则: leopard/pricing-rules.md
               - 退费说明: leopard/refunds.md
           - 代金券: leopard/voucher.md
+          - 限额管理: leopard/credit_limit.md
       - 管理:
           - 个人中心:
               - 索引: manage/personal/index.md
