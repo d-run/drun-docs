@@ -3,6 +3,10 @@ nav:
   - 首页: https://www.d.run/
   - d.run 文档:
       - 注册账号: index.md
+      - ClawOS:
+          - 快速入门: clawos/quickstart.md
+          - 飞书集成: clawos/feishu-integration.md
+          - 常见问题: clawos/faq.md
       - 算力云:
           - 算力市场: zestu/index.md
           - 容器实例:
@@ -307,3 +311,6 @@ plugins:
                 Nano-vLLM 学习教程: Nano-vLLM Tutorial
                 llm-d 智能代理运行时未来指北: llm-d as the Agentic Runtime Northstar
                 vLLM Semantic Router v0.1 Iris 发布: vLLM Semantic Router v0.1 Iris Released
+                ClawOS: ClawOS
+                快速入门: Quick Start
+                飞书集成: Feishu Integration
