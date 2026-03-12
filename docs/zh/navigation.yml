@@ -4,7 +4,7 @@ nav:
   - d.run 文档:
       - 注册账号: index.md
       - ClawOS:
-          - ClawOS介绍: clawos/intro2ClawOs.md
+          - ClawOS介绍: clawos/index.md
           - 快速入门: clawos/quickstart.md
           - 飞书集成: clawos/feishu-integration.md
           - 常见问题: clawos/faq.md
