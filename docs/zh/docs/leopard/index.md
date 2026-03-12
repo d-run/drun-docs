@@ -48,11 +48,9 @@ hide:
 
 === "API 自助入账 (开发者)"
     
-    1. 获取认证 Token
-    使用具有 `费用中心-对公转账-创建` 权限的账号登录平台，从浏览器控制台获取 `Authorization` Token。
+    1. 获取认证 Token：使用具有 `费用中心-对公转账-创建` 权限的账号登录平台，从浏览器控制台获取 `Authorization` Token。
     
-    2. 发送入账请求
-    通过命令行或 API 工具执行以下请求。请务必核实参数，**一旦提交暂不支持通过 API 回退**。
+    2. 发送入账请求：通过命令行或 API 工具执行以下请求。请务必核实参数，**一旦提交暂不支持通过 API 回退**。
     
     ```bash
     curl --location '[https://console.d.run/apis/leopard.io/v1alpha1/wallet/corporate-transfer/recharge](https://console.d.run/apis/leopard.io/v1alpha1/wallet/corporate-transfer/recharge)' \
@@ -71,7 +69,7 @@ hide:
     }'
     ```
     
-    #### 参数说明
+    参数说明：
     
     | 参数名 | 必选 | 说明 |
     | :--- | :--- | :--- |
@@ -84,8 +82,7 @@ hide:
     | ∟ `bank_account` | 是 | 汇款银行账号 |
     | ∟ `bank_name` | 是 | 汇款银行名称 |
     
-    3. 结果确认
-    请求成功后，可在 [收支明细](./transactions.md) 中查看记录。
+    请求成功后，可在[收支明细](./transactions.md)中查看记录。
 
 
 ## 余额提醒
