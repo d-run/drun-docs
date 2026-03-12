@@ -21,7 +21,7 @@ Currently, in the [Certified Kubernetes - AI Platform](https://landscape.cncf.io
 
 !!! tip
 
-    <abbr title="DaoCloud Runs Intelligence">d.run</abbr> unlease your AI power.
+    <abbr title="DaoCloud Runs Intelligence">d.run</abbr> unleash your AI power.
     [Register and Try d.run](https://console.d.run/){ .md-button }
     
     <abbr title="DaoCloud Runs Intelligence">d.run</abbr> is a comprehensive
@@ -45,9 +45,9 @@ Currently, in the [Certified Kubernetes - AI Platform](https://landscape.cncf.io
         If you are prompted that the email is already registered, you can return to the login page,
         click **Forgot Password** , and enter your registered email to reset the password.
 
-1. click **Register**. After successful registration, you will return to the login page, enter your username or email, and log in to your account.
+1. Click **Register**. After successful registration, you will return to the login page, enter your username or email, and log in to your account.
 
-You can now start purchasing computing resource.
+You can now start purchasing computing resources.
 
 ![market](./images/regis01.png)
 
