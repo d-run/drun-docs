@@ -50,10 +50,10 @@ hide:
 
     对于需要通过程序化方式关联对公转账流水与平台余额的用户，可以通过 API 提交入账请求。
     
-    #### 1. 获取认证 Token
+    1. 获取认证 Token
     使用具有 `费用中心-对公转账-创建` 权限的账号登录平台，从浏览器控制台获取 `Authorization` Token。
     
-    #### 2. 发送入账请求
+    2. 发送入账请求
     通过命令行或 API 工具执行以下请求。请务必核实参数，**一旦提交暂不支持通过 API 回退**。
     
     ```bash
@@ -86,17 +86,18 @@ hide:
     | ∟ `bank_account` | 是 | 汇款银行账号 |
     | ∟ `bank_name` | 是 | 汇款银行名称 |
     
-    #### 3. 结果确认
+    3. 结果确认
     请求成功后，可在 [收支明细](./transactions.md) 中查看记录。
 
----
 
 ## 余额提醒
 
 1. 点击 **现金余额** 旁的 **余额提醒已关闭**（默认为关闭状态），即可开启。
-   ![balance](images/balance.png){width=900px}
+  
+     ![balance](images/balance.png){width=900px}
 
 2. 在弹窗中启用提醒并设置阈值。当余额低于设定金额时，系统将发送短信至绑定的手机号。
-   ![balance_setting](images/balance_setting.png){width=900px}
+  
+     ![balance_setting](images/balance_setting.png){width=900px}
 
 [注册并体验 d.run](https://console.d.run/){ .md-button .md-button--primary }
