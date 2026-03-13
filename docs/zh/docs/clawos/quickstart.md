@@ -8,46 +8,40 @@
 - 完成实名认证
 - 账户有足够余额或代金券
 
-## 创建实例
+## 创建 Openclaw 实例
 
-### 1. 创建 Openclaw 实例
+1. 选择 **ClawOS** 模块，点击右侧的 **创建** 按钮。
 
-选择 **ClawOS** 版块，点击 **创建** 按钮。
+    ![创建实例](./images/create-instance.png)
 
-![创建实例](./images/create-instance.png)
+1. 为 Openclaw 实例设置一个英文 **名称** ，点击右下角 **确定** 。
 
-### 2. 配置实例
+    ![配置实例](./images/configure-instance.png)
 
-只需为Openclaw实例设置一个英文 **名称**，点击右下角 **确定** 即可完成创建。
+1. （可选）d.run Openclaw 已无缝对接飞书。创建实例时，开启 **集成飞书** 开关并填入飞书配置信息。
 
-![配置实例](./images/configure-instance.png)
+    > 有关如何获取飞书配置信息以及对接飞书的详细步骤，请参考[飞书集成](./feishu-integration.md)文档。
 
-### 3. 飞书集成（可选）
+    ![飞书集成](./images/feishu-integration.png)
 
-d.run Openclaw已无缝对接飞书。创建实例时，开启 **集成飞书** 开关并填入飞书配置信息即可。
+1. 耐心等待实例创建完成。
 
-> 飞书配置信息获取以及对接的详细步骤请参考 [飞书集成](./feishu-integration.md) 文档。
+    ![等待创建](./images/wait-for-creation.png)
 
-![飞书集成](./images/feishu-integration.png)
-
-### 4. 等待实例就绪
-
-耐心等待实例创建完成。
-
-![等待创建](./images/wait-for-creation.png)
-
-### 5. 访问 OpenClaw
+## 访问 OpenClaw
 
 当实例状态显示为 **运行中** 后：
 
 1. 点击右侧的 **访问工具** -> **OpenClaw**
-2. 打开Openclaw管理页面
-
-> 注意：由于网络原因，可能需要等待 1-2 分钟才能访问。
+2. 打开 Openclaw 管理页面
 
 ![访问工具](./images/access-tools.png)
 
-### 6. 开始使用
+!!! note
+
+    由于网络原因，可能需要等待 1-2 分钟才能访问。
+
+## 开始使用 OpenClaw
 
 点击 **继续访问网站** ，在聊天窗口中开始对话。
 
@@ -61,19 +55,17 @@ d.run 提供了多种后台操作途径，您可以通过 SSH 登录或网页上
 
 ![访问后台](./images/access-backend.png)
 
-### 访问方式
+=== "方式一：SSH 登录"
 
-**方式一：SSH 登录**
+    通过 SSH 直接进入 Openclaw 的安全沙盒。
 
-通过 SSH 直接进入Openclaw的安全沙盒。
+    ![SSH 登录](./images/ssh-login.png)
 
-![SSH 登录](./images/ssh-login.png)
+=== "方式二：网页访问"
 
-**方式二：网页访问**
+    通过网页方式访问后台。
 
-通过网页方式访问后台。
-
-![网页访问](./images/web-access.png)
+    ![网页访问](./images/web-access.png)
 
 ### 命令行操作
 
@@ -92,4 +84,5 @@ openclaw skills list
 ![Skills 列表](./images/skills-list.png)
 
 ## OpenClaw 常见问题
-请见 [常见问题](./faq.md) 文档
+
+参阅[常见问题](./faq.md)文档。
