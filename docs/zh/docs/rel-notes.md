@@ -355,3 +355,19 @@
 - [模型服务] 实例数配置：允许横向扩展实例数量
 - [模型服务] 支持已部署的模型服务在线体验
 - [模型服务] 支持对已部署的模型提供多种方式、多种语言的AIP调用示例：curl、python、node.js
+
+## None
+
+### ClawOS v0.1
+
+#### 🚀 新功能
+
+- [ClawOS] 支持通过页面UI创建openclaw实例
+- [ClawOS] 支持通过openclaw访问工具快捷打开实例
+- [ClawOS] 支持通过jupyterlab打开openclaw实例
+- [ClawOS] 支持通过SSH打开openclaw实例
+- [ClawOS] 支持在创建openclaw实例时选择minimax模型
+- [ClawOS] 支持在创建openclaw实例时集成飞书
+- [ClawOS] 支释放openclaw实例
+- [ClawOS] 支持查看openclaw实例的token用量统计
+- [ClawOS] 支持创建openclaw实例时挂载文件存储
