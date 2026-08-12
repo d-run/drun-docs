@@ -50,8 +50,8 @@ jobs:
       # Runs a single command using the runners shell
       - run: pip install -r requirements.txt
 
-      # Install mkdocs-material-insiders
-      - run: git clone git@github.com:DaoCloud/mkdocs-material-insiders.git mkdocs-material
+      # Install mkdocs-material
+      - run: git clone git@github.com:DaoCloud/mkdocs-material.git mkdocs-material
       - run: pip install -e mkdocs-material
 
       # build docs
