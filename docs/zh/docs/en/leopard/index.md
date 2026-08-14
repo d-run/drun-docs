@@ -7,6 +7,14 @@ hide:
 
 The expense center serves as a one-stop financial platform, providing functions such as top-up, expense viewing, bill and voucher details. Users can monitor the consumption of various resources in real-time, clearly understand bill details, usage, and payment status, helping enterprises optimize resource allocation, control costs, and improve financial transparency.
 
+After signing in, a primary account can use the Wallet to top up and view balance and voucher information.
+
+![Primary account wallet](images/main-account-wallet-en.png){width=900px}
+
+If the primary account has not set a quota for the sub-account, the sub-account can view the balance shared with the primary account after signing in, but cannot top up or manage the wallet.
+
+![Sub-account wallet](images/sub-account-wallet-en.png){width=900px}
+
 You can top-up your account online in the **Wallet** , and the top-up amount can be used to purchase various products on the platform.
 
 !!! note

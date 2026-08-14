@@ -11,9 +11,17 @@ hide:
 
 1. In the **Orders**, you can view detailed records of the user's purchases or resource operations.
 
-    Filtering: Click the search box to select filtering criteria, supporting search or filtering by order ID, resource ID, type, product name, and status.
+    Filtering: Click the search box to select filtering criteria, supporting search or filtering by order ID, resource ID, type, product name, and status. Primary accounts can also use the **Account** selector to select primary-account or sub-account orders. Sub-accounts can view orders for the currently signed-in account only.
 
     ![orderlist](../leopard/images/orderlist.png){width=900px}
+
+    Primary accounts can view orders for the primary account and its sub-accounts and filter them with the **Account** selector.
+
+    ![Primary account orders](images/main-account-orders-en.png){width=900px}
+
+    After signing in, a sub-account sees only the orders created or operated by that sub-account. The list displays the username and User ID.
+
+    ![Sub-account orders](images/sub-account-orders-en.png){width=900px}
 
     !!! note
 
@@ -33,6 +41,7 @@ hide:
 | Order Type | The category of the order, such as new purchase, renewal, upgrade, or downgrade. |
 | Product Name | The name of the product involved in the order, such as container instances, model services, etc. |
 | Resource Name/ID | The specific resource identifier associated with the order, such as container instance name or unique resource ID. |
+| Username / User ID | The account name and unique identifier that created or operated the order. |
 | Status | The current processing progress or result status of the order, such as paid, refunded, or canceled. |
 | Order Price | The total amount of the order, indicating the cost before any discounts or promotions are applied. |
 | Amount Due | The actual amount the user needs to pay. |
