@@ -14,6 +14,7 @@ nav:
               - 创建容器实例: zestu/instance.md
               - 创建包年包月容器实例: zestu/instance-prepaid.md
               - 容器实例开关机: zestu/instance-on-off.md
+              - 容器实例更换配置: zestu/instance-update.md
               - 通过容器实例使用 DeepSeek: zestu/deepseek.md
               - JupyterLab: zestu/instance/jupyter.md
               - SSH: zestu/instance/ssh.md
@@ -183,6 +184,7 @@ plugins:
                 容器实例: Container Instances
                 创建容器实例: Create Instance
                 容器实例开关机: Power on/off
+                容器实例更换配置: Update Container Instance Configuration
                 文件存储: File Storage
                 大模型服务平台: LLM Studio
                 模型广场: Model Gallery
