@@ -40,7 +40,8 @@
 
 1. 首先创建一个为 TensorFlow 2 的实例。
 
-2. 下载 `beginner.ipynb` 记事本文件并通过 JupyterLab 上传到服务器中。双击打开记事本，在右方工作区中可以看到笔记本中的代码内容。
+2. 从 TensorFlow 官方教程下载 [`beginner.ipynb`](https://raw.githubusercontent.com/tensorflow/docs-l10n/master/site/zh-cn/tutorials/quickstart/beginner.ipynb) 记事本文件并通过 JupyterLab 上传到服务器中。
+   如果浏览器显示文件内容，请将页面另存为 `beginner.ipynb`。双击打开记事本，在右方工作区中可以看到笔记本中的代码内容。
 
     ![teminal4](../images/terminal4.png)
 

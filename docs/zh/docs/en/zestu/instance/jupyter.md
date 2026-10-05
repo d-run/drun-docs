@@ -39,7 +39,8 @@ To exit the terminal properly, run `logout` or press `Ctrl+D`.
 
 1. First, create a container instance with **TensorFlow 2**.
 
-2. Download the `beginner.ipynb` notebook file and upload it to the server via JupyterLab. Double-click to open the notebook—you will see the code content in the right-side workspace.
+2. Download the [`beginner.ipynb`](https://raw.githubusercontent.com/tensorflow/docs/master/site/en/tutorials/quickstart/beginner.ipynb) notebook from the official TensorFlow tutorial and upload it to the server via JupyterLab.
+   If your browser displays the file contents, save the page as `beginner.ipynb`. Double-click to open the notebook—you will see the code content in the right-side workspace.
 
     ![teminal4](../images/terminal4.png)
 
