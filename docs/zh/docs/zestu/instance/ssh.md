@@ -4,29 +4,28 @@ SSH（Secure Shell）是一种网络协议，用于在不安全的网络中安�
 
 ## 使用 SSH 用户名/密码登录容器实例
 
-1. 在打开的 Terminal 终端中，安装 openssh-server 服务。
+1. 在容器实例内部的 Terminal 终端中，检查是否已安装 SSH 服务端。
 
-    若已安装可跳过此步骤，直接进入步骤二。
+    ```shell
+    command -v sshd
+    ```
 
-    1. 执行如下命令，安装 openssh-server 服务。
+    如果返回 `sshd` 的路径，说明已安装，可跳过安装步骤。
+    否则，先运行 `cat /etc/os-release` 查看容器镜像的 Linux 发行版，再以 root 用户运行对应的安装命令。
 
-        ```shell
-        apt-get update && apt install openssh-server
-        ```
+    | Linux 发行版 | 安装命令 |
+    | --- | --- |
+    | Debian / Ubuntu | `apt-get update && apt-get install -y openssh-server` |
+    | Fedora / Rocky Linux / AlmaLinux | `dnf install -y openssh-server` |
+    | 使用 yum 的 CentOS / RHEL 镜像 | `yum install -y openssh-server` |
+    | Alpine Linux | `apk add --no-cache openssh-server` |
 
-    1. 检查安装是否成功。
+    安装后，再次运行 `command -v sshd` 确认服务端程序可用。
+    仅安装 `openssh-client` 或在包列表中找到 `ssh`，不能证明已安装 SSH 服务端。
 
-        * 检查 ssh 进程。
-
-            ```shell
-            ps -e | grep ssh
-            ```
-
-        * 检查安装包。
-
-            ```
-            dpkg -l | grep ssh
-            ```
+    登录前还需确保 SSH 服务端已使用镜像的启动方式启动。
+    安装软件包不代表服务已启动，容器镜像也不一定使用 systemd。
+    参阅[服务开机自启动](service-auto-start.md)配置容器实例中的服务。
 
 2. 容器启动后，在容器实例列表中点击 SSH 登录按钮，打开弹窗复制 SSH 的登录信息。
 

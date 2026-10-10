@@ -5,29 +5,28 @@ Using SSH, users can securely access container instances on the platform from th
 
 ## Log in to a Container Instance Using SSH Username/Password
 
-1. In the container’s terminal, install the `openssh-server` service.
+1. In the container instance's terminal, check whether the SSH server is installed.
 
-    If it's already installed, you may skip this step and proceed to Step 2.
+    ```bash
+    command -v sshd
+    ```
 
-    - Run the following command to install the SSH server:
+    If this returns the path to `sshd`, skip the installation.
+    Otherwise, run `cat /etc/os-release` to identify the container image's Linux distribution, then run the matching installation command as root.
 
-        ```bash
-        apt-get update && apt install openssh-server
-        ```
+    | Linux distribution | Installation command |
+    | --- | --- |
+    | Debian / Ubuntu | `apt-get update && apt-get install -y openssh-server` |
+    | Fedora / Rocky Linux / AlmaLinux | `dnf install -y openssh-server` |
+    | CentOS / RHEL images using yum | `yum install -y openssh-server` |
+    | Alpine Linux | `apk add --no-cache openssh-server` |
 
-    - Verify the installation:
+    After installation, run `command -v sshd` again to confirm that the server executable is available.
+    Installing only `openssh-client` or finding `ssh` in a package list does not confirm that the SSH server is installed.
 
-        - Check for SSH processes:
-
-            ```bash
-            ps -e | grep ssh
-            ```
-
-        - Check installed packages:
-
-            ```bash
-            dpkg -l | grep ssh
-            ```
+    Before logging in, also ensure that the SSH server is running, using the image's startup mechanism.
+    Installing the package does not mean the service has started, and container images do not necessarily use systemd.
+    See [Service Auto-start](service-auto-start.md) to configure services in a container instance.
 
 2. After the container starts, click the **SSH Login** button in the container instance list to open a dialog with login information.
 
